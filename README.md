@@ -22,7 +22,7 @@ how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
 - **Capability** = easy 10 % · standard 20 % · judge 20 % · **hard 50 %**. **Calibration** is its own sub-score (hard tier:
   ECE + fidelity to exact gold distributions). Main Score weights unchanged (Balanced 33:33:33); cost pooled over 534 decisions.
 - Rankings are published under all presets, under **measured prices only**, and under a **self-host cost sensitivity**.
-  Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py).
+  Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py). Per-task outcomes (public items) and per-tier/per-topic aggregates: [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
 
 ![JevBench v1.2 Main Score](results/v1.2/charts/main-score.png)
 
@@ -213,3 +213,7 @@ House rules the harness enforces rather than documents:
 MIT for this harness and the 72 original public decisions. Everything else - model
 weights, other projects' code, upstream datasets - keeps its own licence. See
 [`THIRD-PARTY.md`](THIRD-PARTY.md).
+
+## Support
+
+This is a one-person hobby project, and the servers and model calls are paid out of pocket. If it is useful to you, you can **[support this project](https://donate.stripe.com/fZu00i9ro0wmdF88sg1Jm01)** with whatever amount you like. Payments go to productivity-boost.com Betriebs UG (haftungsbeschränkt) & Co. KG, the one-person company behind these projects.
