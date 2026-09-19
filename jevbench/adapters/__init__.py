@@ -25,6 +25,7 @@ from .semif_direct import SemIfDirectAdapter  # noqa: F401
 from .so1_decider import So1DeciderAdapter  # noqa: F401
 from .remote_inproc import RemoteInprocAdapter  # noqa: F401
 from .sg_system_one import SgSystemOneAdapter  # noqa: F401
+from .djev import DjevAdapter  # noqa: F401
 
 
 def NeedleLocalAdapter(**kw):  # lazy: only the Needle venv can import needle

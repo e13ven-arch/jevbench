@@ -15,13 +15,14 @@ SHORT = {
     "gemini-3.1-flash-lite": "Gemini 3.1 Flash-Lite", "needle-3": "Needle 3", "needle-3-tools": "Needle 3, options as tools",
     "qwen3.8-27b": "Qwen3.8 27B", "semif-qwen3.5-4b": "SemIf (Qwen3.5-4B)", "openjev-razorback16": "OpenJev razorback16 (DiffusionGemma 26B)",
     "system-one-sg": "system-one (Qwen3-8B, Goedecke)", "nimble-9b": "Bespoke Nimble 9B", "open-alternative-jev": "open-alternative-jev (Qwen3.5-4B, IkerMoel)",
+    "djev": "djev (Maisa, diffusion-gemma)",
 }
 name = lambda s: SHORT.get(s["key"], s["display"])
 
 
 def usd(s):
-    v, est = s["cost"]["usd_per_1000"], s["cost"]["kind"] == "estimate"
-    return f"${v:.4f}" + (" est." if est else "")
+    v, kind = s["cost"]["usd_per_1000"], s["cost"]["kind"]
+    return f"${v:.4f}" + {"estimate": " est.", "announced": " (announced price, free preview)"}.get(kind, "")
 
 
 def table(rows, ranked_rows=True):
@@ -38,13 +39,14 @@ def table(rows, ranked_rows=True):
 presets = list(R["presets"])
 jev = next(s for s in ranked if s["key"] == "jev-1.13.0")
 second = ranked[1]
-md = f"""# JevBench v1.2 — results
+log = "\n".join(f"- **{e['revision']}** ({e['date']}): {e['note']}" for e in R.get("revision_log", []))
+md = f"""# JevBench {R['revision']} — results
 
 **JevBench Score** = {R['score_one_liner']}
 
 Artifact: [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) · scoring code:
 [`jevbench/composite_v12.py`](jevbench/composite_v12.py) · built by [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py) from the
-v1.2-wip measurements (tag `v1.2-wip`; no measurement changed) · interactive page: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
+v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; v1.2.1 adds djev, measured later on the same frozen items) · interactive page: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
 
 ![JevBench Score](results/v1.2/charts/main-score.png)
 
@@ -101,6 +103,10 @@ files (`results/v1.2/wip/`, GPU round runs).
 ## Cost basis
 
 """ + "\n".join(f"- **{name(s)}** — {usd(s)}: {s['cost']['basis']}" for s in S) + """
+
+## Revision log
+
+""" + log + """
 
 ## What changed from v1.2-wip
 

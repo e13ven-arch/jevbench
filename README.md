@@ -8,7 +8,7 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.2: the JevBench Score (current)
+## v1.2.1: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
 interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
@@ -27,8 +27,8 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking: **Jev 1.13.0 75.3** · SemIf (Qwen3.5-4B) 74.6 · open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.7 ·
-  OpenJev razorback16 67.6. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Top of the ranking: **Jev 1.13.0 75.3** · SemIf (Qwen3.5-4B) 74.6 · djev (Maisa, diffusion-gemma) 74.3 ·
+  open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.7 · OpenJev razorback16 67.6. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
 - Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py); the final artifact is rebuilt from the frozen measurements by
   [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py), charts by [`scripts/v1.2/charts.py`](scripts/v1.2/charts.py).
   Per-task outcomes (public items): [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
@@ -44,6 +44,11 @@ v1.2-wip (tag `v1.2-wip`) hard tier + calibration sub-score, Balanced 33:33:33 M
 and Cost 30 points per decade; latency of non-production endpoints adjusted ×2 (+0.15 s on our own servers, an assumption);
 one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced on Needle 3's per-token basis ($0.0162 est.).
 The earlier weightings are kept as views, recomputed the same way, and are not the JevBench Score.
+**v1.2.1 (tag `v1.2.1`): added djev** (Maisa's diffusion-gemma Jev implementation, api.djev.dev) — all 534 decisions including the
+held-out items, one request at a time through its production API (no latency adjustment), scored with the unchanged v1.2 rules.
+Cost uses djev's announced price ($0.035 per million input tokens, output free), which is not charged yet (free preview).
+Adapter: [`jevbench/adapters/djev.py`](jevbench/adapters/djev.py); row: [`results/v1.2/additions/djev.json`](results/v1.2/additions/djev.json).
+No other row changed; ranks below #2 move down one.
 
 ## v1.1.3: the GPU round
 

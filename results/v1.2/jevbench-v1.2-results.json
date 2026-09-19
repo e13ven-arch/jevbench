@@ -1,11 +1,23 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2",
+ "revision": "v1.2.1",
+ "revision_log": [
+  {
+   "revision": "v1.2.1",
+   "date": "2026-09-19",
+   "note": "Added djev (Maisa, diffusion-gemma): full v1.2 set (534 decisions incl. held-out) through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), which is not yet charged (free preview). No other row changed."
+  },
+  {
+   "revision": "v1.2",
+   "date": "2026-09-19",
+   "note": "Final JevBench Score: 4 axes, geometric mean."
+  }
+ ],
  "protocol": "jevbench::v1.2",
  "status": "final",
- "generated_utc": "2026-09-19T13:25:14+00:00",
- "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final",
- "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced.",
+ "generated_utc": "2026-09-19T17:00:38+00:00",
+ "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final; v1.2.1 additions measured later on the same frozen items: djev",
+ "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced. v1.2.1: added djev (Maisa, diffusion-gemma).",
  "score_name": "JevBench Score",
  "score_one_liner": "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.",
  "tiers": {
@@ -71,8 +83,8 @@
   "intelligence": "100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 %. Accuracy = correct / all items; failed, timed-out or unparseable answers count as wrong.",
   "hard_tier": "220 new decisions (111 public, 109 held out): long multi-condition policy documents (2-6k tokens), priority trade-offs, deliberately ambiguous cases with a 'no clear answer' label, traps, multi-hop lookups, date/number reasoning, adversarial distractors, subtle answer-judging, overlapping routing, and probability items with an exact gold distribution. Half written by Claude Opus 5, half by GPT-5.6 Sol; each item reviewed blind and then against its gold by the other model; one discussion round; frozen and hashed before any benchmarked system saw an item. No item was selected on any system's answers.",
   "calibration": "Hard tier only, systems that return a probability distribution: mean of (a) 100 x (1 - ECE/0.5), ECE = top-label expected calibration error in 10 bins, and (b) probability fidelity = 100 x (1 - mean total-variation distance) between the returned distribution and the exact gold distribution on the 20 probability items. Label-only systems have none; it counts as 0 in the JevBench Score.",
-  "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo. Production APIs (Jev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
-  "cost": "Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens.",
+  "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo. Production APIs (Jev, djev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
+  "cost": "Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens. announced = the provider's published price, not yet charged (free preview), x measured tokens.",
   "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
   "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score."
  },
@@ -315,10 +327,10 @@
    "rank": 1,
    "rank_under": {
     "JevBench Score (25:25:25:25)": 1,
-    "Balanced 33:33:33 (no calibration)": 3,
-    "Emphasis on Accuracy 60:20:20": 1,
-    "Emphasis on Speed 20:60:20": 2,
-    "Emphasis on Cost 20:20:60": 5,
+    "Balanced 33:33:33 (no calibration)": 4,
+    "Emphasis on Accuracy 60:20:20": 2,
+    "Emphasis on Speed 20:60:20": 3,
+    "Emphasis on Cost 20:20:60": 6,
     "Intelligence only": 3
    }
   },
@@ -477,11 +489,164 @@
    "rank": 2,
    "rank_under": {
     "JevBench Score (25:25:25:25)": 2,
+    "Balanced 33:33:33 (no calibration)": 2,
+    "Emphasis on Accuracy 60:20:20": 3,
+    "Emphasis on Speed 20:60:20": 2,
+    "Emphasis on Cost 20:20:60": 3,
+    "Intelligence only": 8
+   }
+  },
+  {
+   "key": "djev",
+   "display": "djev (Maisa, diffusion-gemma)",
+   "class": "jev-rebuild",
+   "open": "planned",
+   "author": "Maisa (David Villalón)",
+   "repo": "https://djev.dev",
+   "licence": "hosted API; open-sourcing announced, not yet released",
+   "underlying": "diffusion-gemma (Gemma-based diffusion model, djev-0.1, one denoising step)",
+   "has_distribution": true,
+   "probability_source": [
+    "native"
+   ],
+   "endpoint_condition": "production API (api.djev.dev, free preview)",
+   "endpoint_kind": "api",
+   "partial": false,
+   "ranked": true,
+   "tiers": {
+    "easy": 1.0,
+    "standard": 0.9791666666666666,
+    "judge": 0.9315068493150684,
+    "hard": 0.6954545454545454
+   },
+   "axes": {
+    "intelligence": 88.36249481112495,
+    "calibration": 65.41450619010376,
+    "speed": 91.35677310946093,
+    "cost": 57.57524920597589
+   },
+   "jevbench_score": 74.25567554991633,
+   "speed": {
+    "p50_s_raw": 0.2370578795671463,
+    "p95_s_raw": 0.30865143015980717,
+    "p50_s_adjusted": 0.2370578795671463,
+    "p95_s_adjusted": 0.30865143015980717,
+    "adjustment": "none (production API)",
+    "run": "serial 242-decision standard+judge run",
+    "hardware": null,
+    "measured_where": "from a Hetzner server in Germany, network included",
+    "hard_tier_p50_s": 0.24707749113440514,
+    "hard_tier_p95_s": 0.3622760258615016
+   },
+   "cost": {
+    "kind": "announced",
+    "usd_per_1000": 0.025951254681647943,
+    "basis": "ANNOUNCED PRICE (free preview): djev's docs state $0.035 per million input tokens, output tokens free (https://api.djev.dev/docs, 'Usage & credits'; prepaid billing not yet switched on, 19 Sep 2026, so nothing was charged) x measured input tokens (741 per decision on average over all 534 decisions)",
+    "usd_per_1000_v11_tiers": 0.01388441082802548,
+    "usd_per_1000_hard": 0.04317393181818183,
+    "self_host_sensitivity": null
+   },
+   "calibration": {
+    "score": 65.41450619010376,
+    "score_label_only_as_onehot": null,
+    "ece_hard": 0.17503581317955752,
+    "probability_fidelity": 65.83617501611904,
+    "brier_hard": 0.4680494813450917,
+    "brier_standard_judge_v11": 0.08268269187152161,
+    "note": null
+   },
+   "hard": {
+    "run": "runs/djev--hard (job djev-jevbench-20260919)",
+    "n_items": 220,
+    "n_ok": 220,
+    "n_attempted": 220,
+    "coverage": 1.0,
+    "success_rate": 1.0,
+    "accuracy": 0.6954545454545454,
+    "by_family": {
+     "adversarial": {
+      "correct": 12,
+      "n": 12,
+      "accuracy": 1.0
+     },
+     "ambiguous": {
+      "correct": 10,
+      "n": 14,
+      "accuracy": 0.7142857142857143
+     },
+     "judge_hard": {
+      "correct": 29,
+      "n": 33,
+      "accuracy": 0.8787878787878788
+     },
+     "long_policy": {
+      "correct": 18,
+      "n": 38,
+      "accuracy": 0.47368421052631576
+     },
+     "multi_hop": {
+      "correct": 29,
+      "n": 35,
+      "accuracy": 0.8285714285714286
+     },
+     "probability": {
+      "correct": 12,
+      "n": 20,
+      "accuracy": 0.6
+     },
+     "routing_hard": {
+      "correct": 10,
+      "n": 10,
+      "accuracy": 1.0
+     },
+     "temporal_numeric": {
+      "correct": 10,
+      "n": 30,
+      "accuracy": 0.3333333333333333
+     },
+     "tradeoff": {
+      "correct": 8,
+      "n": 12,
+      "accuracy": 0.6666666666666666
+     },
+     "trap": {
+      "correct": 15,
+      "n": 16,
+      "accuracy": 0.9375
+     }
+    },
+    "has_distribution": true,
+    "brier_mean": 0.4680494813450917,
+    "ece": 0.17503581317955752,
+    "probability_fidelity": 65.83617501611904,
+    "calibration_score": 65.41450619010376,
+    "onehot": {
+     "ece": 0.30454545454545456,
+     "probability_fidelity": 52.93449999999999,
+     "calibration_score": 46.01270454545454
+    },
+    "latency_p50_s": 0.24707749113440514,
+    "latency_p95_s": 0.3622760258615016,
+    "mean_input_tokens": 1233.540909090909,
+    "mean_output_tokens": 8.0,
+    "charged_usd": 0.009498265000000002
+   },
+   "presets": {
+    "JevBench Score (25:25:25:25)": 74.25567554991633,
+    "Balanced 33:33:33 (no calibration)": 77.46071752205515,
+    "Emphasis on Accuracy 60:20:20": 81.64998269000436,
+    "Emphasis on Speed 20:60:20": 82.74565722170483,
+    "Emphasis on Cost 20:20:60": 68.79284014965901,
+    "Intelligence only": 88.36249481112495
+   },
+   "rank": 3,
+   "rank_under": {
+    "JevBench Score (25:25:25:25)": 3,
     "Balanced 33:33:33 (no calibration)": 1,
-    "Emphasis on Accuracy 60:20:20": 2,
+    "Emphasis on Accuracy 60:20:20": 1,
     "Emphasis on Speed 20:60:20": 1,
     "Emphasis on Cost 20:20:60": 2,
-    "Intelligence only": 7
+    "Intelligence only": 6
    }
   },
   {
@@ -637,14 +802,14 @@
     "Intelligence only": 75.57456413449565
    },
    "run_key": "open-alternative-jev-yesfirst",
-   "rank": 3,
+   "rank": 4,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 3,
-    "Balanced 33:33:33 (no calibration)": 4,
-    "Emphasis on Accuracy 60:20:20": 5,
-    "Emphasis on Speed 20:60:20": 3,
-    "Emphasis on Cost 20:20:60": 4,
-    "Intelligence only": 11
+    "JevBench Score (25:25:25:25)": 4,
+    "Balanced 33:33:33 (no calibration)": 5,
+    "Emphasis on Accuracy 60:20:20": 6,
+    "Emphasis on Speed 20:60:20": 4,
+    "Emphasis on Cost 20:20:60": 5,
+    "Intelligence only": 12
    }
   },
   {
@@ -799,14 +964,14 @@
     "Emphasis on Cost 20:20:60": 69.44018159051123,
     "Intelligence only": 79.52521793275217
    },
-   "rank": 4,
+   "rank": 5,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 4,
-    "Balanced 33:33:33 (no calibration)": 2,
-    "Emphasis on Accuracy 60:20:20": 3,
-    "Emphasis on Speed 20:60:20": 4,
+    "JevBench Score (25:25:25:25)": 5,
+    "Balanced 33:33:33 (no calibration)": 3,
+    "Emphasis on Accuracy 60:20:20": 4,
+    "Emphasis on Speed 20:60:20": 5,
     "Emphasis on Cost 20:20:60": 1,
-    "Intelligence only": 9
+    "Intelligence only": 10
    }
   },
   {
@@ -961,14 +1126,14 @@
     "Emphasis on Cost 20:20:60": 58.05631173255278,
     "Intelligence only": 85.97654628476548
    },
-   "rank": 5,
+   "rank": 6,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 5,
-    "Balanced 33:33:33 (no calibration)": 5,
-    "Emphasis on Accuracy 60:20:20": 4,
-    "Emphasis on Speed 20:60:20": 5,
-    "Emphasis on Cost 20:20:60": 6,
-    "Intelligence only": 6
+    "JevBench Score (25:25:25:25)": 6,
+    "Balanced 33:33:33 (no calibration)": 6,
+    "Emphasis on Accuracy 60:20:20": 5,
+    "Emphasis on Speed 20:60:20": 6,
+    "Emphasis on Cost 20:20:60": 7,
+    "Intelligence only": 7
    }
   },
   {
@@ -1123,13 +1288,13 @@
     "Emphasis on Cost 20:20:60": 50.332216387316564,
     "Intelligence only": 88.89995848899957
    },
-   "rank": 6,
+   "rank": 7,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 6,
-    "Balanced 33:33:33 (no calibration)": 9,
-    "Emphasis on Accuracy 60:20:20": 7,
-    "Emphasis on Speed 20:60:20": 8,
-    "Emphasis on Cost 20:20:60": 9,
+    "JevBench Score (25:25:25:25)": 7,
+    "Balanced 33:33:33 (no calibration)": 10,
+    "Emphasis on Accuracy 60:20:20": 8,
+    "Emphasis on Speed 20:60:20": 9,
+    "Emphasis on Cost 20:20:60": 10,
     "Intelligence only": 5
    }
   },
@@ -1276,13 +1441,13 @@
     "Emphasis on Cost 20:20:60": 44.186858649444055,
     "Intelligence only": 96.82139892071399
    },
-   "rank": 7,
+   "rank": 8,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 7,
-    "Balanced 33:33:33 (no calibration)": 10,
-    "Emphasis on Accuracy 60:20:20": 6,
-    "Emphasis on Speed 20:60:20": 10,
-    "Emphasis on Cost 20:20:60": 10,
+    "JevBench Score (25:25:25:25)": 8,
+    "Balanced 33:33:33 (no calibration)": 11,
+    "Emphasis on Accuracy 60:20:20": 7,
+    "Emphasis on Speed 20:60:20": 11,
+    "Emphasis on Cost 20:20:60": 11,
     "Intelligence only": 1
    }
   },
@@ -1438,14 +1603,14 @@
     "Emphasis on Cost 20:20:60": 67.43039738917257,
     "Intelligence only": 53.57632835201329
    },
-   "rank": 8,
+   "rank": 9,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 8,
-    "Balanced 33:33:33 (no calibration)": 7,
-    "Emphasis on Accuracy 60:20:20": 12,
-    "Emphasis on Speed 20:60:20": 11,
-    "Emphasis on Cost 20:20:60": 3,
-    "Intelligence only": 12
+    "JevBench Score (25:25:25:25)": 9,
+    "Balanced 33:33:33 (no calibration)": 8,
+    "Emphasis on Accuracy 60:20:20": 13,
+    "Emphasis on Speed 20:60:20": 12,
+    "Emphasis on Cost 20:20:60": 4,
+    "Intelligence only": 13
    }
   },
   {
@@ -1600,14 +1765,14 @@
     "Emphasis on Cost 20:20:60": 52.071449531130746,
     "Intelligence only": 78.56408260689082
    },
-   "rank": 9,
+   "rank": 10,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 9,
-    "Balanced 33:33:33 (no calibration)": 8,
-    "Emphasis on Accuracy 60:20:20": 10,
-    "Emphasis on Speed 20:60:20": 7,
-    "Emphasis on Cost 20:20:60": 8,
-    "Intelligence only": 10
+    "JevBench Score (25:25:25:25)": 10,
+    "Balanced 33:33:33 (no calibration)": 9,
+    "Emphasis on Accuracy 60:20:20": 11,
+    "Emphasis on Speed 20:60:20": 8,
+    "Emphasis on Cost 20:20:60": 9,
+    "Intelligence only": 11
    }
   },
   {
@@ -1753,13 +1918,13 @@
     "Emphasis on Cost 20:20:60": 43.041851112250264,
     "Intelligence only": 90.29052511415529
    },
-   "rank": 10,
+   "rank": 11,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 10,
-    "Balanced 33:33:33 (no calibration)": 11,
-    "Emphasis on Accuracy 60:20:20": 9,
-    "Emphasis on Speed 20:60:20": 9,
-    "Emphasis on Cost 20:20:60": 11,
+    "JevBench Score (25:25:25:25)": 11,
+    "Balanced 33:33:33 (no calibration)": 12,
+    "Emphasis on Accuracy 60:20:20": 10,
+    "Emphasis on Speed 20:60:20": 10,
+    "Emphasis on Cost 20:20:60": 12,
     "Intelligence only": 4
    }
   },
@@ -1906,13 +2071,13 @@
     "Emphasis on Cost 20:20:60": 32.1870312466733,
     "Intelligence only": 96.09608066971082
    },
-   "rank": 11,
+   "rank": 12,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 11,
-    "Balanced 33:33:33 (no calibration)": 12,
-    "Emphasis on Accuracy 60:20:20": 11,
-    "Emphasis on Speed 20:60:20": 12,
-    "Emphasis on Cost 20:20:60": 12,
+    "JevBench Score (25:25:25:25)": 12,
+    "Balanced 33:33:33 (no calibration)": 13,
+    "Emphasis on Accuracy 60:20:20": 12,
+    "Emphasis on Speed 20:60:20": 13,
+    "Emphasis on Cost 20:20:60": 13,
     "Intelligence only": 2
    }
   },
@@ -2068,14 +2233,14 @@
     "Emphasis on Cost 20:20:60": 54.27065411483852,
     "Intelligence only": 80.07363013698631
    },
-   "rank": 12,
+   "rank": 13,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 12,
-    "Balanced 33:33:33 (no calibration)": 6,
-    "Emphasis on Accuracy 60:20:20": 8,
-    "Emphasis on Speed 20:60:20": 6,
-    "Emphasis on Cost 20:20:60": 7,
-    "Intelligence only": 8
+    "JevBench Score (25:25:25:25)": 13,
+    "Balanced 33:33:33 (no calibration)": 7,
+    "Emphasis on Accuracy 60:20:20": 9,
+    "Emphasis on Speed 20:60:20": 7,
+    "Emphasis on Cost 20:20:60": 8,
+    "Intelligence only": 9
    }
   },
   {

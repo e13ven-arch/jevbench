@@ -23,7 +23,7 @@ import time
 from .adapters import (GradioSpaceAdapter, LocalOpenJevAdapter, NeedleLocalAdapter,
                        OpenAICompatAdapter, SystemOneListAdapter,
                        RemoteInprocAdapter, SemIfDirectAdapter, SgSystemOneAdapter, So1DeciderAdapter,
-                       TypeSafeAdapter)
+                       TypeSafeAdapter, DjevAdapter)
 from .budget import Ledger
 from .runner import DEFAULT_RESERVE_USD, Runner
 from .summarize import public_export, summarize
@@ -58,8 +58,9 @@ def cmd_run(args) -> int:
              "openai_compat": OpenAICompatAdapter,
              "needle_local": NeedleLocalAdapter,
              "semif_direct": SemIfDirectAdapter, "so1_decider": So1DeciderAdapter,
-             "remote_inproc": RemoteInprocAdapter, "sg_system_one": SgSystemOneAdapter}
-    if args.adapter not in ("typesafe", "needle_local", "semif_direct", "so1_decider", "sg_system_one") and not args.endpoint:
+             "remote_inproc": RemoteInprocAdapter, "sg_system_one": SgSystemOneAdapter,
+             "djev": DjevAdapter}
+    if args.adapter not in ("typesafe", "djev", "needle_local", "semif_direct", "so1_decider", "sg_system_one") and not args.endpoint:
         print(f"--endpoint required for {args.adapter}", file=sys.stderr)
         return 2
     kwargs = dict(endpoint=args.endpoint, model=args.model,
@@ -156,7 +157,7 @@ def main(argv=None) -> int:
                        choices=["typesafe", "systemone_list", "gradio_space",
                                 "local_openjev", "openai_compat", "needle_local",
                                 "semif_direct", "so1_decider", "remote_inproc",
-                                "sg_system_one"])
+                                "sg_system_one", "djev"])
     p_run.add_argument("--endpoint", default=None)
     p_run.add_argument("--model", default=None)
     p_run.add_argument("--key-env", dest="key_env",

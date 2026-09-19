@@ -6,6 +6,9 @@ Input : results/v1.2/wip/jevbench-v1.2-wip-results.json  (the v1.2-wip artifact:
         results/v1.2/wip/jevbench-v1.2-wip-per-task.json
 Output: results/v1.2/jevbench-v1.2-results.json, results/v1.2/jevbench-v1.2-per-task.json
 
+v1.2.1 (19 Sep 2026): rows measured after the v1.2 freeze on the same frozen items and code are added from
+results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. First addition: djev (Maisa).
+
 No measurement changes here. What changes: the score (4 axes, geometric mean), one open-alternative-jev row instead of two,
 and the Needle 3 options-as-tools price (it had none; now priced on Needle 3's per-token basis).
 """
@@ -22,6 +25,14 @@ from jevbench import composite_v12 as C  # noqa: E402
 V12 = ROOT / "results/v1.2"
 WIP = json.loads((V12 / "wip/jevbench-v1.2-wip-results.json").read_text())
 WIP_TASKS = json.loads((V12 / "wip/jevbench-v1.2-wip-per-task.json").read_text())
+ADDITIONS = {p.stem: json.loads(p.read_text()) for p in sorted((V12 / "additions").glob("*.json")) if not p.stem.endswith("-per-task")}
+REVISION = "v1.2.1" if ADDITIONS else "v1.2"
+REVISION_LOG = [
+    {"revision": "v1.2.1", "date": "2026-09-19", "note": "Added djev (Maisa, diffusion-gemma): full v1.2 set (534 decisions incl. held-out) "
+     "through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), "
+     "which is not yet charged (free preview). No other row changed."},
+    {"revision": "v1.2", "date": "2026-09-19", "note": "Final JevBench Score: 4 axes, geometric mean."},
+]
 
 # open-alternative-jev: the ranked row is the run with the author's own yes/no option order ("A. yes, B. no", as his
 # yes_no() helper builds it). Our first adapter reversed it; that run is kept as raw files and one footnote, not ranked.
@@ -100,6 +111,9 @@ def main():
     own.update(key=OAJ_KEY, display=OAJ_NAME, run_key=OAJ_RANKED)
     src[OAJ_KEY] = own
     needle_tools_price(src["needle-3-tools"], src["needle-3"])
+    for k, row in ADDITIONS.items():
+        assert k not in src, k
+        src[k] = copy.deepcopy(row)
 
     rows = [build_row(s) for s in src.values()]
     rows[[r["key"] for r in rows].index(OAJ_KEY)]["run_key"] = OAJ_RANKED
@@ -115,12 +129,13 @@ def main():
 
     footnote = OAJ_FOOTNOTE
     art = {
-        "benchmark": "JevBench", "revision": "v1.2", "protocol": "jevbench::v1.2", "status": "final",
+        "benchmark": "JevBench", "revision": REVISION, "revision_log": REVISION_LOG, "protocol": "jevbench::v1.2", "status": "final",
         "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final",
+        "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final" + (
+            "; v1.2.1 additions measured later on the same frozen items: " + ", ".join(ADDITIONS) if ADDITIONS else ""),
         "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; "
                          "latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); "
-                         "Needle 3 options-as-tools priced.",
+                         "Needle 3 options-as-tools priced." + (" v1.2.1: added djev (Maisa, diffusion-gemma)." if ADDITIONS else ""),
         "score_name": "JevBench Score",
         "score_one_liner": "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.",
         "tiers": WIP["tiers"], "tier_weights": C.TIER_WEIGHTS, "axis_weights": C.WEIGHTS,
@@ -135,10 +150,10 @@ def main():
             "calibration": WIP["scoring"]["calibration"].split(" Label-only")[0] + " Label-only systems have none; it counts as 0 in the JevBench Score.",
             "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), "
                      "clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). " + C.SPEED_NOTE +
-                     " Production APIs (Jev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
+                     " Production APIs (Jev, djev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
             "cost": "Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 "
                     "($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price "
-                    "of the same weights or size class x tokens.",
+                    "of the same weights or size class x tokens. announced = the provider's published price, not yet charged (free preview), x measured tokens.",
             "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
             "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score.",
         },
@@ -159,7 +174,9 @@ def main():
     tasks["systems"][OAJ_KEY] = tasks["systems"].pop(OAJ_RANKED)
     if isinstance(tasks["systems"][OAJ_KEY], dict) and "display" in tasks["systems"][OAJ_KEY]:
         tasks["systems"][OAJ_KEY]["display"] = OAJ_NAME
-    tasks.update(revision="v1.2", status="final")
+    for k in ADDITIONS:
+        tasks["systems"][k] = json.loads((V12 / "additions" / f"{k}-per-task.json").read_text())
+    tasks.update(revision=REVISION, status="final")
     (V12 / "jevbench-v1.2-per-task.json").write_text(json.dumps(tasks, indent=1, ensure_ascii=False) + "\n")
 
     for r in ranked + partial:

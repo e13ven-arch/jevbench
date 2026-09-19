@@ -25,7 +25,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 CLASS = {
     "jev": ("#2a78d6", "Jev (TypeSafe, closed)"),
-    "jev-rebuild": ("#eb6834", "Open Jev rebuild"),
+    "jev-rebuild": ("#eb6834", "Jev rebuild (open, or open source planned)"),
     "llm-baseline": ("#1baf7a", "Instruction model"),
     "small-tool-model": ("#4a3aa7", "Small tool-calling model"),
 }
@@ -40,6 +40,7 @@ SHORT = {
     "open-alternative-jev": "open-alternative-jev (Qwen3.5-4B)",
     "semif-qwen3.5-4b": "SemIf (Qwen3.5-4B)", "openjev-razorback16": "OpenJev razorback16 (DiffusionGemma 26B)",
     "system-one-sg": "system-one (Qwen3-8B, Goedecke)", "nimble-9b": "Bespoke Nimble 9B",
+    "djev": "djev (Maisa, diffusion-gemma)",
 }
 
 
@@ -95,16 +96,16 @@ def main():
     ranked = [s for s in sys_ if s["ranked"]]
     part = [s for s in sys_ if s["partial"]]
     n_hard = RES["tiers"]["hard"]
-    cost = lambda s: ("est. " if s["cost"]["kind"] == "estimate" else "") + f"${s['cost']['usd_per_1000']:.3f}"
+    cost = lambda s: ({"estimate": "est. ", "announced": "announced "}.get(s["cost"]["kind"], "")) + f"${s['cost']['usd_per_1000']:.3f}"
     ax4 = lambda s: s["axes"]
     f0 = lambda v: "–" if v is None else f"{v:.0f}"
     bars("main-score.png", ranked + part, lambda s: s["jevbench_score"],
          lambda s, v: f"{v:.1f}   I {f0(ax4(s)['intelligence'])} · C {f0(ax4(s)['calibration'])} · S {f0(ax4(s)['speed'])} · K {f0(ax4(s)['cost'])}  ({cost(s)}/1k)",
-         "JevBench v1.2 — JevBench Score",
+         f"JevBench {RES['revision']} — JevBench Score",
          "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard. "
          f"{sum(RES['tiers'].values())} decisions incl. {n_hard} hard.",
          "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption; raw measurements in the repo. "
-         "est. = hosted-provider list price.")
+         "est. = hosted-provider list price; announced = provider's published price, not yet charged.")
     # four axes side by side, ranked systems only
     fig, axs = plt.subplots(1, 4, figsize=(16, 0.5 * len(ranked) + 2.6), facecolor=SURFACE, sharey=True)
     fig.subplots_adjust(left=0.2, right=0.99, wspace=0.08, top=1 - 1.05 / (0.5 * len(ranked) + 2.6), bottom=1.0 / (0.5 * len(ranked) + 2.6))
@@ -119,7 +120,7 @@ def main():
         ax.set_xticks([0, 50, 100])
         ax.set_title(t, fontsize=11.5, color=INK, loc="left")
     axs[0].set_yticks(ys, [name(s) for s in ranked])
-    stamp(fig, "JevBench v1.2 — the four axes", "Each 0–100. The JevBench Score is their geometric mean.",
+    stamp(fig, f"JevBench {RES['revision']} — the four axes", "Each 0–100. The JevBench Score is their geometric mean.",
           "Speed: latency of self-hosted and demo endpoints adjusted ×2 (+0.15 s on our own servers) — an assumption, not a measurement.")
     legend(fig, {s["class"] for s in ranked})
     fig.savefig(OUT / "axes.png", dpi=150, facecolor=SURFACE)
@@ -136,13 +137,13 @@ def main():
 
     hrows = sorted([s for s in sys_ if s["hard"] and s["hard"]["n_attempted"]], key=lambda s: (s["partial"], -hard_acc(s)))
     bars("hard-tier.png", hrows, hard_acc, hard_label,
-         "JevBench v1.2 — hard-tier accuracy",
+         f"JevBench {RES['revision']} — hard-tier accuracy",
          f"{n_hard} decisions: long multi-condition documents, trade-offs, ambiguous cases, traps, multi-hop, dates & numbers, answer judging",
          "Items written by Claude Opus 5 and GPT-5.6 Sol, cross-reviewed, frozen before any system ran. Failed or unparseable answers count as wrong.")
     crows = sorted([s for s in sys_ if s["calibration"]["score"] is not None], key=lambda s: (s["partial"], -s["calibration"]["score"]))
     bars("calibration.png", crows, lambda s: s["calibration"]["score"],
          lambda s, v: f"{v:.1f}   ECE {s['calibration']['ece_hard']:.3f}" + (f" · fidelity {s['calibration']['probability_fidelity']:.0f}" if s['calibration']['probability_fidelity'] is not None else ""),
-         "JevBench v1.2 — Calibration (hard tier)",
+         f"JevBench {RES['revision']} — Calibration (hard tier)",
          "Mean of (100 × (1 − ECE/0.5)) and probability fidelity (100 × (1 − total-variation distance to the exact gold distribution) on 20 probability items)",
          "Label-only systems (Needle 3) have no distribution and no calibration score (0 in the JevBench Score). Verbalised LLM probabilities and native model distributions are both scored as returned.")
     # heat table of hard-tier families
@@ -161,7 +162,7 @@ def main():
     for side in ax.spines.values():
         side.set_visible(False)
     ax.tick_params(length=0)
-    stamp(fig, "JevBench v1.2 — hard tier by item family (accuracy %)", "Where the systems differ: dates & numbers and long policy documents separate them most",
+    stamp(fig, f"JevBench {RES['revision']} — hard tier by item family (accuracy %)", "Where the systems differ: dates & numbers and long policy documents separate them most",
           "Families with n ≤ 16 are small; read single cells with care.")
     fig.savefig(OUT / "hard-families.png", dpi=150, facecolor=SURFACE)
     plt.close(fig)
