@@ -18,6 +18,32 @@ SHORT = {
     "djev": "djev (Maisa, diffusion-gemma)",
 }
 name = lambda s: SHORT.get(s["key"], s["display"])
+TOP_PATH = ROOT / "results/v1.2/jevbench-v1.2-topics.json"
+TOP = json.loads(TOP_PATH.read_text()) if TOP_PATH.exists() else None
+
+
+def topic_table():
+    if not TOP:
+        return ""
+    ks = [t["key"] for t in TOP["topics"]]
+    head = "| System | " + " | ".join(f'{t["label"]} ({TOP["n_items"][t["key"]]})' for t in TOP["topics"]) + " |"
+    rows = []
+    for s in ranked + partial:
+        tp = TOP["systems"][s["key"]]["topics"]
+        cell = lambda a: "—" if a["accuracy"] is None else f'{100 * a["accuracy"]:.1f} %' + ("" if a["attempted"] >= TOP["min_attempted"] else f' (n={a["attempted"]}, too few)')
+        rows.append(f"| {name(s)}{'' if s['ranked'] else ' (partial)'} | " + " | ".join(cell(tp[k]) for k in ks) + " |")
+    return ("\n## Accuracy by subject topic\n\n" + TOP["note"] + " How the topics were assigned: [`datasets/TOPICS.md`](datasets/TOPICS.md).\n\n"
+            + head + "\n|---|" + "---|" * len(ks) + "\n" + "\n".join(rows) + "\n")
+
+
+LIMITS = """
+## Limitations
+
+- **The latency adjustment (×2, +0.15 s) is an assumption, not a measurement.** We ran self-hosted and demo endpoints one request at a time (parallelism 1, no other load), so their latency is likely better than the same model on a busy production server; the official Jev API presumably runs under high load, given the public interest. Serving under load trades per-user speed for throughput: in the NVIDIA chart shown by [SemiAnalysis](https://newsletter.semianalysis.com/p/nvidia-blackwell-perf-tco-analysis), moving to the throughput-maximising setting cuts per-user tokens/s by far more than 2×. That chart is a 1.8T MoE on GPU clusters, not a 4B model on one GPU, so it supports the direction and size of the effect, not our exact factor. The +0.15 s stands for infrastructure our self-hosted tests lacked: authentication, load balancing, logging, billing, API gateway. Raw p50/p95 are in the tier table above and in the artifact; a measurement under load is planned.
+- 534 decisions is a pilot, not a census, and it is English-only. Held-out decisions are sent to the evaluated services to get predictions: not public is not the same as not seen.
+- Latency is one origin (a server in Germany) at one time of day; production APIs, public demos, our GPU and a local CPU are different kinds of latency.
+- Estimated costs describe what a large inference provider would charge for a model of that size, not what the author pays.
+"""
 
 
 def usd(s):
@@ -105,7 +131,7 @@ files (`results/v1.2/wip/`, GPU round runs).
 ## Cost basis
 
 """ + "\n".join(f"- **{name(s)}** — {usd(s)}: {s['cost']['basis']}" for s in S) + """
-
+""" + topic_table() + LIMITS + """
 ## Revision log
 
 """ + log + """

@@ -24,6 +24,11 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 > Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load —
 > an assumption, not a measurement; raw measurements are in [`RESULTS-v1.2.md`](RESULTS-v1.2.md) and the artifact.
+> Why, and its limits: [Limits, stated plainly](#limits-stated-plainly).
+
+- **Accuracy by subject topic** (math, coding, rules & law, finance, support & operations, everyday language, safety &
+  security): [`datasets/TOPICS.md`](datasets/TOPICS.md) and `results/v1.2/jevbench-v1.2-topics.json` — aggregates only,
+  not part of the score.
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
@@ -228,6 +233,14 @@ House rules the harness enforces rather than documents:
   read as one ranking.
 - Public demo endpoints are shared with everyone else using them. Their numbers describe
   that deployment on that day, not the model's ceiling on your hardware.
+- **The latency adjustment (×2, +0.15 s) is an assumption, not a measurement.** We ran self-hosted and demo endpoints one
+  request at a time (parallelism 1, no other load), so their latency is likely better than the same model on a busy
+  production server; the official Jev API presumably runs under high load, given the public interest. Serving under load
+  trades per-user speed for throughput: in the NVIDIA chart shown by [SemiAnalysis](https://newsletter.semianalysis.com/p/nvidia-blackwell-perf-tco-analysis),
+  moving to the throughput-maximising setting cuts per-user tokens/s by far more than 2×. That chart is a 1.8T MoE on GPU
+  clusters, not a 4B model on one GPU, so it supports the direction and size of the effect, not our exact factor. The
+  +0.15 s stands for infrastructure our self-hosted tests lacked: authentication, load balancing, logging, billing, API
+  gateway. Raw p50/p95 are in [`RESULTS-v1.2.md`](RESULTS-v1.2.md) and the artifact; a measurement under load is planned.
 - Several projects could not be run at all - no GPU, gated weights, Apple-Silicon-only,
   browser-only. They are listed with the concrete reason, and an exclusion is an
   availability fact, never a quality verdict.
