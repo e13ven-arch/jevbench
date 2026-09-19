@@ -26,6 +26,17 @@ how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
 
 ![JevBench v1.2 Main Score](results/v1.2/charts/main-score.png)
 
+## v1.1.3: the GPU round
+
+**[Results -> `RESULTS-v1.1.3.md`](RESULTS-v1.1.3.md)** · artifact
+[`results/v1.1.3/jevbench-v1.1.3-results.json`](results/v1.1.3/jevbench-v1.1.3-results.json)
+
+The v1.1 task set and v1.1.2 scoring, unchanged, plus six rows for open rebuilds that need a GPU, each run
+the way its author serves it on a rented RunPod GPU: OpenJev on DiffusionGemma 26B-A4B (razorback16),
+SemIf on Qwen3.5-4B, open-alternative-jev (complete this time; plus a marked post-hoc mode), system-one on
+Qwen3-8B, and Bespoke Nimble 9B. Speed is measured from Germany over the internet to the GPU, like every
+remote entrant. v1.1.2 rows are unchanged; only ranks move. Their hard-tier runs feed v1.2.
+
 ## v1.1: three sub-benchmarks and one Main Score
 
 **[Results -> `RESULTS-v1.1.md`](RESULTS-v1.1.md)** · artifact

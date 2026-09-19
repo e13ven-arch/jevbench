@@ -18,9 +18,11 @@ import argparse
 import json
 import os
 import sys
+import time
 
 from .adapters import (GradioSpaceAdapter, LocalOpenJevAdapter, NeedleLocalAdapter,
                        OpenAICompatAdapter, SystemOneListAdapter,
+                       RemoteInprocAdapter, SemIfDirectAdapter, SgSystemOneAdapter, So1DeciderAdapter,
                        TypeSafeAdapter)
 from .budget import Ledger
 from .runner import DEFAULT_RESERVE_USD, Runner
@@ -54,8 +56,10 @@ def cmd_run(args) -> int:
     kinds = {"typesafe": TypeSafeAdapter, "systemone_list": SystemOneListAdapter,
              "gradio_space": GradioSpaceAdapter, "local_openjev": LocalOpenJevAdapter,
              "openai_compat": OpenAICompatAdapter,
-             "needle_local": NeedleLocalAdapter}
-    if args.adapter not in ("typesafe", "needle_local") and not args.endpoint:
+             "needle_local": NeedleLocalAdapter,
+             "semif_direct": SemIfDirectAdapter, "so1_decider": So1DeciderAdapter,
+             "remote_inproc": RemoteInprocAdapter, "sg_system_one": SgSystemOneAdapter}
+    if args.adapter not in ("typesafe", "needle_local", "semif_direct", "so1_decider", "sg_system_one") and not args.endpoint:
         print(f"--endpoint required for {args.adapter}", file=sys.stderr)
         return 2
     kwargs = dict(endpoint=args.endpoint, model=args.model,
@@ -64,7 +68,7 @@ def cmd_run(args) -> int:
                   price_output_per_m=args.price_out_per_m)
     if args.adapter == "openai_compat":
         kwargs["model"] = args.model or ""
-    if args.adapter == "local_openjev":
+    if args.adapter in ("local_openjev", "semif_direct", "so1_decider", "sg_system_one"):
         kwargs["revision"] = args.revision
     adapter = kinds[args.adapter](**kwargs)
     if args.cost_basis:
@@ -74,6 +78,12 @@ def cmd_run(args) -> int:
         # into the run manifest so a published number names its settings.
         adapter.request_options = json.loads(args.request_options)
     endpoint_desc = getattr(adapter, "endpoint", None) or getattr(adapter, "path", "")
+    if os.environ.get("JEVBENCH_WARM_LOAD") == "1" and hasattr(adapter, "load"):
+        # v1.1.3 in-process GPU entrants: load weights before the clock starts,
+        # like a server that is already up. The load time is printed to the run log.
+        _t = time.perf_counter()
+        adapter.load()
+        print(f"[jevbench] warm load {time.perf_counter() - _t:.1f}s", flush=True)
 
     ledger = Ledger(args.ledger, cap_usd=args.cap_usd)
     runner = Runner(adapter, ledger, raw_dir=args.raw_dir,
@@ -144,7 +154,9 @@ def main(argv=None) -> int:
     p_run.add_argument("--tasks", required=True)
     p_run.add_argument("--adapter", required=True,
                        choices=["typesafe", "systemone_list", "gradio_space",
-                                "local_openjev", "openai_compat", "needle_local"])
+                                "local_openjev", "openai_compat", "needle_local",
+                                "semif_direct", "so1_decider", "remote_inproc",
+                                "sg_system_one"])
     p_run.add_argument("--endpoint", default=None)
     p_run.add_argument("--model", default=None)
     p_run.add_argument("--key-env", dest="key_env",

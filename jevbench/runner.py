@@ -47,7 +47,8 @@ class Runner:
     except BudgetExceeded as e:print('STOP:',str(e),flush=True);break
     records.append(r)
     if stream:stream.write(json.dumps(r,allow_nan=False)+'\n');stream.flush();os.fsync(stream.fileno())
-    errors=errors+1 if not r['ok']else 0
+    # v1.1.3: a 422 is the system refusing this input (e.g. over its context limit), not an outage; it counts as a wrong answer, not toward the stop rule
+    errors=errors+1 if not r['ok'] and r['status_code']!=422 else 0
     if i%progress_every==0:print(f'{i}/{len(tasks)} completed',flush=True)
     if r['status_code']in(401,403,429) or errors>=3:
      print('STOP: access/rate limit or consecutive infrastructure errors; remaining tasks unattempted',flush=True);break
