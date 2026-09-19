@@ -146,5 +146,6 @@
    "brier_mean": 0.11298411762398966,
    "first_request_s": 0.7758965417742729
   }
- }
+ },
+ "footnote": "Hosted API in free preview: the cost uses djev's announced price ($0.035 per million input tokens, output free); nothing is charged yet. Open-sourcing is planned, not yet released. Probabilities are djev's own (its docs call them experimental and uncalibrated)."
 }

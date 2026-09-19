@@ -62,6 +62,8 @@ v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; v1.2.1 adds djev,
 
 {table(partial, False)}
 
+Footnote — djev: {R['footnotes'].get('djev', '')}
+
 Footnote — open-alternative-jev: {R['footnotes']['open-alternative-jev']} The ranked row uses the author's own order
 (`A. yes, B. no`, as his `yes_no()` helper builds it); the reversed-order run was our adapter's mistake and is kept only as raw
 files (`results/v1.2/wip/`, GPU round runs).

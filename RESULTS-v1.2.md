@@ -38,6 +38,8 @@ Jev 1.13.0 is #1 with 75.3; SemIf (Qwen3.5-4B) is #2, 0.7 points behind (differe
 |  | Needle 3, options as tools (partial run) | **19.1** | 39.5 | none (label only) | 52.8 | 63.7 | $0.0162 est. | 3.78 s → 7.71 s | our CPU (2 threads, Ryzen 5 3600) |
 |  | Needle 3 (partial run) | **16.7** | 22.4 | none (label only) | 59.9 | 58.1 | $0.0249 est. | 1.69 s → 3.52 s | our CPU (2 threads, Ryzen 5 3600) |
 
+Footnote — djev: Hosted API in free preview: the cost uses djev's announced price ($0.035 per million input tokens, output free); nothing is charged yet. Open-sourcing is planned, not yet released. Probabilities are djev's own (its docs call them experimental and uncalibrated).
+
 Footnote — open-alternative-jev: With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no answer-judging items — small models are very sensitive to option order. The ranked row uses the author's own order
 (`A. yes, B. no`, as his `yes_no()` helper builds it); the reversed-order run was our adapter's mistake and is kept only as raw
 files (`results/v1.2/wip/`, GPU round runs).

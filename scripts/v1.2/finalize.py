@@ -158,7 +158,7 @@ def main():
             "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score.",
         },
         "hard_dataset": WIP.get("hard_dataset"),
-        "footnotes": {OAJ_KEY: footnote},
+        "footnotes": {OAJ_KEY: footnote, **{k: r["footnote"] for k, r in ADDITIONS.items() if r.get("footnote")}},
         "excluded_runs": [{
             "key": "open-alternative-jev-reversed-order", "run_key": OAJ_REVERSED, "why_not_ranked":
             "Our first adapter put the options in reverse order (A. no, B. yes); the author's yes_no() helper builds A. yes, B. no. "

@@ -15,7 +15,7 @@
  ],
  "protocol": "jevbench::v1.2",
  "status": "final",
- "generated_utc": "2026-09-19T17:00:38+00:00",
+ "generated_utc": "2026-09-19T17:03:11+00:00",
  "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final; v1.2.1 additions measured later on the same frozen items: djev",
  "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced. v1.2.1: added djev (Maisa, diffusion-gemma).",
  "score_name": "JevBench Score",
@@ -164,7 +164,8 @@
   "rule": "Items authored by Claude Opus 5 were reviewed by GPT-5.6 Sol and vice versa (blind answer, then gold verdict); one discussion round; anything not accepted afterwards was dropped. No item was selected or dropped on the basis of any benchmarked system's answers. Frozen before any benchmarked system saw an item."
  },
  "footnotes": {
-  "open-alternative-jev": "With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no answer-judging items — small models are very sensitive to option order."
+  "open-alternative-jev": "With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no answer-judging items — small models are very sensitive to option order.",
+  "djev": "Hosted API in free preview: the cost uses djev's announced price ($0.035 per million input tokens, output free); nothing is charged yet. Open-sourcing is planned, not yet released. Probabilities are djev's own (its docs call them experimental and uncalibrated)."
  },
  "excluded_runs": [
   {
