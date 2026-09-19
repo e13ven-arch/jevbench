@@ -12,7 +12,16 @@ class Runner:
   self.raw_dir.mkdir(parents=True,exist_ok=True)
  def run_task(self,t):
   estimate=self.adapter.reserve_estimate(t);reserve=max(self.reserve,finite(estimate)) if estimate is not None else self.reserve
-  rid=self.ledger.reserve(reserve,{'task_id':t.id,'adapter':self.adapter.name});started=time.perf_counter()
+  rid=self.ledger.reserve(reserve,{'task_id':t.id,'adapter':self.adapter.name})
+  # v1.2.2: adapters with a per-rubric setup (ProgramAsWeights loads one compiled program per rubric) do it in
+  # prepare(), before the clock: setup is not decision latency. Its time is kept as prepare_s. No other adapter has it.
+  prep=None
+  if hasattr(self.adapter,'prepare'):
+   p0=time.perf_counter()
+   try:self.adapter.prepare(t)
+   except Exception as e:print('prepare failed:',type(e).__name__,str(e)[:200],flush=True)
+   prep=time.perf_counter()-p0
+  started=time.perf_counter()
   try:r=self.adapter.run(t)
   except Exception as e:r=DecisionResult(self.adapter.name,False,error=type(e).__name__)
   wall=time.perf_counter()-started
@@ -33,7 +42,7 @@ class Runner:
   self.ledger.settle(rid,cost if cost is not None else reserve,{'task_id':t.id,'basis':basis})
   if r.ok and r.probs is None and r.probs_source=='label_only_no_calibrated_distribution':scored=score_label(r.label,t)
   else:scored=score_task(r.probs or {},t)if r.ok else {'valid':False,'strict_valid':False,'renormalized':False,'correct':False,'predicted':None}
-  return {'task_id':t.id,'family':t.family,'split':t.split,'group':t.group,'ts':time.time(),'status':'ok'if r.ok else'failed','ok':r.ok,'valid':scored['valid'],'correct':scored['correct'],'predicted':scored.get('predicted'),'ordinal_ev':scored.get('ordinal_ev'),'probs':scored.get('probs'),'probs_as_returned':r.probs,'strict_valid':scored.get('strict_valid',False),'renormalized':scored.get('renormalized',False),'probs_source':r.probs_source,'model':r.model,'error':r.error,'schema_error':scored.get('error'),'status_code':r.status,'latency_s':wall,'usage':r.usage,'cost_usd':cost,'cost_basis':basis,'reserved_usd':reserve,'charged_usd':cost if cost is not None else reserve,'raw_sha256':digest,'runtime':r.raw.get('runtime')if isinstance(r.raw,dict)else None}
+  return {'task_id':t.id,'family':t.family,'split':t.split,'group':t.group,'ts':time.time(),'status':'ok'if r.ok else'failed','ok':r.ok,'valid':scored['valid'],'correct':scored['correct'],'predicted':scored.get('predicted'),'ordinal_ev':scored.get('ordinal_ev'),'probs':scored.get('probs'),'probs_as_returned':r.probs,'strict_valid':scored.get('strict_valid',False),'renormalized':scored.get('renormalized',False),'probs_source':r.probs_source,'model':r.model,'error':r.error,'schema_error':scored.get('error'),'status_code':r.status,'latency_s':wall,'usage':r.usage,'cost_usd':cost,'cost_basis':basis,'reserved_usd':reserve,'charged_usd':cost if cost is not None else reserve,'raw_sha256':digest,'runtime':r.raw.get('runtime')if isinstance(r.raw,dict)else None,**({'prepare_s':prep} if prep is not None else {})}
  def run_all(self,tasks,progress_every=10,results_path=None,delay_s=0.):
   records=[];errors=0;stream=None
   if results_path:

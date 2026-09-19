@@ -26,6 +26,12 @@ from .so1_decider import So1DeciderAdapter  # noqa: F401
 from .remote_inproc import RemoteInprocAdapter  # noqa: F401
 from .sg_system_one import SgSystemOneAdapter  # noqa: F401
 from .djev import DjevAdapter  # noqa: F401
+# v1.2.2 additions (their heavy libraries are imported lazily, inside each system's own venv)
+from .laya_local import LayaLocalAdapter  # noqa: F401
+from .gliner2_local import Gliner2LocalAdapter  # noqa: F401
+from .verdict_local import VerdictLocalAdapter  # noqa: F401
+from .paw_local import PawLocalAdapter  # noqa: F401
+from .classifier_dev import ClassifierDevAdapter  # noqa: F401
 
 
 def NeedleLocalAdapter(**kw):  # lazy: only the Needle venv can import needle
