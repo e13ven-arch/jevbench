@@ -9,6 +9,17 @@ adapter asks the question the way Needle is built to be asked - one tool,
 only. `probs` stays None and `probs_source` says why: we never turn a single
 confidence into a distribution, so Brier and ECE are not computed for Needle.
 
+Two modes, both reported, never merged:
+  "record_decision" (default, frozen before the v1.1 run): one tool whose one
+      argument is the typed label.
+  "options_as_tools" (request_options {"choice_mode": "tools"}; added after the
+      easy-tier run showed Needle declining record_decision for requests like
+      "Where is my package?" because no tool could *serve* the request): for
+      choice questions every option becomes its own tool, named by the label
+      and described by its criterion, and the called tool is the answer. This
+      is how Needle is meant to be used for tool selection. Yes/no and ordinal
+      questions are unchanged in this mode.
+
 A suppressed call (Needle's "the request does not fit the tool" refusal) is an
 abstention and scores as wrong. What the suppressed call would have said is kept
 in the raw record for inspection, not scored.
@@ -87,16 +98,27 @@ class NeedleLocalAdapter:
             return s if s in task.labels else None
         return value if value in task.labels else None
 
+    @staticmethod
+    def build_option_tools(task) -> list:
+        crit = task.question.get("criteria")
+        return [{"name": str(lab),
+                 "description": (crit.get(lab) if isinstance(crit, dict) and crit.get(lab) else str(lab)),
+                 "parameters": {"type": "object", "properties": {}, "required": []}}
+                for lab in task.labels]
+
     def run(self, task) -> DecisionResult:
+        mode = (getattr(self, "request_options", None) or {}).get("choice_mode", "record_decision")
+        as_tools = mode == "tools" and task.question["type"] == "choice"
         tool = self.build_tool(task)
+        tools = self.build_option_tools(task) if as_tools else [tool]
         text = task.state if isinstance(task.state, str) else json.dumps(task.state, ensure_ascii=False)
-        body = {"system": task.question["instructions"], "tools": [tool], "text_sha_only": True}
+        body = {"system": task.question["instructions"], "tools": tools, "mode": "options_as_tools" if as_tools else "record_decision"}
         res = DecisionResult(adapter=self.name, ok=False, probs=None, probs_source=NO_DISTRIBUTION,
                              model=self.model, request_body=body)
         agent = None
         t0 = time.perf_counter()
         try:
-            agent = self._needle.Needle(tools=[tool], system=task.question["instructions"])
+            agent = self._needle.Needle(tools=tools, system=task.question["instructions"])
             out = agent.complete(text, max_new_tokens=self.max_new_tokens)
         except Exception as e:  # engine error is an infrastructure failure, not an answer
             res.latency_s = time.perf_counter() - t0
@@ -108,12 +130,17 @@ class NeedleLocalAdapter:
         res.latency_s = time.perf_counter() - t0
         calls = out.get("function_calls") or []
         suppressed = out.get("suppressed_calls") or []
-        value = (calls[0].get("arguments") or {}).get("decision") if calls else None
+        def pick(c):
+            if as_tools:
+                return c.get("name")
+            return (c.get("arguments") or {}).get("decision")
+        value = pick(calls[0]) if calls else None
         label = self.to_label(value, task) if calls else None
         res.raw = {"response": out, "runtime": {
             "engine": f"cactus-needle {self.version}", "suppressed": bool(not calls and suppressed),
             "confidence_scalar": out.get("confidence"), "state_truncated": False,
-            "suppressed_label": self.to_label((suppressed[0].get("arguments") or {}).get("decision"), task)
+            "mode": body["mode"], "n_calls": len(calls),
+            "suppressed_label": self.to_label(pick(suppressed[0]), task)
             if (not calls and suppressed) else None}}
         res.usage = {k: out.get(k) for k in ("prefill_tps", "decode_tps", "peak_ram_mb") if k in out}
         res.ok = True  # the engine answered; an abstention or off-enum value is a wrong answer
