@@ -1,6 +1,8 @@
 # JevBench v1.1 - results
 
-Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T08:32 UTC). v1.1 is a new version: it adds an easy tier and scores three sub-benchmarks. Its numbers are not comparable with v1.0's single pooled accuracy ([`RESULTS.md`](RESULTS.md)), which stays as published.
+Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:16 UTC). v1.1 is a new version: it adds an easy tier and scores three sub-benchmarks. Its numbers are not comparable with v1.0's single pooled accuracy ([`RESULTS.md`](RESULTS.md)), which stays as published.
+
+**Revision v1.1.1.** 19 Sep 2026: the Cost sub-benchmark is re-priced. Systems without a tariff are now priced as if a large inference provider hosted them (OpenRouter/DeepInfra list prices for the same weights or the model's size class) instead of our own CPU time or the nearest larger model family; Main Scores and ranks are recomputed. Items, answers, Capability and Speed are unchanged. The v1.1 numbers stay at tag v1.1.
 
 ![Main Score](results/v1.1/charts/main-score.png)
 
@@ -10,15 +12,15 @@ Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T08:32 UTC).
 
 | # | System | Main | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Jev 1.13.0 (TypeSafe AI) | **87.6** | 97.8 | 58.2 | 86.2 | 100.0 % | 99.0 % | 94.5 % | 0.65 s / 0.72 s | $0.0259 |
-| 2 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **84.2** | 97.0 | 57.7 | 72.1 | 100.0 % | 95.8 % | 95.2 % | 0.68 s / 0.73 s | ~$0.0685 |
-| 3 | system-one-open (Gemma 4 E2B LoRA on an L4) | **83.7** | 93.8 | 57.5 | 79.5 | 100.0 % | 93.8 % | 87.7 % | 0.65 s / 0.77 s | ~$0.0413 |
+| 1 | system-one-open (Gemma 4 E2B LoRA on an L4) | **87.8** | 93.8 | 57.5 | 100.0 | 100.0 % | 93.8 % | 87.7 % | 0.65 s / 0.77 s | ~$0.0092 |
+| 2 | Jev 1.13.0 (TypeSafe AI) | **87.6** | 97.8 | 58.2 | 86.2 | 100.0 % | 99.0 % | 94.5 % | 0.65 s / 0.72 s | $0.0259 |
+| 3 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **84.2** | 97.0 | 57.7 | 72.1 | 100.0 % | 95.8 % | 95.2 % | 0.68 s / 0.73 s | ~$0.0685 |
 | 4 | Gemini 3.1 Flash-Lite | **80.9** | 97.4 | 54.5 | 57.7 | 100.0 % | 99.0 % | 93.2 % | 0.76 s / 0.88 s | $0.1856 |
 | 5 | GPT-5.6 Luna (low reasoning effort) | **79.6** | 98.2 | 43.9 | 59.5 | 100.0 % | 97.9 % | 96.6 % | 0.97 s / 1.82 s | $0.1642 |
 | 6 | DeepSeek V4.1 Flash (thinking default) | **74.9** | 96.9 | 29.0 | 54.9 | 98.6 % | 99.0 % | 93.2 % | 1.42 s / 4.89 s | $0.2252 |
-| 7 | open-jev-deberta-v3-large (local CPU) | **66.6** | 67.5 | 30.7 | 100.0 | 100.0 % | 49.0 % | 53.4 % | 1.77 s / 3.35 s | ~$0.0030 |
-| 8 | Needle 3, options as tools (post-hoc adapter mode) | **48.5** | 44.1 | 10.6 | 100.0 | 66.7 % | 31.2 % | 34.2 % | 3.78 s / 33.64 s | ~$0.0061 |
-| 9 | Needle 3 (Cactus, 2-bit, local CPU) | **42.9** | 31.8 | 19.3 | 100.0 | 47.2 % | 16.7 % | 31.5 % | 1.69 s / 14.36 s | ~$0.0032 |
+| 7 | open-jev-deberta-v3-large (local CPU) | **66.6** | 67.5 | 30.7 | 100.0 | 100.0 % | 49.0 % | 53.4 % | 1.77 s / 3.35 s | ~$0.0045 |
+| 8 | Needle 3, options as tools (post-hoc adapter mode) | **47.1** | 44.1 | 10.6 | 93.0 | 66.7 % | 31.2 % | 34.2 % | 3.78 s / 33.64 s | ~$0.0162 |
+| 9 | Needle 3 (Cactus, 2-bit, local CPU) | **41.5** | 31.8 | 19.3 | 93.0 | 47.2 % | 16.7 % | 31.5 % | 1.69 s / 14.36 s | ~$0.0162 |
 
 `~` = an estimate from a stated reference deployment, because we pay no tariff on that route (see Cost below). Every other price is the provider's public tariff times the tokens we measured.
 
@@ -36,7 +38,7 @@ Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T08:32 UTC).
 - **Capability.** Mean of the three tier accuracies (easy, standard, judge), each weighted 1/3, times 100. Frozen with the v1.1 dataset before any v1.1 inference. Pooled accuracy over all 314 decisions is published beside it.
 - **Calibration.** Reported, not scored. Brier and ECE are published for every system that returns a distribution. They are not part of Capability or the Main Score, because label-only systems (Needle 3) have no distribution and any penalty we invented for that would be our choice, not a measurement; and verbalised LLM probabilities and native model distributions are different things.
 - **Speed.** Median (p50) and 95th-percentile latency of successful requests in the system's serial run of the 242 standard+judge decisions (one request at a time, from a Hetzner server in Germany, network included; local models on 2 CPU threads of a Ryzen 5 3600). Each latency t maps to 100 * (log10(10 s) - log10(t)) / 2, clipped to 0..100: 0.1 s = 100, 1 s = 50, 10 s = 0. Speed = mean of the p50 and p95 scores. Log scale because 0.2 s vs 0.4 s matters as much as 2 s vs 4 s.
-- **Cost.** Dollars per 1,000 decisions over all attempted decisions. Metered APIs: the provider's public tariff times measured tokens. No tariff for us (author endpoints, our CPU, a flat-rate plan): an ESTIMATE, labelled as such, from a stated reference deployment: open weights on a GPU = OpenRouter list price of the same weights (or of the nearest larger sibling) times measured tokens; CPU models = a 2-vCPU Hetzner Cloud CX22 billed for the measured median latency per decision, one decision at a time. Each cost c maps to 100 * (log10($10) - log10(c)) / 3, clipped to 0..100: $0.01 per 1,000 = 100, $0.10 = 67, $1 = 33, $10 = 0.
+- **Cost.** Dollars per 1,000 decisions over all attempted decisions. Metered APIs: the provider's public tariff times measured tokens. No tariff for us (open weights, author demos, local runs): an ESTIMATE, labelled as such, priced as if a large inference provider hosted the model - the OpenRouter list price of the same weights (else the nearest larger sibling; else the DeepInfra list price of the same weights or of the nearest larger model of the same size class, e.g. same-size encoders for an encoder) times the tokens per decision (measured, or the input tokens of the gemini-3.1-flash-lite run on the same prompts). Not GPU rental by the minute and not our own CPU time: providers buy capacity in bulk or own the hardware. Each cost c maps to 100 * (log10($10) - log10(c)) / 3, clipped to 0..100: $0.01 per 1,000 = 100, $0.10 = 67, $1 = 33, $10 = 0.
 - **Main.** JevBench Main Score = 0.6 * Capability + 0.2 * Speed + 0.2 * Cost. Capability carries most of the weight because a fast, cheap wrong decision is still wrong. The sensitivity table shows the ranking under five other weightings.
 - **Ranked.** Ranked: every tier attempted in full or nearly (>= 95% of decisions). Partial runs are shown, marked, and not ranked.
 
@@ -56,22 +58,23 @@ The easy tier exists so that the floor of the scale means something. In v1.0 a s
 
 We never write a zero for a route we did not pay for, and we never leave it blank without saying why. The rule:
 
-- **openjev-sglang (Qwen3.6-35B-A3B on SGLang)**: ESTIMATE: qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights (Qwen3.6-35B-A3B)) x 667 input and 2 output tokens per decision.
-- **system-one-open (Gemma 4 E2B LoRA on an L4)**: ESTIMATE: google/gemma-4-26b-a4b-it list price $0.09/M in, $0.3/M out (Gemma 4 E2B is not listed; the smallest listed Gemma 4 is larger, so this errs high) x 452 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
-- **open-jev-deberta-v3-large (local CPU)**: ESTIMATE: Hetzner Cloud CX22 (2 vCPU, 4 GB) at $0.0070/h x 1.55 s median per decision, one decision at a time.
-- **Needle 3, options as tools (post-hoc adapter mode)**: ESTIMATE: Hetzner Cloud CX22 (2 vCPU, 4 GB) at $0.0070/h x 3.12 s median per decision, one decision at a time.
-- **Needle 3 (Cactus, 2-bit, local CPU)**: ESTIMATE: Hetzner Cloud CX22 (2 vCPU, 4 GB) at $0.0070/h x 1.67 s median per decision, one decision at a time.
-- **Qwen3.8 27B (Chutes TEE)**: ESTIMATE: qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 445 input and 393 output tokens per decision.
+- **system-one-open (Gemma 4 E2B LoRA on an L4)**: ESTIMATE: hosted-provider price, deepinfra google/gemma-4-E4B-it list price $0.02/M in, $0.1/M out (Gemma 4 E2B is not listed; the nearest larger sibling, Gemma 4 E4B, is listed only on DeepInfra) x 452 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
+- **openjev-sglang (Qwen3.6-35B-A3B on SGLang)**: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights) x 667 input and 2 output tokens per decision.
+- **open-jev-deberta-v3-large (local CPU)**: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
+- **Needle 3, options as tools (post-hoc adapter mode)**: ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (as needle-3) x 452 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
+- **Needle 3 (Cactus, 2-bit, local CPU)**: ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (no generative model under 1B is listed; the smallest listed one (1B) errs high; about 20 generated tokens for one tool call) x 452 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
+- **Qwen3.8 27B (Chutes TEE)**: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 445 input and 393 output tokens per decision.
+- **open-alternative-jev (Qwen3.5-4B, HF Space)**: ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter); one forward pass, nothing generated) x 452 input and 1 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts).
 
-Reference prices: CPU = Hetzner Cloud CX22 (2 vCPU, 4 GB), https://www.hetzner.com/pressroom/new-cx-plans/; tokens = https://openrouter.ai/api/v1/models (read 2026-09-19).
+How costs are estimated: A system with a public per-call or per-token tariff is priced at that tariff x measured tokens. A system without one (open weights, author demos, local CPU runs) is priced as if a large inference provider hosted it: the OpenRouter list price of the same weights; if OpenRouter does not list them, the nearest LARGER sibling on OpenRouter; if no sibling of the size class is on OpenRouter, the DeepInfra list price of the same weights or the nearest larger model of the same class. Never RunPod/per-minute GPU rental and never our own CPU time: providers buy capacity in bulk or own the GPUs. Price x tokens per decision (measured where the run reports usage, else the input tokens of the gemini-3.1-flash-lite run on the same prompts, which is how the other systems see the same state and rubric) = $ per 1,000 decisions, marked est. Reference prices: OpenRouter https://openrouter.ai/api/v1/models and DeepInfra https://api.deepinfra.com/models/list (both read 2026-09-19). Size-class reference models: dense_2-4B: deepinfra Qwen/Qwen3.5-4B 0.03/0.15, deepinfra google/gemma-4-E4B-it 0.02/0.1, openrouter google/gemma-3-4b-it 0.05/0.1, openrouter meta-llama/llama-3.2-3b-instruct 0.05/0.33; dense_27B: openrouter qwen/qwen3.5-27b 0.195/1.56, openrouter qwen/qwen3.6-27b 0.3/2.0, openrouter qwen/qwen3.8-27b 0.214/2.55; dense_9B: openrouter qwen/qwen3.5-9b 0.1/0.15; encoder_classifier_<=0.6B: BAAI/bge-large-en-v1.5 (335M) 0.01, Qwen/Qwen3-Embedding-0.6B 0.01, intfloat/e5-large-v2 (335M) 0.01, intfloat/multilingual-e5-large (560M) 0.01, thenlper/gte-base (110M) 0.005; generative_<=1B: deepinfra meta-llama/Llama-3.2-1B-Instruct 0.005/0.01, openrouter meta-llama/llama-3.2-1b-instruct 0.027/0.201; moe_26B-A4B: deepinfra google/gemma-4-26B-A4B-it 0.07/0.34, openrouter google/gemma-4-26b-a4b-it 0.09/0.3; moe_35B-A3B: deepinfra Qwen/Qwen3.6-35B-A3B 0.1/0.95, openrouter qwen/qwen3.5-35b-a3b 0.1625/1.3, openrouter qwen/qwen3.6-35b-a3b 0.1/0.9 ($ per million input/output tokens).
 
 ### Calibration (reported, not scored)
 
 | System | Brier (standard + judge) | Distribution |
 |---|---|---|
+| system-one-open (Gemma 4 E2B LoRA on an L4) | 0.138 | native |
 | Jev 1.13.0 (TypeSafe AI) | 0.056 | native |
 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | 0.085 | native |
-| system-one-open (Gemma 4 E2B LoRA on an L4) | 0.138 | native |
 | Gemini 3.1 Flash-Lite | 0.095 | verbalized |
 | GPT-5.6 Luna (low reasoning effort) | 0.056 | verbalized |
 | DeepSeek V4.1 Flash (thinking default) | 0.028 | verbalized |
@@ -87,17 +90,17 @@ Reference prices: CPU = Hetzner Cloud CX22 (2 vCPU, 4 GB), https://www.hetzner.c
 
 | System | 60/20/20 (headline) | capability only | 80/10/10 | 50/25/25 | equal thirds | 60/20/20 geometric |
 |---|---|---|---|---|---|---|
-| Jev 1.13.0 (TypeSafe AI) | #1 (87.6) | #2 (97.8) | #1 (92.7) | #1 (85.0) | #1 (80.7) | #1 (86.0) |
-| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #2 (84.2) | #4 (97.0) | #2 (90.6) | #3 (81.0) | #3 (75.6) | #2 (82.4) |
-| system-one-open (Gemma 4 E2B LoRA on an L4) | #3 (83.7) | #6 (93.8) | #5 (88.7) | #2 (81.1) | #2 (76.9) | #3 (82.3) |
-| Gemini 3.1 Flash-Lite | #4 (80.9) | #3 (97.4) | #3 (89.1) | #4 (76.7) | #4 (69.9) | #4 (78.1) |
-| GPT-5.6 Luna (low reasoning effort) | #5 (79.6) | #1 (98.2) | #4 (88.9) | #5 (74.9) | #5 (67.2) | #5 (75.6) |
+| system-one-open (Gemma 4 E2B LoRA on an L4) | #1 (87.8) | #6 (93.8) | #2 (90.8) | #1 (86.3) | #1 (83.8) | #1 (86.1) |
+| Jev 1.13.0 (TypeSafe AI) | #2 (87.6) | #2 (97.8) | #1 (92.7) | #2 (85.0) | #2 (80.7) | #2 (86.0) |
+| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #3 (84.2) | #4 (97.0) | #3 (90.6) | #3 (81.0) | #3 (75.6) | #3 (82.4) |
+| Gemini 3.1 Flash-Lite | #4 (80.9) | #3 (97.4) | #4 (89.1) | #4 (76.7) | #4 (69.9) | #4 (78.1) |
+| GPT-5.6 Luna (low reasoning effort) | #5 (79.6) | #1 (98.2) | #5 (88.9) | #5 (74.9) | #5 (67.2) | #5 (75.6) |
 | DeepSeek V4.1 Flash (thinking default) | #6 (74.9) | #5 (96.9) | #6 (85.9) | #6 (69.4) | #7 (60.3) | #6 (68.0) |
 | open-jev-deberta-v3-large (local CPU) | #7 (66.6) | #7 (67.5) | #7 (67.0) | #7 (66.4) | #6 (66.1) | #7 (62.3) |
-| Needle 3, options as tools (post-hoc adapter mode) | #8 (48.5) | #8 (44.1) | #8 (46.3) | #8 (49.7) | #8 (51.5) | #8 (39.0) |
-| Needle 3 (Cactus, 2-bit, local CPU) | #9 (42.9) | #9 (31.8) | #9 (37.4) | #9 (45.7) | #9 (50.4) | #9 (36.2) |
+| Needle 3, options as tools (post-hoc adapter mode) | #8 (47.1) | #8 (44.1) | #8 (45.6) | #8 (47.9) | #8 (49.2) | #8 (38.4) |
+| Needle 3 (Cactus, 2-bit, local CPU) | #9 (41.5) | #9 (31.8) | #9 (36.7) | #9 (44.0) | #9 (48.0) | #9 (35.7) |
 
-Jev 1.13.0 is first under every weighting except *capability only*, where GPT-5.6 Luna leads by 0.4 points - inside the noise we measured when Jev answered the same suite twice. The two Needle 3 rows are last under every weighting, and above zero under every weighting.
+Under the headline weights system-one-open (Gemma 4 E2B LoRA on an L4) leads Jev 1.13.0 (TypeSafe AI) by 0.2 points. First place by weighting: *60/20/20 (headline)*: system-one-open (Gemma 4 E2B LoRA on an L4); *capability only*: GPT-5.6 Luna (low reasoning effort); *80/10/10*: Jev 1.13.0 (TypeSafe AI); *50/25/25*: system-one-open (Gemma 4 E2B LoRA on an L4); *equal thirds*: system-one-open (Gemma 4 E2B LoRA on an L4); *60/20/20 geometric*: system-one-open (Gemma 4 E2B LoRA on an L4).
 
 ## Needle 3
 

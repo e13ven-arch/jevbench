@@ -19,7 +19,7 @@ measured here.
 |---|---|---|
 | **Capability** | accuracy on 314 decisions in three tiers - easy (72, new in v1.1), standard (96), judge (146) | mean of the three tier accuracies |
 | **Speed** | median and p95 latency, serial, network included | log scale: 0.1 s = 100, 1 s = 50, 10 s = 0 |
-| **Cost** | $ per 1,000 decisions: public tariff x measured tokens, or a labelled estimate from a stated reference deployment | log scale: $0.01 = 100, $1 = 33, $10 = 0 |
+| **Cost** | $ per 1,000 decisions: public tariff x measured tokens, or (no tariff) a labelled estimate at hosted-provider prices for the same weights or size class ([table](results/v1.1/pricing/jevbench-hosted-price-table.json)) | log scale: $0.01 = 100, $1 = 33, $10 = 0 |
 
 **JevBench Main Score = 0.6 x Capability + 0.2 x Speed + 0.2 x Cost.** The ranking under
 five other weightings is published beside it. Calibration (Brier, ECE) is reported for
