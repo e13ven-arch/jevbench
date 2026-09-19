@@ -19,7 +19,7 @@ import json
 import os
 import sys
 
-from .adapters import (GradioSpaceAdapter, LocalOpenJevAdapter,
+from .adapters import (GradioSpaceAdapter, LocalOpenJevAdapter, NeedleLocalAdapter,
                        OpenAICompatAdapter, SystemOneListAdapter,
                        TypeSafeAdapter)
 from .budget import Ledger
@@ -53,8 +53,9 @@ def cmd_run(args) -> int:
 
     kinds = {"typesafe": TypeSafeAdapter, "systemone_list": SystemOneListAdapter,
              "gradio_space": GradioSpaceAdapter, "local_openjev": LocalOpenJevAdapter,
-             "openai_compat": OpenAICompatAdapter}
-    if args.adapter != "typesafe" and not args.endpoint:
+             "openai_compat": OpenAICompatAdapter,
+             "needle_local": NeedleLocalAdapter}
+    if args.adapter not in ("typesafe", "needle_local") and not args.endpoint:
         print(f"--endpoint required for {args.adapter}", file=sys.stderr)
         return 2
     kwargs = dict(endpoint=args.endpoint, model=args.model,
@@ -143,7 +144,7 @@ def main(argv=None) -> int:
     p_run.add_argument("--tasks", required=True)
     p_run.add_argument("--adapter", required=True,
                        choices=["typesafe", "systemone_list", "gradio_space",
-                                "local_openjev", "openai_compat"])
+                                "local_openjev", "openai_compat", "needle_local"])
     p_run.add_argument("--endpoint", default=None)
     p_run.add_argument("--model", default=None)
     p_run.add_argument("--key-env", dest="key_env",

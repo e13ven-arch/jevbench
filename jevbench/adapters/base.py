@@ -25,6 +25,9 @@ class DecisionResult:
     usage: dict = field(default_factory=dict)
     raw: Optional[Any] = None  # preserved response body (json-safe)
     request_body: Optional[Any] = None
+    # Label-only systems (Needle 3) answer with one label and no distribution.
+    # They get accuracy, never Brier/ECE: a label is not a calibrated forecast.
+    label: Optional[str] = None
 
     def to_public(self) -> dict:
         """Public-safe view: no raw response text, no request body."""
@@ -38,6 +41,7 @@ class DecisionResult:
             "error": self.error,
             "latency_s": self.latency_s,
             "usage": self.usage,
+            "label": self.label,
         }
 
 

@@ -122,3 +122,22 @@ def score_task(probs: dict, task) -> dict:
         out["predicted"] = pred
         out["correct"] = pred == task.expected
     return out
+
+
+def score_label(label, task) -> dict:
+    """Score a label-only answer (a system with no distribution, e.g. Needle 3).
+
+    Valid when the label is in the exact label set. No probabilities are
+    produced here or anywhere downstream, so calibration metrics skip it.
+    An abstention (label None) is a valid-but-empty answer that counts wrong.
+    """
+    ok = label is not None and str(label) in [str(x) for x in task.labels]
+    out = {"valid": ok, "strict_valid": ok, "renormalized": False, "probs": None,
+           "predicted": str(label) if ok else None}
+    if task.expected is None:
+        out["correct"] = None
+    else:
+        out["correct"] = ok and str(label) == str(task.expected)
+    if not ok:
+        out["error"] = "abstained" if label is None else "label outside the label set"
+    return out

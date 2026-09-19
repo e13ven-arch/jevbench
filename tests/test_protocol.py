@@ -74,3 +74,31 @@ class Protocol(unittest.TestCase):
   groups={t.group for t in ts}
   for g in groups:self.assertEqual(len({str(t.expected)for t in ts if t.group==g}),1)
 if __name__=='__main__':unittest.main()
+
+
+class LabelOnlyScoring(unittest.TestCase):
+    """v1.1: a label-only system (Needle 3) is scored on its label, never given
+    a distribution, and an abstention counts wrong."""
+
+    def _task(self):
+        from jevbench.tasks import Task
+        return Task("t", "fact", "Status: paid.", {"type": "noul", "instructions": "Paid?"},
+                    ["no", "yes"], "yes", "public")
+
+    def test_right_wrong_abstain(self):
+        from jevbench.scoring import score_label
+        t = self._task()
+        self.assertTrue(score_label("yes", t)["correct"])
+        self.assertFalse(score_label("no", t)["correct"])
+        r = score_label(None, t)
+        self.assertFalse(r["correct"]); self.assertFalse(r["valid"]); self.assertIsNone(r["probs"])
+        self.assertFalse(score_label("maybe", t)["valid"])
+
+    def test_needle_label_mapping(self):
+        from jevbench.adapters.needle_local import NeedleLocalAdapter as N
+        t = self._task()
+        self.assertEqual(N.to_label(True, t), "yes")
+        self.assertEqual(N.to_label(False, t), "no")
+        self.assertIsNone(N.to_label(3, t))
+        tool = N.build_tool(t)
+        self.assertEqual(tool["parameters"]["properties"]["decision"]["type"], "boolean")

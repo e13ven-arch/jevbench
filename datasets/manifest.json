@@ -1,6 +1,5 @@
 {
-  "protocol": "jevbench::v1",
-  "frozen_at": "2026-09-18T21:20:30.887054+00:00",
+  "protocol": "jevbench::v1.1",
   "splits": [
     {
       "name": "original",
@@ -25,6 +24,18 @@
       "n": 68,
       "sha256": "e0b9805689767ca8e5ec09d9c4cd9b5f6f633882d8ba91a329fe644c9a85e20b",
       "canonical_sha256": "2d3a951107be250172d9cd6830602f8bed409ed85be4876f92de12a4ada18ca7"
+    },
+    {
+      "name": "easy",
+      "n": 48,
+      "sha256": "231df3c2c8e88a1a8c137ebe85de96ba70fabd330849098ac7b3c52c70b7172b",
+      "canonical_sha256": "3cbd0e951fa8059741955ef2bd3273b0bb60aecae8f4a68b89872f55f7376b3d"
+    },
+    {
+      "name": "easy-heldout",
+      "n": 24,
+      "sha256": "f5ef66cc3baa0b9d44013235d53649163226a57da8ba58099d237e77235fe6a8",
+      "canonical_sha256": "610ff842b81626eb07d3949ae9525eb242630bae61234e118cbaaf08839a1df8"
     }
   ],
   "labels_changed_after_inference": false,
@@ -35,5 +46,28 @@
     "origin": "Sandy Hetzner server",
     "concurrency": 1
   },
-  "pilot": true
+  "pilot": true,
+  "v1_0_frozen_at": "2026-09-18T21:20:30.887054+00:00",
+  "frozen_at": "2026-09-19T07:25:18.902230+00:00",
+  "tiers": {
+    "easy": [
+      "easy",
+      "easy-heldout"
+    ],
+    "standard": [
+      "original",
+      "heldout"
+    ],
+    "judge": [
+      "router",
+      "judge"
+    ]
+  },
+  "tier_notes": {
+    "easy": "72 clear-cut decisions (intent, explicit yes/no fact, enum extraction, one-obvious-tool selection); new in v1.1",
+    "standard": "96 authored decisions from v1.0 (policy, intent, extraction, ordinal, adequacy, routing), unchanged",
+    "judge": "146 imported decisions from v1.0 (routing real task prompts into 9 categories; judging whether a saved math answer is correct), unchanged"
+  },
+  "overall_score": "Mean of the three tier accuracies, each tier weighted 1/3. Pooled accuracy over all 314 decisions is published beside it.",
+  "v1_0_items_unchanged": true
 }

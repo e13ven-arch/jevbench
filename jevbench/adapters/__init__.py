@@ -21,3 +21,8 @@ from .openai_compat import OpenAICompatAdapter  # noqa: F401
 from .systemone_list import SystemOneListAdapter  # noqa: F401
 from .gradio_space import GradioSpaceAdapter  # noqa: F401
 from .local_openjev import LocalOpenJevAdapter  # noqa: F401
+
+
+def NeedleLocalAdapter(**kw):  # lazy: only the Needle venv can import needle
+    from .needle_local import NeedleLocalAdapter as A
+    return A(**kw)
