@@ -1,0 +1,39 @@
+{
+  "protocol": "jevbench::v1",
+  "frozen_at": "2026-09-18T21:20:30.887054+00:00",
+  "splits": [
+    {
+      "name": "original",
+      "n": 72,
+      "sha256": "5c2414edb3006b8bfcb70fda433f0f9ca015759433849f8d3104328a1f7c4180",
+      "canonical_sha256": "914276022fa5f0ea70e4231f2af98e68c67b274b61bea8c440b33890401cd2f9"
+    },
+    {
+      "name": "heldout",
+      "n": 24,
+      "sha256": "8766a0cccb65b3857b1d13c1fee541bed8f3b82abb6d3ab6dced31161fadd1cf",
+      "canonical_sha256": "0648e6b956d579250a606579ab701481639b831dca125ddc84842841817191c7"
+    },
+    {
+      "name": "router",
+      "n": 78,
+      "sha256": "d845fe36727df2d183352d87f18c6fd9279317c1a06fad90abfbbfe4518acf33",
+      "canonical_sha256": "08df3667a5b7419a8a89023840835c059cb1f6c1e6414de9fa6d0569ce595098"
+    },
+    {
+      "name": "judge",
+      "n": 68,
+      "sha256": "e0b9805689767ca8e5ec09d9c4cd9b5f6f633882d8ba91a329fe644c9a85e20b",
+      "canonical_sha256": "2d3a951107be250172d9cd6830602f8bed409ed85be4876f92de12a4ada18ca7"
+    }
+  ],
+  "labels_changed_after_inference": false,
+  "hardware": {
+    "platform": "Linux-5.15.0-143-generic-x86_64-with-glibc2.35",
+    "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+    "local_threads": 2,
+    "origin": "Sandy Hetzner server",
+    "concurrency": 1
+  },
+  "pilot": true
+}

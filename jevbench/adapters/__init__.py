@@ -1,0 +1,23 @@
+"""Model adapters. Each adapter returns a DecisionResult.
+
+Every adapter exposes the same probabilities-over-exact-labels interface:
+  * TypeSafe-compatible /v1/systemone (native typed interface).
+  * The list-shaped /decide flavour some open rebuilds ship (also native).
+  * A Gradio demo Space, when that is a rebuild's only public interface
+    (still the model's own softmax, only the transport is the demo form).
+  * An open-weights checkpoint loaded in-process (native softmax, no network).
+  * OpenAI-compatible chat completions with JSON-schema-constrained output;
+    the distribution is VERBALIZED by the model (we ask it to emit
+    probabilities). This is explicitly NOT logprobs.
+
+No silent fallback: if the endpoint URL/model/key is missing or the response
+is unusable, the adapter raises and the runner records a failed attempt.
+Raw provider responses are preserved by the runner, not here.
+"""
+
+from .base import DecisionResult  # noqa: F401
+from .typesafe import TypeSafeAdapter  # noqa: F401
+from .openai_compat import OpenAICompatAdapter  # noqa: F401
+from .systemone_list import SystemOneListAdapter  # noqa: F401
+from .gradio_space import GradioSpaceAdapter  # noqa: F401
+from .local_openjev import LocalOpenJevAdapter  # noqa: F401
