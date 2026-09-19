@@ -1,6 +1,6 @@
 """JevBench v1.2 subject topics: datasets/topics.json and results/v1.2/jevbench-v1.2-topics.json.
 
-    python3 scripts/v1.2/topics.py <private topic labels.json> <v1.2 run sources module> <djev runs dir>
+    python3 scripts/v1.2/topics.py <private topic labels.json> <v1.2 run sources module> <additions runs dir> [<runs dir> ...]
 
 Every one of the 534 v1.2 decisions carries one subject topic (what the item is about: math, coding, rules and law, ...),
 separate from its item family (the task format: intent, extraction, long_policy, ...). Method: datasets/TOPICS.md.
@@ -27,7 +27,7 @@ KEYS = [k for k, _, _ in TOPICS]
 MIN_N = 15
 
 
-def main(labels_path, sources_path, djev_runs):
+def main(labels_path, sources_path, *addition_runs):
     labels = json.loads(Path(labels_path).read_text())["labels"]
     spec = importlib.util.spec_from_file_location("sources", sources_path)
     pt = importlib.util.module_from_spec(spec); spec.loader.exec_module(pt)
@@ -43,7 +43,7 @@ def main(labels_path, sources_path, djev_runs):
         if not public:
             hidden[labels[i]][tier] += 1
     ds = {
-        "benchmark": "JevBench", "revision": "v1.2.1",
+        "benchmark": "JevBench", "revision": published.get("revision", "v1.2.1"),
         "note": "One subject topic per item (what it is about), separate from the item family (the task format). "
                 "Public items are listed by id; held-out and imported items only as counts. Method: datasets/TOPICS.md.",
         "topics": [{"key": k, "label": l, "covers": c} for k, l, c in TOPICS],
@@ -52,11 +52,16 @@ def main(labels_path, sources_path, djev_runs):
         "n_items": {k: counts[k] for k in KEYS}, "n_items_by_tier": by_tier,
     }
     systems = {}
-    runs = Path(djev_runs)
+    # rows added after v1.2 (djev in v1.2.1, the requested systems in v1.2.2+) come from their own jobs' run folders
+    extra = {}
+    for d in map(Path, addition_runs):
+        for v1dir in d.glob("*--v1"):
+            extra.setdefault(v1dir.name[: -len("--v1")], d)
     for key, pub in published["systems"].items():
-        if key == "djev":
-            v1 = pt.rows(runs / "djev--v1")
-            src = {"easy": pt.rows(runs / "djev--easy"), "standard": v1, "judge": v1, "hard": pt.rows(runs / "djev--hard")}
+        if key in extra:
+            runs = extra[key]
+            v1 = pt.rows(runs / f"{key}--v1")
+            src = {"easy": pt.rows(runs / f"{key}--easy"), "standard": v1, "judge": v1, "hard": pt.rows(runs / f"{key}--hard")}
         else:  # the ranked open-alternative-jev row is the author's option order (see finalize.py)
             src = pt.sources("open-alternative-jev-yesfirst" if key == "open-alternative-jev" else key)
         tier_c, top = {}, {k: collections.Counter() for k in KEYS}
@@ -74,7 +79,7 @@ def main(labels_path, sources_path, djev_runs):
             n = sum(top[k].values()); att = n - top[k]["n"]
             systems[key]["topics"][k] = {"n": n, "attempted": att, "correct": top[k]["c"], "accuracy": round(top[k]["c"] / att, 4) if att else None}
     res = {
-        "benchmark": "JevBench", "protocol": "jevbench::v1.2", "revision": "v1.2.1", "status": "final",
+        "benchmark": "JevBench", "protocol": "jevbench::v1.2", "revision": published.get("revision", "v1.2.1"), "status": "final",
         "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count "
                 "as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. "
                 f"Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. "
@@ -89,4 +94,4 @@ def main(labels_path, sources_path, djev_runs):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:])

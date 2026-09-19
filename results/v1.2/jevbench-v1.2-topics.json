@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.1",
+ "revision": "v1.2.2",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -816,6 +816,54 @@
     }
    }
   },
+  "classifier-dev-fast": {
+   "display": "classifier.dev (fast tier)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 111,
+     "accuracy": 0.8605
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 52,
+     "accuracy": 0.9286
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 53,
+     "accuracy": 0.791
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 45,
+     "accuracy": 0.7031
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 105,
+     "accuracy": 0.8824
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 79,
+     "accuracy": 1.0
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 19,
+     "accuracy": 0.95
+    }
+   }
+  },
   "djev": {
    "display": "djev (Maisa, diffusion-gemma)",
    "partial": false,
@@ -861,6 +909,198 @@
      "attempted": 20,
      "correct": 19,
      "accuracy": 0.95
+    }
+   }
+  },
+  "gliner2": {
+   "display": "GLiNER2 (Fastino, gliner2.5-base)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 75,
+     "accuracy": 0.5814
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 24,
+     "accuracy": 0.4286
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 28,
+     "accuracy": 0.4179
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 24,
+     "accuracy": 0.375
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 52,
+     "accuracy": 0.437
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 66,
+     "accuracy": 0.8354
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 12,
+     "accuracy": 0.6
+    }
+   }
+  },
+  "jeff": {
+   "display": "jeff (Logan Markewich, GLiFormer 400M)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 89,
+     "accuracy": 0.6899
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 38,
+     "accuracy": 0.6786
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 27,
+     "accuracy": 0.403
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 30,
+     "accuracy": 0.4688
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 57,
+     "accuracy": 0.479
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 67,
+     "accuracy": 0.8481
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 10,
+     "accuracy": 0.5
+    }
+   }
+  },
+  "laya": {
+   "display": "Laya (Convai Innovations, ModernBERT-large 421M)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 67,
+     "accuracy": 0.5194
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 33,
+     "accuracy": 0.5893
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 27,
+     "accuracy": 0.403
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 35,
+     "accuracy": 0.5469
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 73,
+     "accuracy": 0.6134
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 66,
+     "accuracy": 0.8354
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 13,
+     "accuracy": 0.65
+    }
+   }
+  },
+  "openjev-verdict": {
+   "display": "openJev Verdict (heman10x, ModernBERT-base 151M)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 84,
+     "accuracy": 0.6512
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 29,
+     "accuracy": 0.5179
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 26,
+     "accuracy": 0.3881
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 33,
+     "accuracy": 0.5156
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 51,
+     "accuracy": 0.4286
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 63,
+     "accuracy": 0.7975
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 12,
+     "accuracy": 0.6
     }
    }
   }

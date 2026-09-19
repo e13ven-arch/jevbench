@@ -67,7 +67,7 @@ class VerdictLocalAdapter:
         prop = q["instructions"]
         if crit and (crit.get("true") or crit.get("false")):
             prop += f" (true: {crit.get('true') or 'yes'}; false: {crit.get('false') or 'no'})"
-        return Noul(id="decision", proposition=prop)
+        return Noul(id="decision", proposition=prop, semantics="conditional_on_sufficient_evidence_v2")  # the only value the engine accepts
 
     def run(self, task) -> DecisionResult:
         res = DecisionResult(adapter=self.name, ok=False, probs_source="native", model=self.model)

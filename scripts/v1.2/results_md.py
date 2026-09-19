@@ -16,6 +16,9 @@ SHORT = {
     "qwen3.8-27b": "Qwen3.8 27B", "semif-qwen3.5-4b": "SemIf (Qwen3.5-4B)", "openjev-razorback16": "OpenJev razorback16 (DiffusionGemma 26B)",
     "system-one-sg": "system-one (Qwen3-8B, Goedecke)", "nimble-9b": "Bespoke Nimble 9B", "open-alternative-jev": "open-alternative-jev (Qwen3.5-4B, IkerMoel)",
     "djev": "djev (Maisa, diffusion-gemma)",
+    "laya": "Laya (421M)", "jeff": "jeff (GLiFormer 400M)", "gliner2": "GLiNER2 (gliner2.5-base)",
+    "openjev-verdict": "openJev Verdict (151M)", "classifier-dev-fast": "classifier.dev (fast tier)",
+    "programasweights": "ProgramAsWeights (Qwen3-0.6B)",
 }
 name = lambda s: SHORT.get(s["key"], s["display"])
 TOP_PATH = ROOT / "results/v1.2/jevbench-v1.2-topics.json"
@@ -65,6 +68,10 @@ def table(rows, ranked_rows=True):
 presets = list(R["presets"])
 jev = next(s for s in ranked if s["key"] == "jev-1.13.0")
 second = ranked[1]
+lead = (f"{name(ranked[0])} is #1 with {f1(ranked[0]['jevbench_score'])}; {name(second)} is #2, "
+        f"{f1(round(ranked[0]['jevbench_score'], 1) - round(second['jevbench_score'], 1))} points behind (difference of the rounded scores)."
+        + ("" if ranked[0] is jev else f" {name(jev)} is #{jev['rank']} with {f1(jev['jevbench_score'])}."))
+footnotes = "\n\n".join(f"Footnote — {name(next(x for x in S if x['key'] == k))}: {v}" for k, v in R["footnotes"].items() if k != "open-alternative-jev")
 log = "\n".join(f"- **{e['revision']}** ({e['date']}): {e['note']}" for e in R.get("revision_log", []))
 md = f"""# JevBench {R['revision']} — results
 
@@ -72,7 +79,7 @@ md = f"""# JevBench {R['revision']} — results
 
 Artifact: [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) · scoring code:
 [`jevbench/composite_v12.py`](jevbench/composite_v12.py) · built by [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py) from the
-v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; v1.2.1 adds djev, measured later on the same frozen items) · interactive page: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
+v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; later revisions add systems measured on the same frozen items, see the revision log) · interactive page: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
 
 ![JevBench Score](results/v1.2/charts/main-score.png)
 
@@ -82,13 +89,13 @@ v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; v1.2.1 adds djev,
 
 {table(ranked)}
 
-{name(jev)} is #1 with {f1(jev['jevbench_score'])}; {name(second)} is #2, {f1(round(jev['jevbench_score'], 1) - round(second['jevbench_score'], 1))} points behind (difference of the rounded scores).
+{lead}
 
 **Partial runs** — shown, not ranked (a tier attempted for fewer than 95 % of its decisions):
 
 {table(partial, False)}
 
-Footnote — djev: {R['footnotes'].get('djev', '')}
+{footnotes}
 
 Footnote — open-alternative-jev: {R['footnotes']['open-alternative-jev']} The ranked row uses the author's own order
 (`A. yes, B. no`, as his `yes_no()` helper builds it); the reversed-order run was our adapter's mistake and is kept only as raw

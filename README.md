@@ -8,7 +8,7 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.2.1: the JevBench Score (current)
+## v1.2.2: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
 interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
@@ -32,8 +32,10 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking: **Jev 1.13.0 75.3** · SemIf (Qwen3.5-4B) 74.6 · djev (Maisa, diffusion-gemma) 74.3 ·
-  open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.7 · OpenJev razorback16 67.6. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Top of the ranking: **classifier.dev (fast tier) 84.8** · Jev 1.13.0 75.3 · SemIf (Qwen3.5-4B) 74.6 ·
+  djev (Maisa, diffusion-gemma) 74.3 · Laya (421M) 70.1 · open-alternative-jev (Qwen3.5-4B) 69.8. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+  classifier.dev's fast tier *is* Jev behind its own API, so it matches Jev on Intelligence and leads on price (its flat plan at full use) and on
+  measured latency from our server; that, not a better model, is why it is #1.
 - Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py); the final artifact is rebuilt from the frozen measurements by
   [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py), charts by [`scripts/v1.2/charts.py`](scripts/v1.2/charts.py).
   Per-task outcomes (public items): [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
@@ -54,6 +56,18 @@ held-out items, one request at a time through its production API (no latency adj
 Cost uses djev's announced price ($0.035 per million input tokens, output free), which is not charged yet (free preview).
 Adapter: [`jevbench/adapters/djev.py`](jevbench/adapters/djev.py); row: [`results/v1.2/additions/djev.json`](results/v1.2/additions/djev.json).
 No other row changed; ranks below #2 move down one.
+
+**v1.2.2 (tag `v1.2.2`): five systems readers asked for** — [Laya](https://huggingface.co/convaiinnovations/laya) (Convai Innovations,
+ModernBERT-large 421M), [jeff](https://github.com/logan-markewich/jeff) (Logan Markewich, GLiFormer 400M),
+[GLiNER2](https://github.com/fastino-ai/GLiNER2) (Fastino, gliner2.5-base), [openJev Verdict](https://github.com/Heman10x-NGU/openJev-verdict-2.0)
+(heman10x, 151M) and [classifier.dev](https://classifier.dev) (fast tier). Each ran all 534 decisions including the held-out ones, with the
+unchanged v1.2 scoring. The four open systems ran on our CPU (4 threads) and carry the usual ×2 + 0.15 s latency adjustment; classifier.dev is a
+production API and carries none. Every mapping — above all GLiNER2's label scores → one distribution — was written down before the runs:
+[`docs/v1.2-additions.md`](docs/v1.2-additions.md). Adapters: [`jevbench/adapters/`](jevbench/adapters/) (`laya_local`, `gliner2_local`,
+`verdict_local`, `classifier_dev`; jeff uses the existing `typesafe` adapter against its own server). Rows:
+[`results/v1.2/additions/`](results/v1.2/additions/). No other row changed.
+ProgramAsWeights was also requested and is prepared (`paw_local`), but its hosted compiler only keeps a program private for a signed-in
+account, and compiling 223 held-out rubrics into public programs would publish them; it is therefore not in this revision.
 
 ## v1.1.3: the GPU round
 

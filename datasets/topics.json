@@ -1,6 +1,6 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.1",
+ "revision": "v1.2.2",
  "note": "One subject topic per item (what it is about), separate from the item family (the task format). Public items are listed by id; held-out and imported items only as counts. Method: datasets/TOPICS.md.",
  "topics": [
   {

@@ -28,6 +28,8 @@ CLASS = {
     "jev-rebuild": ("#eb6834", "Jev rebuild (open, or open source planned)"),
     "llm-baseline": ("#1baf7a", "Instruction model"),
     "small-tool-model": ("#4a3aa7", "Small tool-calling model"),
+    "jev-service": ("#7cb4f0", "Service built on Jev"),
+    "classifier": ("#c0368c", "Zero-shot classifier (not a Jev rebuild)"),
 }
 SURFACE, INK, INK2, GRID, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#d8d7d2", "#b9b8b1"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "text.parse_math": False, "axes.edgecolor": GRID,
@@ -41,6 +43,9 @@ SHORT = {
     "semif-qwen3.5-4b": "SemIf (Qwen3.5-4B)", "openjev-razorback16": "OpenJev razorback16 (DiffusionGemma 26B)",
     "system-one-sg": "system-one (Qwen3-8B, Goedecke)", "nimble-9b": "Bespoke Nimble 9B",
     "djev": "djev (Maisa, diffusion-gemma)",
+    "laya": "Laya (421M)", "jeff": "jeff (GLiFormer 400M)", "gliner2": "GLiNER2 (gliner2.5-base)",
+    "openjev-verdict": "openJev Verdict (151M)", "classifier-dev-fast": "classifier.dev (fast tier)",
+    "programasweights": "ProgramAsWeights (Qwen3-0.6B)",
 }
 
 
@@ -64,15 +69,22 @@ def stamp(fig, title, sub, foot):
     fig.text(0.01, 0.005, foot, fontsize=8.5, color=INK2, ha="left", va="bottom")
 
 
-def legend(fig, used):
+def legend(fig, used, y=0.04):
     h = [Patch(facecolor=CLASS[k][0], label=CLASS[k][1]) for k in CLASS if k in used]
     h.append(Patch(facecolor=MUTED, label="partial run (not ranked)"))
-    fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.01, 0.04), ncol=5, frameon=False, fontsize=10, labelcolor=INK2)
+    # v1.2.2 added two kinds of system, so the legend can need a second row: keep it clear of the x axis.
+    ncol = 5 if len(h) <= 5 else 4
+    fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.01, y), ncol=ncol,
+               frameon=False, fontsize=10, labelcolor=INK2)
+    return -(-len(h) // ncol)
 
 
 def bars(fname, rows, value, label_fn, title, sub, foot, xmax=100):
-    fig, ax = plt.subplots(figsize=(14, 0.5 * len(rows) + 2.6), facecolor=SURFACE)
-    fig.subplots_adjust(left=0.27, right=0.985, top=1 - 1.05 / (0.5 * len(rows) + 2.6), bottom=1.0 / (0.5 * len(rows) + 2.6))
+    legend_rows = 1 if len({s["class"] for s in rows} | {"partial"}) <= 5 else 2
+    extra = 0.3 * (legend_rows - 1) + 0.25 * foot.count("\n")
+    h = 0.5 * len(rows) + 2.6 + extra
+    fig, ax = plt.subplots(figsize=(14, h), facecolor=SURFACE)
+    fig.subplots_adjust(left=0.27, right=0.985, top=1 - 1.05 / h, bottom=(1.0 + 0.45 * (legend_rows - 1) + 0.3 * foot.count("\n")) / h)
     frame(ax)
     ys = list(range(len(rows)))[::-1]
     for y, s in zip(ys, rows):
@@ -86,7 +98,7 @@ def bars(fname, rows, value, label_fn, title, sub, foot, xmax=100):
     ax.set_xlim(0, xmax * 1.45)
     ax.set_xticks([0, 20, 40, 60, 80, 100])
     stamp(fig, title, sub, foot)
-    legend(fig, {s["class"] for s in rows})
+    legend(fig, {s["class"] for s in rows}, y=(0.5 + 0.6 * foot.count("\n")) / h)
     fig.savefig(OUT / fname, dpi=150, facecolor=SURFACE)
     plt.close(fig)
 
@@ -104,8 +116,8 @@ def main():
          f"JevBench {RES['revision']} — JevBench Score",
          "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard. "
          f"{sum(RES['tiers'].values())} decisions incl. {n_hard} hard.",
-         "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption; raw measurements in the repo. "
-         "est. = hosted-provider list price; announced = provider's published price, not yet charged.")
+         "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption; raw measurements in the repo.\n"
+         "est. = hosted-provider list price for the same size class, or a flat plan's price at full use; announced = provider's published price, not yet charged.")
     # four axes side by side, ranked systems only
     fig, axs = plt.subplots(1, 4, figsize=(16, 0.5 * len(ranked) + 2.6), facecolor=SURFACE, sharey=True)
     fig.subplots_adjust(left=0.2, right=0.99, wspace=0.08, top=1 - 1.05 / (0.5 * len(ranked) + 2.6), bottom=1.0 / (0.5 * len(ranked) + 2.6))
