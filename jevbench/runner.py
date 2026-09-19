@@ -31,8 +31,8 @@ class Runner:
     cost=finite(i)*finite(price_in)/1e6+finite(o)*finite(price_out)/1e6;basis='derived_usage_times_tariff'
   # Unknown/failed billed amount retains reservation. Not a measured price.
   self.ledger.settle(rid,cost if cost is not None else reserve,{'task_id':t.id,'basis':basis})
-  scored=score_task(r.probs or {},t)if r.ok else {'valid':False,'correct':False,'predicted':None}
-  return {'task_id':t.id,'family':t.family,'split':t.split,'group':t.group,'ts':time.time(),'status':'ok'if r.ok else'failed','ok':r.ok,'valid':scored['valid'],'correct':scored['correct'],'predicted':scored.get('predicted'),'ordinal_ev':scored.get('ordinal_ev'),'probs':r.probs if scored['valid']else None,'probs_source':r.probs_source,'model':r.model,'error':r.error,'schema_error':scored.get('error'),'status_code':r.status,'latency_s':wall,'usage':r.usage,'cost_usd':cost,'cost_basis':basis,'reserved_usd':reserve,'charged_usd':cost if cost is not None else reserve,'raw_sha256':digest,'runtime':r.raw.get('runtime')if isinstance(r.raw,dict)else None}
+  scored=score_task(r.probs or {},t)if r.ok else {'valid':False,'strict_valid':False,'renormalized':False,'correct':False,'predicted':None}
+  return {'task_id':t.id,'family':t.family,'split':t.split,'group':t.group,'ts':time.time(),'status':'ok'if r.ok else'failed','ok':r.ok,'valid':scored['valid'],'correct':scored['correct'],'predicted':scored.get('predicted'),'ordinal_ev':scored.get('ordinal_ev'),'probs':scored.get('probs'),'probs_as_returned':r.probs,'strict_valid':scored.get('strict_valid',False),'renormalized':scored.get('renormalized',False),'probs_source':r.probs_source,'model':r.model,'error':r.error,'schema_error':scored.get('error'),'status_code':r.status,'latency_s':wall,'usage':r.usage,'cost_usd':cost,'cost_basis':basis,'reserved_usd':reserve,'charged_usd':cost if cost is not None else reserve,'raw_sha256':digest,'runtime':r.raw.get('runtime')if isinstance(r.raw,dict)else None}
  def run_all(self,tasks,progress_every=10,results_path=None,delay_s=0.):
   records=[];errors=0;stream=None
   if results_path:

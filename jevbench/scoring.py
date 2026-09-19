@@ -9,6 +9,15 @@ from __future__ import annotations
 import math
 
 SUM_TOL = 1e-3
+# v1 froze SUM_TOL = 1e-3 before the run. The run then showed what that
+# actually measures: several models round their probabilities to three
+# decimals, so a nine-option answer lands on 0.999 or 1.005 and would be
+# thrown out for arithmetic rather than for judgement. RENORM_TOL is the band
+# inside which a distribution is treated as a rounded one - rescaled to sum to
+# 1 and scored normally. Outside it, the answer is still invalid and still
+# counts as wrong. Both tolerances are reported for every model, so the
+# pre-registered strict number stays visible next to the headline.
+RENORM_TOL = 2e-2
 
 
 class InvalidDistribution(ValueError):
@@ -66,27 +75,43 @@ def top_label_confidence(probs: dict) -> float:
 
 
 def score_task(probs: dict, task) -> dict:
-    """Score one validated distribution against a canonical task.
+    """Score one distribution against a canonical task.
 
-    Returns dict with: valid, correct (None when expected is None),
-    predicted (label or None), ordinal_ev (score family only).
-    Invalid distributions: valid=False and correct=False (never skipped),
-    but coverage/schema metrics remain separate from accuracy.
+    Returns: valid (inside RENORM_TOL, the headline rule), strict_valid
+    (inside SUM_TOL, the pre-registered rule), renormalized, correct (None
+    when expected is None), predicted, ordinal_ev (score family only).
+    Distributions outside RENORM_TOL are invalid and count as wrong; they are
+    never repaired into a distribution.
     """
     try:
         clean = validate_probs(probs, task.labels)
-    except InvalidDistribution as e:
-        return {"valid": False, "error": str(e), "correct": False, "predicted": None}
+        strict_valid, renormalized = True, False
+    except InvalidDistribution as strict_error:
+        try:
+            clean = validate_probs(probs, task.labels, sum_tol=RENORM_TOL)
+        except InvalidDistribution:
+            return {"valid": False, "strict_valid": False, "renormalized": False,
+                    "error": str(strict_error), "correct": False, "predicted": None}
+        total = sum(clean.values())
+        if total <= 0:
+            return {"valid": False, "strict_valid": False, "renormalized": False,
+                    "error": "probabilities sum to zero", "correct": False,
+                    "predicted": None}
+        clean = {k: v / total for k, v in clean.items()}
+        strict_valid, renormalized = False, True
 
+    # `probs` is the distribution every downstream metric uses: the model's own
+    # numbers, rescaled only when they were inside the rounding band.
+    base = {"valid": True, "strict_valid": strict_valid,
+            "renormalized": renormalized, "probs": clean}
     if task.expected is None:
-        correct = None
         pred = argmax_label(clean) if task.question["type"] != "score" else None
-        out = {"valid": True, "correct": None, "predicted": pred}
+        out = {**base, "correct": None, "predicted": pred}
         if task.question["type"] == "score":
             out["ordinal_ev"] = expected_value(clean)
         return out
 
-    out = {"valid": True}
+    out = dict(base)
     if task.question["type"] == "score":
         ev = expected_value(clean)
         out["ordinal_ev"] = ev

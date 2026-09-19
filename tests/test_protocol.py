@@ -24,9 +24,16 @@ class Protocol(unittest.TestCase):
  def test_invalid_probabilities(self):
   for p in [{'a':True,'b':0},{'a':math.nan,'b':.5},{'a':.3,'b':.3},{'a':1},{'a':1,'b':0,'c':0}]:
    with self.assertRaises(InvalidDistribution):validate_probs(p,['a','b'])
+ def test_rounded_sum_is_renormalized_but_reported(self):
+  t=task()
+  s=score_task({'a':.25,'b':.745},t)  # sums to 0.995: three-decimal rounding, not a malformed answer
+  self.assertTrue(s['valid']);self.assertFalse(s['strict_valid']);self.assertTrue(s['renormalized'])
+  self.assertAlmostEqual(sum(s['probs'].values()),1);self.assertTrue(s['correct'])
+  bad=score_task({'a':.2,'b':.5},t)   # sums to 0.7: outside the band, still wrong
+  self.assertFalse(bad['valid']);self.assertFalse(bad['correct'])
  def test_ordinal_argmax_not_round_mean(self):
   t=Task('ord','ordinal','s',{'type':'score','instructions':'q','criteria':['zero','one','two']},['0','1','2'],0,'public')
-  s=score_task({'0':.4,'1':.2,'2':.4},t);self.assertEqual(s['predicted'],'0');self.assertTrue(s['correct']);self.assertAlmostEqual(s['ordinal_ev'],1)
+  s=score_task({'0':.4,'1':.2,'2':.4},t);self.assertTrue(s['strict_valid']);self.assertEqual(s['predicted'],'0');self.assertTrue(s['correct']);self.assertAlmostEqual(s['ordinal_ev'],1)
  def test_no_private_export_even_injected_summary(self):
   t=task();export=public_export({'leak':t.state,'id':t.id},[t],[])
   self.assertNotIn('PRIVATE TEXT SENTINEL',json.dumps(export));self.assertNotIn('leak',export);self.assertIsNone(export['accuracy']);self.assertIsNone(export['latency']['p95_s'])

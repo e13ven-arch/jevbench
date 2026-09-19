@@ -13,8 +13,10 @@ Mapping rules, all lossless with respect to the canonical record:
 A label containing a comma or newline cannot survive the demo's delimiter and
 is refused rather than silently rewritten.
 
-Requires `gradio_client`. Latency is measured end to end by the runner, so the
-queue wait of a shared Space is included - which is the honest number for a
+Requires `gradio_client`. Pass `--key-env HF_TOKEN` to use the larger quota the
+Space grants a signed-in Hugging Face account; without it the caller is
+anonymous and gets a handful of runs. Latency is measured end to end by the
+runner, so the queue wait of a shared Space is included - which is the honest number for a
 free public demo and is reported as such.
 """
 
@@ -52,9 +54,18 @@ class GradioSpaceAdapter:
 
     def client(self):
         if self._client is None:
+            import os
+
             from gradio_client import Client
 
-            self._client = Client(self.endpoint, verbose=False)
+            # A free Space gives an anonymous caller a handful of GPU runs and
+            # then says, in its own words, "authenticate with a Hugging Face
+            # token for more quota". Signing in as ourselves is the quota the
+            # service offers; it is not a way around the limit, and the token
+            # goes to huggingface.co, never into a request body or a log.
+            token = os.environ.get(self.key_env) if self.key_env else None
+            self._client = Client(self.endpoint, verbose=False,
+                                  **({"token": token} if token else {}))
         return self._client
 
     def _labels_and_rubric(self, task):

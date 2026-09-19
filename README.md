@@ -102,6 +102,12 @@ House rules the harness enforces rather than documents:
   because some cohorts are skewed and an accuracy has to be read against its floor.
   95 % confidence intervals resample whole scenarios, since paraphrases of one scenario
   are not independent draws.
+- **Valid answers** - a distribution has to cover exactly the label set, sit in [0,1]
+  and sum to 1. v1 froze a 0.001 sum tolerance; the run showed that this mostly catches
+  three-decimal rounding (0.999 on a nine-option question), so the headline renormalizes
+  anything inside a 2 % band and both columns are published: `schema_validity` under that
+  rule and `schema_validity_strict` under the frozen one. Outside the band the answer is
+  invalid and counts as wrong.
 - **Brier** - the multi-class sum `sum_k (p_k - y_k)^2` over the exact label set. Binary
   questions use the matching two-class convention, so the numbers are comparable.
 - **ECE** - top-label confidence, 10 equal-width bins. Empty bins are absent, not zero.
