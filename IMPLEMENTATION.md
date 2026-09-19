@@ -47,6 +47,16 @@ the result `verbalized`. Providers disagree about which request knobs exist, so
 `--request-options` can add a field or, with a `null` value, remove one - and whatever it
 did is written into the run manifest, so a published number names its settings.
 
+`needle_local` (v1.1) runs Cactus Needle 3 in-process. Needle is a function-calling
+model: it returns a tool call, not a distribution, so the result carries **no**
+probability map (`probs_source` says why) and no Brier or ECE is computed for it. We
+never turn its single confidence scalar into a distribution. Default mode: one tool whose
+one argument is the typed answer (enum / boolean / integer enum). A suppressed call is
+an abstention and scores as wrong. With `--request-options '{"choice_mode": "tools"}'`
+every option of a choice question becomes its own tool and the called tool is the
+answer; that mode was added after the frozen easy-tier run and is always reported beside
+the default mode, never instead of it.
+
 ## The budget
 
 `jevbench/budget.py` is a `flock`-serialized append-only ledger. `reserve()` writes the

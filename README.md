@@ -1,21 +1,47 @@
-# JevBench v1
+# JevBench
 
 A benchmark for **Jev-class decision models**: you hand the model a piece of state
-and a bounded rubric, and it hands back a typed answer with a probability. No prose,
-no parsing, no "as an AI language model".
-
-Five axes, because a single score would hide the trade-off that actually decides which
-one you ship: **smart** (is it right), **cheap** (what 1,000 decisions cost), **fast**
-(end-to-end latency, network included), **reliable** (does the stated probability mean
-anything, does it survive a rephrasing, does it keep to the schema) and **open**
-(weights and licence).
+and a bounded rubric, and it hands back a typed answer, ideally with a probability for
+every option. No prose, no parsing, no "as an AI language model".
 
 JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It is not
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
-measured here. Results, the method and the limits are in
-[`results/`](results/) and on <https://benchmarkheaven.com/jev-models>.
+measured here.
 
-## What is in the suite
+## v1.1 (current): three sub-benchmarks and one Main Score
+
+**[Results -> `RESULTS-v1.1.md`](RESULTS-v1.1.md)** · artifact
+[`results/v1.1/jevbench-v1.1-results.json`](results/v1.1/jevbench-v1.1-results.json)
+
+![JevBench v1.1 Main Score](results/v1.1/charts/main-score.png)
+
+| Sub-benchmark | What it measures | Score 0-100 |
+|---|---|---|
+| **Capability** | accuracy on 314 decisions in three tiers - easy (72, new in v1.1), standard (96), judge (146) | mean of the three tier accuracies |
+| **Speed** | median and p95 latency, serial, network included | log scale: 0.1 s = 100, 1 s = 50, 10 s = 0 |
+| **Cost** | $ per 1,000 decisions: public tariff x measured tokens, or a labelled estimate from a stated reference deployment | log scale: $0.01 = 100, $1 = 33, $10 = 0 |
+
+**JevBench Main Score = 0.6 x Capability + 0.2 x Speed + 0.2 x Cost.** The ranking under
+five other weightings is published beside it. Calibration (Brier, ECE) is reported for
+every system with a distribution but is not part of the score - see
+[`RESULTS-v1.1.md`](RESULTS-v1.1.md) for why. The rules are pure functions in
+[`jevbench/composite.py`](jevbench/composite.py).
+
+The easy tier exists so that small function-calling models are measured, not floored:
+clear-cut intent, explicit yes/no facts, enum extraction, one obviously right tool.
+48 of its items are public in `datasets/public/easy.jsonl`; 24 are held out.
+
+v1.1 numbers are never mixed with v1.0's. v1.0 is described below and its results stay in
+[`RESULTS.md`](RESULTS.md) as published.
+
+## v1.0
+
+v1.0 scored five axes side by side without a composite: **smart** (is it right), **cheap**
+(what 1,000 decisions cost), **fast** (end-to-end latency, network included), **reliable**
+(does the stated probability mean anything, does it survive a rephrasing, does it keep to
+the schema) and **open** (weights and licence).
+
+## What is in the suite (v1.0; v1.1 adds the easy tier)
 
 242 decisions, six families, three cohorts:
 
