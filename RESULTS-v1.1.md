@@ -1,26 +1,26 @@
 # JevBench v1.1 - results
 
-Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:16 UTC). v1.1 is a new version: it adds an easy tier and scores three sub-benchmarks. Its numbers are not comparable with v1.0's single pooled accuracy ([`RESULTS.md`](RESULTS.md)), which stays as published.
+Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:19 UTC). v1.1 is a new version: it adds an easy tier and scores three sub-benchmarks. Its numbers are not comparable with v1.0's single pooled accuracy ([`RESULTS.md`](RESULTS.md)), which stays as published.
 
-**Revision v1.1.1.** 19 Sep 2026: the Cost sub-benchmark is re-priced. Systems without a tariff are now priced as if a large inference provider hosted them (OpenRouter/DeepInfra list prices for the same weights or the model's size class) instead of our own CPU time or the nearest larger model family; Main Scores and ranks are recomputed. Items, answers, Capability and Speed are unchanged. The v1.1 numbers stay at tag v1.1.
+**Revision v1.1.2.** 19 Sep 2026 (v1.1.2): the Main Score is now Balanced 33:33:33 (Capability, Speed and Cost weighted equally); the old 60:20:20 default is kept as the preset 'Emphasis on Accuracy'. The Cost scale is widened to $0.001-$10 per 1,000 decisions so it no longer saturates. Earlier the same day (v1.1.1): the Cost sub-benchmark was re-priced. Systems without a tariff are now priced as if a large inference provider hosted them (OpenRouter/DeepInfra list prices for the same weights or the model's size class) instead of our own CPU time or the nearest larger model family; Main Scores and ranks are recomputed. Items, answers, Capability and Speed are unchanged. The v1.1 numbers stay at tag v1.1, v1.1.1 at tag v1.1.1.
 
 ![Main Score](results/v1.1/charts/main-score.png)
 
 ## Main Score
 
-**JevBench Main Score = 0.6 x Capability + 0.2 x Speed + 0.2 x Cost**, each sub-score on 0-100. Capability carries most of the weight because a fast, cheap wrong decision is still wrong. How the ranking moves under five other weightings is in the sensitivity table below.
+**JevBench Main Composite Score - Balanced 33:33:33 = (Capability + Speed + Cost) / 3**, each sub-score on 0-100 (since v1.1.2, 19 Sep 2026). The previous default, 0.6 x Capability + 0.2 x Speed + 0.2 x Cost, is kept as the named weighting *Emphasis on Accuracy (60:20:20)*; *Emphasis on Speed (20:60:20)* and *Emphasis on Cost (20:20:60)* are the other presets. How the ranking moves under each is in the sensitivity table below, and benchmarkheaven.com/jev-models lets you set your own weights.
 
 | # | System | Main | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | system-one-open (Gemma 4 E2B LoRA on an L4) | **87.8** | 93.8 | 57.5 | 100.0 | 100.0 % | 93.8 % | 87.7 % | 0.65 s / 0.77 s | ~$0.0092 |
-| 2 | Jev 1.13.0 (TypeSafe AI) | **87.6** | 97.8 | 58.2 | 86.2 | 100.0 % | 99.0 % | 94.5 % | 0.65 s / 0.72 s | $0.0259 |
-| 3 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **84.2** | 97.0 | 57.7 | 72.1 | 100.0 % | 95.8 % | 95.2 % | 0.68 s / 0.73 s | ~$0.0685 |
-| 4 | Gemini 3.1 Flash-Lite | **80.9** | 97.4 | 54.5 | 57.7 | 100.0 % | 99.0 % | 93.2 % | 0.76 s / 0.88 s | $0.1856 |
-| 5 | GPT-5.6 Luna (low reasoning effort) | **79.6** | 98.2 | 43.9 | 59.5 | 100.0 % | 97.9 % | 96.6 % | 0.97 s / 1.82 s | $0.1642 |
-| 6 | DeepSeek V4.1 Flash (thinking default) | **74.9** | 96.9 | 29.0 | 54.9 | 98.6 % | 99.0 % | 93.2 % | 1.42 s / 4.89 s | $0.2252 |
-| 7 | open-jev-deberta-v3-large (local CPU) | **66.6** | 67.5 | 30.7 | 100.0 | 100.0 % | 49.0 % | 53.4 % | 1.77 s / 3.35 s | ~$0.0045 |
-| 8 | Needle 3, options as tools (post-hoc adapter mode) | **47.1** | 44.1 | 10.6 | 93.0 | 66.7 % | 31.2 % | 34.2 % | 3.78 s / 33.64 s | ~$0.0162 |
-| 9 | Needle 3 (Cactus, 2-bit, local CPU) | **41.5** | 31.8 | 19.3 | 93.0 | 47.2 % | 16.7 % | 31.5 % | 1.69 s / 14.36 s | ~$0.0162 |
+| 1 | system-one-open (Gemma 4 E2B LoRA on an L4) | **75.7** | 93.8 | 57.5 | 75.9 | 100.0 % | 93.8 % | 87.7 % | 0.65 s / 0.77 s | ~$0.0092 |
+| 2 | Jev 1.13.0 (TypeSafe AI) | **73.6** | 97.8 | 58.2 | 64.7 | 100.0 % | 99.0 % | 94.5 % | 0.65 s / 0.72 s | $0.0259 |
+| 3 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **69.6** | 97.0 | 57.7 | 54.1 | 100.0 % | 95.8 % | 95.2 % | 0.68 s / 0.73 s | ~$0.0685 |
+| 4 | Gemini 3.1 Flash-Lite | **65.0** | 97.4 | 54.5 | 43.3 | 100.0 % | 99.0 % | 93.2 % | 0.76 s / 0.88 s | $0.1856 |
+| 5 | GPT-5.6 Luna (low reasoning effort) | **62.2** | 98.2 | 43.9 | 44.6 | 100.0 % | 97.9 % | 96.6 % | 0.97 s / 1.82 s | $0.1642 |
+| 6 | open-jev-deberta-v3-large (local CPU) | **60.6** | 67.5 | 30.7 | 83.6 | 100.0 % | 49.0 % | 53.4 % | 1.77 s / 3.35 s | ~$0.0045 |
+| 7 | DeepSeek V4.1 Flash (thinking default) | **55.7** | 96.9 | 29.0 | 41.2 | 98.6 % | 99.0 % | 93.2 % | 1.42 s / 4.89 s | $0.2252 |
+| 8 | Needle 3, options as tools (post-hoc adapter mode) | **41.5** | 44.1 | 10.6 | 69.7 | 66.7 % | 31.2 % | 34.2 % | 3.78 s / 33.64 s | ~$0.0162 |
+| 9 | Needle 3 (Cactus, 2-bit, local CPU) | **40.3** | 31.8 | 19.3 | 69.7 | 47.2 % | 16.7 % | 31.5 % | 1.69 s / 14.36 s | ~$0.0162 |
 
 `~` = an estimate from a stated reference deployment, because we pay no tariff on that route (see Cost below). Every other price is the provider's public tariff times the tokens we measured.
 
@@ -28,7 +28,7 @@ Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:16 UTC).
 
 | System | Main | Easy | Standard | Judge | Coverage (easy / standard / judge) | Why |
 |---|---|---|---|---|---|---|
-| Qwen3.8 27B (Chutes TEE) | 66.2 | 98.6 % | 99.0 % | 95.3 % | 100 % / 100 % / 87 % | v1.0 run stopped at 223 of 242 after three empty completions in a row |
+| Qwen3.8 27B (Chutes TEE) | 42.5 | 98.6 % | 99.0 % | 95.3 % | 100 % / 100 % / 87 % | v1.0 run stopped at 223 of 242 after three empty completions in a row |
 | open-alternative-jev (Qwen3.5-4B, HF Space) | - | - | 33.3 % | - | 0 % / 6 % / 0 % | the author's free Hugging Face Space ran out of ZeroGPU quota after 6 decisions in v1.0, and answered the first v1.1 request on 19 Sep with the same quota error; the next step is a paid Hugging Face subscription, which we did not buy |
 
 ## The three sub-benchmarks
@@ -38,8 +38,8 @@ Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:16 UTC).
 - **Capability.** Mean of the three tier accuracies (easy, standard, judge), each weighted 1/3, times 100. Frozen with the v1.1 dataset before any v1.1 inference. Pooled accuracy over all 314 decisions is published beside it.
 - **Calibration.** Reported, not scored. Brier and ECE are published for every system that returns a distribution. They are not part of Capability or the Main Score, because label-only systems (Needle 3) have no distribution and any penalty we invented for that would be our choice, not a measurement; and verbalised LLM probabilities and native model distributions are different things.
 - **Speed.** Median (p50) and 95th-percentile latency of successful requests in the system's serial run of the 242 standard+judge decisions (one request at a time, from a Hetzner server in Germany, network included; local models on 2 CPU threads of a Ryzen 5 3600). Each latency t maps to 100 * (log10(10 s) - log10(t)) / 2, clipped to 0..100: 0.1 s = 100, 1 s = 50, 10 s = 0. Speed = mean of the p50 and p95 scores. Log scale because 0.2 s vs 0.4 s matters as much as 2 s vs 4 s.
-- **Cost.** Dollars per 1,000 decisions over all attempted decisions. Metered APIs: the provider's public tariff times measured tokens. No tariff for us (open weights, author demos, local runs): an ESTIMATE, labelled as such, priced as if a large inference provider hosted the model - the OpenRouter list price of the same weights (else the nearest larger sibling; else the DeepInfra list price of the same weights or of the nearest larger model of the same size class, e.g. same-size encoders for an encoder) times the tokens per decision (measured, or the input tokens of the gemini-3.1-flash-lite run on the same prompts). Not GPU rental by the minute and not our own CPU time: providers buy capacity in bulk or own the hardware. Each cost c maps to 100 * (log10($10) - log10(c)) / 3, clipped to 0..100: $0.01 per 1,000 = 100, $0.10 = 67, $1 = 33, $10 = 0.
-- **Main.** JevBench Main Score = 0.6 * Capability + 0.2 * Speed + 0.2 * Cost. Capability carries most of the weight because a fast, cheap wrong decision is still wrong. The sensitivity table shows the ranking under five other weightings.
+- **Cost.** Dollars per 1,000 decisions over all attempted decisions. Metered APIs: the provider's public tariff times measured tokens. No tariff for us (open weights, author demos, local runs): an ESTIMATE, labelled as such, priced as if a large inference provider hosted the model - the OpenRouter list price of the same weights (else the nearest larger sibling; else the DeepInfra list price of the same weights or of the nearest larger model of the same size class, e.g. same-size encoders for an encoder) times the tokens per decision (measured, or the input tokens of the gemini-3.1-flash-lite run on the same prompts). Not GPU rental by the minute and not our own CPU time: providers buy capacity in bulk or own the hardware. Each cost c maps to 100 * (log10($10) - log10(c)) / 4, clipped to 0..100: $0.001 per 1,000 = 100, $0.01 = 75, $0.10 = 50, $1 = 25, $10 = 0. Log scale over four decades, so every benchmarked system lands inside the scale and real price differences (e.g. an encoder vs a tiny generator) show up as different scores.
+- **Main.** JevBench Main Composite Score = (Capability + Speed + Cost) / 3, 'Balanced 33:33:33'. Since v1.1.2 (19 Sep 2026); v1.1 and v1.1.1 used 0.6 * Capability + 0.2 * Speed + 0.2 * Cost, which is kept as the named weighting 'Emphasis on Accuracy (60:20:20)'. The sensitivity table shows the ranking under five other weightings.
 - **Ranked.** Ranked: every tier attempted in full or nearly (>= 95% of decisions). Partial runs are shown, marked, and not ranked.
 
 ### Capability by tier
@@ -77,8 +77,8 @@ How costs are estimated: A system with a public per-call or per-token tariff is 
 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | 0.085 | native |
 | Gemini 3.1 Flash-Lite | 0.095 | verbalized |
 | GPT-5.6 Luna (low reasoning effort) | 0.056 | verbalized |
-| DeepSeek V4.1 Flash (thinking default) | 0.028 | verbalized |
 | open-jev-deberta-v3-large (local CPU) | 0.651 | native |
+| DeepSeek V4.1 Flash (thinking default) | 0.028 | verbalized |
 | Needle 3, options as tools (post-hoc adapter mode) | - | label_only_no_calibrated_distribution |
 | Needle 3 (Cactus, 2-bit, local CPU) | - | label_only_no_calibrated_distribution |
 | Qwen3.8 27B (Chutes TEE) | 0.019 | verbalized |
@@ -88,19 +88,19 @@ How costs are estimated: A system with a public per-call or per-token tariff is 
 
 ![Sensitivity](results/v1.1/charts/sensitivity.png)
 
-| System | 60/20/20 (headline) | capability only | 80/10/10 | 50/25/25 | equal thirds | 60/20/20 geometric |
+| System | 33/33/33 balanced (headline) | 60/20/20 accuracy emphasis | 20/60/20 speed emphasis | 20/20/60 cost emphasis | capability only | 33/33/33 geometric |
 |---|---|---|---|---|---|---|
-| system-one-open (Gemma 4 E2B LoRA on an L4) | #1 (87.8) | #6 (93.8) | #2 (90.8) | #1 (86.3) | #1 (83.8) | #1 (86.1) |
-| Jev 1.13.0 (TypeSafe AI) | #2 (87.6) | #2 (97.8) | #1 (92.7) | #2 (85.0) | #2 (80.7) | #2 (86.0) |
-| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #3 (84.2) | #4 (97.0) | #3 (90.6) | #3 (81.0) | #3 (75.6) | #3 (82.4) |
-| Gemini 3.1 Flash-Lite | #4 (80.9) | #3 (97.4) | #4 (89.1) | #4 (76.7) | #4 (69.9) | #4 (78.1) |
-| GPT-5.6 Luna (low reasoning effort) | #5 (79.6) | #1 (98.2) | #5 (88.9) | #5 (74.9) | #5 (67.2) | #5 (75.6) |
-| DeepSeek V4.1 Flash (thinking default) | #6 (74.9) | #5 (96.9) | #6 (85.9) | #6 (69.4) | #7 (60.3) | #6 (68.0) |
-| open-jev-deberta-v3-large (local CPU) | #7 (66.6) | #7 (67.5) | #7 (67.0) | #7 (66.4) | #6 (66.1) | #7 (62.3) |
-| Needle 3, options as tools (post-hoc adapter mode) | #8 (47.1) | #8 (44.1) | #8 (45.6) | #8 (47.9) | #8 (49.2) | #8 (38.4) |
-| Needle 3 (Cactus, 2-bit, local CPU) | #9 (41.5) | #9 (31.8) | #9 (36.7) | #9 (44.0) | #9 (48.0) | #9 (35.7) |
+| system-one-open (Gemma 4 E2B LoRA on an L4) | #1 (75.7) | #2 (82.9) | #1 (68.4) | #1 (75.8) | #6 (93.8) | #1 (74.2) |
+| Jev 1.13.0 (TypeSafe AI) | #2 (73.6) | #1 (83.3) | #2 (67.4) | #2 (70.0) | #2 (97.8) | #2 (71.7) |
+| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #3 (69.6) | #3 (80.6) | #3 (64.8) | #4 (63.4) | #4 (97.0) | #3 (67.2) |
+| Gemini 3.1 Flash-Lite | #4 (65.0) | #4 (78.0) | #4 (60.8) | #5 (56.3) | #3 (97.4) | #4 (61.2) |
+| GPT-5.6 Luna (low reasoning effort) | #5 (62.2) | #5 (76.6) | #5 (54.9) | #6 (55.2) | #1 (98.2) | #5 (57.7) |
+| open-jev-deberta-v3-large (local CPU) | #6 (60.6) | #7 (63.3) | #6 (48.6) | #3 (69.8) | #7 (67.5) | #6 (55.7) |
+| DeepSeek V4.1 Flash (thinking default) | #7 (55.7) | #6 (72.2) | #7 (45.0) | #9 (49.9) | #5 (96.9) | #7 (48.7) |
+| Needle 3, options as tools (post-hoc adapter mode) | #8 (41.5) | #8 (42.5) | #9 (29.1) | #7 (52.8) | #8 (44.1) | #9 (31.9) |
+| Needle 3 (Cactus, 2-bit, local CPU) | #9 (40.3) | #9 (36.9) | #8 (31.9) | #8 (52.1) | #9 (31.8) | #8 (35.0) |
 
-Under the headline weights system-one-open (Gemma 4 E2B LoRA on an L4) leads Jev 1.13.0 (TypeSafe AI) by 0.2 points. First place by weighting: *60/20/20 (headline)*: system-one-open (Gemma 4 E2B LoRA on an L4); *capability only*: GPT-5.6 Luna (low reasoning effort); *80/10/10*: Jev 1.13.0 (TypeSafe AI); *50/25/25*: system-one-open (Gemma 4 E2B LoRA on an L4); *equal thirds*: system-one-open (Gemma 4 E2B LoRA on an L4); *60/20/20 geometric*: system-one-open (Gemma 4 E2B LoRA on an L4).
+Under the headline weights system-one-open (Gemma 4 E2B LoRA on an L4) leads Jev 1.13.0 (TypeSafe AI) by 2.2 points. First place by weighting: *33/33/33 balanced (headline)*: system-one-open (Gemma 4 E2B LoRA on an L4); *60/20/20 accuracy emphasis*: Jev 1.13.0 (TypeSafe AI); *20/60/20 speed emphasis*: system-one-open (Gemma 4 E2B LoRA on an L4); *20/20/60 cost emphasis*: system-one-open (Gemma 4 E2B LoRA on an L4); *capability only*: GPT-5.6 Luna (low reasoning effort); *33/33/33 geometric*: system-one-open (Gemma 4 E2B LoRA on an L4).
 
 ## Needle 3
 

@@ -19,10 +19,13 @@ measured here.
 |---|---|---|
 | **Capability** | accuracy on 314 decisions in three tiers - easy (72, new in v1.1), standard (96), judge (146) | mean of the three tier accuracies |
 | **Speed** | median and p95 latency, serial, network included | log scale: 0.1 s = 100, 1 s = 50, 10 s = 0 |
-| **Cost** | $ per 1,000 decisions: public tariff x measured tokens, or (no tariff) a labelled estimate at hosted-provider prices for the same weights or size class ([table](results/v1.1/pricing/jevbench-hosted-price-table.json)) | log scale: $0.01 = 100, $1 = 33, $10 = 0 |
+| **Cost** | $ per 1,000 decisions: public tariff x measured tokens, or (no tariff) a labelled estimate at hosted-provider prices for the same weights or size class ([table](results/v1.1/pricing/jevbench-hosted-price-table.json)) | log scale: $0.001 = 100, $0.01 = 75, $0.10 = 50, $1 = 25, $10 = 0 |
 
-**JevBench Main Score = 0.6 x Capability + 0.2 x Speed + 0.2 x Cost.** The ranking under
-five other weightings is published beside it. Calibration (Brier, ECE) is reported for
+**JevBench Main Composite Score = (Capability + Speed + Cost) / 3 - "Balanced 33:33:33"** (v1.1.2).
+Three more named weightings are published beside it - *Emphasis on Accuracy (60:20:20)*, the
+default until v1.1.1; *Emphasis on Speed (20:60:20)*; *Emphasis on Cost (20:20:60)* - plus
+capability-only and a geometric mean. [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
+lets you set your own weights. Calibration (Brier, ECE) is reported for
 every system with a distribution but is not part of the score - see
 [`RESULTS-v1.1.md`](RESULTS-v1.1.md) for why. The rules are pure functions in
 [`jevbench/composite.py`](jevbench/composite.py).
@@ -30,6 +33,12 @@ every system with a distribution but is not part of the score - see
 The easy tier exists so that small function-calling models are measured, not floored:
 clear-cut intent, explicit yes/no facts, enum extraction, one obviously right tool.
 48 of its items are public in `datasets/public/easy.jsonl`; 24 are held out.
+
+**Revisions of v1.1 (all 19 Sep 2026; items, answers, Capability and Speed never changed):**
+v1.1 (tag `v1.1`) Main Score 60:20:20; v1.1.1 (tag `v1.1.1`) Cost re-priced at hosted-provider
+prices for every system without a tariff; **v1.1.2** Main Score weights changed to Balanced 33:33:33
+(the previous default is kept as the preset "Emphasis on Accuracy") and the Cost scale widened to
+$0.001-$10 per 1,000 decisions, so no system sits at the 100 cap.
 
 v1.1 numbers are never mixed with v1.0's. v1.0 is described below and its results stay in
 [`RESULTS.md`](RESULTS.md) as published.

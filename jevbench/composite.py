@@ -6,23 +6,28 @@ recompute a system's Main Score from results/v1.1/jevbench-v1.1-results.json.
 Capability  mean of the easy, standard and judge tier accuracies (1/3 each), x 100
 Speed       latency t -> 100 * log10(10 s / t) / 2, clipped: 0.1 s = 100, 1 s = 50, 10 s = 0;
             Speed = mean of the p50 and p95 scores
-Cost        $ per 1,000 decisions c -> 100 * log10($10 / c) / 3, clipped:
-            $0.01 = 100, $0.10 = 67, $1 = 33, $10 = 0
-Main Score  0.6 * Capability + 0.2 * Speed + 0.2 * Cost
+Cost        $ per 1,000 decisions c -> 100 * log10($10 / c) / 4, clipped:
+            $0.001 = 100, $0.01 = 75, $0.10 = 50, $1 = 25, $10 = 0
+            (v1.1.2: four decades instead of three, so no benchmarked system sits at
+            the 100 cap and every real price difference shows in the score)
+Main Score  (Capability + Speed + Cost) / 3, "Balanced 33:33:33" (v1.1.2, 19 Sep 2026;
+            v1.1 and v1.1.1 used 0.6 / 0.2 / 0.2, kept as the preset "Emphasis on Accuracy")
 
 Calibration (Brier, ECE) is reported beside these, not folded in: label-only
 systems have no distribution, and a penalty for that would be our invention.
 """
 import math
 
-WEIGHTS = (0.6, 0.2, 0.2)
+WEIGHTS = (1 / 3, 1 / 3, 1 / 3)
+COST_BEST, COST_WORST = 0.001, 10  # $ per 1,000 decisions -> 100 and 0
+HEADLINE = "33/33/33 balanced (headline)"
 SENSITIVITY = {
-    "60/20/20 (headline)": (0.6, 0.2, 0.2, "arith"),
+    HEADLINE: (1 / 3, 1 / 3, 1 / 3, "arith"),
+    "60/20/20 accuracy emphasis": (0.6, 0.2, 0.2, "arith"),
+    "20/60/20 speed emphasis": (0.2, 0.6, 0.2, "arith"),
+    "20/20/60 cost emphasis": (0.2, 0.2, 0.6, "arith"),
     "capability only": (1.0, 0.0, 0.0, "arith"),
-    "80/10/10": (0.8, 0.1, 0.1, "arith"),
-    "50/25/25": (0.5, 0.25, 0.25, "arith"),
-    "equal thirds": (1 / 3, 1 / 3, 1 / 3, "arith"),
-    "60/20/20 geometric": (0.6, 0.2, 0.2, "geo"),
+    "33/33/33 geometric": (1 / 3, 1 / 3, 1 / 3, "geo"),
 }
 
 
@@ -49,10 +54,10 @@ def speed(p50_s, p95_s):
 
 
 def cost(usd_per_1000):
-    return log_score(usd_per_1000, 0.01, 10)
+    return log_score(usd_per_1000, COST_BEST, COST_WORST)
 
 
-def main_score(cap, spd, cst, weights=(0.6, 0.2, 0.2, "arith")):
+def main_score(cap, spd, cst, weights=SENSITIVITY[HEADLINE]):
     a, b, d = weights[:3]
     kind = weights[3] if len(weights) > 3 else "arith"
     if None in (cap, spd, cst):
