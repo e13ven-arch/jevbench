@@ -1,9 +1,5 @@
 # JevBench
 
-> [!WARNING]
-> **Work in progress — results are preliminary. Please don't share or cite them yet.**
-> We are adding a much harder task tier and a calibration score (v1.2). The rankings below will change.
-
 A benchmark for **Jev-class decision models**: you hand the model a piece of state
 and a bounded rubric, and it hands back a typed answer, ideally with a probability for
 every option. No prose, no parsing, no "as an AI language model".
@@ -12,19 +8,42 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.2 (work in progress): a hard tier and a calibration score
+## v1.2: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
-how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
+interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
 
-- **220 new hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
-  cross-reviewed, frozen and hashed before any system ran. The v1.1 tiers were saturated (top five at 97-98 %).
-- **Capability** = easy 10 % · standard 20 % · judge 20 % · **hard 50 %**. **Calibration** is its own sub-score (hard tier:
-  ECE + fidelity to exact gold distributions). Main Score weights unchanged (Balanced 33:33:33); cost pooled over 534 decisions.
-- Rankings are published under all presets, under **measured prices only**, and under a **self-host cost sensitivity**.
-  Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py). Per-task outcomes (public items) and per-tier/per-topic aggregates: [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
+**JevBench Score** = Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.
 
-![JevBench v1.2 Main Score](results/v1.2/charts/main-score.png)
+| Axis | Score 0-100 |
+|---|---|
+| **Intelligence** | 100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 % |
+| **Calibration** | hard tier: ECE + fidelity to exact gold distributions (label-only systems: none, counts as 0) |
+| **Speed** | mean of score(p50), score(p95); score(s) = 100 - 20 log10(s / 0.1 s): 0.1 s = 100, each 10x slower -20 |
+| **Cost** | 100 - 30 log10($ per 1,000 decisions / $0.001): $0.001 = 100, each 10x more expensive -30 |
+
+> Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load —
+> an assumption, not a measurement; raw measurements are in [`RESULTS-v1.2.md`](RESULTS-v1.2.md) and the artifact.
+
+- **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
+  cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
+- Top of the ranking: **Jev 1.13.0 75.3** · SemIf (Qwen3.5-4B) 74.6 · open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.7 ·
+  OpenJev razorback16 67.6. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py); the final artifact is rebuilt from the frozen measurements by
+  [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py), charts by [`scripts/v1.2/charts.py`](scripts/v1.2/charts.py).
+  Per-task outcomes (public items): [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
+- open-alternative-jev is ranked with the author's own option order (`A. yes, B. no`). With the options in reverse order
+  (`A. no, B. yes`) the same model scored 21 % instead of 72 % on answer-judging items — small models are very sensitive to
+  option order. Both runs: [`results/v1.2/runs/open-alternative-jev/`](results/v1.2/runs/open-alternative-jev/).
+
+![JevBench v1.2 — JevBench Score](results/v1.2/charts/main-score.png)
+
+**Revision log of v1.2 (19 Sep 2026; items and answers never changed after the freeze):**
+v1.2-wip (tag `v1.2-wip`) hard tier + calibration sub-score, Balanced 33:33:33 Main Score with hard 50 % of Capability;
+**v1.2 final (tag `v1.2`): 4 axes, geometric mean** — Intelligence (hard 30 %), Calibration, Speed, Cost at 25 % each; Speed 20 points
+and Cost 30 points per decade; latency of non-production endpoints adjusted ×2 (+0.15 s on our own servers, an assumption);
+one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced on Needle 3's per-token basis ($0.0162 est.).
+The earlier weightings are kept as views, recomputed the same way, and are not the JevBench Score.
 
 ## v1.1.3: the GPU round
 
@@ -37,7 +56,7 @@ SemIf on Qwen3.5-4B, open-alternative-jev (complete this time; plus a marked pos
 Qwen3-8B, and Bespoke Nimble 9B. Speed is measured from Germany over the internet to the GPU, like every
 remote entrant. v1.1.2 rows are unchanged; only ranks move. Their hard-tier runs feed v1.2.
 
-## v1.1: three sub-benchmarks and one Main Score
+## v1.1: three sub-benchmarks and one Main Score (superseded by v1.2)
 
 **[Results -> `RESULTS-v1.1.md`](RESULTS-v1.1.md)** · artifact
 [`results/v1.1/jevbench-v1.1-results.json`](results/v1.1/jevbench-v1.1-results.json)

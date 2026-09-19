@@ -1,5 +1,5 @@
 > [!WARNING]
-> **Work in progress — preliminary results, please don't share or cite yet** (v1.2 with a harder tier is being built).
+> Superseded by **JevBench v1.2** — see [`RESULTS-v1.2.md`](RESULTS-v1.2.md). These results stay as published for their version.
 
 # JevBench v1 - results
 
