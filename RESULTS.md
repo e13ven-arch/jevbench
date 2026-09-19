@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Work in progress — preliminary results, please don't share or cite yet** (v1.2 with a harder tier is being built).
+
 # JevBench v1 - results
 
 *Generated from `results/jevbench-v1-results.json`. Do not edit a number by hand here; regenerate.*

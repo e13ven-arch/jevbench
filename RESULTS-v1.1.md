@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Work in progress — preliminary results, please don't share or cite yet** (v1.2 with a harder tier is being built).
+
 # JevBench v1.1 - results
 
 Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:19 UTC). v1.1 is a new version: it adds an easy tier and scores three sub-benchmarks. Its numbers are not comparable with v1.0's single pooled accuracy ([`RESULTS.md`](RESULTS.md)), which stays as published.

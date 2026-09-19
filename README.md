@@ -1,5 +1,9 @@
 # JevBench
 
+> [!WARNING]
+> **Work in progress — results are preliminary. Please don't share or cite them yet.**
+> We are adding a much harder task tier and a calibration score (v1.2). The rankings below will change.
+
 A benchmark for **Jev-class decision models**: you hand the model a piece of state
 and a bounded rubric, and it hands back a typed answer, ideally with a probability for
 every option. No prose, no parsing, no "as an AI language model".
