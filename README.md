@@ -12,7 +12,21 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.1 (current): three sub-benchmarks and one Main Score
+## v1.2 (work in progress): a hard tier and a calibration score
+
+**[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
+how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
+
+- **220 new hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
+  cross-reviewed, frozen and hashed before any system ran. The v1.1 tiers were saturated (top five at 97-98 %).
+- **Capability** = easy 10 % · standard 20 % · judge 20 % · **hard 50 %**. **Calibration** is its own sub-score (hard tier:
+  ECE + fidelity to exact gold distributions). Main Score weights unchanged (Balanced 33:33:33); cost pooled over 534 decisions.
+- Rankings are published under all presets, under **measured prices only**, and under a **self-host cost sensitivity**.
+  Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py).
+
+![JevBench v1.2 Main Score](results/v1.2/charts/main-score.png)
+
+## v1.1: three sub-benchmarks and one Main Score
 
 **[Results -> `RESULTS-v1.1.md`](RESULTS-v1.1.md)** · artifact
 [`results/v1.1/jevbench-v1.1-results.json`](results/v1.1/jevbench-v1.1-results.json)

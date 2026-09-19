@@ -1,5 +1,5 @@
 {
-  "protocol": "jevbench::v1.1",
+  "protocol": "jevbench::v1.2",
   "splits": [
     {
       "name": "original",
@@ -36,6 +36,13 @@
       "n": 24,
       "sha256": "f5ef66cc3baa0b9d44013235d53649163226a57da8ba58099d237e77235fe6a8",
       "canonical_sha256": "610ff842b81626eb07d3949ae9525eb242630bae61234e118cbaaf08839a1df8"
+    },
+    {
+      "name": "hard",
+      "n": 111,
+      "sha256": "89e9e6becb33ed88c1de7d42dcc87531b2fb64cfaef4e1986faf7c37b3f80ebb",
+      "canonical_sha256": "e816e106f562dec75a8da12e69b75e957a4bbd9f6300f1145fc71837327a3c61",
+      "note": "v1.2 hard tier, public half; 109 more held out"
     }
   ],
   "labels_changed_after_inference": false,
