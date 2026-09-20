@@ -59,7 +59,8 @@ def cost_unit_example():
 COST_UNIT_EXAMPLE = cost_unit_example()
 # Which revision added which row. A row's revision is fixed; the artifact's revision is the newest one present.
 ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1.2.2", "openjev-verdict": "v1.2.2",
-            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.7",
+            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.8",
+            "jqv": "v1.2.7", "gliner2.5-small": "v1.2.7", "gliner2.5-multi": "v1.2.7", "opendecision": "v1.2.7",
             "kev-0.5b": "v1.2.5", "kev-0.6b": "v1.2.5", "kev-4b": "v1.2.5", "kev-8b": "v1.2.5",
             "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
@@ -68,7 +69,15 @@ HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
-    {"revision": "v1.2.7", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.8", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.7", "date": "2026-09-20", "note":
+     "Added three systems: jqv (a stock Qwen3-32B read as a decision model, submitted with a public endpoint) and the "
+     "GLiNER2.5 small and multi checkpoints. The GLiNER2.5 rows ran the full frozen 534-decision set on our CPU with "
+     "the same mapping as the GLiNER2 row. jqv is a partial row: its endpoint is the submitter's own machine, and "
+     "this revision stopped sending held-out items to an endpoint a submitter operates. The easy and standard/judge "
+     "tiers had already been sent in full when that was decided; the 109 held-out hard items never were, so the row "
+     "covers 425 of 534 decisions and carries no rank. Mappings, endpoint conditions and cost bases were "
+     "committed before the runs (docs/v1.2-additions-run3.md). No earlier row changed."},
     {"revision": "v1.2.6", "date": "2026-09-20", "note": "Added openJev Verdict 1.4 and the identified SimpleJev public-demo configurations on the unchanged frozen 534-decision set. No earlier row changed."},
     {"revision": "v1.2.5", "date": "2026-09-20", "note": "Added kev 0.5B and the 0.6B, 4B and 8B research previews. Each ran the full frozen v1.2 set (534 decisions including held-out items) through kev's native TypeSafe-compatible endpoint on an RTX 3090. No other row changed."},
     {"revision": "v1.2.4", "date": "2026-09-20", "note":
@@ -162,7 +171,7 @@ def endpoint_kind(cond):
         return "api"
     if "runpod gpu" in c:
         return "gpu"
-    if "demo endpoint" in c:
+    if "demo endpoint" in c or "author-hosted endpoint" in c:
         return "demo"
     if "our cpu" in c:
         return "cpu"

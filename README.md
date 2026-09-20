@@ -109,6 +109,17 @@ one place where the fast tier measurably differs from Jev, is in
 
 **v1.2.6:** Added openJev Verdict 1.4 as its own row (same weights, fixed author engine) and the reachable, identified SimpleJev public-demo configurations. Every entrant ran the unchanged 534 frozen decisions including the hard tier; earlier Verdict and all other rows remain unchanged. Full method and endpoint conditions: [`docs/v1.2-additions.md`](docs/v1.2-additions.md).
 
+**v1.2.7 (tag `v1.2.7`): two more GLiNER2 checkpoints, and a submitted endpoint measured on the public items.**
+Added [GLiNER2.5 small](https://huggingface.co/fastino/gliner2.5-small-v1) at 62.1 (#21) and [GLiNER2.5 multi](https://huggingface.co/fastino/gliner2.5-multi-v1) at 63.1 (#19) — both ran all 534 frozen decisions on our CPU with the same mapping as the existing GLiNER2 row
+(gliner2.5-base), re-checked on each checkpoint before its run. Also added **jqv** at 67.2, a stock
+[Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B) read as a decision model, submitted with a public endpoint in
+[issue #6](https://github.com/fstandhartinger/jevbench/issues/6): it is a **partial row, shown but not ranked**,
+because its endpoint runs on the submitter's own machine and this round stopped sending held-out items to an
+endpoint a submitter operates. It answered 425 of 534 decisions — everything except the 109 held-out hard items —
+and on the public items it reproduced the submitter's own numbers exactly (easy 1.000, standard 0.958, hard 0.622).
+Mappings, endpoint conditions and cost bases were committed before the runs:
+[`docs/v1.2-additions-run3.md`](docs/v1.2-additions-run3.md). No other row changed.
+
 ## v1.1.3: the GPU round
 
 **[Results -> `RESULTS-v1.1.3.md`](RESULTS-v1.1.3.md)** · artifact

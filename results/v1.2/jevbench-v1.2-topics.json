@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.6",
+ "revision": "v1.2.7",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -912,6 +912,102 @@
     }
    }
   },
+  "gliner2.5-multi": {
+   "display": "GLiNER2.5 multi (Fastino, 287M)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 76,
+     "accuracy": 0.5891
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 19,
+     "accuracy": 0.3393
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 27,
+     "accuracy": 0.403
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 28,
+     "accuracy": 0.4375
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 41,
+     "accuracy": 0.3445
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 63,
+     "accuracy": 0.7975
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 7,
+     "accuracy": 0.35
+    }
+   }
+  },
+  "gliner2.5-small": {
+   "display": "GLiNER2.5 small (Fastino, 74M)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 80,
+     "accuracy": 0.6202
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 20,
+     "accuracy": 0.3571
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 26,
+     "accuracy": 0.3881
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 25,
+     "accuracy": 0.3906
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 41,
+     "accuracy": 0.3445
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 49,
+     "accuracy": 0.6203
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 11,
+     "accuracy": 0.55
+    }
+   }
+  },
   "gliner2": {
    "display": "GLiNER2 (Fastino, gliner2.5-base)",
    "partial": false,
@@ -1005,6 +1101,54 @@
      "attempted": 20,
      "correct": 10,
      "accuracy": 0.5
+    }
+   }
+  },
+  "jqv": {
+   "display": "jqv (Qwen3-32B zero-shot)",
+   "partial": true,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 112,
+     "correct": 99,
+     "accuracy": 0.8839
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 45,
+     "correct": 42,
+     "accuracy": 0.9333
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 39,
+     "correct": 32,
+     "accuracy": 0.8205
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 45,
+     "correct": 35,
+     "accuracy": 0.7778
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 96,
+     "correct": 76,
+     "accuracy": 0.7917
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 78,
+     "correct": 76,
+     "accuracy": 0.9744
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 10,
+     "correct": 8,
+     "accuracy": 0.8
     }
    }
   },
