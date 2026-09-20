@@ -1,5 +1,8 @@
 # JevBench
 
+Combination experiments (confidence cascades, committees, and real-sample best-of-n) are
+reported in [RESULTS-COMBINATIONS.md](RESULTS-COMBINATIONS.md). None changed the ranked board.
+
 A benchmark for **Jev-class decision models**: you hand the model a piece of state
 and a bounded rubric, and it hands back a typed answer, ideally with a probability for
 every option. No prose, no parsing, no "as an AI language model".
