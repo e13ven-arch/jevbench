@@ -2,7 +2,8 @@
 
     python3 scripts/v1.2/charts.py
 
-main-score.png   JevBench Score (4 axes, geometric mean), ranked; partial runs greyed below, unranked
+main-score.png   JevBench Score (4 axes, geometric mean), ranked; honorable mentions (a service on another
+                 entrant's model) and partial runs greyed below, unranked
 axes.png         the four axis scores per ranked system
 hard-tier.png    hard-tier accuracy per system beside the mean of the three v1.1 tiers
 calibration.png  calibration sub-score (ECE + probability fidelity on the hard tier)
@@ -49,9 +50,12 @@ SHORT = {
 }
 
 
+NOT_RANKED = {"partial": " (partial run)", "honorable_mention": " (honorable mention)"}
+
+
 def name(s):
     r = f"{s['rank']:>2}. " if s.get("rank") else ""
-    return r + SHORT.get(s["key"], s["display"]) + (" (partial run)" if s["partial"] else "")
+    return r + SHORT.get(s["key"], s["display"]) + NOT_RANKED.get(s.get("listing", "ranked"), "")
 
 
 def frame(ax):
@@ -71,7 +75,7 @@ def stamp(fig, title, sub, foot):
 
 def legend(fig, used, y=0.04):
     h = [Patch(facecolor=CLASS[k][0], label=CLASS[k][1]) for k in CLASS if k in used]
-    h.append(Patch(facecolor=MUTED, label="partial run (not ranked)"))
+    h.append(Patch(facecolor=MUTED, label="listed, not ranked (honorable mention or partial run)"))
     # v1.2.2 added two kinds of system, so the legend can need a second row: keep it clear of the x axis.
     ncol = 5 if len(h) <= 5 else 4
     fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.01, y), ncol=ncol,
@@ -80,25 +84,28 @@ def legend(fig, used, y=0.04):
 
 
 def bars(fname, rows, value, label_fn, title, sub, foot, xmax=100):
-    legend_rows = 1 if len({s["class"] for s in rows} | {"partial"}) <= 5 else 2
+    legend_rows = 1 if len({s["class"] for s in rows if s["ranked"]} | {"partial"}) <= 5 else 2
     extra = 0.3 * (legend_rows - 1) + 0.25 * foot.count("\n")
     h = 0.5 * len(rows) + 2.6 + extra
+    # Inches of margin under the axes: one legend row (0.5 in) plus one line per footer line, and never less than 1.0.
+    bottom_in = 1.0 + 0.45 * (legend_rows - 1) + 0.3 * foot.count("\n")
     fig, ax = plt.subplots(figsize=(14, h), facecolor=SURFACE)
-    fig.subplots_adjust(left=0.27, right=0.985, top=1 - 1.05 / h, bottom=(1.0 + 0.45 * (legend_rows - 1) + 0.3 * foot.count("\n")) / h)
+    # left: the longest y label is "17. classifier.dev (fast tier) (honorable mention)".
+    fig.subplots_adjust(left=0.3, right=0.985, top=1 - 1.05 / h, bottom=bottom_in / h)
     frame(ax)
     ys = list(range(len(rows)))[::-1]
     for y, s in zip(ys, rows):
         v = value(s)
         if v is None:
             continue
-        c = MUTED if s["partial"] else CLASS.get(s["class"], (MUTED,))[0]
+        c = MUTED if not s["ranked"] else CLASS.get(s["class"], (MUTED,))[0]
         ax.barh(y, v, color=c, height=0.66)
         ax.text(v + xmax * 0.008, y, label_fn(s, v), va="center", fontsize=10, color=INK)
     ax.set_yticks(ys, [name(s) for s in rows])
     ax.set_xlim(0, xmax * 1.45)
     ax.set_xticks([0, 20, 40, 60, 80, 100])
     stamp(fig, title, sub, foot)
-    legend(fig, {s["class"] for s in rows}, y=(0.5 + 0.6 * foot.count("\n")) / h)
+    legend(fig, {s["class"] for s in rows if s["ranked"]}, y=(bottom_in - 0.5 * legend_rows) / h)
     fig.savefig(OUT / fname, dpi=150, facecolor=SURFACE)
     plt.close(fig)
 
@@ -111,12 +118,13 @@ def main():
     global COST_EXAMPLE
     COST_EXAMPLE = RES["cost_unit"]["short_note"]
     ranked = [s for s in sys_ if s["ranked"]]
+    honorable = [s for s in sys_ if s.get("listing") == "honorable_mention"]
     part = [s for s in sys_ if s["partial"]]
     n_hard = RES["tiers"]["hard"]
     cost = lambda s: ({"estimate": "est. ", "announced": "announced "}.get(s["cost"]["kind"], "")) + f"${s['cost']['usd_per_1000']:.3f}"
     ax4 = lambda s: s["axes"]
     f0 = lambda v: "–" if v is None else f"{v:.0f}"
-    bars("main-score.png", ranked + part, lambda s: s["jevbench_score"],
+    bars("main-score.png", ranked + honorable + part, lambda s: s["jevbench_score"],
          lambda s, v: f"{v:.1f}   I {f0(ax4(s)['intelligence'])} · C {f0(ax4(s)['calibration'])} · S {f0(ax4(s)['speed'])} · K {f0(ax4(s)['cost'])}  ({cost(s)} / 1k decisions)",
          f"JevBench {RES['revision']} — JevBench Score",
          "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard. "
@@ -124,7 +132,8 @@ def main():
          "K = Cost. Prices are US$ per 1,000 DECISIONS — not per 1,000 tokens. One decision is a whole question: its state, its rubric and its options.\n"
          + COST_EXAMPLE + "\n"
          "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption; raw measurements in the repo.\n"
-         "est. = hosted-provider list price for the same size class, or a flat plan's price at full use; announced = provider's published price, not yet charged.")
+         "est. = hosted-provider list price for the same size class, or a flat plan's price at full use; announced = provider's published price, not yet charged.\n"
+         + (RES["honorable_mentions"]["rule"].split(" Ranking it")[0] if RES.get("honorable_mentions") else ""))
     # four axes side by side, ranked systems only
     fig, axs = plt.subplots(1, 4, figsize=(16, 0.5 * len(ranked) + 2.6), facecolor=SURFACE, sharey=True)
     fig.subplots_adjust(left=0.2, right=0.99, wspace=0.08, top=1 - 1.05 / (0.5 * len(ranked) + 2.6), bottom=1.0 / (0.5 * len(ranked) + 2.6))
@@ -155,12 +164,12 @@ def main():
         tail = f"(v1.1 tiers: {100 * sum(v11) / 3:.1f} %)" if None not in v11 else ""
         return f"{v:.1f} %   " + (f"of {h['n_attempted']} attempted" if h["coverage"] < 0.95 else tail)
 
-    hrows = sorted([s for s in sys_ if s["hard"] and s["hard"]["n_attempted"]], key=lambda s: (s["partial"], -hard_acc(s)))
+    hrows = sorted([s for s in sys_ if s["hard"] and s["hard"]["n_attempted"]], key=lambda s: (not s["ranked"], s["partial"], -hard_acc(s)))
     bars("hard-tier.png", hrows, hard_acc, hard_label,
          f"JevBench {RES['revision']} — hard-tier accuracy",
          f"{n_hard} decisions: long multi-condition documents, trade-offs, ambiguous cases, traps, multi-hop, dates & numbers, answer judging",
          "Items written by Claude Opus 5 and GPT-5.6 Sol, cross-reviewed, frozen before any system ran. Failed or unparseable answers count as wrong.")
-    crows = sorted([s for s in sys_ if s["calibration"]["score"] is not None], key=lambda s: (s["partial"], -s["calibration"]["score"]))
+    crows = sorted([s for s in sys_ if s["calibration"]["score"] is not None], key=lambda s: (not s["ranked"], s["partial"], -s["calibration"]["score"]))
     bars("calibration.png", crows, lambda s: s["calibration"]["score"],
          lambda s, v: f"{v:.1f}   ECE {s['calibration']['ece_hard']:.3f}" + (f" · fidelity {s['calibration']['probability_fidelity']:.0f}" if s['calibration']['probability_fidelity'] is not None else ""),
          f"JevBench {RES['revision']} — Calibration (hard tier)",

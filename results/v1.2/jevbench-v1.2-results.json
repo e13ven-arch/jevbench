@@ -1,7 +1,12 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.3",
+ "revision": "v1.2.4",
  "revision_log": [
+  {
+   "revision": "v1.2.4",
+   "date": "2026-09-20",
+   "note": "classifier.dev (fast tier) leaves the ranking and becomes an honorable mention. It is not its own model: its own pages say \"The fast tier is Jev, TypeSafe's decision model\" (https://classifier.dev/benchmark), so ranking it against Jev ranks Jev's model against Jev's model at a different price. General rule from this revision on: a service that runs another entrant's model is listed with all of its scores and axes, but is not ranked against the models. Its numbers, axes, cost basis, radars and per-task outcomes are unchanged; only its rank is gone. Every other row moves up one place; no score changed."
+  },
   {
    "revision": "v1.2.3",
    "date": "2026-09-20",
@@ -25,7 +30,7 @@
  ],
  "protocol": "jevbench::v1.2",
  "status": "final",
- "generated_utc": "2026-09-20T07:55:24+00:00",
+ "generated_utc": "2026-09-20T08:15:46+00:00",
  "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final; later additions measured on the same frozen items: v1.2.1: djev (Maisa, diffusion-gemma); v1.2.2: classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M)",
  "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced. v1.2.1: added djev (Maisa, diffusion-gemma). v1.2.2: added classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M).",
  "score_name": "JevBench Score",
@@ -242,7 +247,7 @@
   "calibration": "Hard tier only, systems that return a probability distribution: mean of (a) 100 x (1 - ECE/0.5), ECE = top-label expected calibration error in 10 bins, and (b) probability fidelity = 100 x (1 - mean total-variation distance) between the returned distribution and the exact gold distribution on the 20 probability items. Label-only systems have none; it counts as 0 in the JevBench Score.",
   "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo. Production APIs (Jev, djev, classifier.dev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
   "cost": "US dollars per 1,000 DECISIONS — not per 1,000 tokens. One decision is one whole question: its state, its rubric and its options, which is hundreds to thousands of input tokens. Pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens.",
-  "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
+  "ranked": "Ranked: a system's own model, with every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank. A service that runs another entrant's model is listed with all of its scores and axes, but is not ranked against the models. Ranking it would rank the same model twice, once at the model's own price and once at the service's. The row keeps every number, axis, cost basis and per-task outcome; it carries no rank number.",
   "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score."
  },
  "hard_dataset": {
@@ -343,160 +348,30 @@
    "footnote": "With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no answer-judging items — small models are very sensitive to option order."
   }
  ],
- "systems": [
-  {
-   "key": "classifier-dev-fast",
-   "display": "classifier.dev (fast tier)",
-   "class": "jev-service",
-   "open": "no",
-   "author": "mrmps (@michael_chomsky)",
-   "repo": "https://classifier.dev",
-   "licence": "MIT (code); hosted service",
-   "underlying": "Jev (TypeSafe) behind classifier.dev's zero-shot classification API",
-   "has_distribution": true,
-   "probability_source": [
-    "native"
-   ],
-   "endpoint_condition": "production API (classifier.dev, fast tier)",
-   "endpoint_kind": "api",
-   "partial": false,
-   "ranked": true,
-   "tiers": {
-    "easy": 1.0,
-    "standard": 0.9895833333333334,
-    "judge": 0.9726027397260274,
-    "hard": 0.7045454545454546
-   },
-   "axes": {
-    "intelligence": 90.07757368202573,
-    "calibration": 77.8658124426079,
-    "speed": 87.59107265834845,
-    "cost": 84.31363764158988
-   },
-   "jevbench_score": 84.83602134050506,
-   "speed": {
-    "p50_s_raw": 0.38636084645986557,
-    "p95_s_raw": 0.4507125232368707,
-    "p50_s_adjusted": 0.38636084645986557,
-    "p95_s_adjusted": 0.4507125232368707,
-    "adjustment": "none (production API)",
-    "run": "serial 242-decision standard+judge run",
-    "hardware": null,
-    "measured_where": "from a Hetzner server in Germany, network included",
-    "hard_tier_p50_s": 0.38397014886140823,
-    "hard_tier_p95_s": 0.45760550089180463
-   },
-   "cost": {
-    "kind": "estimate",
-    "usd_per_1000": 0.003333333333333333,
-    "basis": "ESTIMATE from the published paid plan (the free tier was used): classifier.dev Pro $20/month for 200,000 fast classifications a day (https://classifier.dev/pricing, read 2026-09-19) = $0.0033 per 1,000 decisions at full use; one decision = one classification. Lower use costs more per decision: at a tenth of that allowance it is $0.033 per 1,000, and the free tier (20,000 fast classifications a day, which is what this run used) costs nothing.",
-    "usd_per_1000_v11_tiers": 0.003333333333333333,
-    "usd_per_1000_hard": 0.003333333333333333,
-    "self_host_sensitivity": null
-   },
-   "calibration": {
-    "score": 77.8658124426079,
-    "score_label_only_as_onehot": null,
-    "ece_hard": 0.09111937557392094,
-    "probability_fidelity": 73.9555,
-    "brier_hard": 0.3604363282039868,
-    "brier_standard_judge_v11": 0.04268640347881518,
-    "note": null
-   },
-   "hard": {
-    "run": "runs/classifier-dev-fast--hard (job jevbench-add-requests-20260919)",
-    "n_items": 220,
-    "n_ok": 220,
-    "n_attempted": 220,
-    "coverage": 1.0,
-    "success_rate": 1.0,
-    "accuracy": 0.7045454545454546,
-    "by_family": {
-     "adversarial": {
-      "correct": 12,
-      "n": 12,
-      "accuracy": 1.0
-     },
-     "ambiguous": {
-      "correct": 11,
-      "n": 14,
-      "accuracy": 0.7857142857142857
-     },
-     "judge_hard": {
-      "correct": 26,
-      "n": 33,
-      "accuracy": 0.7878787878787878
-     },
-     "long_policy": {
-      "correct": 20,
-      "n": 38,
-      "accuracy": 0.5263157894736842
-     },
-     "multi_hop": {
-      "correct": 28,
-      "n": 35,
-      "accuracy": 0.8
-     },
-     "probability": {
-      "correct": 14,
-      "n": 20,
-      "accuracy": 0.7
-     },
-     "routing_hard": {
-      "correct": 10,
-      "n": 10,
-      "accuracy": 1.0
-     },
-     "temporal_numeric": {
-      "correct": 7,
-      "n": 30,
-      "accuracy": 0.23333333333333334
-     },
-     "tradeoff": {
-      "correct": 11,
-      "n": 12,
-      "accuracy": 0.9166666666666666
-     },
-     "trap": {
-      "correct": 16,
-      "n": 16,
-      "accuracy": 1.0
-     }
-    },
-    "has_distribution": true,
-    "brier_mean": 0.3604363282039868,
-    "ece": 0.09111937557392094,
-    "probability_fidelity": 73.9555,
-    "calibration_score": 77.8658124426079,
-    "onehot": {
-     "ece": 0.2954545454545454,
-     "probability_fidelity": 56.04099999999998,
-     "calibration_score": 48.47504545454545
-    },
-    "latency_p50_s": 0.38397014886140823,
-    "latency_p95_s": 0.45760550089180463,
-    "mean_input_tokens": null,
-    "mean_output_tokens": null,
-    "charged_usd": 0.0
-   },
-   "presets": {
-    "JevBench Score (25:25:25:25)": 84.83602134050506,
-    "Balanced 33:33:33 (no calibration)": 87.29541832038613,
-    "Emphasis on Accuracy 60:20:20": 88.39781739411562,
-    "Emphasis on Speed 20:60:20": 87.41356011258576,
-    "Emphasis on Cost 20:20:60": 86.09025636062546,
-    "Intelligence only": 90.07757368202576
-   },
-   "rank": 1,
-   "rank_under": {
-    "JevBench Score (25:25:25:25)": 1,
-    "Balanced 33:33:33 (no calibration)": 1,
-    "Emphasis on Accuracy 60:20:20": 1,
-    "Emphasis on Speed 20:60:20": 1,
-    "Emphasis on Cost 20:20:60": 1,
-    "Intelligence only": 5
+ "honorable_mentions": {
+  "heading": "Honorable mentions — services built on another entrant's model",
+  "rule": "A service that runs another entrant's model is listed with all of its scores and axes, but is not ranked against the models. Ranking it would rank the same model twice, once at the model's own price and once at the service's. The row keeps every number, axis, cost basis and per-task outcome; it carries no rank number.",
+  "systems": {
+   "classifier-dev-fast": {
+    "runs_on_key": "jev-1.13.0",
+    "runs_on": "Jev (TypeSafe)",
+    "short_reason": "runs on Jev (TypeSafe) — listed, not ranked",
+    "why_not_ranked": "classifier.dev is not its own model. Its own pages say so: \"The fast tier is Jev, TypeSafe's decision model\" (https://classifier.dev/benchmark, read 2026-09-20), and the API answers with \"model\": \"jev-1.13.0\" — the same model version this benchmark measures directly as Jev 1.13.0. What it adds is a price and, on its smart tier, an orchestration layer: \"The smart tier is Jev plus a reasoning model re-asking only the answers Jev put under 0.7 confidence\" — escalation on low confidence (a model cascade), not best-of-N, not self-consistency and not a committee. Its published escalation model is gemini-3.8-flash. Ranking it against Jev would rank Jev's model against Jev's model, so from v1.2.4 it is an honorable mention instead of #1.",
+    "tier_measured": "Only the fast tier was measured. The smart tier's escalation was never run, so nothing here scores it.",
+    "price_note": "$0.0033 per 1,000 decisions is an estimate from the published flat-rate plan at full use: classifier.dev Pro is $20/month for 200,000 fast classifications a day (https://classifier.dev/pricing, read 2026-09-20), and one classification is one decision. Lower use costs more per decision — at a tenth of that allowance it is $0.033 per 1,000 — and the free tier (20,000 fast classifications a day), which is what our run used, costs nothing. Their pages do not say how the flat rate is funded, so we do not know their cost basis; the only figure they publish is what the model costs a caller: \"The model behind the fast tier costs about $0.005 per thousand classifications and needs a TypeSafe key\" (https://classifier.dev/pricing) — for their short single-sentence inputs, not for JevBench's whole questions.",
+    "not_pass_through": "On our set the fast tier scored 97.3 % on the judge tier against Jev's 94.5 %, and 70.5 % against 74.1 % on the hard tier. classifier.dev's own explanation for differences of this kind is batching (\"The fast tier is Jev, packed a thousand to a request\"); on their own two test sets they measured the same difference as noise.",
+    "credit": "A legitimate, well-documented product: free without an account, open source (https://github.com/mrmps/classifier-dev), by Michael Ryaboy (@michael_chomsky).",
+    "sources": [
+     "https://classifier.dev",
+     "https://classifier.dev/benchmark",
+     "https://classifier.dev/pricing",
+     "https://classifier.dev/about"
+    ],
+    "sources_read": "2026-09-20"
    }
-  },
+  }
+ },
+ "systems": [
   {
    "key": "jev-1.13.0",
    "display": "Jev 1.13.0 (TypeSafe AI)",
@@ -514,6 +389,8 @@
    "endpoint_kind": "api",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9895833333333334,
@@ -640,13 +517,13 @@
     "Emphasis on Cost 20:20:60": 63.79154874036463,
     "Intelligence only": 90.40135948526363
    },
-   "rank": 2,
+   "rank": 1,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 2,
-    "Balanced 33:33:33 (no calibration)": 5,
-    "Emphasis on Accuracy 60:20:20": 3,
-    "Emphasis on Speed 20:60:20": 4,
-    "Emphasis on Cost 20:20:60": 11,
+    "JevBench Score (25:25:25:25)": 1,
+    "Balanced 33:33:33 (no calibration)": 4,
+    "Emphasis on Accuracy 60:20:20": 2,
+    "Emphasis on Speed 20:60:20": 3,
+    "Emphasis on Cost 20:20:60": 10,
     "Intelligence only": 3
    }
   },
@@ -667,6 +544,8 @@
    "endpoint_kind": "gpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9791666666666666,
@@ -802,14 +681,14 @@
     "Emphasis on Cost 20:20:60": 68.54099389960113,
     "Intelligence only": 85.93783727687837
    },
-   "rank": 3,
+   "rank": 2,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 3,
-    "Balanced 33:33:33 (no calibration)": 3,
-    "Emphasis on Accuracy 60:20:20": 4,
-    "Emphasis on Speed 20:60:20": 3,
-    "Emphasis on Cost 20:20:60": 8,
-    "Intelligence only": 9
+    "JevBench Score (25:25:25:25)": 2,
+    "Balanced 33:33:33 (no calibration)": 2,
+    "Emphasis on Accuracy 60:20:20": 3,
+    "Emphasis on Speed 20:60:20": 2,
+    "Emphasis on Cost 20:20:60": 7,
+    "Intelligence only": 8
    }
   },
   {
@@ -829,6 +708,8 @@
    "endpoint_kind": "api",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9791666666666666,
@@ -955,14 +836,14 @@
     "Emphasis on Cost 20:20:60": 68.79284014965901,
     "Intelligence only": 88.36249481112495
    },
-   "rank": 4,
+   "rank": 3,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 4,
-    "Balanced 33:33:33 (no calibration)": 2,
-    "Emphasis on Accuracy 60:20:20": 2,
-    "Emphasis on Speed 20:60:20": 2,
-    "Emphasis on Cost 20:20:60": 7,
-    "Intelligence only": 7
+    "JevBench Score (25:25:25:25)": 3,
+    "Balanced 33:33:33 (no calibration)": 1,
+    "Emphasis on Accuracy 60:20:20": 1,
+    "Emphasis on Speed 20:60:20": 1,
+    "Emphasis on Cost 20:20:60": 6,
+    "Intelligence only": 6
    }
   },
   {
@@ -982,6 +863,8 @@
    "endpoint_kind": "cpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.9444444444444444,
     "standard": 0.7291666666666666,
@@ -1108,14 +991,14 @@
     "Emphasis on Cost 20:20:60": 77.95325412394823,
     "Intelligence only": 63.23602462986025
    },
-   "rank": 5,
+   "rank": 4,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 5,
-    "Balanced 33:33:33 (no calibration)": 6,
-    "Emphasis on Accuracy 60:20:20": 13,
-    "Emphasis on Speed 20:60:20": 10,
-    "Emphasis on Cost 20:20:60": 2,
-    "Intelligence only": 15
+    "JevBench Score (25:25:25:25)": 4,
+    "Balanced 33:33:33 (no calibration)": 5,
+    "Emphasis on Accuracy 60:20:20": 12,
+    "Emphasis on Speed 20:60:20": 9,
+    "Emphasis on Cost 20:20:60": 1,
+    "Intelligence only": 14
    }
   },
   {
@@ -1135,6 +1018,8 @@
    "endpoint_kind": "gpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.84375,
@@ -1271,14 +1156,14 @@
     "Intelligence only": 75.57456413449565
    },
    "run_key": "open-alternative-jev-yesfirst",
-   "rank": 6,
+   "rank": 5,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 6,
-    "Balanced 33:33:33 (no calibration)": 7,
-    "Emphasis on Accuracy 60:20:20": 7,
-    "Emphasis on Speed 20:60:20": 5,
-    "Emphasis on Cost 20:20:60": 10,
-    "Intelligence only": 13
+    "JevBench Score (25:25:25:25)": 5,
+    "Balanced 33:33:33 (no calibration)": 6,
+    "Emphasis on Accuracy 60:20:20": 6,
+    "Emphasis on Speed 20:60:20": 4,
+    "Emphasis on Cost 20:20:60": 9,
+    "Intelligence only": 12
    }
   },
   {
@@ -1298,6 +1183,8 @@
    "endpoint_kind": "demo",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9375,
@@ -1433,14 +1320,14 @@
     "Emphasis on Cost 20:20:60": 69.88499417255228,
     "Intelligence only": 79.52521793275217
    },
-   "rank": 7,
+   "rank": 6,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 7,
-    "Balanced 33:33:33 (no calibration)": 4,
-    "Emphasis on Accuracy 60:20:20": 5,
-    "Emphasis on Speed 20:60:20": 6,
-    "Emphasis on Cost 20:20:60": 6,
-    "Intelligence only": 11
+    "JevBench Score (25:25:25:25)": 6,
+    "Balanced 33:33:33 (no calibration)": 3,
+    "Emphasis on Accuracy 60:20:20": 4,
+    "Emphasis on Speed 20:60:20": 5,
+    "Emphasis on Cost 20:20:60": 5,
+    "Intelligence only": 10
    }
   },
   {
@@ -1460,6 +1347,8 @@
    "endpoint_kind": "gpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9583333333333334,
@@ -1595,14 +1484,14 @@
     "Emphasis on Cost 20:20:60": 58.29596524301672,
     "Intelligence only": 85.97654628476548
    },
-   "rank": 8,
+   "rank": 7,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 8,
-    "Balanced 33:33:33 (no calibration)": 10,
-    "Emphasis on Accuracy 60:20:20": 6,
-    "Emphasis on Speed 20:60:20": 7,
-    "Emphasis on Cost 20:20:60": 12,
-    "Intelligence only": 8
+    "JevBench Score (25:25:25:25)": 7,
+    "Balanced 33:33:33 (no calibration)": 9,
+    "Emphasis on Accuracy 60:20:20": 5,
+    "Emphasis on Speed 20:60:20": 6,
+    "Emphasis on Cost 20:20:60": 11,
+    "Intelligence only": 7
    }
   },
   {
@@ -1622,6 +1511,8 @@
    "endpoint_kind": "cpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.7604166666666666,
@@ -1748,14 +1639,14 @@
     "Emphasis on Cost 20:20:60": 71.13105895122344,
     "Intelligence only": 63.8701224574512
    },
-   "rank": 9,
+   "rank": 8,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 9,
-    "Balanced 33:33:33 (no calibration)": 11,
-    "Emphasis on Accuracy 60:20:20": 15,
-    "Emphasis on Speed 20:60:20": 16,
-    "Emphasis on Cost 20:20:60": 5,
-    "Intelligence only": 14
+    "JevBench Score (25:25:25:25)": 8,
+    "Balanced 33:33:33 (no calibration)": 10,
+    "Emphasis on Accuracy 60:20:20": 14,
+    "Emphasis on Speed 20:60:20": 15,
+    "Emphasis on Cost 20:20:60": 4,
+    "Intelligence only": 13
    }
   },
   {
@@ -1775,6 +1666,8 @@
    "endpoint_kind": "demo",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9583333333333334,
@@ -1910,14 +1803,14 @@
     "Emphasis on Cost 20:20:60": 50.60536040198783,
     "Intelligence only": 88.89995848899957
    },
-   "rank": 10,
+   "rank": 9,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 10,
-    "Balanced 33:33:33 (no calibration)": 15,
-    "Emphasis on Accuracy 60:20:20": 9,
-    "Emphasis on Speed 20:60:20": 13,
-    "Emphasis on Cost 20:20:60": 15,
-    "Intelligence only": 6
+    "JevBench Score (25:25:25:25)": 9,
+    "Balanced 33:33:33 (no calibration)": 14,
+    "Emphasis on Accuracy 60:20:20": 8,
+    "Emphasis on Speed 20:60:20": 12,
+    "Emphasis on Cost 20:20:60": 14,
+    "Intelligence only": 5
    }
   },
   {
@@ -1937,6 +1830,8 @@
    "endpoint_kind": "cpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.8611111111111112,
     "standard": 0.65625,
@@ -2063,14 +1958,14 @@
     "Emphasis on Cost 20:20:60": 76.32416702438564,
     "Intelligence only": 58.95359416078595
    },
-   "rank": 11,
+   "rank": 10,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 11,
-    "Balanced 33:33:33 (no calibration)": 8,
-    "Emphasis on Accuracy 60:20:20": 14,
-    "Emphasis on Speed 20:60:20": 8,
-    "Emphasis on Cost 20:20:60": 3,
-    "Intelligence only": 16
+    "JevBench Score (25:25:25:25)": 10,
+    "Balanced 33:33:33 (no calibration)": 7,
+    "Emphasis on Accuracy 60:20:20": 13,
+    "Emphasis on Speed 20:60:20": 7,
+    "Emphasis on Cost 20:20:60": 2,
+    "Intelligence only": 15
    }
   },
   {
@@ -2090,6 +1985,8 @@
    "endpoint_kind": "api",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9791666666666666,
@@ -2216,13 +2113,13 @@
     "Emphasis on Cost 20:20:60": 44.45545124790049,
     "Intelligence only": 96.82139892071399
    },
-   "rank": 12,
+   "rank": 11,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 12,
-    "Balanced 33:33:33 (no calibration)": 16,
-    "Emphasis on Accuracy 60:20:20": 8,
-    "Emphasis on Speed 20:60:20": 15,
-    "Emphasis on Cost 20:20:60": 16,
+    "JevBench Score (25:25:25:25)": 11,
+    "Balanced 33:33:33 (no calibration)": 15,
+    "Emphasis on Accuracy 60:20:20": 7,
+    "Emphasis on Speed 20:60:20": 14,
+    "Emphasis on Cost 20:20:60": 15,
     "Intelligence only": 1
    }
   },
@@ -2243,6 +2140,8 @@
    "endpoint_kind": "cpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.4895833333333333,
@@ -2378,14 +2277,14 @@
     "Emphasis on Cost 20:20:60": 67.81326216982217,
     "Intelligence only": 53.57632835201329
    },
-   "rank": 13,
+   "rank": 12,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 13,
-    "Balanced 33:33:33 (no calibration)": 13,
-    "Emphasis on Accuracy 60:20:20": 18,
-    "Emphasis on Speed 20:60:20": 17,
-    "Emphasis on Cost 20:20:60": 9,
-    "Intelligence only": 18
+    "JevBench Score (25:25:25:25)": 12,
+    "Balanced 33:33:33 (no calibration)": 12,
+    "Emphasis on Accuracy 60:20:20": 17,
+    "Emphasis on Speed 20:60:20": 16,
+    "Emphasis on Cost 20:20:60": 8,
+    "Intelligence only": 17
    }
   },
   {
@@ -2405,6 +2304,8 @@
    "endpoint_kind": "gpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9479166666666666,
@@ -2540,14 +2441,14 @@
     "Emphasis on Cost 20:20:60": 52.41930793467613,
     "Intelligence only": 78.56408260689082
    },
-   "rank": 14,
+   "rank": 13,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 14,
-    "Balanced 33:33:33 (no calibration)": 14,
-    "Emphasis on Accuracy 60:20:20": 12,
-    "Emphasis on Speed 20:60:20": 11,
-    "Emphasis on Cost 20:20:60": 14,
-    "Intelligence only": 12
+    "JevBench Score (25:25:25:25)": 13,
+    "Balanced 33:33:33 (no calibration)": 13,
+    "Emphasis on Accuracy 60:20:20": 11,
+    "Emphasis on Speed 20:60:20": 10,
+    "Emphasis on Cost 20:20:60": 13,
+    "Intelligence only": 11
    }
   },
   {
@@ -2567,6 +2468,8 @@
    "endpoint_kind": "api",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.9895833333333334,
@@ -2693,13 +2596,13 @@
     "Emphasis on Cost 20:20:60": 43.24724630191816,
     "Intelligence only": 90.29052511415529
    },
-   "rank": 15,
+   "rank": 14,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 15,
-    "Balanced 33:33:33 (no calibration)": 17,
-    "Emphasis on Accuracy 60:20:20": 11,
-    "Emphasis on Speed 20:60:20": 14,
-    "Emphasis on Cost 20:20:60": 17,
+    "JevBench Score (25:25:25:25)": 14,
+    "Balanced 33:33:33 (no calibration)": 16,
+    "Emphasis on Accuracy 60:20:20": 10,
+    "Emphasis on Speed 20:60:20": 13,
+    "Emphasis on Cost 20:20:60": 16,
     "Intelligence only": 4
    }
   },
@@ -2720,6 +2623,8 @@
    "endpoint_kind": "api",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.9861111111111112,
     "standard": 0.9895833333333334,
@@ -2846,13 +2751,13 @@
     "Emphasis on Cost 20:20:60": 31.812977507470656,
     "Intelligence only": 96.09608066971082
    },
-   "rank": 16,
+   "rank": 15,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 16,
-    "Balanced 33:33:33 (no calibration)": 18,
-    "Emphasis on Accuracy 60:20:20": 16,
-    "Emphasis on Speed 20:60:20": 18,
-    "Emphasis on Cost 20:20:60": 18,
+    "JevBench Score (25:25:25:25)": 15,
+    "Balanced 33:33:33 (no calibration)": 17,
+    "Emphasis on Accuracy 60:20:20": 15,
+    "Emphasis on Speed 20:60:20": 17,
+    "Emphasis on Cost 20:20:60": 17,
     "Intelligence only": 2
    }
   },
@@ -2873,6 +2778,8 @@
    "endpoint_kind": "gpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 1.0,
     "standard": 0.90625,
@@ -3008,14 +2915,14 @@
     "Emphasis on Cost 20:20:60": 54.50878535854715,
     "Intelligence only": 80.07363013698631
    },
-   "rank": 17,
+   "rank": 16,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 17,
-    "Balanced 33:33:33 (no calibration)": 12,
-    "Emphasis on Accuracy 60:20:20": 10,
-    "Emphasis on Speed 20:60:20": 9,
-    "Emphasis on Cost 20:20:60": 13,
-    "Intelligence only": 10
+    "JevBench Score (25:25:25:25)": 16,
+    "Balanced 33:33:33 (no calibration)": 11,
+    "Emphasis on Accuracy 60:20:20": 9,
+    "Emphasis on Speed 20:60:20": 8,
+    "Emphasis on Cost 20:20:60": 12,
+    "Intelligence only": 9
    }
   },
   {
@@ -3035,6 +2942,8 @@
    "endpoint_kind": "cpu",
    "partial": false,
    "ranked": true,
+   "listing": "ranked",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.9722222222222222,
     "standard": 0.6666666666666666,
@@ -3161,15 +3070,162 @@
     "Emphasis on Cost 20:20:60": 74.57176620324665,
     "Intelligence only": 56.03618375536186
    },
-   "rank": 18,
+   "rank": 17,
    "rank_under": {
-    "JevBench Score (25:25:25:25)": 18,
-    "Balanced 33:33:33 (no calibration)": 9,
-    "Emphasis on Accuracy 60:20:20": 17,
-    "Emphasis on Speed 20:60:20": 12,
-    "Emphasis on Cost 20:20:60": 4,
-    "Intelligence only": 17
+    "JevBench Score (25:25:25:25)": 17,
+    "Balanced 33:33:33 (no calibration)": 8,
+    "Emphasis on Accuracy 60:20:20": 16,
+    "Emphasis on Speed 20:60:20": 11,
+    "Emphasis on Cost 20:20:60": 3,
+    "Intelligence only": 16
    }
+  },
+  {
+   "key": "classifier-dev-fast",
+   "display": "classifier.dev (fast tier)",
+   "class": "jev-service",
+   "open": "no",
+   "author": "mrmps (@michael_chomsky)",
+   "repo": "https://classifier.dev",
+   "licence": "MIT (code); hosted service",
+   "underlying": "Jev (TypeSafe) behind classifier.dev's zero-shot classification API",
+   "has_distribution": true,
+   "probability_source": [
+    "native"
+   ],
+   "endpoint_condition": "production API (classifier.dev, fast tier)",
+   "endpoint_kind": "api",
+   "partial": false,
+   "ranked": false,
+   "listing": "honorable_mention",
+   "not_ranked_because": "runs on Jev (TypeSafe) — listed, not ranked",
+   "tiers": {
+    "easy": 1.0,
+    "standard": 0.9895833333333334,
+    "judge": 0.9726027397260274,
+    "hard": 0.7045454545454546
+   },
+   "axes": {
+    "intelligence": 90.07757368202573,
+    "calibration": 77.8658124426079,
+    "speed": 87.59107265834845,
+    "cost": 84.31363764158988
+   },
+   "jevbench_score": 84.83602134050506,
+   "speed": {
+    "p50_s_raw": 0.38636084645986557,
+    "p95_s_raw": 0.4507125232368707,
+    "p50_s_adjusted": 0.38636084645986557,
+    "p95_s_adjusted": 0.4507125232368707,
+    "adjustment": "none (production API)",
+    "run": "serial 242-decision standard+judge run",
+    "hardware": null,
+    "measured_where": "from a Hetzner server in Germany, network included",
+    "hard_tier_p50_s": 0.38397014886140823,
+    "hard_tier_p95_s": 0.45760550089180463
+   },
+   "cost": {
+    "kind": "estimate",
+    "usd_per_1000": 0.003333333333333333,
+    "basis": "ESTIMATE from the published paid plan (the free tier was used): classifier.dev Pro $20/month for 200,000 fast classifications a day (https://classifier.dev/pricing, read 2026-09-19) = $0.0033 per 1,000 decisions at full use; one decision = one classification. Lower use costs more per decision: at a tenth of that allowance it is $0.033 per 1,000, and the free tier (20,000 fast classifications a day, which is what this run used) costs nothing.",
+    "usd_per_1000_v11_tiers": 0.003333333333333333,
+    "usd_per_1000_hard": 0.003333333333333333,
+    "self_host_sensitivity": null
+   },
+   "calibration": {
+    "score": 77.8658124426079,
+    "score_label_only_as_onehot": null,
+    "ece_hard": 0.09111937557392094,
+    "probability_fidelity": 73.9555,
+    "brier_hard": 0.3604363282039868,
+    "brier_standard_judge_v11": 0.04268640347881518,
+    "note": null
+   },
+   "hard": {
+    "run": "runs/classifier-dev-fast--hard (job jevbench-add-requests-20260919)",
+    "n_items": 220,
+    "n_ok": 220,
+    "n_attempted": 220,
+    "coverage": 1.0,
+    "success_rate": 1.0,
+    "accuracy": 0.7045454545454546,
+    "by_family": {
+     "adversarial": {
+      "correct": 12,
+      "n": 12,
+      "accuracy": 1.0
+     },
+     "ambiguous": {
+      "correct": 11,
+      "n": 14,
+      "accuracy": 0.7857142857142857
+     },
+     "judge_hard": {
+      "correct": 26,
+      "n": 33,
+      "accuracy": 0.7878787878787878
+     },
+     "long_policy": {
+      "correct": 20,
+      "n": 38,
+      "accuracy": 0.5263157894736842
+     },
+     "multi_hop": {
+      "correct": 28,
+      "n": 35,
+      "accuracy": 0.8
+     },
+     "probability": {
+      "correct": 14,
+      "n": 20,
+      "accuracy": 0.7
+     },
+     "routing_hard": {
+      "correct": 10,
+      "n": 10,
+      "accuracy": 1.0
+     },
+     "temporal_numeric": {
+      "correct": 7,
+      "n": 30,
+      "accuracy": 0.23333333333333334
+     },
+     "tradeoff": {
+      "correct": 11,
+      "n": 12,
+      "accuracy": 0.9166666666666666
+     },
+     "trap": {
+      "correct": 16,
+      "n": 16,
+      "accuracy": 1.0
+     }
+    },
+    "has_distribution": true,
+    "brier_mean": 0.3604363282039868,
+    "ece": 0.09111937557392094,
+    "probability_fidelity": 73.9555,
+    "calibration_score": 77.8658124426079,
+    "onehot": {
+     "ece": 0.2954545454545454,
+     "probability_fidelity": 56.04099999999998,
+     "calibration_score": 48.47504545454545
+    },
+    "latency_p50_s": 0.38397014886140823,
+    "latency_p95_s": 0.45760550089180463,
+    "mean_input_tokens": null,
+    "mean_output_tokens": null,
+    "charged_usd": 0.0
+   },
+   "presets": {
+    "JevBench Score (25:25:25:25)": 84.83602134050506,
+    "Balanced 33:33:33 (no calibration)": 87.29541832038613,
+    "Emphasis on Accuracy 60:20:20": 88.39781739411562,
+    "Emphasis on Speed 20:60:20": 87.41356011258576,
+    "Emphasis on Cost 20:20:60": 86.09025636062546,
+    "Intelligence only": 90.07757368202576
+   },
+   "rank": null
   },
   {
    "key": "qwen3.8-27b",
@@ -3188,6 +3244,8 @@
    "endpoint_kind": "api",
    "partial": true,
    "ranked": false,
+   "listing": "partial",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.9861111111111112,
     "standard": 0.9895833333333334,
@@ -3342,6 +3400,8 @@
    "endpoint_kind": "cpu",
    "partial": true,
    "ranked": false,
+   "listing": "partial",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.6666666666666666,
     "standard": 0.3125,
@@ -3412,6 +3472,8 @@
    "endpoint_kind": "cpu",
    "partial": true,
    "ranked": false,
+   "listing": "partial",
+   "not_ranked_because": null,
    "tiers": {
     "easy": 0.4722222222222222,
     "standard": 0.16666666666666666,

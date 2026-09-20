@@ -6,7 +6,9 @@ ROOT = Path(__file__).resolve().parents[2]
 R = json.loads((ROOT / "results/v1.2/jevbench-v1.2-results.json").read_text())
 S = R["systems"]
 ranked = [s for s in S if s["ranked"]]
+honorable = [s for s in S if s.get("listing") == "honorable_mention"]
 partial = [s for s in S if s["partial"]]
+HM = R.get("honorable_mentions") or {"heading": "Honorable mentions", "rule": "", "systems": {}}
 f1 = lambda v: "—" if v is None else f"{v:.1f}"
 pct = lambda v: "—" if v is None else f"{100 * v:.1f} %"
 sec = lambda v: "—" if v is None else f"{v:.2f} s"
@@ -31,10 +33,10 @@ def topic_table():
     ks = [t["key"] for t in TOP["topics"]]
     head = "| System | " + " | ".join(f'{t["label"]} ({TOP["n_items"][t["key"]]})' for t in TOP["topics"]) + " |"
     rows = []
-    for s in ranked + partial:
+    for s in ranked + honorable + partial:
         tp = TOP["systems"][s["key"]]["topics"]
         cell = lambda a: "—" if a["accuracy"] is None else f'{100 * a["accuracy"]:.1f} %' + ("" if a["attempted"] >= TOP["min_attempted"] else f' (n={a["attempted"]}, too few)')
-        rows.append(f"| {name(s)}{'' if s['ranked'] else ' (partial)'} | " + " | ".join(cell(tp[k]) for k in ks) + " |")
+        rows.append(f"| {name(s)}{'' if s['ranked'] else (' (partial)' if s['partial'] else ' (honorable mention)')} | " + " | ".join(cell(tp[k]) for k in ks) + " |")
     return ("\n## Accuracy by subject topic\n\n" + TOP["note"] + " How the topics were assigned: [`datasets/TOPICS.md`](datasets/TOPICS.md).\n\n"
             + head + "\n|---|" + "---|" * len(ks) + "\n" + "\n".join(rows) + "\n")
 
@@ -60,8 +62,25 @@ def table(rows, ranked_rows=True):
     for s in rows:
         a, sp = s["axes"], s["speed"]
         lat = sec(sp["p50_s_raw"]) + ("" if sp["p50_s_adjusted"] == sp["p50_s_raw"] else f" → {sec(sp['p50_s_adjusted'])}")
-        out.append(f"| {s['rank'] or ''} | {name(s)}{' (partial run)' if s['partial'] else ''} | **{f1(s['jevbench_score'])}** | {f1(a['intelligence'])} | "
+        tag = " (partial run)" if s["partial"] else ""
+        out.append(f"| {s['rank'] or ''} | {name(s)}{tag} | **{f1(s['jevbench_score'])}** | {f1(a['intelligence'])} | "
                    f"{f1(a['calibration']) if a['calibration'] is not None else 'none (label only)'} | {f1(a['speed'])} | {f1(a['cost'])} | {usd(s)} | {lat} | {s['endpoint_condition']} |")
+    return "\n".join(out)
+
+
+def honorable_section():
+    if not honorable:
+        return ""
+    out = [f"\n## {HM['heading']}\n", HM["rule"] + "\n", table(honorable), ""]
+    for row in honorable:
+        d = HM["systems"][row["key"]]
+        out += [f"### {name(row)} — runs on {d['runs_on']}\n",
+                d["why_not_ranked"] + "\n",
+                "**" + d["tier_measured"] + "**\n",
+                "*Price.* " + d["price_note"] + "\n",
+                "*Not a pass-through.* " + d["not_pass_through"] + "\n",
+                d["credit"] + " Sources, read " + d["sources_read"] + ": "
+                + ", ".join(f"<{u}>" for u in d["sources"]) + "\n"]
     return "\n".join(out)
 
 
@@ -90,10 +109,11 @@ v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; later revisions a
 {table(ranked)}
 
 {lead}
+""" + honorable_section() + """
 
 **Partial runs** — shown, not ranked (a tier attempted for fewer than 95 % of its decisions):
 
-{table(partial, False)}
+""" + table(partial, False) + f"""
 
 {footnotes}
 

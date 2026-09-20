@@ -7,10 +7,14 @@ Input : results/v1.2/wip/jevbench-v1.2-wip-results.json  (the v1.2-wip artifact:
 Output: results/v1.2/jevbench-v1.2-results.json, results/v1.2/jevbench-v1.2-per-task.json
 
 v1.2.1 (19 Sep 2026): rows measured after the v1.2 freeze on the same frozen items and code are added from
-results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); ProgramAsWeights (v1.2.4).
+results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); ProgramAsWeights (v1.2.5).
 
 v1.2.3 (20 Sep 2026): the cost of each row is recomputed with every decision counted exactly once, from
 results/v1.2/cost-correction-v1.2.3.json. No tariff, measurement, item or answer changed.
+
+v1.2.4 (20 Sep 2026): a service that runs another entrant's model is listed, but not ranked against the models
+(HONORABLE below). classifier.dev (fast tier), which runs Jev, leaves the ranking and becomes an honorable mention.
+No measurement, no axis and no score changed; only its rank is gone and every other row moves up one place.
 
 No measurement changes here. What changes: the score (4 axes, geometric mean), one open-alternative-jev row instead of two,
 and the Needle 3 options-as-tools price (it had none; now priced on Needle 3's per-token basis).
@@ -55,13 +59,21 @@ def cost_unit_example():
 COST_UNIT_EXAMPLE = cost_unit_example()
 # Which revision added which row. A row's revision is fixed; the artifact's revision is the newest one present.
 ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1.2.2", "openjev-verdict": "v1.2.2",
-            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.4"}
+            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.5"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 COST_FIX_REVISION = "v1.2.3"
+HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
-REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION], default="v1.2", key=_rk)
+REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
-    {"revision": "v1.2.4", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.5", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.4", "date": "2026-09-20", "note":
+     "classifier.dev (fast tier) leaves the ranking and becomes an honorable mention. It is not its own model: its own "
+     "pages say \"The fast tier is Jev, TypeSafe's decision model\" (https://classifier.dev/benchmark), so ranking it "
+     "against Jev ranks Jev's model against Jev's model at a different price. General rule from this revision on: a "
+     "service that runs another entrant's model is listed with all of its scores and axes, but is not ranked against "
+     "the models. Its numbers, axes, cost basis, radars and per-task outcomes are unchanged; only its rank is gone. "
+     "Every other row moves up one place; no score changed."},
     {"revision": "v1.2.3", "date": "2026-09-20", "note":
      "Cost correction. Every row's $ per 1,000 decisions is recomputed with each of the 534 decisions counted exactly "
      "once and priced exactly once. Three arithmetic mistakes were fixed: the 242-decision standard+judge run was "
@@ -79,7 +91,7 @@ REVISION_LOG = [e for e in [
      "through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), "
      "which is not yet charged (free preview). No other row changed."},
     {"revision": "v1.2", "date": "2026-09-19", "note": "Final JevBench Score: 4 axes, geometric mean."},
-] if e["revision"] in {"v1.2", COST_FIX_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
+] if e["revision"] in {"v1.2", COST_FIX_REVISION, HONORABLE_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
 ADDED_NAMES = {r: [ADDITIONS[k]["display"] for k in ADDITIONS if ADDED_IN[k] == r] for r in sorted({ADDED_IN[k] for k in ADDITIONS})}
 
 # open-alternative-jev: the ranked row is the run with the author's own yes/no option order ("A. yes, B. no", as his
@@ -90,6 +102,54 @@ OAJ_KEY, OAJ_NAME = "open-alternative-jev", "open-alternative-jev (Qwen3.5-4B, I
 # recomputed from the GPU round's runs/open-alternative-jev{,-yesfirst}--v1/results.jsonl on 19 Sep 2026.
 OAJ_FOOTNOTE = ("With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no "
                 "answer-judging items — small models are very sensitive to option order.")
+
+# v1.2.4 (Florian, 20 Sep 2026): a service that runs another entrant's model is listed, but not ranked against the
+# models. classifier.dev is the only such row today; it was #1 in v1.2.2 and v1.2.3. Everything in HONORABLE below is
+# either measured by us or quoted from the service's own pages (read 2026-09-20, saved with the job's evidence).
+HONORABLE_RULE = (
+    "A service that runs another entrant's model is listed with all of its scores and axes, but is not ranked against "
+    "the models. Ranking it would rank the same model twice, once at the model's own price and once at the service's. "
+    "The row keeps every number, axis, cost basis and per-task outcome; it carries no rank number.")
+HONORABLE_HEADING = "Honorable mentions — services built on another entrant's model"
+HONORABLE = {
+    "classifier-dev-fast": {
+        "runs_on_key": "jev-1.13.0",
+        "runs_on": "Jev (TypeSafe)",
+        "short_reason": "runs on Jev (TypeSafe) — listed, not ranked",
+        "why_not_ranked": (
+            "classifier.dev is not its own model. Its own pages say so: \"The fast tier is Jev, TypeSafe's decision "
+            "model\" (https://classifier.dev/benchmark, read 2026-09-20), and the API answers with "
+            "\"model\": \"jev-1.13.0\" — the same model version this benchmark measures directly as Jev 1.13.0. What "
+            "it adds is a price and, on its smart tier, an orchestration layer: \"The smart tier is Jev plus a "
+            "reasoning model re-asking only the answers Jev put under 0.7 confidence\" — escalation on low confidence "
+            "(a model cascade), not best-of-N, not self-consistency and not a committee. Its published escalation "
+            "model is gemini-3.8-flash. Ranking it against Jev would rank Jev's model against Jev's model, so from "
+            "v1.2.4 it is an honorable mention instead of #1."),
+        "tier_measured": (
+            "Only the fast tier was measured. The smart tier's escalation was never run, so nothing here scores it."),
+        "price_note": (
+            "$0.0033 per 1,000 decisions is an estimate from the published flat-rate plan at full use: classifier.dev "
+            "Pro is $20/month for 200,000 fast classifications a day (https://classifier.dev/pricing, read "
+            "2026-09-20), and one classification is one decision. Lower use costs more per decision — at a tenth of "
+            "that allowance it is $0.033 per 1,000 — and the free tier (20,000 fast classifications a day), which is "
+            "what our run used, costs nothing. Their pages do not say how the flat rate is funded, so we do not know "
+            "their cost basis; the only figure they publish is what the model costs a caller: \"The model behind the "
+            "fast tier costs about $0.005 per thousand classifications and needs a TypeSafe key\" "
+            "(https://classifier.dev/pricing) — for their short single-sentence inputs, not for JevBench's whole "
+            "questions."),
+        "not_pass_through": (
+            "On our set the fast tier scored 97.3 % on the judge tier against Jev's "
+            "94.5 %, and 70.5 % against 74.1 % on the hard tier. classifier.dev's own explanation for differences of "
+            "this kind is batching (\"The fast tier is Jev, packed a thousand to a request\"); on their own two test "
+            "sets they measured the same difference as noise."),
+        "credit": (
+            "A legitimate, well-documented product: free without an account, open source "
+            "(https://github.com/mrmps/classifier-dev), by Michael Ryaboy (@michael_chomsky)."),
+        "sources": ["https://classifier.dev", "https://classifier.dev/benchmark", "https://classifier.dev/pricing",
+                    "https://classifier.dev/about"],
+        "sources_read": "2026-09-20",
+    },
+}
 
 
 def endpoint_kind(cond):
@@ -159,9 +219,13 @@ def build_row(s):
         "cost": C.cost(s["cost"]["usd_per_1000"]),
     }
     row = {k: s.get(k) for k in ("key", "display", "class", "open", "author", "repo", "licence", "underlying", "has_distribution", "probability_source")}
+    # Three ways to be listed, exactly one per row: ranked, partial (a tier under 95 % coverage), honorable mention
+    # (a service running another entrant's model — v1.2.4). Only a ranked row carries a rank number.
+    listing = "partial" if s["partial"] else ("honorable_mention" if s["key"] in HONORABLE else "ranked")
     row.update({
         "endpoint_condition": s["endpoint_condition"], "endpoint_kind": kind,
-        "partial": s["partial"], "ranked": not s["partial"],
+        "partial": s["partial"], "ranked": listing == "ranked", "listing": listing,
+        "not_ranked_because": HONORABLE[s["key"]]["short_reason"] if listing == "honorable_mention" else None,
         "tiers": s["tiers"], "axes": axes, "jevbench_score": C.jevbench_score(axes),
         "speed": {
             "p50_s_raw": p50, "p95_s_raw": p95,
@@ -197,11 +261,12 @@ def main():
 
     rows = [build_row(s) for s in src.values()]
     rows[[r["key"] for r in rows].index(OAJ_KEY)]["run_key"] = OAJ_RANKED
-    ranked = sorted((r for r in rows if r["ranked"]), key=lambda r: -r["jevbench_score"])
-    partial = sorted((r for r in rows if not r["ranked"]), key=lambda r: -r["jevbench_score"])
+    by = lambda kind: sorted((r for r in rows if r["listing"] == kind), key=lambda r: -r["jevbench_score"])
+    ranked, honorable, partial = by("ranked"), by("honorable_mention"), by("partial")
+    assert set(HONORABLE) == {r["key"] for r in honorable}, set(HONORABLE) ^ {r["key"] for r in honorable}
     for i, r in enumerate(ranked, 1):
         r["rank"] = i
-    for r in partial:
+    for r in honorable + partial:
         r["rank"] = None
     for name in C.PRESETS:
         for i, r in enumerate(sorted(ranked, key=lambda r: -r["presets"][name]), 1):
@@ -251,7 +316,7 @@ def main():
                     "score = 100 - 30 log10(usd / 0.001), clipped to 0..100 "
                     "($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price "
                     "of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens.",
-            "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
+            "ranked": "Ranked: a system's own model, with every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank. " + HONORABLE_RULE,
             "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score.",
         },
         "hard_dataset": WIP.get("hard_dataset"),
@@ -262,7 +327,9 @@ def main():
             "An adapter mistake, not a model weakness, so the author-order run is the ranked row. Raw run files are kept.",
             "tiers": rev["tiers"], "footnote": footnote,
         }],
-        "systems": ranked + partial,
+        "honorable_mentions": {"heading": HONORABLE_HEADING, "rule": HONORABLE_RULE,
+                               "systems": {k: dict(v) for k, v in HONORABLE.items()}},
+        "systems": ranked + honorable + partial,
     }
     (V12 / "jevbench-v1.2-results.json").write_text(json.dumps(art, indent=1, ensure_ascii=False) + "\n")
 
@@ -276,11 +343,12 @@ def main():
     tasks.update(revision=REVISION, status="final")
     (V12 / "jevbench-v1.2-per-task.json").write_text(json.dumps(tasks, indent=1, ensure_ascii=False) + "\n")
 
-    for r in ranked + partial:
+    for r in ranked + honorable + partial:
         a = r["axes"]
         f = lambda v: "  -  " if v is None else f"{v:5.1f}"
         print(f"{str(r['rank'] or '-'):>2} {r['key'][:28]:28} {f(r['jevbench_score'])}  I {f(a['intelligence'])} C {f(a['calibration'])} "
-              f"S {f(a['speed'])} K {f(a['cost'])}  ${r['cost']['usd_per_1000']:.4f} {r['cost']['kind'][:4]} {'PARTIAL' if r['partial'] else ''}")
+              f"S {f(a['speed'])} K {f(a['cost'])}  ${r['cost']['usd_per_1000']:.4f} {r['cost']['kind'][:4]} "
+              f"{'' if r['ranked'] else ('PARTIAL' if r['partial'] else 'HONORABLE MENTION')}")
     print(footnote)
 
 

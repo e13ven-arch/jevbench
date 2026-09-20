@@ -36,10 +36,14 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking: **classifier.dev (fast tier) 84.8** · Jev 1.13.0 75.4 · SemIf (Qwen3.5-4B) 74.7 ·
-  djev (Maisa, diffusion-gemma) 74.3 · Laya (421M) 70.1 · open-alternative-jev (Qwen3.5-4B) 69.8. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
-  classifier.dev's fast tier *is* Jev behind its own API, so it matches Jev on Intelligence and leads on price (its flat plan at full use) and on
-  measured latency from our server; that, not a better model, is why it is #1.
+- Top of the ranking: **Jev 1.13.0 75.4** · SemIf (Qwen3.5-4B) 74.7 · djev (Maisa, diffusion-gemma) 74.3 ·
+  Laya (421M) 70.1 · open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.9. Qwen3.8 27B and Needle 3 (both
+  modes) are partial runs, shown without a rank.
+- **Honorable mention, not ranked: classifier.dev (fast tier) 84.8.** A service that runs another entrant's model is
+  listed with all of its scores and axes, but is not ranked against the models — its fast tier *is* Jev
+  ("The fast tier is Jev, TypeSafe's decision model", [classifier.dev/benchmark](https://classifier.dev/benchmark)), so
+  ranking it would rank Jev's model against Jev's model at a different price. See
+  [Honorable mentions](RESULTS-v1.2.md#honorable-mentions--services-built-on-another-entrants-model).
 - Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py); the final artifact is rebuilt from the frozen measurements by
   [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py), charts by [`scripts/v1.2/charts.py`](scripts/v1.2/charts.py).
   Per-task outcomes (public items): [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
@@ -83,6 +87,20 @@ back unparseable were left unpriced although the provider billed them (9 DeepSee
 everywhere: the Cost column is dollars **per 1,000 decisions**, never per 1,000 tokens. Per-row figures and their derivation:
 [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json); check:
 [`tests/test_cost_correction.py`](tests/test_cost_correction.py).
+
+**v1.2.4 (tag `v1.2.4`): classifier.dev leaves the ranking and becomes an honorable mention.** New general rule: *a
+service that runs another entrant's model is listed, but not ranked against the models.* classifier.dev is not its own
+model — its own pages say "The fast tier is Jev, TypeSafe's decision model"
+([classifier.dev/benchmark](https://classifier.dev/benchmark), read 20 Sep 2026) and the API answers with
+`"model": "jev-1.13.0"` — so ranking it put the same model in the list twice, once at TypeSafe's per-token tariff and
+once at classifier.dev's flat plan. What it adds is that price and, on its **smart** tier (which we did not measure),
+an orchestration layer: "The smart tier is Jev plus a reasoning model re-asking only the answers Jev put under 0.7
+confidence" — escalation on low confidence, a model cascade, not best-of-N, self-consistency or a committee.
+Its row keeps every number, axis, cost basis, radar and per-task outcome and carries no rank; **Jev 1.13.0 is #1** and
+every other row moves up one place. No measurement and no score changed. The full note, with the price caveat and the
+one place where the fast tier measurably differs from Jev, is in
+[`RESULTS-v1.2.md`](RESULTS-v1.2.md#honorable-mentions--services-built-on-another-entrants-model); check:
+[`tests/test_honorable_mentions.py`](tests/test_honorable_mentions.py).
 
 ## v1.1.3: the GPU round
 
