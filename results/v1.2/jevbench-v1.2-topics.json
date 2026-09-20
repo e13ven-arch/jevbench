@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.5",
+ "revision": "v1.2.6",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -1248,6 +1248,54 @@
     }
    }
   },
+  "openjev-verdict-1.4": {
+   "display": "openJev Verdict 1.4",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 83,
+     "accuracy": 0.6434
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 31,
+     "accuracy": 0.5536
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 26,
+     "accuracy": 0.3881
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 33,
+     "accuracy": 0.5156
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 45,
+     "accuracy": 0.3782
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 62,
+     "accuracy": 0.7848
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 12,
+     "accuracy": 0.6
+    }
+   }
+  },
   "openjev-verdict": {
    "display": "openJev Verdict (heman10x, ModernBERT-base 151M)",
    "partial": false,
@@ -1293,6 +1341,102 @@
      "attempted": 20,
      "correct": 12,
      "accuracy": 0.6
+    }
+   }
+  },
+  "simplejev-qwen3.6-35b-a3b": {
+   "display": "SimpleJev Qwen3.6-35B-A3B",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 110,
+     "accuracy": 0.8527
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 49,
+     "accuracy": 0.875
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 48,
+     "accuracy": 0.7164
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 44,
+     "accuracy": 0.6875
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 99,
+     "accuracy": 0.8319
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 76,
+     "accuracy": 0.962
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
+    }
+   }
+  },
+  "simplejev-qwen3.8-27b": {
+   "display": "SimpleJev Qwen3.8-27B",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 104,
+     "accuracy": 0.8062
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 54,
+     "accuracy": 0.9643
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 57,
+     "accuracy": 0.8507
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 46,
+     "accuracy": 0.7188
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 108,
+     "accuracy": 0.9076
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 77,
+     "accuracy": 0.9747
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 20,
+     "accuracy": 1.0
     }
    }
   }

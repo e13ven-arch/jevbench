@@ -50,6 +50,10 @@ class TypeSafeAdapter:
         headers = {
             **({"Authorization": f"Bearer {key}"} if key else {}),
             "Content-Type": "application/json",
+            # Some public demo CDNs reject urllib's default Python user agent
+            # while accepting ordinary API clients. This identifies the
+            # benchmark harness without altering browser or network identity.
+            "User-Agent": "JevBench/1.2 (+https://github.com/fstandhartinger/jevbench)",
         }
         try:
             status, parsed, latency = http_post_json(
