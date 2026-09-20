@@ -52,7 +52,12 @@ def test_geometric_mean():
 
 
 def test_score_lab_reference_rows():
-    """Jev 1.13 and SemIf from Florian's Score Lab (19 Sep 2026): 75.3 and 74.6."""
+    """Jev 1.13 and SemIf as the Score Lab computed them on 19 Sep 2026: 75.3 and 74.6.
+
+    A fixed historical check of the formula, with the prices as published that day. The v1.2.3 cost correction
+    (20 Sep 2026) moved those two prices to $0.039914 and $0.022445, which lifts the scores to 75.4 and 74.7;
+    the live figures are checked against the artifact in tests/test_cost_correction.py.
+    """
     jev = dict(intelligence=intelligence({"easy": 1.0, "standard": 0.9895833333333334, "judge": 0.9452054794520548, "hard": 0.740909090909091}),
                calibration=82.6528888888889, speed=speed(0.6524335257709026, 0.7221905551850795, "api"), cost=cost(0.04061412193840432))
     semif = dict(intelligence=intelligence({"easy": 1.0, "standard": 0.9791666666666666, "judge": 0.952054794520548, "hard": 0.5954545454545455}),

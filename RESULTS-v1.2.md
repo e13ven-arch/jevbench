@@ -1,4 +1,4 @@
-# JevBench v1.2.2 — results
+# JevBench v1.2.3 — results
 
 **JevBench Score** = Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.
 
@@ -12,36 +12,36 @@ v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; later revisions a
 
 ## Ranking
 
-| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ / 1,000 | p50 raw → adjusted | Endpoint |
+| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ per 1,000 decisions | p50 raw → adjusted | Endpoint |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | classifier.dev (fast tier) | **84.8** | 90.1 | 77.9 | 87.6 | 84.3 | $0.0033 est. | 0.39 s | production API (classifier.dev, fast tier) |
-| 2 | Jev 1.13.0 | **75.3** | 90.4 | 82.7 | 83.3 | 51.7 | $0.0406 | 0.65 s | production API (api.typesafe.ai) |
-| 3 | SemIf (Qwen3.5-4B) | **74.6** | 85.9 | 72.6 | 83.7 | 59.2 | $0.0230 est. | 0.20 s → 0.55 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 2 | Jev 1.13.0 | **75.4** | 90.4 | 82.7 | 83.3 | 52.0 | $0.0399 | 0.65 s | production API (api.typesafe.ai) |
+| 3 | SemIf (Qwen3.5-4B) | **74.7** | 85.9 | 72.6 | 83.7 | 59.5 | $0.0224 est. | 0.20 s → 0.55 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
 | 4 | djev (Maisa, diffusion-gemma) | **74.3** | 88.4 | 65.4 | 91.4 | 57.6 | $0.0260 (announced price, free preview) | 0.24 s | production API (api.djev.dev, free preview) |
 | 5 | Laya (421M) | **70.1** | 63.2 | 62.5 | 71.1 | 86.2 | $0.0029 est. | 0.79 s → 1.72 s | our CPU (4 threads, Ryzen 5 3600) |
 | 6 | open-alternative-jev (Qwen3.5-4B, IkerMoel) | **69.8** | 75.6 | 63.2 | 83.5 | 59.6 | $0.0222 est. | 0.21 s → 0.56 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
-| 7 | system-one-open (Gemma 4 E2B LoRA on an L4) | **68.7** | 79.5 | 56.7 | 77.0 | 64.1 | $0.0157 est. | 0.65 s → 1.30 s | author's public demo endpoint (Modal, L4) — not a production service |
-| 8 | OpenJev razorback16 (DiffusionGemma 26B) | **67.6** | 86.0 | 64.8 | 83.2 | 45.2 | $0.0672 est. | 0.24 s → 0.63 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 7 | system-one-open (Gemma 4 E2B LoRA on an L4) | **68.9** | 79.5 | 56.7 | 77.0 | 64.8 | $0.0149 est. | 0.65 s → 1.30 s | author's public demo endpoint (Modal, L4) — not a production service |
+| 8 | OpenJev razorback16 (DiffusionGemma 26B) | **67.7** | 86.0 | 64.8 | 83.2 | 45.5 | $0.0656 est. | 0.24 s → 0.63 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
 | 9 | jeff (GLiFormer 400M) | **66.9** | 63.9 | 64.6 | 63.5 | 76.6 | $0.0060 est. | 0.94 s → 2.03 s | our CPU (4 threads, Ryzen 5 3600) |
-| 10 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **66.2** | 88.9 | 77.4 | 77.1 | 36.1 | $0.1346 est. | 0.68 s → 1.36 s | author's public demo endpoint (Modal) — not a production service |
-| 11 | openJev Verdict (151M) | **66.1** | 59.0 | 51.3 | 76.7 | 82.4 | $0.0039 est. | 0.28 s → 0.71 s | our CPU (4 threads, Ryzen 5 3600) |
-| 12 | GPT-5.6 Luna (low) | **66.0** | 96.8 | 89.8 | 77.5 | 28.2 | $0.2473 | 0.97 s | production API (OpenAI), reasoning effort low |
-| 13 | open-jev-deberta-v3-large (local CPU) | **64.4** | 53.6 | 66.4 | 66.0 | 73.3 | $0.0077 est. | 1.77 s → 3.69 s | our CPU (2 threads, Ryzen 5 3600) |
-| 14 | Bespoke Nimble 9B | **63.5** | 78.6 | 64.5 | 82.5 | 38.9 | $0.1085 est. | 0.19 s → 0.52 s | our RunPod GPU (A40 48 GB (EU-SE-1)), reached over the internet |
-| 15 | Gemini 3.1 Flash-Lite | **60.8** | 90.3 | 68.1 | 81.8 | 27.1 | $0.2682 | 0.76 s | production API (Google) |
-| 16 | DeepSeek V4.1 Flash | **58.1** | 96.1 | 96.7 | 71.6 | 17.1 | $0.5788 | 1.42 s | production API (DeepSeek) |
-| 17 | system-one (Qwen3-8B, Goedecke) | **56.5** | 80.1 | 36.8 | 84.4 | 41.2 | $0.0915 est. | 0.17 s → 0.48 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
-| 18 | GLiNER2 (gliner2.5-base) | **52.9** | 56.0 | 23.7 | 71.8 | 82.4 | $0.0039 est. | 0.31 s → 0.78 s | our CPU (4 threads, Ryzen 5 3600) |
+| 10 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **66.3** | 88.9 | 77.4 | 77.1 | 36.5 | $0.1313 est. | 0.68 s → 1.36 s | author's public demo endpoint (Modal) — not a production service |
+| 11 | openJev Verdict (151M) | **66.2** | 59.0 | 51.3 | 76.7 | 83.1 | $0.0037 est. | 0.28 s → 0.71 s | our CPU (4 threads, Ryzen 5 3600) |
+| 12 | GPT-5.6 Luna (low) | **66.2** | 96.8 | 89.8 | 77.5 | 28.5 | $0.2419 | 0.97 s | production API (OpenAI), reasoning effort low |
+| 13 | open-jev-deberta-v3-large (local CPU) | **64.6** | 53.6 | 66.4 | 66.0 | 74.0 | $0.0073 est. | 1.77 s → 3.69 s | our CPU (2 threads, Ryzen 5 3600) |
+| 14 | Bespoke Nimble 9B | **63.7** | 78.6 | 64.5 | 82.5 | 39.4 | $0.1049 est. | 0.19 s → 0.52 s | our RunPod GPU (A40 48 GB (EU-SE-1)), reached over the internet |
+| 15 | Gemini 3.1 Flash-Lite | **60.9** | 90.3 | 68.1 | 81.8 | 27.4 | $0.2638 | 0.76 s | production API (Google) |
+| 16 | DeepSeek V4.1 Flash | **57.8** | 96.1 | 96.7 | 71.6 | 16.8 | $0.5937 | 1.42 s | production API (DeepSeek) |
+| 17 | system-one (Qwen3-8B, Goedecke) | **56.6** | 80.1 | 36.8 | 84.4 | 41.5 | $0.0894 est. | 0.17 s → 0.48 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 18 | GLiNER2 (gliner2.5-base) | **53.0** | 56.0 | 23.7 | 71.8 | 83.1 | $0.0037 est. | 0.31 s → 0.78 s | our CPU (4 threads, Ryzen 5 3600) |
 
-classifier.dev (fast tier) is #1 with 84.8; Jev 1.13.0 is #2, 9.5 points behind (difference of the rounded scores). Jev 1.13.0 is #2 with 75.3.
+classifier.dev (fast tier) is #1 with 84.8; Jev 1.13.0 is #2, 9.4 points behind (difference of the rounded scores). Jev 1.13.0 is #2 with 75.4.
 
 **Partial runs** — shown, not ranked (a tier attempted for fewer than 95 % of its decisions):
 
-| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ / 1,000 | p50 raw → adjusted | Endpoint |
+| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ per 1,000 decisions | p50 raw → adjusted | Endpoint |
 |---|---|---|---|---|---|---|---|---|---|
-|  | Qwen3.8 27B (partial run) | **25.5** | 74.6 | 92.1 | 61.3 | 0.0 | $2.7110 est. | 5.75 s | Chutes shared inference (TEE) |
-|  | Needle 3, options as tools (partial run) | **19.1** | 39.5 | none (label only) | 52.8 | 63.7 | $0.0162 est. | 3.78 s → 7.71 s | our CPU (2 threads, Ryzen 5 3600) |
-|  | Needle 3 (partial run) | **16.7** | 22.4 | none (label only) | 59.9 | 58.1 | $0.0249 est. | 1.69 s → 3.52 s | our CPU (2 threads, Ryzen 5 3600) |
+|  | Qwen3.8 27B (partial run) | **25.5** | 74.6 | 92.1 | 61.3 | 0.0 | $2.6691 est. | 5.75 s | Chutes shared inference (TEE) |
+|  | Needle 3, options as tools (partial run) | **19.2** | 39.5 | none (label only) | 52.8 | 65.3 | $0.0144 est. | 3.78 s → 7.71 s | our CPU (2 threads, Ryzen 5 3600) |
+|  | Needle 3 (partial run) | **16.8** | 22.4 | none (label only) | 59.9 | 58.7 | $0.0238 est. | 1.69 s → 3.52 s | our CPU (2 threads, Ryzen 5 3600) |
 
 Footnote — classifier.dev (fast tier): Its own benchmark page says the fast tier is Jev. Free for us; the price is its published Pro plan ($20/month for 200,000 fast classifications a day) at full use, $0.0033 per 1,000 decisions.
 
@@ -66,7 +66,7 @@ files (`results/v1.2/wip/`, GPU round runs).
 | **Intelligence** | 100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 %. Accuracy = correct / all items; failed, timed-out or unparseable answers count as wrong. |
 | **Calibration** | Hard tier only, systems that return a probability distribution: mean of (a) 100 x (1 - ECE/0.5), ECE = top-label expected calibration error in 10 bins, and (b) probability fidelity = 100 x (1 - mean total-variation distance) between the returned distribution and the exact gold distribution on the 20 probability items. Label-only systems have none; it counts as 0 in the JevBench Score. |
 | **Speed** | Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo. Production APIs (Jev, djev, classifier.dev, OpenAI, Google, DeepSeek, Chutes) are not adjusted. |
-| **Cost** | Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens. |
+| **Cost** | US dollars per 1,000 DECISIONS — not per 1,000 tokens. One decision is one whole question: its state, its rubric and its options, which is hundreds to thousands of input tokens. Pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens. |
 | **JevBench Score** | exp(sum over the four axes of 0.25 x ln(max(axis, 1))) — the geometric mean of Intelligence, Calibration, Speed and Cost. A weak axis pulls the score down hard; a strong axis cannot buy it back. |
 
 ![The four axes](results/v1.2/charts/axes.png)
@@ -78,23 +78,23 @@ Other views reweight the same four axes and combine them the same way (geometric
 | System | JevBench Score (25:25:25:25) (25:25:25:25) | Balanced 33:33:33 (no calibration) (33:0:33:33) | Emphasis on Accuracy 60:20:20 (60:0:20:20) | Emphasis on Speed 20:60:20 (20:0:60:20) | Emphasis on Cost 20:20:60 (20:0:20:60) | Intelligence only (100:0:0:0) |
 |---|---|---|---|---|---|---|
 | classifier.dev (fast tier) | #1 84.8 | #1 87.3 | #1 88.4 | #1 87.4 | #1 86.1 | #5 90.1 |
-| Jev 1.13.0 | #2 75.3 | #5 73.0 | #3 79.5 | #4 77.0 | #11 63.6 | #3 90.4 |
-| SemIf (Qwen3.5-4B) | #3 74.6 | #3 75.2 | #4 79.3 | #3 78.5 | #8 68.3 | #9 85.9 |
+| Jev 1.13.0 | #2 75.4 | #5 73.1 | #3 79.6 | #4 77.0 | #11 63.8 | #3 90.4 |
+| SemIf (Qwen3.5-4B) | #3 74.7 | #3 75.3 | #4 79.4 | #3 78.6 | #8 68.5 | #9 85.9 |
 | djev (Maisa, diffusion-gemma) | #4 74.3 | #2 77.5 | #2 81.6 | #2 82.7 | #7 68.8 | #7 88.4 |
 | Laya (421M) | #5 70.1 | #6 72.9 | #13 68.9 | #10 72.2 | #2 78.0 | #15 63.2 |
 | open-alternative-jev (Qwen3.5-4B, IkerMoel) | #6 69.8 | #7 72.2 | #7 73.5 | #5 76.5 | #10 66.9 | #13 75.6 |
-| system-one-open (Gemma 4 E2B LoRA on an L4) | #7 68.7 | #4 73.2 | #5 75.7 | #6 74.7 | #6 69.4 | #11 79.5 |
-| OpenJev razorback16 (DiffusionGemma 26B) | #8 67.6 | #10 68.6 | #6 75.1 | #7 74.1 | #12 58.1 | #8 86.0 |
+| system-one-open (Gemma 4 E2B LoRA on an L4) | #7 68.9 | #4 73.5 | #5 75.8 | #6 74.9 | #6 69.9 | #11 79.5 |
+| OpenJev razorback16 (DiffusionGemma 26B) | #8 67.7 | #10 68.8 | #6 75.2 | #7 74.2 | #12 58.3 | #8 86.0 |
 | jeff (GLiFormer 400M) | #9 66.9 | #11 67.7 | #15 66.2 | #16 66.0 | #5 71.1 | #14 63.9 |
-| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #10 66.2 | #15 62.8 | #9 72.2 | #13 68.1 | #15 50.3 | #6 88.9 |
-| openJev Verdict (151M) | #11 66.1 | #8 71.9 | #14 66.4 | #8 73.8 | #3 75.9 | #16 59.0 |
-| GPT-5.6 Luna (low) | #12 66.0 | #16 59.6 | #8 72.4 | #15 66.2 | #16 44.2 | #1 96.8 |
-| open-jev-deberta-v3-large (local CPU) | #13 64.4 | #13 63.8 | #18 59.5 | #17 64.6 | #9 67.4 | #18 53.6 |
-| Bespoke Nimble 9B | #14 63.5 | #14 63.2 | #12 69.0 | #11 70.3 | #14 52.1 | #12 78.6 |
-| Gemini 3.1 Flash-Lite | #15 60.8 | #17 58.5 | #11 69.6 | #14 66.9 | #17 43.0 | #4 90.3 |
-| DeepSeek V4.1 Flash | #16 58.1 | #18 49.0 | #16 64.2 | #18 57.0 | #18 32.2 | #2 96.1 |
-| system-one (Qwen3-8B, Goedecke) | #17 56.5 | #12 65.3 | #10 70.8 | #9 72.3 | #13 54.3 | #10 80.1 |
-| GLiNER2 (gliner2.5-base) | #18 52.9 | #9 69.2 | #17 63.6 | #12 70.2 | #4 74.2 | #17 56.0 |
+| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #10 66.3 | #15 63.0 | #9 72.3 | #13 68.3 | #15 50.6 | #6 88.9 |
+| openJev Verdict (151M) | #11 66.2 | #8 72.1 | #14 66.5 | #8 73.9 | #3 76.3 | #16 59.0 |
+| GPT-5.6 Luna (low) | #12 66.2 | #16 59.8 | #8 72.5 | #15 66.4 | #16 44.5 | #1 96.8 |
+| open-jev-deberta-v3-large (local CPU) | #13 64.6 | #13 64.0 | #18 59.6 | #17 64.8 | #9 67.8 | #18 53.6 |
+| Bespoke Nimble 9B | #14 63.7 | #14 63.4 | #12 69.1 | #11 70.5 | #14 52.4 | #12 78.6 |
+| Gemini 3.1 Flash-Lite | #15 60.9 | #17 58.7 | #11 69.7 | #14 67.0 | #17 43.2 | #4 90.3 |
+| DeepSeek V4.1 Flash | #16 57.8 | #18 48.7 | #16 63.9 | #18 56.8 | #18 31.8 | #2 96.1 |
+| system-one (Qwen3-8B, Goedecke) | #17 56.6 | #12 65.4 | #10 70.9 | #9 72.4 | #13 54.5 | #10 80.1 |
+| GLiNER2 (gliner2.5-base) | #18 53.0 | #9 69.4 | #17 63.7 | #12 70.4 | #4 74.6 | #17 56.0 |
 
 ## Hard tier
 
@@ -132,27 +132,30 @@ Other views reweight the same four axes and combine them the same way (geometric
 
 ## Cost basis
 
+**The Cost column is US dollars per 1,000 DECISIONS, not per 1,000 tokens.** One decision is a whole question: its state,
+its rubric and its options — hundreds to thousands of input tokens. One decision is a whole question, not a token. Jev 1.13.0 reads 950 input tokens per decision on average over the 534 v1.2 decisions. At its public tariff of $0.042 per MILLION input tokens (output tokens are free, https://docs.typesafe.ai/models), 1,000 decisions therefore cost 950 x 1,000 x $0.042 / 1,000,000 = $0.0399. That is what the Cost column shows: $0.0399 per 1,000 decisions, not per 1,000 tokens.
+
 - **classifier.dev (fast tier)** — $0.0033 est.: ESTIMATE from the published paid plan (the free tier was used): classifier.dev Pro $20/month for 200,000 fast classifications a day (https://classifier.dev/pricing, read 2026-09-19) = $0.0033 per 1,000 decisions at full use; one decision = one classification. Lower use costs more per decision: at a tenth of that allowance it is $0.033 per 1,000, and the free tier (20,000 fast classifications a day, which is what this run used) costs nothing.
-- **Jev 1.13.0** — $0.0406: public tariff x measured tokens (https://docs.typesafe.ai/models (output tokens not billed)) | public tariff x measured tokens (hard-tier run)
-- **SemIf (Qwen3.5-4B)** — $0.0230 est.: ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter), as open-alternative-jev in v1.1.2) x 426 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1244 in / 0 out tokens per hard decision
+- **Jev 1.13.0** — $0.0399: public tariff x measured tokens (https://docs.typesafe.ai/models (output tokens not billed)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)
+- **SemIf (Qwen3.5-4B)** — $0.0224 est.: ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter), as open-alternative-jev in v1.1.2) x 396 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1244 in / 0 out tokens per hard decision
 - **djev (Maisa, diffusion-gemma)** — $0.0260 (announced price, free preview): ANNOUNCED PRICE (free preview): djev's docs state $0.035 per million input tokens, output tokens free (https://api.djev.dev/docs, 'Usage & credits'; prepaid billing not yet switched on, 19 Sep 2026, so nothing was charged) x measured input tokens (741 per decision on average over all 534 decisions)
 - **Laya (421M)** — $0.0029 est.: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 205 input and 0 output tokens per decision (input tokens measured (the system's own count))
 - **open-alternative-jev (Qwen3.5-4B, IkerMoel)** — $0.0222 est.: ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (as open-alternative-jev) x 383 input and 1 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1235 in / 1 out tokens per hard decision
-- **system-one-open (Gemma 4 E2B LoRA on an L4)** — $0.0157 est.: ESTIMATE: hosted-provider price, deepinfra google/gemma-4-E4B-it list price $0.02/M in, $0.1/M out (Gemma 4 E2B is not listed; the nearest larger sibling, Gemma 4 E4B, is listed only on DeepInfra) x 452 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: deepinfra google/gemma-4-E4B-it $0.02/M in, $0.1/M out x 1235 in / 2 out tokens per hard decision
-- **OpenJev razorback16 (DiffusionGemma 26B)** — $0.0672 est.: ESTIMATE: hosted-provider price, openrouter google/gemma-4-26b-a4b-it list price $0.09/M in, $0.3/M out (DiffusionGemma 26B-A4B is not listed; the same-size Gemma 4 26B-A4B MoE sibling is (size class moe_26B-A4B)) x 410 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter google/gemma-4-26b-a4b-it $0.09/M in, $0.3/M out x 1222 in / 0 out tokens per hard decision
+- **system-one-open (Gemma 4 E2B LoRA on an L4)** — $0.0149 est.: ESTIMATE: hosted-provider price, deepinfra google/gemma-4-E4B-it list price $0.02/M in, $0.1/M out (Gemma 4 E2B is not listed; the nearest larger sibling, Gemma 4 E4B, is listed only on DeepInfra) x 383 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra google/gemma-4-E4B-it $0.02/M in, $0.1/M out x 1235 in / 2 out tokens per hard decision
+- **OpenJev razorback16 (DiffusionGemma 26B)** — $0.0656 est.: ESTIMATE: hosted-provider price, openrouter google/gemma-4-26b-a4b-it list price $0.09/M in, $0.3/M out (DiffusionGemma 26B-A4B is not listed; the same-size Gemma 4 26B-A4B MoE sibling is (size class moe_26B-A4B)) x 380 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter google/gemma-4-26b-a4b-it $0.09/M in, $0.3/M out x 1222 in / 0 out tokens per hard decision
 - **jeff (GLiFormer 400M)** — $0.0060 est.: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 272 input and 0 output tokens per decision (input tokens measured (the system's own count))
-- **openjev-sglang (Qwen3.6-35B-A3B on SGLang)** — $0.1346 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights) x 667 input and 2 output tokens per decision | ESTIMATE: openrouter qwen/qwen3.6-35b-a3b $0.1/M in, $0.9/M out x 2272 in / 2 out tokens per hard decision
-- **openJev Verdict (151M)** — $0.0039 est.: ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts)
-- **GPT-5.6 Luna (low)** — $0.2473: public tariff x measured tokens (https://platform.openai.com/docs/pricing (standard tier, read 2026-09-19)) | public tariff x measured tokens (hard-tier run)
-- **open-jev-deberta-v3-large (local CPU)** — $0.0077 est.: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) $0.01/M in, $0.0/M out x 1235 in / 0 out tokens per hard decision
-- **Bespoke Nimble 9B** — $0.1085 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.5-9b list price $0.1/M in, $0.15/M out (a LoRA merge of Qwen3.5-9B; the base weights are listed on OpenRouter (size class dense_9B)) x 990 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter qwen/qwen3.5-9b $0.1/M in, $0.15/M out x 1215 in / 2 out tokens per hard decision
-- **Gemini 3.1 Flash-Lite** — $0.2682: public tariff x measured tokens (https://ai.google.dev/gemini-api/docs/pricing (paid tier, read 2026-09-19)) | public tariff x measured tokens (hard-tier run)
-- **DeepSeek V4.1 Flash** — $0.5788: public tariff x measured tokens (https://api-docs.deepseek.com/quick_start/pricing (cache-miss off-peak; the run is on a Saturday, off-peak all day)) | public tariff x measured tokens (hard-tier run)
-- **system-one (Qwen3-8B, Goedecke)** — $0.0915 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3-8b list price $0.117/M in, $0.455/M out (same weights, listed on OpenRouter) x 443 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter qwen/qwen3-8b $0.117/M in, $0.455/M out x 1258 in / 1 out tokens per hard decision
-- **GLiNER2 (gliner2.5-base)** — $0.0039 est.: ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts)
-- **Qwen3.8 27B** — $2.7110 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 445 input and 393 output tokens per decision | ESTIMATE: openrouter qwen/qwen3.8-27b $0.214/M in, $2.55/M out x 1592 in / 1833 out tokens per hard decision
-- **Needle 3, options as tools** — $0.0162 est.: ESTIMATE: same per-token price as Needle 3 (openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out) x 452 input and 20 output tokens per decision, over the 314 easy/standard/judge decisions it ran (no hard-tier run). The v1.2 score lab had no price for this row and scored it 100; fixed.
-- **Needle 3** — $0.0249 est.: ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (no generative model under 1B is listed; the smallest listed one (1B) errs high; about 20 generated tokens for one tool call) x 452 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out x 1235 in / 20 out tokens per hard decision
+- **openjev-sglang (Qwen3.6-35B-A3B on SGLang)** — $0.1313 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights) x 610 input and 2 output tokens per decision [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.6-35b-a3b $0.1/M in, $0.9/M out x 2272 in / 2 out tokens per hard decision
+- **openJev Verdict (151M)** — $0.0037 est.: ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]
+- **GPT-5.6 Luna (low)** — $0.2419: public tariff x measured tokens (https://platform.openai.com/docs/pricing (standard tier, read 2026-09-19)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)
+- **open-jev-deberta-v3-large (local CPU)** — $0.0073 est.: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) $0.01/M in, $0.0/M out x 1235 in / 0 out tokens per hard decision
+- **Bespoke Nimble 9B** — $0.1049 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.5-9b list price $0.1/M in, $0.15/M out (a LoRA merge of Qwen3.5-9B; the base weights are listed on OpenRouter (size class dense_9B)) x 930 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.5-9b $0.1/M in, $0.15/M out x 1215 in / 2 out tokens per hard decision
+- **Gemini 3.1 Flash-Lite** — $0.2638: public tariff x measured tokens (https://ai.google.dev/gemini-api/docs/pricing (paid tier, read 2026-09-19)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)
+- **DeepSeek V4.1 Flash** — $0.5937: public tariff x measured tokens (https://api-docs.deepseek.com/quick_start/pricing (cache-miss off-peak; the run is on a Saturday, off-peak all day)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)
+- **system-one (Qwen3-8B, Goedecke)** — $0.0894 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3-8b list price $0.117/M in, $0.455/M out (same weights, listed on OpenRouter) x 412 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3-8b $0.117/M in, $0.455/M out x 1258 in / 1 out tokens per hard decision
+- **GLiNER2 (gliner2.5-base)** — $0.0037 est.: ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]
+- **Qwen3.8 27B** — $2.6691 est.: ESTIMATE: hosted-provider price, openrouter qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 416 input and 393 output tokens per decision [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.8-27b $0.214/M in, $2.55/M out x 1592 in / 1833 out tokens per hard decision
+- **Needle 3, options as tools** — $0.0144 est.: ESTIMATE: same per-token price as Needle 3 (openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out) x 383 input and 20 output tokens per decision, over the 314 easy/standard/judge decisions it ran (no hard-tier run). The v1.2 score lab had no price for this row and scored it 100; fixed. [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]
+- **Needle 3** — $0.0238 est.: ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (no generative model under 1B is listed; the smallest listed one (1B) errs high; about 20 generated tokens for one tool call) x 383 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out x 1235 in / 20 out tokens per hard decision
 
 ## Accuracy by subject topic
 
@@ -191,6 +194,7 @@ Accuracy per subject topic over all four tiers (easy, standard, judge, hard): co
 
 ## Revision log
 
+- **v1.2.3** (2026-09-20): Cost correction. Every row's $ per 1,000 decisions is recomputed with each of the 534 decisions counted exactly once and priced exactly once. Three arithmetic mistakes were fixed: the 242-decision standard+judge run was averaged twice in the v1.1-tier price (556 rows instead of 314); rows priced from the gemini-3.1-flash-lite token counts used that run's standard+judge-only average (452 input tokens per decision) for all 314 v1.1 decisions instead of its average over all 314 (383); and requests whose answer came back unparseable were left unpriced although they were billed (9 DeepSeek V4.1 Flash decisions). The first two made the affected rows look 1.5-11 % more expensive than they are; the third made DeepSeek look 2.6 % cheaper. No tariff, no measurement, no item and no answer changed, and no rank changed. Details: results/v1.2/cost-correction-v1.2.3.json.
 - **v1.2.2** (2026-09-19): Added five systems requested by readers: Laya, jeff, GLiNER2, openJev Verdict and classifier.dev (fast tier). Full v1.2 set each (534 decisions incl. held-out), scored with the unchanged v1.2 rules. Local systems ran on our CPU (4 threads) with the usual self-hosted latency adjustment; classifier.dev is a production API. Mappings were fixed before the runs (docs/v1.2-additions.md). No other row changed.
 - **v1.2.1** (2026-09-19): Added djev (Maisa, diffusion-gemma): full v1.2 set (534 decisions incl. held-out) through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), which is not yet charged (free preview). No other row changed.
 - **v1.2** (2026-09-19): Final JevBench Score: 4 axes, geometric mean.
@@ -203,3 +207,37 @@ Accuracy per subject topic over all four tiers (easy, standard, judge, hard): co
 - One open-alternative-jev row (author's option order), named plainly; the reversed-order run is a footnote.
 - Needle 3 options-as-tools priced on Needle 3's per-token basis ($0.0162 est.; it had no price).
 - Qwen3.8 27B on Chutes is treated as a production API (no latency adjustment).
+
+## Cost correction in v1.2.3 (20 September 2026)
+
+Every price on this page was recomputed so that each of the 534 decisions is counted exactly once, and priced exactly
+once. No tariff, no measurement, no item, no answer and no rank changed. What was wrong:
+
+1. The v1.1 and v1.1.3 aggregations built their cost average from a row list that contained the 242-decision standard+judge run twice (once as the standard tier, once as the judge tier) and the 72 easy decisions once: 556 rows instead of 314. The standard and judge tiers were therefore over-weighted in the price, which made the affected rows look 1.5-3.3 % more expensive than they are.
+2. Rows without their own token counts were priced at the input tokens of the gemini-3.1-flash-lite run measured on the 242 standard+judge decisions only (452 per decision) and that figure was applied to all 314 v1.1 decisions, which excludes the shorter easy tier. Over all 314 decisions the same run averages 383.41 input tokens, which is the figure used from v1.2.3 on. This made the affected rows look 4-11 % more expensive.
+3. A metered row's price left out the requests whose answer came back unparseable. Those requests returned HTTP 200 with generated tokens and were billed, and JevBench already counts them as wrong answers, so from v1.2.3 they are priced too. Only DeepSeek V4.1 Flash had any (9 of its 314 v1.1 decisions); its price rises by 2.6 %.
+4. No tariff was wrong. The hard-tier costs, and classifier.dev's flat plan price, were already correct.
+
+Almost every affected row had been published as slightly **more** expensive than it is: those prices move down by 1.5 %
+to 11 % and their JevBench Scores up by at most 0.2 points. DeepSeek V4.1 Flash moves the other way (+2.6 %, score
+58.1 → 57.8) because its unparseable-but-billed requests are now priced. No rank changed. Row-by-row figures and
+their derivation: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json).
+
+| System | published before | corrected | change |
+|---|---|---|---|
+| Jev 1.13.0 | $0.0406 | $0.0399 | -1.72 % |
+| SemIf (Qwen3.5-4B) | $0.0230 | $0.0224 | -2.31 % |
+| system-one-open (Gemma 4 E2B LoRA on an L4) | $0.0157 | $0.0149 | -5.13 % |
+| OpenJev razorback16 (DiffusionGemma 26B) | $0.0672 | $0.0656 | -2.36 % |
+| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | $0.1346 | $0.1313 | -2.48 % |
+| openJev Verdict (151M) | $0.0039 | $0.0037 | -5.21 % |
+| GPT-5.6 Luna (low) | $0.2473 | $0.2419 | -2.17 % |
+| open-jev-deberta-v3-large (local CPU) | $0.0077 | $0.0073 | -5.20 % |
+| Bespoke Nimble 9B | $0.1085 | $0.1049 | -3.28 % |
+| Gemini 3.1 Flash-Lite | $0.2682 | $0.2638 | -1.65 % |
+| DeepSeek V4.1 Flash | $0.5788 | $0.5937 | +2.57 % |
+| system-one (Qwen3-8B, Goedecke) | $0.0915 | $0.0894 | -2.29 % |
+| GLiNER2 (gliner2.5-base) | $0.0039 | $0.0037 | -5.21 % |
+| Qwen3.8 27B | $2.7110 | $2.6691 | -1.55 % |
+| Needle 3, options as tools | $0.0162 | $0.0144 | -11.39 % |
+| Needle 3 | $0.0249 | $0.0238 | -4.36 % |

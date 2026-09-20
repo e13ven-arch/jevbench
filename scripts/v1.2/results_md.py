@@ -55,7 +55,7 @@ def usd(s):
 
 
 def table(rows, ranked_rows=True):
-    out = ["| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ / 1,000 | p50 raw → adjusted | Endpoint |",
+    out = ["| # | System | **JevBench Score** | Intelligence | Calibration | Speed | Cost | $ per 1,000 decisions | p50 raw → adjusted | Endpoint |",
            "|---|---|---|---|---|---|---|---|---|---|"]
     for s in rows:
         a, sp = s["axes"], s["speed"]
@@ -137,6 +137,9 @@ files (`results/v1.2/wip/`, GPU round runs).
 
 ## Cost basis
 
+**The Cost column is US dollars per 1,000 DECISIONS, not per 1,000 tokens.** One decision is a whole question: its state,
+its rubric and its options — hundreds to thousands of input tokens. """ + R["cost_unit"]["worked_example"] + """
+
 """ + "\n".join(f"- **{name(s)}** — {usd(s)}: {s['cost']['basis']}" for s in S) + """
 """ + topic_table() + LIMITS + """
 ## Revision log
@@ -151,6 +154,23 @@ files (`results/v1.2/wip/`, GPU round runs).
 - One open-alternative-jev row (author's option order), named plainly; the reversed-order run is a footnote.
 - Needle 3 options-as-tools priced on Needle 3's per-token basis ($0.0162 est.; it had no price).
 - Qwen3.8 27B on Chutes is treated as a production API (no latency adjustment).
+
+## Cost correction in v1.2.3 (20 September 2026)
+
+Every price on this page was recomputed so that each of the 534 decisions is counted exactly once, and priced exactly
+once. No tariff, no measurement, no item, no answer and no rank changed. What was wrong:
+
+""" + "\n".join(f"{i}. {w}" for i, w in enumerate(R["cost_correction"]["what_was_wrong"], 1)) + """
+
+Almost every affected row had been published as slightly **more** expensive than it is: those prices move down by 1.5 %
+to 11 % and their JevBench Scores up by at most 0.2 points. DeepSeek V4.1 Flash moves the other way (+2.6 %, score
+58.1 → 57.8) because its unparseable-but-billed requests are now priced. No rank changed. Row-by-row figures and
+their derivation: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json).
+
+| System | published before | corrected | change |
+|---|---|---|---|
+""" + "\n".join(f"| {name(s)} | ${R['cost_correction_table'][s['key']]['old']:.4f} | ${R['cost_correction_table'][s['key']]['new']:.4f} | "
+                 f"{R['cost_correction_table'][s['key']]['pct']:+.2f} % |" for s in S if not R['cost_correction_table'][s['key']]['unchanged']) + """
 """
 (ROOT / "RESULTS-v1.2.md").write_text(md)
 print("RESULTS-v1.2.md written")

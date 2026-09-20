@@ -103,8 +103,13 @@ def bars(fname, rows, value, label_fn, title, sub, foot, xmax=100):
     plt.close(fig)
 
 
+COST_EXAMPLE = ""
+
+
 def main():
     sys_ = RES["systems"]
+    global COST_EXAMPLE
+    COST_EXAMPLE = RES["cost_unit"]["short_note"]
     ranked = [s for s in sys_ if s["ranked"]]
     part = [s for s in sys_ if s["partial"]]
     n_hard = RES["tiers"]["hard"]
@@ -112,17 +117,19 @@ def main():
     ax4 = lambda s: s["axes"]
     f0 = lambda v: "–" if v is None else f"{v:.0f}"
     bars("main-score.png", ranked + part, lambda s: s["jevbench_score"],
-         lambda s, v: f"{v:.1f}   I {f0(ax4(s)['intelligence'])} · C {f0(ax4(s)['calibration'])} · S {f0(ax4(s)['speed'])} · K {f0(ax4(s)['cost'])}  ({cost(s)}/1k)",
+         lambda s, v: f"{v:.1f}   I {f0(ax4(s)['intelligence'])} · C {f0(ax4(s)['calibration'])} · S {f0(ax4(s)['speed'])} · K {f0(ax4(s)['cost'])}  ({cost(s)} / 1k decisions)",
          f"JevBench {RES['revision']} — JevBench Score",
          "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard. "
          f"{sum(RES['tiers'].values())} decisions incl. {n_hard} hard.",
+         "K = Cost. Prices are US$ per 1,000 DECISIONS — not per 1,000 tokens. One decision is a whole question: its state, its rubric and its options.\n"
+         + COST_EXAMPLE + "\n"
          "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption; raw measurements in the repo.\n"
          "est. = hosted-provider list price for the same size class, or a flat plan's price at full use; announced = provider's published price, not yet charged.")
     # four axes side by side, ranked systems only
     fig, axs = plt.subplots(1, 4, figsize=(16, 0.5 * len(ranked) + 2.6), facecolor=SURFACE, sharey=True)
     fig.subplots_adjust(left=0.2, right=0.99, wspace=0.08, top=1 - 1.05 / (0.5 * len(ranked) + 2.6), bottom=1.0 / (0.5 * len(ranked) + 2.6))
     ys = list(range(len(ranked)))[::-1]
-    for ax, (k, t) in zip(axs, [("intelligence", "Intelligence"), ("calibration", "Calibration"), ("speed", "Speed (adjusted)"), ("cost", "Cost")]):
+    for ax, (k, t) in zip(axs, [("intelligence", "Intelligence"), ("calibration", "Calibration"), ("speed", "Speed (adjusted)"), ("cost", "Cost ($ per 1,000 decisions)")]):
         frame(ax)
         for y, s in zip(ys, ranked):
             v = s["axes"][k] or 0
@@ -133,6 +140,7 @@ def main():
         ax.set_title(t, fontsize=11.5, color=INK, loc="left")
     axs[0].set_yticks(ys, [name(s) for s in ranked])
     stamp(fig, f"JevBench {RES['revision']} — the four axes", "Each 0–100. The JevBench Score is their geometric mean.",
+          "Cost is scored from US$ per 1,000 DECISIONS (a whole question each), never per 1,000 tokens. " + COST_EXAMPLE + "\n"
           "Speed: latency of self-hosted and demo endpoints adjusted ×2 (+0.15 s on our own servers) — an assumption, not a measurement.")
     legend(fig, {s["class"] for s in ranked})
     fig.savefig(OUT / "axes.png", dpi=150, facecolor=SURFACE)

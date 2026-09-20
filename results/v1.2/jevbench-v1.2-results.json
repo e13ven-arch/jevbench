@@ -1,7 +1,12 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.2",
+ "revision": "v1.2.3",
  "revision_log": [
+  {
+   "revision": "v1.2.3",
+   "date": "2026-09-20",
+   "note": "Cost correction. Every row's $ per 1,000 decisions is recomputed with each of the 534 decisions counted exactly once and priced exactly once. Three arithmetic mistakes were fixed: the 242-decision standard+judge run was averaged twice in the v1.1-tier price (556 rows instead of 314); rows priced from the gemini-3.1-flash-lite token counts used that run's standard+judge-only average (452 input tokens per decision) for all 314 v1.1 decisions instead of its average over all 314 (383); and requests whose answer came back unparseable were left unpriced although they were billed (9 DeepSeek V4.1 Flash decisions). The first two made the affected rows look 1.5-11 % more expensive than they are; the third made DeepSeek look 2.6 % cheaper. No tariff, no measurement, no item and no answer changed, and no rank changed. Details: results/v1.2/cost-correction-v1.2.3.json."
+  },
   {
    "revision": "v1.2.2",
    "date": "2026-09-19",
@@ -20,7 +25,7 @@
  ],
  "protocol": "jevbench::v1.2",
  "status": "final",
- "generated_utc": "2026-09-19T22:49:39+00:00",
+ "generated_utc": "2026-09-20T07:09:10+00:00",
  "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final; later additions measured on the same frozen items: v1.2.1: djev (Maisa, diffusion-gemma); v1.2.2: classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M)",
  "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced. v1.2.1: added djev (Maisa, diffusion-gemma). v1.2.2: added classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M).",
  "score_name": "JevBench Score",
@@ -83,13 +88,160 @@
  },
  "main": "JevBench Score (25:25:25:25)",
  "speed_note": "Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo.",
+ "cost_unit": {
+  "label": "$ per 1,000 decisions",
+  "not": "$ per 1,000 tokens",
+  "one_liner": "Dollars per 1,000 decisions, not per 1,000 tokens: one decision is a whole question — state, rubric and options.",
+  "worked_example": "One decision is a whole question, not a token. Jev 1.13.0 reads 950 input tokens per decision on average over the 534 v1.2 decisions. At its public tariff of $0.042 per MILLION input tokens (output tokens are free, https://docs.typesafe.ai/models), 1,000 decisions therefore cost 950 x 1,000 x $0.042 / 1,000,000 = $0.0399. That is what the Cost column shows: $0.0399 per 1,000 decisions, not per 1,000 tokens.",
+  "short_note": "One decision ≈ 950 input tokens on average; at Jev's $0.042 per million input tokens that is $0.0399 per 1,000 decisions.",
+  "mean_input_tokens_per_decision_jev": 950.3389513108614
+ },
+ "cost_correction": {
+  "revision": "v1.2.3",
+  "file": "results/v1.2/cost-correction-v1.2.3.json",
+  "what_was_wrong": [
+   "The v1.1 and v1.1.3 aggregations built their cost average from a row list that contained the 242-decision standard+judge run twice (once as the standard tier, once as the judge tier) and the 72 easy decisions once: 556 rows instead of 314. The standard and judge tiers were therefore over-weighted in the price, which made the affected rows look 1.5-3.3 % more expensive than they are.",
+   "Rows without their own token counts were priced at the input tokens of the gemini-3.1-flash-lite run measured on the 242 standard+judge decisions only (452 per decision) and that figure was applied to all 314 v1.1 decisions, which excludes the shorter easy tier. Over all 314 decisions the same run averages 383.41 input tokens, which is the figure used from v1.2.3 on. This made the affected rows look 4-11 % more expensive.",
+   "A metered row's price left out the requests whose answer came back unparseable. Those requests returned HTTP 200 with generated tokens and were billed, and JevBench already counts them as wrong answers, so from v1.2.3 they are priced too. Only DeepSeek V4.1 Flash had any (9 of its 314 v1.1 decisions); its price rises by 2.6 %.",
+   "No tariff was wrong. The hard-tier costs, and classifier.dev's flat plan price, were already correct."
+  ],
+  "rule": "usd_per_1000_v11_tiers = 1000 x (mean input tokens per decision x $/M in + output tokens charged x $/M out) / 1e6, averaged over all 314 v1.1 decisions (72 easy + 242 standard+judge), each decision counted exactly once. Metered APIs use the provider's own per-decision charge instead. usd_per_1000 = (v11 x 314 + hard x 220) / 534."
+ },
+ "cost_correction_table": {
+  "classifier-dev-fast": {
+   "old": 0.003333333333333333,
+   "new": 0.003333333333333333,
+   "pct": 0.0,
+   "unchanged": true
+  },
+  "jev-1.13.0": {
+   "old": 0.04061412193840432,
+   "new": 0.03991423595505617,
+   "pct": -1.7232576994021993,
+   "unchanged": false
+  },
+  "semif-qwen3.5-4b": {
+   "old": 0.022975040619190038,
+   "new": 0.02244460674157303,
+   "pct": -2.3087396727993554,
+   "unchanged": false
+  },
+  "djev": {
+   "old": 0.025951254681647943,
+   "new": 0.025951254681647943,
+   "pct": 0.0,
+   "unchanged": true
+  },
+  "laya": {
+   "old": 0.0028831273408239703,
+   "new": 0.0028831273408239703,
+   "pct": 0.0,
+   "unchanged": true
+  },
+  "open-alternative-jev": {
+   "old": 0.022171404494382024,
+   "new": 0.022171404494382024,
+   "pct": 0.0,
+   "unchanged": true
+  },
+  "system-one-open": {
+   "old": 0.015685659145076917,
+   "new": 0.014880936329588014,
+   "pct": -5.130309208213748,
+   "unchanged": false
+  },
+  "openjev-razorback16": {
+   "old": 0.0671907566081966,
+   "new": 0.06560455056179774,
+   "pct": -2.3607503866169424,
+   "unchanged": false
+  },
+  "jeff": {
+   "old": 0.006036722846441948,
+   "new": 0.006036722846441948,
+   "pct": 0.0,
+   "unchanged": true
+  },
+  "openjev-sglang": {
+   "old": 0.134615554522674,
+   "new": 0.13127546816479402,
+   "pct": -2.481203877013638,
+   "unchanged": false
+  },
+  "openjev-verdict": {
+   "old": 0.003872921348314607,
+   "new": 0.00367125468164794,
+   "pct": -5.20709429729129,
+   "unchanged": false
+  },
+  "gpt-5.6-luna": {
+   "old": 0.24728613154420276,
+   "new": 0.24191123595505612,
+   "pct": -2.173553185365702,
+   "unchanged": false
+  },
+  "open-jev-deberta-v3-large": {
+   "old": 0.007742829572538459,
+   "new": 0.007340468164794008,
+   "pct": -5.196568050154547,
+   "unchanged": false
+  },
+  "nimble-9b": {
+   "old": 0.10850016283992836,
+   "new": 0.10494152501680593,
+   "pct": -3.2798456057365897,
+   "unchanged": false
+  },
+  "gemini-3.1-flash-lite": {
+   "old": 0.26820170492819223,
+   "new": 0.26378698501872655,
+   "pct": -1.6460446851550288,
+   "unchanged": false
+  },
+  "deepseek-flash": {
+   "old": 0.5788175142273461,
+   "new": 0.593682584269663,
+   "pct": 2.5681790334489274,
+   "unchanged": false
+  },
+  "system-one-sg": {
+   "old": 0.09153429437798077,
+   "new": 0.08944116853932584,
+   "pct": -2.286712158408745,
+   "unchanged": false
+  },
+  "gliner2": {
+   "old": 0.003872921348314607,
+   "new": 0.00367125468164794,
+   "pct": -5.20709429729129,
+   "unchanged": false
+  },
+  "qwen3.8-27b": {
+   "old": 2.7110372815546095,
+   "new": 2.669088141927965,
+   "pct": -1.5473464681603164,
+   "unchanged": false
+  },
+  "needle-3-tools": {
+   "old": 0.016219537190082647,
+   "new": 0.014372006369426754,
+   "pct": -11.3907739721794,
+   "unchanged": false
+  },
+  "needle-3": {
+   "old": 0.02492563984585384,
+   "new": 0.023839264044943822,
+   "pct": -4.358467054921875,
+   "unchanged": false
+  }
+ },
  "scoring": {
   "jevbench_score": "exp(sum over the four axes of 0.25 x ln(max(axis, 1))) — the geometric mean of Intelligence, Calibration, Speed and Cost. A weak axis pulls the score down hard; a strong axis cannot buy it back.",
   "intelligence": "100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 %. Accuracy = correct / all items; failed, timed-out or unparseable answers count as wrong.",
   "hard_tier": "220 new decisions (111 public, 109 held out): long multi-condition policy documents (2-6k tokens), priority trade-offs, deliberately ambiguous cases with a 'no clear answer' label, traps, multi-hop lookups, date/number reasoning, adversarial distractors, subtle answer-judging, overlapping routing, and probability items with an exact gold distribution. Half written by Claude Opus 5, half by GPT-5.6 Sol; each item reviewed blind and then against its gold by the other model; one discussion round; frozen and hashed before any benchmarked system saw an item. No item was selected on any system's answers.",
   "calibration": "Hard tier only, systems that return a probability distribution: mean of (a) 100 x (1 - ECE/0.5), ECE = top-label expected calibration error in 10 bins, and (b) probability fidelity = 100 x (1 - mean total-variation distance) between the returned distribution and the exact gold distribution on the 20 probability items. Label-only systems have none; it counts as 0 in the JevBench Score.",
   "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load — an assumption, not a measurement; raw measurements are in the table and the repo. Production APIs (Jev, djev, classifier.dev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
-  "cost": "Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens.",
+  "cost": "US dollars per 1,000 DECISIONS — not per 1,000 tokens. One decision is one whole question: its state, its rubric and its options, which is hundreds to thousands of input tokens. Pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 ($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens.",
   "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
   "presets": "Other views reweight the same four axes and combine them the same way (geometric mean). They are not the JevBench Score."
  },
@@ -372,9 +524,9 @@
     "intelligence": 90.4013594852636,
     "calibration": 82.6528888888889,
     "speed": 83.26811926100174,
-    "cost": 51.7396879482021
+    "cost": 51.96616538951724
    },
-   "jevbench_score": 75.32408936881852,
+   "jevbench_score": 75.40638246358375,
    "speed": {
     "p50_s_raw": 0.6524335257709026,
     "p95_s_raw": 0.7221905551850795,
@@ -389,9 +541,9 @@
    },
    "cost": {
     "kind": "measured",
-    "usd_per_1000": 0.04061412193840432,
-    "basis": "public tariff x measured tokens (https://docs.typesafe.ai/models (output tokens not billed)) | public tariff x measured tokens (hard-tier run)",
-    "usd_per_1000_v11_tiers": 0.025888392086330935,
+    "usd_per_1000": 0.03991423595505617,
+    "basis": "public tariff x measured tokens (https://docs.typesafe.ai/models (output tokens not billed)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)",
+    "usd_per_1000_v11_tiers": 0.024698140127388538,
     "usd_per_1000_hard": 0.06163175454545452,
     "self_host_sensitivity": null
    },
@@ -481,11 +633,11 @@
     "charged_usd": 0.013558985999999993
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 75.32408936881852,
-    "Balanced 33:33:33 (no calibration)": 73.02852136414201,
-    "Emphasis on Accuracy 60:20:20": 79.53631926295024,
-    "Emphasis on Speed 20:60:20": 76.96388937219076,
-    "Emphasis on Cost 20:20:60": 63.62459435639222,
+    "JevBench Score (25:25:25:25)": 75.40638246358375,
+    "Balanced 33:33:33 (no calibration)": 73.13492091676584,
+    "Emphasis on Accuracy 60:20:20": 79.60582770455876,
+    "Emphasis on Speed 20:60:20": 77.03114971388078,
+    "Emphasis on Cost 20:20:60": 63.79154874036463,
     "Intelligence only": 90.40135948526363
    },
    "rank": 2,
@@ -525,9 +677,9 @@
     "intelligence": 85.93783727687837,
     "calibration": 72.60139737235289,
     "speed": 83.70422262345133,
-    "cost": 59.16231136364247
+    "cost": 59.46663998783557
    },
-   "jevbench_score": 74.55563524981045,
+   "jevbench_score": 74.65132867650296,
    "speed": {
     "p50_s_raw": 0.19796114787459373,
     "p95_s_raw": 0.3153164997696876,
@@ -542,9 +694,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.022975040619190038,
-    "basis": "ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter), as open-alternative-jev in v1.1.2) x 426 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1244 in / 0 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.012921852517985612,
+    "usd_per_1000": 0.02244460674157303,
+    "basis": "ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter), as open-alternative-jev in v1.1.2) x 396 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1244 in / 0 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.012019777070063693,
     "usd_per_1000_hard": 0.03732368181818181,
     "self_host_sensitivity": {
      "usd_per_1000": 0.0347231924417574,
@@ -643,11 +795,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 74.55563524981045,
-    "Balanced 33:33:33 (no calibration)": 75.21866826455926,
-    "Emphasis on Accuracy 60:20:20": 79.33579024666345,
-    "Emphasis on Speed 20:60:20": 78.50446006573023,
-    "Emphasis on Cost 20:20:60": 68.3303172520137,
+    "JevBench Score (25:25:25:25)": 74.65132867650296,
+    "Balanced 33:33:33 (no calibration)": 75.34742171482885,
+    "Emphasis on Accuracy 60:20:20": 79.41724286569098,
+    "Emphasis on Speed 20:60:20": 78.58505917311687,
+    "Emphasis on Cost 20:20:60": 68.54099389960113,
     "Intelligence only": 85.93783727687837
    },
    "rank": 3,
@@ -706,7 +858,7 @@
     "kind": "announced",
     "usd_per_1000": 0.025951254681647943,
     "basis": "ANNOUNCED PRICE (free preview): djev's docs state $0.035 per million input tokens, output tokens free (https://api.djev.dev/docs, 'Usage & credits'; prepaid billing not yet switched on, 19 Sep 2026, so nothing was charged) x measured input tokens (741 per decision on average over all 534 decisions)",
-    "usd_per_1000_v11_tiers": 0.01388441082802548,
+    "usd_per_1000_v11_tiers": 0.013884410828025478,
     "usd_per_1000_hard": 0.04317393181818183,
     "self_host_sensitivity": null
    },
@@ -1156,9 +1308,9 @@
     "intelligence": 79.52521793275218,
     "calibration": 56.699696211408835,
     "speed": 76.96012500732209,
-    "cost": 64.1349167978843
+    "cost": 64.82109224519658
    },
-   "jevbench_score": 68.68493237922856,
+   "jevbench_score": 68.86791381139408,
    "speed": {
     "p50_s_raw": 0.6517308317124844,
     "p95_s_raw": 0.7724301926791667,
@@ -1173,9 +1325,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.015685659145076917,
-    "basis": "ESTIMATE: hosted-provider price, deepinfra google/gemma-4-E4B-it list price $0.02/M in, $0.1/M out (Gemma 4 E2B is not listed; the nearest larger sibling, Gemma 4 E4B, is listed only on DeepInfra) x 452 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: deepinfra google/gemma-4-E4B-it $0.02/M in, $0.1/M out x 1235 in / 2 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.009236694214876034,
+    "usd_per_1000": 0.014880936329588014,
+    "basis": "ESTIMATE: hosted-provider price, deepinfra google/gemma-4-E4B-it list price $0.02/M in, $0.1/M out (Gemma 4 E2B is not listed; the nearest larger sibling, Gemma 4 E4B, is listed only on DeepInfra) x 383 input and 2 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra google/gemma-4-E4B-it $0.02/M in, $0.1/M out x 1235 in / 2 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.00786815286624204,
     "usd_per_1000_hard": 0.024890090909090907,
     "self_host_sensitivity": {
      "usd_per_1000": 0.06593618349183544,
@@ -1274,11 +1426,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 68.68493237922856,
-    "Balanced 33:33:33 (no calibration)": 73.21865093666031,
-    "Emphasis on Accuracy 60:20:20": 75.678929598647,
-    "Emphasis on Speed 20:60:20": 74.69290307278011,
-    "Emphasis on Cost 20:20:60": 69.44018159051123,
+    "JevBench Score (25:25:25:25)": 68.86791381139408,
+    "Balanced 33:33:33 (no calibration)": 73.47884577786428,
+    "Emphasis on Accuracy 60:20:20": 75.84017781665544,
+    "Emphasis on Speed 20:60:20": 74.8520503755002,
+    "Emphasis on Cost 20:20:60": 69.88499417255228,
     "Intelligence only": 79.52521793275217
    },
    "rank": 7,
@@ -1318,9 +1470,9 @@
     "intelligence": 85.97654628476548,
     "calibration": 64.76011611808524,
     "speed": 83.1778984786352,
-    "cost": 45.18071405399585
+    "cost": 45.49198106171689
    },
-   "jevbench_score": 67.63354664009132,
+   "jevbench_score": 67.74973515791666,
    "speed": {
     "p50_s_raw": 0.24127069488167763,
     "p95_s_raw": 0.3052692499011755,
@@ -1335,9 +1487,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.0671907566081966,
-    "basis": "ESTIMATE: hosted-provider price, openrouter google/gemma-4-26b-a4b-it list price $0.09/M in, $0.3/M out (DiffusionGemma 26B-A4B is not listed; the same-size Gemma 4 26B-A4B MoE sibling is (size class moe_26B-A4B)) x 410 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter google/gemma-4-26b-a4b-it $0.09/M in, $0.3/M out x 1222 in / 0 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.03718122302158273,
+    "usd_per_1000": 0.06560455056179774,
+    "basis": "ESTIMATE: hosted-provider price, openrouter google/gemma-4-26b-a4b-it list price $0.09/M in, $0.3/M out (DiffusionGemma 26B-A4B is not listed; the same-size Gemma 4 26B-A4B MoE sibling is (size class moe_26B-A4B)) x 380 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter google/gemma-4-26b-a4b-it $0.09/M in, $0.3/M out x 1222 in / 0 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.034483662420382165,
     "usd_per_1000_hard": 0.11002254545454546,
     "self_host_sensitivity": {
      "usd_per_1000": 0.042441862057452644,
@@ -1436,11 +1588,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 67.63354664009132,
-    "Balanced 33:33:33 (no calibration)": 68.61941476457532,
-    "Emphasis on Accuracy 60:20:20": 75.09658776310918,
-    "Emphasis on Speed 20:60:20": 74.1090734076208,
-    "Emphasis on Cost 20:20:60": 58.05631173255278,
+    "JevBench Score (25:25:25:25)": 67.74973515791666,
+    "Balanced 33:33:33 (no calibration)": 68.77663595395362,
+    "Emphasis on Accuracy 60:20:20": 75.19977754093541,
+    "Emphasis on Speed 20:60:20": 74.21090624780207,
+    "Emphasis on Cost 20:20:60": 58.29596524301672,
     "Intelligence only": 85.97654628476548
    },
    "rank": 8,
@@ -1633,9 +1785,9 @@
     "intelligence": 88.8999584889996,
     "calibration": 77.41176873901938,
     "speed": 77.059799513554,
-    "cost": 36.12714266404304
+    "cost": 36.45449272670061
    },
-   "jevbench_score": 66.15954494186164,
+   "jevbench_score": 66.30890721348011,
    "speed": {
     "p50_s_raw": 0.6776718497276306,
     "p95_s_raw": 0.7260066717863083,
@@ -1650,9 +1802,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.134615554522674,
-    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights) x 667 input and 2 output tokens per decision | ESTIMATE: openrouter qwen/qwen3.6-35b-a3b $0.1/M in, $0.9/M out x 2272 in / 2 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.06850989208633093,
+    "usd_per_1000": 0.13127546816479402,
+    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.6-35b-a3b list price $0.1/M in, $0.9/M out (same base weights) x 610 input and 2 output tokens per decision [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.6-35b-a3b $0.1/M in, $0.9/M out x 2272 in / 2 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.0628296178343949,
     "usd_per_1000_hard": 0.22896636363636363,
     "self_host_sensitivity": {
      "usd_per_1000": 0.13621106532407892,
@@ -1751,11 +1903,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 66.15954494186164,
-    "Balanced 33:33:33 (no calibration)": 62.78477598208737,
-    "Emphasis on Accuracy 60:20:20": 72.15613005677453,
-    "Emphasis on Speed 20:60:20": 68.14653199669524,
-    "Emphasis on Cost 20:20:60": 50.332216387316564,
+    "JevBench Score (25:25:25:25)": 66.30890721348011,
+    "Balanced 33:33:33 (no calibration)": 62.97383821585399,
+    "Emphasis on Accuracy 60:20:20": 72.28642082689332,
+    "Emphasis on Speed 20:60:20": 68.26958272194607,
+    "Emphasis on Cost 20:20:60": 50.60536040198783,
     "Intelligence only": 88.89995848899957
    },
    "rank": 10,
@@ -1795,9 +1947,9 @@
     "intelligence": 58.95359416078595,
     "calibration": 51.29640397786167,
     "speed": 76.68207818819491,
-    "cost": 82.35883967864214
+    "cost": 83.05556459946699
    },
-   "jevbench_score": 66.10743787007085,
+   "jevbench_score": 66.24680755315786,
    "speed": {
     "p50_s_raw": 0.27805980294942856,
     "p95_s_raw": 1.4451411496847864,
@@ -1812,9 +1964,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.003872921348314607,
-    "basis": "ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts)",
-    "usd_per_1000_v11_tiers": 0.0022600000000000003,
+    "usd_per_1000": 0.00367125468164794,
+    "basis": "ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]",
+    "usd_per_1000_v11_tiers": 0.0019170382165605096,
     "usd_per_1000_hard": 0.006175,
     "self_host_sensitivity": null
    },
@@ -1904,11 +2056,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 66.10743787007085,
-    "Balanced 33:33:33 (no calibration)": 71.94017010285269,
-    "Emphasis on Accuracy 60:20:20": 66.43347822615695,
-    "Emphasis on Speed 20:60:20": 73.80069062497014,
-    "Emphasis on Cost 20:20:60": 75.93936547244502,
+    "JevBench Score (25:25:25:25)": 66.24680755315786,
+    "Balanced 33:33:33 (no calibration)": 72.14246302344415,
+    "Emphasis on Accuracy 60:20:20": 66.54550026517092,
+    "Emphasis on Speed 20:60:20": 73.92513546912393,
+    "Emphasis on Cost 20:20:60": 76.32416702438564,
     "Intelligence only": 58.95359416078595
    },
    "rank": 11,
@@ -1948,9 +2100,9 @@
     "intelligence": 96.821398920714,
     "calibration": 89.79207658196586,
     "speed": 77.5464346646158,
-    "cost": 28.204007179931182
+    "cost": 28.490318789992514
    },
-   "jevbench_score": 66.03444089702963,
+   "jevbench_score": 66.20139303739391,
    "speed": {
     "p50_s_raw": 0.9680032916367054,
     "p95_s_raw": 1.8175220962613816,
@@ -1965,9 +2117,9 @@
    },
    "cost": {
     "kind": "measured",
-    "usd_per_1000": 0.24728613154420276,
-    "basis": "public tariff x measured tokens (https://platform.openai.com/docs/pricing (standard tier, read 2026-09-19)) | public tariff x measured tokens (hard-tier run)",
-    "usd_per_1000_v11_tiers": 0.16415539568345325,
+    "usd_per_1000": 0.24191123595505612,
+    "basis": "public tariff x measured tokens (https://platform.openai.com/docs/pricing (standard tier, read 2026-09-19)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)",
+    "usd_per_1000_v11_tiers": 0.15501464968152867,
     "usd_per_1000_hard": 0.3659363636363635,
     "self_host_sensitivity": null
    },
@@ -2057,11 +2209,11 @@
     "charged_usd": 0.08050599999999997
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 66.03444089702963,
-    "Balanced 33:33:33 (no calibration)": 59.60481371280372,
-    "Emphasis on Accuracy 60:20:20": 72.3697949787392,
-    "Emphasis on Speed 20:60:20": 66.22066459536643,
-    "Emphasis on Cost 20:20:60": 44.186858649444055,
+    "JevBench Score (25:25:25:25)": 66.20139303739391,
+    "Balanced 33:33:33 (no calibration)": 59.80582683903045,
+    "Emphasis on Accuracy 60:20:20": 72.51613365140075,
+    "Emphasis on Speed 20:60:20": 66.35456913610057,
+    "Emphasis on Cost 20:20:60": 44.45545124790049,
     "Intelligence only": 96.82139892071399
    },
    "rank": 12,
@@ -2101,9 +2253,9 @@
     "intelligence": 53.57632835201329,
     "calibration": 66.3822600310561,
     "speed": 65.97921316871283,
-    "cost": 73.3330089966802
+    "cost": 74.02828721517697
    },
-   "jevbench_score": 64.40697539318792,
+   "jevbench_score": 64.55909797869363,
    "speed": {
     "p50_s_raw": 1.767673410475254,
     "p95_s_raw": 3.349288306012749,
@@ -2118,9 +2270,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.007742829572538459,
-    "basis": "ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) $0.01/M in, $0.0/M out x 1235 in / 0 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.004518347107438017,
+    "usd_per_1000": 0.007340468164794008,
+    "basis": "ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) $0.01/M in, $0.0/M out x 1235 in / 0 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.003834076433121019,
     "usd_per_1000_hard": 0.012345045454545454,
     "self_host_sensitivity": {
      "usd_per_1000": 0.014168273865544099,
@@ -2219,11 +2371,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 64.40697539318792,
-    "Balanced 33:33:33 (no calibration)": 63.761696191352485,
-    "Emphasis on Accuracy 60:20:20": 59.47371892582944,
-    "Emphasis on Speed 20:60:20": 64.63961630365256,
-    "Emphasis on Cost 20:20:60": 67.43039738917257,
+    "JevBench Score (25:25:25:25)": 64.55909797869363,
+    "Balanced 33:33:33 (no calibration)": 63.96257319799084,
+    "Emphasis on Accuracy 60:20:20": 59.58606900563149,
+    "Emphasis on Speed 20:60:20": 64.76172513056397,
+    "Emphasis on Cost 20:20:60": 67.81326216982217,
     "Intelligence only": 53.57632835201329
    },
    "rank": 13,
@@ -2263,9 +2415,9 @@
     "intelligence": 78.56408260689082,
     "calibration": 64.51395363452104,
     "speed": 82.5436896273356,
-    "cost": 38.93708830042782
+    "cost": 39.371578866917346
    },
-   "jevbench_score": 63.530352163199524,
+   "jevbench_score": 63.70684569843692,
    "speed": {
     "p50_s_raw": 0.18520960584282875,
     "p95_s_raw": 0.4598693612962959,
@@ -2280,9 +2432,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.10850016283992836,
-    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.5-9b list price $0.1/M in, $0.15/M out (a LoRA merge of Qwen3.5-9B; the base weights are listed on OpenRouter (size class dense_9B)) x 990 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter qwen/qwen3.5-9b $0.1/M in, $0.15/M out x 1215 in / 2 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.09917246376811595,
+    "usd_per_1000": 0.10494152501680593,
+    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.5-9b list price $0.1/M in, $0.15/M out (a LoRA merge of Qwen3.5-9B; the base weights are listed on OpenRouter (size class dense_9B)) x 930 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.5-9b $0.1/M in, $0.15/M out x 1215 in / 2 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.09312051282051283,
     "usd_per_1000_hard": 0.12181333333333334,
     "self_host_sensitivity": {
      "usd_per_1000": 0.021747265140810084,
@@ -2381,11 +2533,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 63.530352163199524,
-    "Balanced 33:33:33 (no calibration)": 63.20582888464125,
-    "Emphasis on Accuracy 60:20:20": 68.9515282037455,
-    "Emphasis on Speed 20:60:20": 70.32792917035779,
-    "Emphasis on Cost 20:20:60": 52.071449531130746,
+    "JevBench Score (25:25:25:25)": 63.70684569843692,
+    "Balanced 33:33:33 (no calibration)": 63.44005985747849,
+    "Emphasis on Accuracy 60:20:20": 69.10472895272545,
+    "Emphasis on Speed 20:60:20": 70.48418809171586,
+    "Emphasis on Cost 20:20:60": 52.41930793467613,
     "Intelligence only": 78.56408260689082
    },
    "rank": 14,
@@ -2425,9 +2577,9 @@
     "intelligence": 90.29052511415526,
     "calibration": 68.08811278368097,
     "speed": 81.78762581772229,
-    "cost": 27.14615397142829
+    "cost": 27.362399077259013
    },
-   "jevbench_score": 60.78233030734062,
+   "jevbench_score": 60.903017744981085,
    "speed": {
     "p50_s_raw": 0.756230715662241,
     "p95_s_raw": 0.8761593606323003,
@@ -2442,9 +2594,9 @@
    },
    "cost": {
     "kind": "measured",
-    "usd_per_1000": 0.26820170492819223,
-    "basis": "public tariff x measured tokens (https://ai.google.dev/gemini-api/docs/pricing (paid tier, read 2026-09-19)) | public tariff x measured tokens (hard-tier run)",
-    "usd_per_1000_v11_tiers": 0.18556834532374103,
+    "usd_per_1000": 0.26378698501872655,
+    "basis": "public tariff x measured tokens (https://ai.google.dev/gemini-api/docs/pricing (paid tier, read 2026-09-19)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)",
+    "usd_per_1000_v11_tiers": 0.17806050955414016,
     "usd_per_1000_hard": 0.38614204545454534,
     "self_host_sensitivity": null
    },
@@ -2534,11 +2686,11 @@
     "charged_usd": 0.08495124999999998
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 60.78233030734062,
-    "Balanced 33:33:33 (no calibration)": 58.52562084452059,
-    "Emphasis on Accuracy 60:20:20": 69.60885485486321,
-    "Emphasis on Speed 20:60:20": 66.90871022390677,
-    "Emphasis on Cost 20:20:60": 43.041851112250264,
+    "JevBench Score (25:25:25:25)": 60.903017744981085,
+    "Balanced 33:33:33 (no calibration)": 58.6806142139355,
+    "Emphasis on Accuracy 60:20:20": 69.71940339819056,
+    "Emphasis on Speed 20:60:20": 67.01497056200006,
+    "Emphasis on Cost 20:20:60": 43.24724630191816,
     "Intelligence only": 90.29052511415529
    },
    "rank": 15,
@@ -2578,9 +2730,9 @@
     "intelligence": 96.0960806697108,
     "calibration": 96.66517503108454,
     "speed": 71.59823070734842,
-    "cost": 17.123750085891416
+    "cost": 16.793370728606376
    },
-   "jevbench_score": 58.092387016557666,
+   "jevbench_score": 57.810133285302385,
    "speed": {
     "p50_s_raw": 1.4163860343396664,
     "p95_s_raw": 4.886470635980367,
@@ -2595,9 +2747,9 @@
    },
    "cost": {
     "kind": "measured",
-    "usd_per_1000": 0.5788175142273461,
-    "basis": "public tariff x measured tokens (https://api-docs.deepseek.com/quick_start/pricing (cache-miss off-peak; the run is on a Saturday, off-peak all day)) | public tariff x measured tokens (hard-tier run)",
-    "usd_per_1000_v11_tiers": 0.2252337662337665,
+    "usd_per_1000": 0.593682584269663,
+    "basis": "public tariff x measured tokens (https://api-docs.deepseek.com/quick_start/pricing (cache-miss off-peak; the run is on a Saturday, off-peak all day)) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | public tariff x measured tokens (hard-tier run)",
+    "usd_per_1000_v11_tiers": 0.2505138535031847,
     "usd_per_1000_hard": 1.083477954545455,
     "self_host_sensitivity": null
    },
@@ -2687,11 +2839,11 @@
     "charged_usd": 0.23836515000000008
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 58.092387016557666,
-    "Balanced 33:33:33 (no calibration)": 49.023270619582924,
-    "Emphasis on Accuracy 60:20:20": 64.16875885728389,
-    "Emphasis on Speed 20:60:20": 57.04299049336464,
-    "Emphasis on Cost 20:20:60": 32.1870312466733,
+    "JevBench Score (25:25:25:25)": 57.810133285302385,
+    "Balanced 33:33:33 (no calibration)": 48.705941972227095,
+    "Emphasis on Accuracy 60:20:20": 63.919215814286204,
+    "Emphasis on Speed 20:60:20": 56.821158535214074,
+    "Emphasis on Cost 20:20:60": 31.812977507470656,
     "Intelligence only": 96.09608066971082
    },
    "rank": 16,
@@ -2731,9 +2883,9 @@
     "intelligence": 80.07363013698631,
     "calibration": 36.764309957143894,
     "speed": 84.3621367799104,
-    "cost": 41.15248486040298
+    "cost": 41.45387606228526
    },
-   "jevbench_score": 56.54118326474669,
+   "jevbench_score": 56.64442376483099,
    "speed": {
     "p50_s_raw": 0.1661309413611889,
     "p95_s_raw": 0.30472867079079147,
@@ -2748,9 +2900,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.09153429437798077,
-    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3-8b list price $0.117/M in, $0.455/M out (same weights, listed on OpenRouter) x 443 input and 1 output tokens per decision (input tokens measured) | ESTIMATE: openrouter qwen/qwen3-8b $0.117/M in, $0.455/M out x 1258 in / 1 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.0522559082733813,
+    "usd_per_1000": 0.08944116853932584,
+    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3-8b list price $0.117/M in, $0.455/M out (same weights, listed on OpenRouter) x 412 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3-8b $0.117/M in, $0.455/M out x 1258 in / 1 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.04869626114649681,
     "usd_per_1000_hard": 0.14759526363636366,
     "self_host_sensitivity": {
      "usd_per_1000": 0.030492280369226854,
@@ -2849,11 +3001,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 56.54118326474669,
-    "Balanced 33:33:33 (no calibration)": 65.26460555906071,
-    "Emphasis on Accuracy 60:20:20": 70.82758559931364,
-    "Emphasis on Speed 20:60:20": 72.32120590531974,
-    "Emphasis on Cost 20:20:60": 54.27065411483852,
+    "JevBench Score (25:25:25:25)": 56.64442376483099,
+    "Balanced 33:33:33 (no calibration)": 65.42354575815337,
+    "Emphasis on Accuracy 60:20:20": 70.93102795032887,
+    "Emphasis on Speed 20:60:20": 72.42682966058122,
+    "Emphasis on Cost 20:20:60": 54.50878535854715,
     "Intelligence only": 80.07363013698631
    },
    "rank": 17,
@@ -2893,9 +3045,9 @@
     "intelligence": 56.03618375536185,
     "calibration": 23.668537162731784,
     "speed": 71.82859826025441,
-    "cost": 82.35883967864214
+    "cost": 83.05556459946699
    },
-   "jevbench_score": 52.92512526887808,
+   "jevbench_score": 53.036703605200266,
    "speed": {
     "p50_s_raw": 0.31302378326654434,
     "p95_s_raw": 4.153845678269863,
@@ -2910,9 +3062,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.003872921348314607,
-    "basis": "ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts)",
-    "usd_per_1000_v11_tiers": 0.0022600000000000003,
+    "usd_per_1000": 0.00367125468164794,
+    "basis": "ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 383 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]",
+    "usd_per_1000_v11_tiers": 0.0019170382165605096,
     "usd_per_1000_hard": 0.006175,
     "self_host_sensitivity": null
    },
@@ -3002,11 +3154,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 52.92512526887808,
-    "Balanced 33:33:33 (no calibration)": 69.20838587710259,
-    "Emphasis on Accuracy 60:20:20": 63.60373985141421,
-    "Emphasis on Speed 20:60:20": 70.24480136619964,
-    "Emphasis on Cost 20:20:60": 74.19579968458429,
+    "JevBench Score (25:25:25:25)": 53.036703605200266,
+    "Balanced 33:33:33 (no calibration)": 69.40299712820872,
+    "Emphasis on Accuracy 60:20:20": 63.71099030430806,
+    "Emphasis on Speed 20:60:20": 70.36325016775695,
+    "Emphasis on Cost 20:20:60": 74.57176620324665,
     "Intelligence only": 56.03618375536186
    },
    "rank": 18,
@@ -3063,9 +3215,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 2.7110372815546095,
-    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 445 input and 393 output tokens per decision | ESTIMATE: openrouter qwen/qwen3.8-27b $0.214/M in, $2.55/M out x 1592 in / 1833 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 1.096335976699029,
+    "usd_per_1000": 2.669088141927965,
+    "basis": "ESTIMATE: hosted-provider price, openrouter qwen/qwen3.8-27b list price $0.214/M in, $2.55/M out (same weights; our run used a flat-rate Chutes subscription) x 416 input and 393 output tokens per decision [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter qwen/qwen3.8-27b $0.214/M in, $2.55/M out x 1592 in / 1833 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 1.0249957201365187,
     "usd_per_1000_hard": 5.0156564166666655,
     "self_host_sensitivity": {
      "usd_per_1000": 3.8023331395736286,
@@ -3200,9 +3352,9 @@
     "intelligence": 39.53196347031963,
     "calibration": null,
     "speed": 52.842525649949984,
-    "cost": 63.698846264524306
+    "cost": 65.27447796986436
    },
-   "jevbench_score": 19.09923092164542,
+   "jevbench_score": 19.216258835717465,
    "speed": {
     "p50_s_raw": 3.778900783509016,
     "p95_s_raw": 33.63718595951795,
@@ -3217,9 +3369,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.016219537190082647,
-    "basis": "ESTIMATE: same per-token price as Needle 3 (openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out) x 452 input and 20 output tokens per decision, over the 314 easy/standard/judge decisions it ran (no hard-tier run). The v1.2 score lab had no price for this row and scored it 100; fixed.",
-    "usd_per_1000_v11_tiers": 0.016219537190082647,
+    "usd_per_1000": 0.014372006369426754,
+    "basis": "ESTIMATE: same per-token price as Needle 3 (openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out) x 383 input and 20 output tokens per decision, over the 314 easy/standard/judge decisions it ran (no hard-tier run). The v1.2 score lab had no price for this row and scored it 100; fixed. [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json]",
+    "usd_per_1000_v11_tiers": 0.014372006369426754,
     "usd_per_1000_hard": null,
     "self_host_sensitivity": null
    },
@@ -3234,11 +3386,11 @@
    },
    "hard": null,
    "presets": {
-    "JevBench Score (25:25:25:25)": 19.09923092164542,
-    "Balanced 33:33:33 (no calibration)": 51.052988888118854,
-    "Emphasis on Accuracy 60:20:20": 46.0884452510143,
-    "Emphasis on Speed 20:60:20": 51.7614138502899,
-    "Emphasis on Cost 20:20:60": 55.77830725034074,
+    "JevBench Score (25:25:25:25)": 19.216258835717465,
+    "Balanced 33:33:33 (no calibration)": 51.47050782614955,
+    "Emphasis on Accuracy 60:20:20": 46.31422765366782,
+    "Emphasis on Speed 20:60:20": 52.01498752412964,
+    "Emphasis on Cost 20:20:60": 56.60208573101237,
     "Intelligence only": 39.53196347031963
    },
    "rank": null
@@ -3270,9 +3422,9 @@
     "intelligence": 22.417877404178775,
     "calibration": null,
     "speed": 59.92368509307548,
-    "cost": 58.10061053357013
+    "cost": 58.68121468207322
    },
-   "jevbench_score": 16.714501353540964,
+   "jevbench_score": 16.75610312223584,
    "speed": {
     "p50_s_raw": 1.6870602630078793,
     "p95_s_raw": 14.364453018829225,
@@ -3287,9 +3439,9 @@
    },
    "cost": {
     "kind": "estimate",
-    "usd_per_1000": 0.02492563984585384,
-    "basis": "ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (no generative model under 1B is listed; the smallest listed one (1B) errs high; about 20 generated tokens for one tool call) x 452 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) | ESTIMATE: openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out x 1235 in / 20 out tokens per hard decision",
-    "usd_per_1000_v11_tiers": 0.016219537190082647,
+    "usd_per_1000": 0.023839264044943822,
+    "basis": "ESTIMATE: hosted-provider price, openrouter meta-llama/llama-3.2-1b-instruct list price $0.027/M in, $0.201/M out (no generative model under 1B is listed; the smallest listed one (1B) errs high; about 20 generated tokens for one tool call) x 383 input and 20 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: openrouter meta-llama/llama-3.2-1b-instruct $0.027/M in, $0.201/M out x 1235 in / 20 out tokens per hard decision",
+    "usd_per_1000_v11_tiers": 0.014372006369426754,
     "usd_per_1000_hard": 0.03735162272727273,
     "self_host_sensitivity": {
      "usd_per_1000": 0.059578722823927475,
@@ -3388,11 +3540,11 @@
     "charged_usd": 0.0
    },
    "presets": {
-    "JevBench Score (25:25:25:25)": 16.714501353540964,
-    "Balanced 33:33:33 (no calibration)": 42.735740443830075,
-    "Emphasis on Accuracy 60:20:20": 33.01509381741361,
-    "Emphasis on Speed 20:60:20": 48.92311991955101,
-    "Emphasis on Cost 20:20:60": 48.32223557391566,
+    "JevBench Score (25:25:25:25)": 16.75610312223584,
+    "Balanced 33:33:33 (no calibration)": 42.87762278959467,
+    "Emphasis on Accuracy 60:20:20": 33.08081613848877,
+    "Emphasis on Speed 20:60:20": 49.02050995009685,
+    "Emphasis on Cost 20:20:60": 48.61139202261915,
     "Intelligence only": 22.41787740417878
    },
    "rank": null

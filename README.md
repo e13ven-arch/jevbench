@@ -8,7 +8,7 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.2.2: the JevBench Score (current)
+## v1.2.3: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
 interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
@@ -22,6 +22,10 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 | **Speed** | mean of score(p50), score(p95); score(s) = 100 - 20 log10(s / 0.1 s): 0.1 s = 100, each 10x slower -20 |
 | **Cost** | 100 - 30 log10($ per 1,000 decisions / $0.001): $0.001 = 100, each 10x more expensive -30 |
 
+> **The Cost column is US dollars per 1,000 DECISIONS, not per 1,000 tokens.** One decision is a whole question: its
+> state, its rubric and its options — hundreds to thousands of input tokens.
+> Jev 1.13.0 reads 950 input tokens per decision on average over the 534 v1.2 decisions. At its public tariff of $0.042 per MILLION input tokens (output tokens are free, https://docs.typesafe.ai/models), 1,000 decisions therefore cost 950 x 1,000 x $0.042 / 1,000,000 = $0.0399. That is what the Cost column shows: $0.0399 per 1,000 decisions, not per 1,000 tokens.
+
 > Latency of self-hosted and demo endpoints is adjusted ×2 (+0.15 s on our own servers) to approximate production load —
 > an assumption, not a measurement; raw measurements are in [`RESULTS-v1.2.md`](RESULTS-v1.2.md) and the artifact.
 > Why, and its limits: [Limits, stated plainly](#limits-stated-plainly).
@@ -32,7 +36,7 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking: **classifier.dev (fast tier) 84.8** · Jev 1.13.0 75.3 · SemIf (Qwen3.5-4B) 74.6 ·
+- Top of the ranking: **classifier.dev (fast tier) 84.8** · Jev 1.13.0 75.4 · SemIf (Qwen3.5-4B) 74.7 ·
   djev (Maisa, diffusion-gemma) 74.3 · Laya (421M) 70.1 · open-alternative-jev (Qwen3.5-4B) 69.8. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
   classifier.dev's fast tier *is* Jev behind its own API, so it matches Jev on Intelligence and leads on price (its flat plan at full use) and on
   measured latency from our server; that, not a better model, is why it is #1.
@@ -68,6 +72,17 @@ production API and carries none. Every mapping — above all GLiNER2's label sco
 [`results/v1.2/additions/`](results/v1.2/additions/). No other row changed.
 ProgramAsWeights was also requested and is prepared (`paw_local`), but its hosted compiler only keeps a program private for a signed-in
 account, and compiling 223 held-out rubrics into public programs would publish them; it is therefore not in this revision.
+
+**v1.2.3 (tag `v1.2.3`): cost correction.** Every row's price was recomputed so that each of the 534 decisions is counted once and
+priced once. Three arithmetic mistakes were fixed — the 242-decision standard+judge run was averaged twice in the v1.1-tier price
+(556 rows instead of 314); rows priced from the gemini-3.1-flash-lite token counts used that run's standard+judge-only average
+(452 input tokens per decision) for all 314 v1.1 decisions instead of its average over all 314 (383); and requests whose answer came
+back unparseable were left unpriced although the provider billed them (9 DeepSeek V4.1 Flash decisions).
+**No tariff was wrong**, no measurement, item or answer changed, and no rank changed. Fifteen rows become 1.5–11 % cheaper
+(JevBench Score up by at most 0.2 points); DeepSeek V4.1 Flash becomes 2.6 % more expensive. The correction also spells the unit out
+everywhere: the Cost column is dollars **per 1,000 decisions**, never per 1,000 tokens. Per-row figures and their derivation:
+[`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json); check:
+[`tests/test_cost_correction.py`](tests/test_cost_correction.py).
 
 ## v1.1.3: the GPU round
 

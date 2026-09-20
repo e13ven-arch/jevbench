@@ -7,7 +7,10 @@ Input : results/v1.2/wip/jevbench-v1.2-wip-results.json  (the v1.2-wip artifact:
 Output: results/v1.2/jevbench-v1.2-results.json, results/v1.2/jevbench-v1.2-per-task.json
 
 v1.2.1 (19 Sep 2026): rows measured after the v1.2 freeze on the same frozen items and code are added from
-results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); ProgramAsWeights (v1.2.3).
+results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); ProgramAsWeights (v1.2.4).
+
+v1.2.3 (20 Sep 2026): the cost of each row is recomputed with every decision counted exactly once, from
+results/v1.2/cost-correction-v1.2.3.json. No tariff, measurement, item or answer changed.
 
 No measurement changes here. What changes: the score (4 axes, geometric mean), one open-alternative-jev row instead of two,
 and the Needle 3 options-as-tools price (it had none; now priced on Needle 3's per-token basis).
@@ -15,6 +18,7 @@ and the Needle 3 options-as-tools price (it had none; now priced on Needle 3's p
 import copy
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -26,13 +30,47 @@ V12 = ROOT / "results/v1.2"
 WIP = json.loads((V12 / "wip/jevbench-v1.2-wip-results.json").read_text())
 WIP_TASKS = json.loads((V12 / "wip/jevbench-v1.2-wip-per-task.json").read_text())
 ADDITIONS = {p.stem: json.loads(p.read_text()) for p in sorted((V12 / "additions").glob("*.json")) if not p.stem.endswith("-per-task")}
+COST_FIX = json.loads((V12 / "cost-correction-v1.2.3.json").read_text())
+COST_FIX_SUFFIX = (" [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; "
+                   "see results/v1.2/cost-correction-v1.2.3.json]")
+
+
+def cost_unit_example():
+    """The worked example that makes the unit unmistakable, built from Jev's own numbers, never hand-written."""
+    fix = COST_FIX["systems"]["jev-1.13.0"]
+    n11, nh = COST_FIX["n_v11_decisions"], COST_FIX["n_hard_decisions"]
+    hard_in = next(s for s in WIP["systems"] if s["key"] == "jev-1.13.0")["hard"]["mean_input_tokens"]
+    mean_in = (fix["mean_input_tokens"] * n11 + hard_in * nh) / (n11 + nh)
+    p_in, usd = fix["price_in_per_m"], fix["usd_per_1000"]
+    long = (f"One decision is a whole question, not a token. Jev 1.13.0 reads {mean_in:.0f} input tokens per decision on average "
+            f"over the {n11 + nh} v1.2 decisions. At its public tariff of ${p_in:g} per MILLION input tokens "
+            f"(output tokens are free, https://docs.typesafe.ai/models), 1,000 decisions therefore cost "
+            f"{mean_in:.0f} x 1,000 x ${p_in:g} / 1,000,000 = ${usd:.4f}. "
+            f"That is what the Cost column shows: ${usd:.4f} per 1,000 decisions, not per 1,000 tokens.")
+    short = (f"One decision ≈ {mean_in:.0f} input tokens on average; at Jev's ${p_in:g} per million input tokens "
+             f"that is ${usd:.4f} per 1,000 decisions.")
+    return {"long": long, "short": short, "mean_input_tokens_per_decision": mean_in}
+
+
+COST_UNIT_EXAMPLE = cost_unit_example()
 # Which revision added which row. A row's revision is fixed; the artifact's revision is the newest one present.
 ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1.2.2", "openjev-verdict": "v1.2.2",
-            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.3"}
+            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.4"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
-REVISION = max((ADDED_IN[k] for k in ADDITIONS), default="v1.2", key=lambda r: [int(x) for x in r[1:].split(".")])
+COST_FIX_REVISION = "v1.2.3"
+_rk = lambda r: [int(x) for x in r[1:].split(".")]
+REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
-    {"revision": "v1.2.3", "date": "2026-09-20", "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.4", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.3", "date": "2026-09-20", "note":
+     "Cost correction. Every row's $ per 1,000 decisions is recomputed with each of the 534 decisions counted exactly "
+     "once and priced exactly once. Three arithmetic mistakes were fixed: the 242-decision standard+judge run was "
+     "averaged twice in the v1.1-tier price (556 rows instead of 314); rows priced from the gemini-3.1-flash-lite token "
+     "counts used that run's standard+judge-only average (452 input tokens per decision) for all 314 v1.1 decisions "
+     "instead of its average over all 314 (383); and requests whose answer came back unparseable were left unpriced "
+     "although they were billed (9 DeepSeek V4.1 Flash decisions). The first two made the affected rows look 1.5-11 % "
+     "more expensive than they are; the third made DeepSeek look 2.6 % cheaper. No tariff, no measurement, no item and "
+     "no answer changed, and no rank changed. Details: results/v1.2/cost-correction-v1.2.3.json."},
     {"revision": "v1.2.2", "date": "2026-09-19", "note": "Added five systems requested by readers: Laya, jeff, GLiNER2, openJev Verdict and "
      "classifier.dev (fast tier). Full v1.2 set each (534 decisions incl. held-out), scored with the unchanged v1.2 rules. Local systems ran "
      "on our CPU (4 threads) with the usual self-hosted latency adjustment; classifier.dev is a production API. Mappings were fixed before "
@@ -41,7 +79,7 @@ REVISION_LOG = [e for e in [
      "through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), "
      "which is not yet charged (free preview). No other row changed."},
     {"revision": "v1.2", "date": "2026-09-19", "note": "Final JevBench Score: 4 axes, geometric mean."},
-] if e["revision"] == "v1.2" or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
+] if e["revision"] in {"v1.2", COST_FIX_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
 ADDED_NAMES = {r: [ADDITIONS[k]["display"] for k in ADDITIONS if ADDED_IN[k] == r] for r in sorted({ADDED_IN[k] for k in ADDITIONS})}
 
 # open-alternative-jev: the ranked row is the run with the author's own yes/no option order ("A. yes, B. no", as his
@@ -77,6 +115,37 @@ def needle_tools_price(row, needle):
                         "x 452 input and 20 output tokens per decision, over the 314 easy/standard/judge decisions it ran (no hard-tier run). "
                         "The v1.2 score lab had no price for this row and scored it 100; fixed.")
     return row
+
+
+def apply_cost_correction(src):
+    """v1.2.3: replace every row's v1.1-tier price with the one that counts each of the 314 decisions once.
+
+    The corrected figures and their derivation (tariff, mean input tokens, output tokens charged, n) are in
+    results/v1.2/cost-correction-v1.2.3.json, which is data, not code: the raw runs it was derived from include
+    held-out items and stay out of the repo. Nothing but the price changes.
+    """
+    n11, nh = COST_FIX["n_v11_decisions"], COST_FIX["n_hard_decisions"]
+    assert set(COST_FIX["systems"]) == set(src), set(COST_FIX["systems"]) ^ set(src)
+    for key, fix in COST_FIX["systems"].items():
+        c = src[key]["cost"]
+        assert abs(c["usd_per_1000_v11_tiers"] - fix["usd_per_1000_v11_tiers_old"]) < 1e-12, key
+        assert abs(c["usd_per_1000"] - fix["usd_per_1000_old"]) < 1e-12, key
+        c["usd_per_1000_v11_tiers"] = fix["usd_per_1000_v11_tiers"]
+        c["usd_per_1000"] = (fix["usd_per_1000_v11_tiers"] * n11 + c["usd_per_1000_hard"] * nh) / (n11 + nh) \
+            if c["usd_per_1000_hard"] is not None else fix["usd_per_1000_v11_tiers"]
+        assert abs(c["usd_per_1000"] - fix["usd_per_1000"]) < 1e-12, (key, c["usd_per_1000"], fix["usd_per_1000"])
+        if fix["unchanged"]:
+            continue
+        # Keep the basis readable: correct the token figure it quotes, and say the price was corrected.
+        for field in ("basis_v11", "basis_final"):
+            b = c.get(field)
+            if not b:
+                continue
+            if "mean_input_tokens" in fix:
+                b = re.sub(r"x \d+ input and (\d+) output tokens per decision",
+                           lambda m: f"x {fix['mean_input_tokens']:.0f} input and {m.group(1)} output tokens per decision", b, count=1)
+            c[field] = b + COST_FIX_SUFFIX
+    return src
 
 
 def build_row(s):
@@ -124,6 +193,7 @@ def main():
     for k, row in ADDITIONS.items():
         assert k not in src, k
         src[k] = copy.deepcopy(row)
+    apply_cost_correction(src)
 
     rows = [build_row(s) for s in src.values()]
     rows[[r["key"] for r in rows].index(OAJ_KEY)]["run_key"] = OAJ_RANKED
@@ -151,6 +221,19 @@ def main():
         "tiers": WIP["tiers"], "tier_weights": C.TIER_WEIGHTS, "axis_weights": C.WEIGHTS,
         "presets": {k: dict(zip(C.AXES, v)) for k, v in C.PRESETS.items()}, "main": C.MAIN,
         "speed_note": C.SPEED_NOTE,
+        "cost_unit": {
+            "label": "$ per 1,000 decisions",
+            "not": "$ per 1,000 tokens",
+            "one_liner": "Dollars per 1,000 decisions, not per 1,000 tokens: one decision is a whole question — state, rubric and options.",
+            "worked_example": COST_UNIT_EXAMPLE["long"],
+            "short_note": COST_UNIT_EXAMPLE["short"],
+            "mean_input_tokens_per_decision_jev": COST_UNIT_EXAMPLE["mean_input_tokens_per_decision"],
+        },
+        "cost_correction": {"revision": COST_FIX_REVISION, "file": "results/v1.2/cost-correction-v1.2.3.json",
+                            "what_was_wrong": COST_FIX["what_was_wrong"], "rule": COST_FIX["rule"]},
+        "cost_correction_table": {k: {"old": f["usd_per_1000_old"], "new": f["usd_per_1000"],
+                                      "pct": f["delta_pct"], "unchanged": f["unchanged"]}
+                                  for k, f in COST_FIX["systems"].items()},
         "scoring": {
             "jevbench_score": "exp(sum over the four axes of 0.25 x ln(max(axis, 1))) — the geometric mean of Intelligence, Calibration, Speed and Cost. "
                               "A weak axis pulls the score down hard; a strong axis cannot buy it back.",
@@ -161,7 +244,9 @@ def main():
             "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), "
                      "clipped to 0..100 (0.1 s = 100, 1 s = 80, 10 s = 60). " + C.SPEED_NOTE +
                      " Production APIs (Jev, djev, classifier.dev, OpenAI, Google, DeepSeek, Chutes) are not adjusted.",
-            "cost": "Dollars per 1,000 decisions pooled over all 534 v1.2 decisions; score = 100 - 30 log10(usd / 0.001), clipped to 0..100 "
+            "cost": "US dollars per 1,000 DECISIONS — not per 1,000 tokens. One decision is one whole question: its state, its rubric "
+                    "and its options, which is hundreds to thousands of input tokens. Pooled over all 534 v1.2 decisions; "
+                    "score = 100 - 30 log10(usd / 0.001), clipped to 0..100 "
                     "($0.001 = 100, $0.01 = 70, $0.10 = 40, $1 = 10). Measured = public tariff x measured tokens. est. = hosted-provider list price "
                     "of the same weights or size class x tokens (for a flat-rate service, its published plan price at full use). announced = the provider's published price, not yet charged (free preview), x measured tokens.",
             "ranked": "Ranked: every tier attempted for >= 95 % of its decisions. Partial runs are shown below the ranking, marked, without a rank.",
