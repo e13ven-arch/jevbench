@@ -7,7 +7,7 @@ Input : results/v1.2/wip/jevbench-v1.2-wip-results.json  (the v1.2-wip artifact:
 Output: results/v1.2/jevbench-v1.2-results.json, results/v1.2/jevbench-v1.2-per-task.json
 
 v1.2.1 (19 Sep 2026): rows measured after the v1.2 freeze on the same frozen items and code are added from
-results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); ProgramAsWeights (v1.2.5).
+results/v1.2/additions/<key>.json (+ <key>-per-task.json); nothing else changes. Additions: djev (v1.2.1); Laya, jeff, GLiNER2, openJev Verdict, classifier.dev (v1.2.2); the four kev checkpoints (v1.2.5).
 
 v1.2.3 (20 Sep 2026): the cost of each row is recomputed with every decision counted exactly once, from
 results/v1.2/cost-correction-v1.2.3.json. No tariff, measurement, item or answer changed.
@@ -59,14 +59,16 @@ def cost_unit_example():
 COST_UNIT_EXAMPLE = cost_unit_example()
 # Which revision added which row. A row's revision is fixed; the artifact's revision is the newest one present.
 ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1.2.2", "openjev-verdict": "v1.2.2",
-            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.5"}
+            "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.6",
+            "kev-0.5b": "v1.2.5", "kev-0.6b": "v1.2.5", "kev-4b": "v1.2.5", "kev-8b": "v1.2.5"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 COST_FIX_REVISION = "v1.2.3"
 HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
-    {"revision": "v1.2.5", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.6", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.5", "date": "2026-09-20", "note": "Added kev 0.5B and the 0.6B, 4B and 8B research previews. Each ran the full frozen v1.2 set (534 decisions including held-out items) through kev's native TypeSafe-compatible endpoint on an RTX 3090. No other row changed."},
     {"revision": "v1.2.4", "date": "2026-09-20", "note":
      "classifier.dev (fast tier) leaves the ranking and becomes an honorable mention. It is not its own model: its own "
      "pages say \"The fast tier is Jev, TypeSafe's decision model\" (https://classifier.dev/benchmark), so ranking it "
@@ -185,7 +187,9 @@ def apply_cost_correction(src):
     held-out items and stay out of the repo. Nothing but the price changes.
     """
     n11, nh = COST_FIX["n_v11_decisions"], COST_FIX["n_hard_decisions"]
-    assert set(COST_FIX["systems"]) == set(src), set(COST_FIX["systems"]) ^ set(src)
+    # The frozen correction covers rows present in v1.2.3. Later additions are
+    # already aggregated with each decision counted exactly once.
+    assert set(COST_FIX["systems"]) <= set(src), set(COST_FIX["systems"]) - set(src)
     for key, fix in COST_FIX["systems"].items():
         c = src[key]["cost"]
         assert abs(c["usd_per_1000_v11_tiers"] - fix["usd_per_1000_v11_tiers_old"]) < 1e-12, key

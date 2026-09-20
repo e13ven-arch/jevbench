@@ -190,7 +190,7 @@ their derivation: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost
 | System | published before | corrected | change |
 |---|---|---|---|
 """ + "\n".join(f"| {name(s)} | ${R['cost_correction_table'][s['key']]['old']:.4f} | ${R['cost_correction_table'][s['key']]['new']:.4f} | "
-                 f"{R['cost_correction_table'][s['key']]['pct']:+.2f} % |" for s in S if not R['cost_correction_table'][s['key']]['unchanged']) + """
+    f"{R['cost_correction_table'][s['key']]['pct']:+.2f} % |" for s in S if s['key'] in R['cost_correction_table'] and not R['cost_correction_table'][s['key']]['unchanged']) + """
 """
 (ROOT / "RESULTS-v1.2.md").write_text(md)
 print("RESULTS-v1.2.md written")

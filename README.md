@@ -102,6 +102,8 @@ one place where the fast tier measurably differs from Jev, is in
 [`RESULTS-v1.2.md`](RESULTS-v1.2.md#honorable-mentions--services-built-on-another-entrants-model); check:
 [`tests/test_honorable_mentions.py`](tests/test_honorable_mentions.py).
 
+**v1.2.5 (tag `v1.2.5`): the kev family.** Added [kev](https://github.com/jaredpalmer/kev) 0.5B and its 0.6B, 4B and 8B research previews. Each ran all 534 frozen decisions through the author's native TypeSafe-compatible endpoint in BF16 on one RTX 3090, with zero failed requests. kev 0.6B enters highest at #9 with 66.7; 0.5B is #15 with 63.1, 4B #16 with 62.2, and 8B #18 with 58.3. The larger checkpoints improve Intelligence but lose points on calibration and estimated hosted cost. No earlier row changed. Full method: [`docs/v1.2-additions.md`](docs/v1.2-additions.md); rows: [`results/v1.2/additions/`](results/v1.2/additions/).
+
 ## v1.1.3: the GPU round
 
 **[Results -> `RESULTS-v1.1.3.md`](RESULTS-v1.1.3.md)** · artifact

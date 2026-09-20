@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.2",
+ "revision": "v1.2.5",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -1005,6 +1005,198 @@
      "attempted": 20,
      "correct": 10,
      "accuracy": 0.5
+    }
+   }
+  },
+  "kev-0.5b": {
+   "display": "kev 0.5B",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 93,
+     "accuracy": 0.7209
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 26,
+     "accuracy": 0.4643
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 25,
+     "accuracy": 0.3731
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 26,
+     "accuracy": 0.4062
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 52,
+     "accuracy": 0.437
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 60,
+     "accuracy": 0.7595
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 9,
+     "accuracy": 0.45
+    }
+   }
+  },
+  "kev-0.6b": {
+   "display": "kev 0.6B (research preview)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 102,
+     "accuracy": 0.7907
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 28,
+     "accuracy": 0.5
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 36,
+     "accuracy": 0.5373
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 31,
+     "accuracy": 0.4844
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 52,
+     "accuracy": 0.437
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 71,
+     "accuracy": 0.8987
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 15,
+     "accuracy": 0.75
+    }
+   }
+  },
+  "kev-4b": {
+   "display": "kev 4B (research preview)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 107,
+     "accuracy": 0.8295
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 35,
+     "accuracy": 0.625
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 34,
+     "accuracy": 0.5075
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 27,
+     "accuracy": 0.4219
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 87,
+     "accuracy": 0.7311
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 74,
+     "accuracy": 0.9367
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 14,
+     "accuracy": 0.7
+    }
+   }
+  },
+  "kev-8b": {
+   "display": "kev 8B (research preview)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 105,
+     "accuracy": 0.814
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 44,
+     "accuracy": 0.7857
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 39,
+     "accuracy": 0.5821
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 33,
+     "accuracy": 0.5156
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 89,
+     "accuracy": 0.7479
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 74,
+     "accuracy": 0.9367
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 13,
+     "accuracy": 0.65
     }
    }
   },
