@@ -25,7 +25,7 @@
  ],
  "protocol": "jevbench::v1.2",
  "status": "final",
- "generated_utc": "2026-09-20T07:13:48+00:00",
+ "generated_utc": "2026-09-20T07:55:24+00:00",
  "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final; later additions measured on the same frozen items: v1.2.1: djev (Maisa, diffusion-gemma); v1.2.2: classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M)",
  "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); Needle 3 options-as-tools priced. v1.2.1: added djev (Maisa, diffusion-gemma). v1.2.2: added classifier.dev (fast tier), GLiNER2 (Fastino, gliner2.5-base), jeff (Logan Markewich, GLiFormer 400M), Laya (Convai Innovations, ModernBERT-large 421M), openJev Verdict (heman10x, ModernBERT-base 151M).",
  "score_name": "JevBench Score",
@@ -105,7 +105,7 @@
    "A metered row's price left out the requests whose answer came back unparseable. Those requests returned HTTP 200 with generated tokens and were billed, and JevBench already counts them as wrong answers, so from v1.2.3 they are priced too. Only DeepSeek V4.1 Flash had any (9 of its 314 v1.1 decisions); its price rises by 2.6 %.",
    "No tariff was wrong. The hard-tier costs, and classifier.dev's flat plan price, were already correct."
   ],
-  "rule": "usd_per_1000_v11_tiers = 1000 x (mean input tokens per decision x $/M in + output tokens charged x $/M out) / 1e6, averaged over all 314 v1.1 decisions (72 easy + 242 standard+judge), each decision counted exactly once. Metered APIs use the provider's own per-decision charge instead. usd_per_1000 = (v11 x 314 + hard x 220) / 534."
+  "rule": "usd_per_1000_v11_tiers = 1000 x (mean input tokens per decision x $/M in + output tokens charged x $/M out) / 1e6, over all 314 v1.1 decisions (72 easy + 242 standard+judge), each decision counted exactly once and priced exactly once. A metered row uses the provider's own tariff and its own measured token counts, including the requests whose answer could not be parsed; an estimated row uses the reference tariff for its weights or size class and, when the run reports no usage, the input tokens of the gemini-3.1-flash-lite run on the same prompts over the same 314 decisions. usd_per_1000 = (v11 x 314 + hard x 220) / 534."
  },
  "cost_correction_table": {
   "classifier-dev-fast": {

@@ -7,7 +7,7 @@
   "A metered row's price left out the requests whose answer came back unparseable. Those requests returned HTTP 200 with generated tokens and were billed, and JevBench already counts them as wrong answers, so from v1.2.3 they are priced too. Only DeepSeek V4.1 Flash had any (9 of its 314 v1.1 decisions); its price rises by 2.6 %.",
   "No tariff was wrong. The hard-tier costs, and classifier.dev's flat plan price, were already correct."
  ],
- "rule": "usd_per_1000_v11_tiers = 1000 x (mean input tokens per decision x $/M in + output tokens charged x $/M out) / 1e6, averaged over all 314 v1.1 decisions (72 easy + 242 standard+judge), each decision counted exactly once. Metered APIs use the provider's own per-decision charge instead. usd_per_1000 = (v11 x 314 + hard x 220) / 534.",
+ "rule": "usd_per_1000_v11_tiers = 1000 x (mean input tokens per decision x $/M in + output tokens charged x $/M out) / 1e6, over all 314 v1.1 decisions (72 easy + 242 standard+judge), each decision counted exactly once and priced exactly once. A metered row uses the provider's own tariff and its own measured token counts, including the requests whose answer could not be parsed; an estimated row uses the reference tariff for its weights or size class and, when the run reports no usage, the input tokens of the gemini-3.1-flash-lite run on the same prompts over the same 314 decisions. usd_per_1000 = (v11 x 314 + hard x 220) / 534.",
  "n_v11_decisions": 314,
  "n_hard_decisions": 220,
  "gemini_fallback_input_tokens_per_decision": 383.4076433121019,
