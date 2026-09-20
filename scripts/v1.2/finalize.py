@@ -222,8 +222,10 @@ def main():
         "presets": {k: dict(zip(C.AXES, v)) for k, v in C.PRESETS.items()}, "main": C.MAIN,
         "speed_note": C.SPEED_NOTE,
         "cost_unit": {
-            "label": "$ per 1,000 decisions",
-            "not": "$ per 1,000 tokens",
+            # Key names avoid the artifact's forbidden-key list (no "label"): the page rejects anything that could
+            # carry item-level content, and this block is published straight into the browser bundle.
+            "unit": "$ per 1,000 decisions",
+            "not_unit": "$ per 1,000 tokens",
             "one_liner": "Dollars per 1,000 decisions, not per 1,000 tokens: one decision is a whole question — state, rubric and options.",
             "worked_example": COST_UNIT_EXAMPLE["long"],
             "short_note": COST_UNIT_EXAMPLE["short"],

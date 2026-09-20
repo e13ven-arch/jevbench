@@ -78,7 +78,12 @@ def test_jev_price_is_the_public_tariff_times_its_own_tokens():
 
 def test_the_unit_is_stated_as_decisions_everywhere_it_is_named():
     u = ART["cost_unit"]
-    assert u["label"] == "$ per 1,000 decisions" and u["not"] == "$ per 1,000 tokens"
+    assert u["unit"] == "$ per 1,000 decisions" and u["not_unit"] == "$ per 1,000 tokens"
+    forbidden = {"text", "prompt", "question", "questions", "state", "rubric", "instructions", "label", "labels", "gold",
+                 "expected", "prediction", "predictions", "predicted", "item", "items", "raw", "response", "responses",
+                 "reply", "replies", "answer", "answers", "completion", "messages", "content", "records"}
+    for block in (u, ART["cost_correction"], ART["cost_correction_table"]):
+        assert not (set(block) & forbidden), set(block) & forbidden  # the page rejects any of these anywhere
     for text in (u["one_liner"], u["worked_example"], u["short_note"], ART["scoring"]["cost"]):
         assert "decision" in text.lower()
     assert "not per 1,000 tokens" in ART["scoring"]["cost"] or "not per 1,000 tokens" in u["one_liner"]
