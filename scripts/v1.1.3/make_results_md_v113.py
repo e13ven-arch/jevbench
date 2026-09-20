@@ -37,7 +37,7 @@ L += ["# JevBench v1.1.3 - the GPU round", "",
       "serves it. Every v1.1.2 row is copied unchanged, so only the ranks move. The v1.1.2 numbers stay at tag `v1.1.2`.", "",
       "![Main Score](results/v1.1.3/charts/main-score.png)", "",
       "## Main Score (Balanced 33:33:33)", "",
-      "| # | System | Main | 60:20:20 | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 |",
+      "| # | System | Main | 60:20:20 | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 decisions |",
       "|---|---|---|---|---|---|---|---|---|---|---|---|"]
 for s in sorted(ranked, key=lambda s: s["rank_under"][H]):
     L.append(row(s["rank_under"][H], s))

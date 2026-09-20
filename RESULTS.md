@@ -1,3 +1,5 @@
+> **Unit note (added 20 Sep 2026).** The Cost column here is US dollars per 1,000 **decisions** — a whole question each (state, rubric, options) — never per 1,000 tokens. These are superseded numbers: v1.2.3 recomputed every price so each decision is counted once and priced once. Current results: [`RESULTS-v1.2.md`](RESULTS-v1.2.md), method and per-row figures: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json).
+
 > [!WARNING]
 > Superseded by **JevBench v1.2** — see [`RESULTS-v1.2.md`](RESULTS-v1.2.md). These results stay as published for their version.
 

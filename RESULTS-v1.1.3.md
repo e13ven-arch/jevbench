@@ -1,3 +1,5 @@
+> **Unit note (added 20 Sep 2026).** The Cost column here is US dollars per 1,000 **decisions** — a whole question each (state, rubric, options) — never per 1,000 tokens. These are superseded numbers: v1.2.3 recomputed every price so each decision is counted once and priced once. Current results: [`RESULTS-v1.2.md`](RESULTS-v1.2.md), method and per-row figures: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json).
+
 > [!WARNING]
 > Superseded by **JevBench v1.2** — see [`RESULTS-v1.2.md`](RESULTS-v1.2.md). These results stay as published for their version.
 
@@ -11,7 +13,7 @@ Generated from `results/v1.1.3/jevbench-v1.1.3-results.json` (2026-09-19 12:26 U
 
 ## Main Score (Balanced 33:33:33)
 
-| # | System | Main | 60:20:20 | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 |
+| # | System | Main | 60:20:20 | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 decisions |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) **(GPU)** | **83.3** | 89.1 | 97.7 | 80.1 | 72.2 | 100.0 % | 97.9 % | 95.2 % | 0.20 s / 0.32 s | ~$0.0129 |
 | 2 | open-alternative-jev, author's yes/no order* (post-hoc adapter mode) **(GPU)** | **79.7** | 82.3 | 86.3 | 79.4 | 73.3 | 100.0 % | 84.4 % | 74.7 % | 0.21 s / 0.32 s | ~$0.0117 |

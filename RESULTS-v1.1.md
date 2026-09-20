@@ -1,3 +1,5 @@
+> **Unit note (added 20 Sep 2026).** The Cost column here is US dollars per 1,000 **decisions** — a whole question each (state, rubric, options) — never per 1,000 tokens. These are superseded numbers: v1.2.3 recomputed every price so each decision is counted once and priced once. Current results: [`RESULTS-v1.2.md`](RESULTS-v1.2.md), method and per-row figures: [`results/v1.2/cost-correction-v1.2.3.json`](results/v1.2/cost-correction-v1.2.3.json).
+
 > [!WARNING]
 > Superseded by **JevBench v1.2** — see [`RESULTS-v1.2.md`](RESULTS-v1.2.md). These results stay as published for their version.
 
@@ -13,7 +15,7 @@ Generated from `results/v1.1/jevbench-v1.1-results.json` (2026-09-19T09:19 UTC).
 
 **JevBench Main Composite Score - Balanced 33:33:33 = (Capability + Speed + Cost) / 3**, each sub-score on 0-100 (since v1.1.2, 19 Sep 2026). The previous default, 0.6 x Capability + 0.2 x Speed + 0.2 x Cost, is kept as the named weighting *Emphasis on Accuracy (60:20:20)*; *Emphasis on Speed (20:60:20)* and *Emphasis on Cost (20:20:60)* are the other presets. How the ranking moves under each is in the sensitivity table below, and benchmarkheaven.com/jev-models lets you set your own weights.
 
-| # | System | Main | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 |
+| # | System | Main | Capability | Speed | Cost | Easy | Standard | Judge | p50 / p95 | $ per 1,000 decisions |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | system-one-open (Gemma 4 E2B LoRA on an L4) | **75.7** | 93.8 | 57.5 | 75.9 | 100.0 % | 93.8 % | 87.7 % | 0.65 s / 0.77 s | ~$0.0092 |
 | 2 | Jev 1.13.0 (TypeSafe AI) | **73.6** | 97.8 | 58.2 | 64.7 | 100.0 % | 99.0 % | 94.5 % | 0.65 s / 0.72 s | $0.0259 |
