@@ -77,7 +77,9 @@ REVISION_LOG = [e for e in [
      "this revision stopped sending held-out items to an endpoint a submitter operates. The easy and standard/judge "
      "tiers had already been sent in full when that was decided; the 109 held-out hard items never were, so the row "
      "covers 425 of 534 decisions and carries no rank. Mappings, endpoint conditions and cost bases were "
-     "committed before the runs (docs/v1.2-additions-run3.md). No earlier row changed."},
+     "committed before any row was aggregated and before the published GLiNER2.5 runs started "
+     "(docs/v1.2-additions-run3.md); jqv's run had begun about ten minutes earlier, but it needs no mapping and is "
+     "priced at its base model's public tariff. No earlier row changed."},
     {"revision": "v1.2.6", "date": "2026-09-20", "note": "Added openJev Verdict 1.4 and the identified SimpleJev public-demo configurations on the unchanged frozen 534-decision set. No earlier row changed."},
     {"revision": "v1.2.5", "date": "2026-09-20", "note": "Added kev 0.5B and the 0.6B, 4B and 8B research previews. Each ran the full frozen v1.2 set (534 decisions including held-out items) through kev's native TypeSafe-compatible endpoint on an RTX 3090. No other row changed."},
     {"revision": "v1.2.4", "date": "2026-09-20", "note":

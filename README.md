@@ -117,8 +117,10 @@ Added [GLiNER2.5 small](https://huggingface.co/fastino/gliner2.5-small-v1) at 62
 because its endpoint runs on the submitter's own machine and this round stopped sending held-out items to an
 endpoint a submitter operates. It answered 425 of 534 decisions — everything except the 109 held-out hard items —
 and on the public items it reproduced the submitter's own numbers exactly (easy 1.000, standard 0.958, hard 0.622).
-Mappings, endpoint conditions and cost bases were committed before the runs:
-[`docs/v1.2-additions-run3.md`](docs/v1.2-additions-run3.md). No other row changed.
+Mappings, endpoint conditions and cost bases were committed before any row was aggregated and before the published
+GLiNER2.5 runs started ([`docs/v1.2-additions-run3.md`](docs/v1.2-additions-run3.md)); jqv's run had begun about ten
+minutes earlier, because its endpoint was temporary, but it needs no mapping and is priced at its base model's public
+tariff. No other row changed.
 
 ## v1.1.3: the GPU round
 
