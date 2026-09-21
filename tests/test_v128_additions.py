@@ -57,3 +57,13 @@ def test_certo_v129_is_complete_ranked_and_costed_from_retained_tokens():
     assert row["endpoint_kind"] == "gpu"
     assert row["cost"]["usd_per_1000"] > 0
     assert "input tokens measured" in row["cost"]["basis"]
+
+
+def test_smalljev_v1210_is_complete_ranked_and_not_costed_as_free():
+    row = SYS["smalljev"]
+    assert row["listing"] == "ranked" and row["rank"]
+    assert row["hard"]["coverage"] == 1.0 and not row["partial"]
+    assert row["endpoint_kind"] == "gpu"
+    assert row["licence"] == "Apache-2.0"
+    assert row["cost"]["usd_per_1000"] > 0 and row["axes"]["cost"] < 100
+    assert "input tokens measured" in row["cost"]["basis"]

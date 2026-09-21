@@ -58,7 +58,7 @@ def test_pooled_price_is_the_weighted_mean_of_the_two_halves():
 
 
 def test_published_artifact_uses_the_corrected_prices():
-    assert ART["revision"] >= "v1.2.3"
+    assert tuple(map(int, ART["revision"].removeprefix("v").split("."))) >= (1, 2, 3)
     for key, f in FIX["systems"].items():
         if key in ART.get("superseded_rows", {}):  # v1.2.8: a complete re-run replaced this row; it is priced from its own run
             continue

@@ -65,7 +65,7 @@ ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1
             "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6",
             "decider-35b-a3b": "v1.2.8", "reflex-27b": "v1.2.8", "decision-machine-1": "v1.2.8", "decider-2b": "v1.2.8",
             "reflex-4b": "v1.2.8", "gliner2-large": "v1.2.8", "jev-local": "v1.2.8", "nimble-9b": "v1.2.8", "litjev": "v1.2.8",
-            "certo": "v1.2.9"}
+            "certo": "v1.2.9", "smalljev": "v1.2.10"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 # A complete re-run that replaces an earlier row (same frozen items, same scorer); the old score stays in the artifact.
 SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the serving prompt limit from 2,048 to 8,192 tokens "
@@ -75,6 +75,11 @@ HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
+    {"revision": "v1.2.10", "date": "2026-09-21", "note":
+     "Added smalljev semantic-v9 after its author requested evaluation. The public Apache-2.0 MiniCPM5-2B-Base "
+     "LoRA and native decision heads ran all 534 frozen decisions serially on our lium.io A6000. Its mapping, "
+     "endpoint condition, non-zero hosted-reference cost basis and public-benchmark-directed training disclosure "
+     "were committed before the run (docs/v1.2-additions-smalljev.md). No earlier measurement or task changed."},
     {"revision": "v1.2.9", "date": "2026-09-21", "note":
      "Added Certo v1 (AltSlate Labs) after its author requested evaluation. The public MIT ModernBERT-large checkpoint "
      "ran all 534 frozen decisions through the author's DecisionModel, serially on our RunPod RTX 3090. Its mapping, "
@@ -192,7 +197,7 @@ def endpoint_kind(cond):
     c = cond.lower()
     if c.startswith("production api") or c.startswith("chutes shared"):
         return "api"
-    if "runpod gpu" in c:
+    if "runpod gpu" in c or c.startswith("our gpu"):
         return "gpu"
     if "demo endpoint" in c or "author-hosted endpoint" in c:
         return "demo"

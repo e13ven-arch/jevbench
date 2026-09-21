@@ -1,6 +1,6 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.9",
+ "revision": "v1.2.10",
  "status": "final",
  "note": "Outcome codes: c correct, w wrong, f failed (scored wrong), n not attempted. Topic = item family. Per-task outcomes only for public items; held-out and imported items only in aggregates. Tier 'standard' and 'judge' accuracies are over all items of the tier (failures count as wrong), as in the scores.",
  "tasks": [
@@ -47722,6 +47722,1130 @@
     "hard-sol-c-multi_hop-13": [
      "c",
      1.287
+    ]
+   }
+  },
+  "smalljev": {
+   "display": "smalljev semantic-v9",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 70,
+     "w": 2,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.9722
+    },
+    "standard": {
+     "c": 66,
+     "w": 30,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.6875
+    },
+    "judge": {
+     "c": 59,
+     "w": 87,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.4041
+    },
+    "hard": {
+     "c": 84,
+     "w": 136,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3818
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 17,
+      "w": 1,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.9444
+     },
+     "fact": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "extraction": {
+      "c": 17,
+      "w": 1,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.9444
+     },
+     "tool_selection": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 13,
+      "w": 3,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8125
+     },
+     "intent": {
+      "c": 7,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4375
+     },
+     "ordinal": {
+      "c": 14,
+      "w": 2,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.875
+     },
+     "extraction": {
+      "c": 10,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.625
+     },
+     "adequacy": {
+      "c": 10,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.625
+     },
+     "routing": {
+      "c": 12,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.75
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 40,
+      "w": 38,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5128
+     },
+     "adequacy": {
+      "c": 19,
+      "w": 49,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2794
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 9,
+      "w": 29,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2368
+     },
+     "probability": {
+      "c": 9,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.45
+     },
+     "temporal_numeric": {
+      "c": 11,
+      "w": 19,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3667
+     },
+     "ambiguous": {
+      "c": 2,
+      "w": 12,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1429
+     },
+     "multi_hop": {
+      "c": 7,
+      "w": 28,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2
+     },
+     "tradeoff": {
+      "c": 6,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "adversarial": {
+      "c": 7,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5833
+     },
+     "trap": {
+      "c": 10,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.625
+     },
+     "judge_hard": {
+      "c": 19,
+      "w": 14,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5758
+     },
+     "routing_hard": {
+      "c": 4,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "c",
+     0.431
+    ],
+    "easy-intent-01": [
+     "c",
+     0.407
+    ],
+    "easy-intent-02": [
+     "c",
+     0.414
+    ],
+    "easy-intent-03": [
+     "c",
+     0.415
+    ],
+    "easy-intent-04": [
+     "c",
+     0.412
+    ],
+    "easy-intent-05": [
+     "c",
+     0.407
+    ],
+    "easy-intent-06": [
+     "c",
+     0.417
+    ],
+    "easy-intent-07": [
+     "c",
+     0.445
+    ],
+    "easy-intent-08": [
+     "c",
+     0.446
+    ],
+    "easy-intent-09": [
+     "w",
+     0.412
+    ],
+    "easy-intent-10": [
+     "c",
+     0.41
+    ],
+    "easy-intent-11": [
+     "c",
+     0.412
+    ],
+    "easy-fact-00": [
+     "c",
+     0.416
+    ],
+    "easy-fact-01": [
+     "c",
+     0.418
+    ],
+    "easy-fact-02": [
+     "c",
+     0.412
+    ],
+    "easy-fact-03": [
+     "c",
+     0.413
+    ],
+    "easy-fact-04": [
+     "c",
+     0.41
+    ],
+    "easy-fact-05": [
+     "c",
+     0.424
+    ],
+    "easy-fact-06": [
+     "c",
+     0.412
+    ],
+    "easy-fact-07": [
+     "c",
+     0.413
+    ],
+    "easy-fact-08": [
+     "c",
+     0.399
+    ],
+    "easy-fact-09": [
+     "c",
+     0.399
+    ],
+    "easy-fact-10": [
+     "c",
+     0.406
+    ],
+    "easy-fact-11": [
+     "c",
+     0.398
+    ],
+    "easy-extraction-00": [
+     "c",
+     0.399
+    ],
+    "easy-extraction-01": [
+     "c",
+     0.428
+    ],
+    "easy-extraction-02": [
+     "c",
+     0.412
+    ],
+    "easy-extraction-03": [
+     "c",
+     0.416
+    ],
+    "easy-extraction-04": [
+     "c",
+     0.415
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.413
+    ],
+    "easy-extraction-06": [
+     "c",
+     0.414
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.404
+    ],
+    "easy-extraction-08": [
+     "c",
+     0.414
+    ],
+    "easy-extraction-09": [
+     "c",
+     0.405
+    ],
+    "easy-extraction-10": [
+     "c",
+     0.405
+    ],
+    "easy-extraction-11": [
+     "c",
+     0.405
+    ],
+    "easy-tool_selection-00": [
+     "c",
+     0.419
+    ],
+    "easy-tool_selection-01": [
+     "c",
+     0.41
+    ],
+    "easy-tool_selection-02": [
+     "c",
+     0.409
+    ],
+    "easy-tool_selection-03": [
+     "c",
+     0.399
+    ],
+    "easy-tool_selection-04": [
+     "c",
+     0.412
+    ],
+    "easy-tool_selection-05": [
+     "c",
+     0.399
+    ],
+    "easy-tool_selection-06": [
+     "c",
+     0.411
+    ],
+    "easy-tool_selection-07": [
+     "c",
+     0.418
+    ],
+    "easy-tool_selection-08": [
+     "c",
+     0.399
+    ],
+    "easy-tool_selection-09": [
+     "c",
+     0.409
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.401
+    ],
+    "easy-tool_selection-11": [
+     "c",
+     0.413
+    ],
+    "original-policy-01-0": [
+     "c",
+     0.401
+    ],
+    "original-policy-01-1": [
+     "c",
+     0.405
+    ],
+    "original-policy-02-0": [
+     "c",
+     0.406
+    ],
+    "original-policy-02-1": [
+     "c",
+     0.397
+    ],
+    "original-policy-03-0": [
+     "c",
+     0.401
+    ],
+    "original-policy-03-1": [
+     "w",
+     0.407
+    ],
+    "original-policy-04-0": [
+     "c",
+     0.414
+    ],
+    "original-policy-04-1": [
+     "c",
+     0.397
+    ],
+    "original-policy-05-0": [
+     "c",
+     0.397
+    ],
+    "original-policy-05-1": [
+     "c",
+     0.399
+    ],
+    "original-policy-06-0": [
+     "c",
+     0.398
+    ],
+    "original-policy-06-1": [
+     "c",
+     0.398
+    ],
+    "original-intent-01-0": [
+     "w",
+     0.398
+    ],
+    "original-intent-01-1": [
+     "c",
+     0.409
+    ],
+    "original-intent-02-0": [
+     "w",
+     0.399
+    ],
+    "original-intent-02-1": [
+     "c",
+     0.399
+    ],
+    "original-intent-03-0": [
+     "w",
+     0.397
+    ],
+    "original-intent-03-1": [
+     "c",
+     0.403
+    ],
+    "original-intent-04-0": [
+     "c",
+     0.413
+    ],
+    "original-intent-04-1": [
+     "w",
+     0.405
+    ],
+    "original-intent-05-0": [
+     "w",
+     0.407
+    ],
+    "original-intent-05-1": [
+     "w",
+     0.406
+    ],
+    "original-intent-06-0": [
+     "w",
+     0.409
+    ],
+    "original-intent-06-1": [
+     "w",
+     0.418
+    ],
+    "original-ordinal-01-0": [
+     "c",
+     0.408
+    ],
+    "original-ordinal-01-1": [
+     "c",
+     0.4
+    ],
+    "original-ordinal-02-0": [
+     "c",
+     0.398
+    ],
+    "original-ordinal-02-1": [
+     "c",
+     0.41
+    ],
+    "original-ordinal-03-0": [
+     "c",
+     0.507
+    ],
+    "original-ordinal-03-1": [
+     "w",
+     0.415
+    ],
+    "original-ordinal-04-0": [
+     "c",
+     0.399
+    ],
+    "original-ordinal-04-1": [
+     "c",
+     0.4
+    ],
+    "original-ordinal-05-0": [
+     "c",
+     0.399
+    ],
+    "original-ordinal-05-1": [
+     "c",
+     0.399
+    ],
+    "original-ordinal-06-0": [
+     "c",
+     0.4
+    ],
+    "original-ordinal-06-1": [
+     "c",
+     0.409
+    ],
+    "original-extraction-01-0": [
+     "c",
+     0.406
+    ],
+    "original-extraction-01-1": [
+     "c",
+     0.396
+    ],
+    "original-extraction-02-0": [
+     "w",
+     0.404
+    ],
+    "original-extraction-02-1": [
+     "w",
+     0.399
+    ],
+    "original-extraction-03-0": [
+     "c",
+     0.4
+    ],
+    "original-extraction-03-1": [
+     "c",
+     0.418
+    ],
+    "original-extraction-04-0": [
+     "w",
+     0.425
+    ],
+    "original-extraction-04-1": [
+     "c",
+     0.398
+    ],
+    "original-extraction-05-0": [
+     "w",
+     0.409
+    ],
+    "original-extraction-05-1": [
+     "w",
+     0.398
+    ],
+    "original-extraction-06-0": [
+     "c",
+     0.399
+    ],
+    "original-extraction-06-1": [
+     "c",
+     0.415
+    ],
+    "original-adequacy-01-0": [
+     "c",
+     0.422
+    ],
+    "original-adequacy-01-1": [
+     "w",
+     0.417
+    ],
+    "original-adequacy-02-0": [
+     "c",
+     0.458
+    ],
+    "original-adequacy-02-1": [
+     "c",
+     0.4
+    ],
+    "original-adequacy-03-0": [
+     "w",
+     0.402
+    ],
+    "original-adequacy-03-1": [
+     "w",
+     0.401
+    ],
+    "original-adequacy-04-0": [
+     "c",
+     0.397
+    ],
+    "original-adequacy-04-1": [
+     "c",
+     0.401
+    ],
+    "original-adequacy-05-0": [
+     "c",
+     0.399
+    ],
+    "original-adequacy-05-1": [
+     "c",
+     0.406
+    ],
+    "original-adequacy-06-0": [
+     "w",
+     0.404
+    ],
+    "original-adequacy-06-1": [
+     "c",
+     0.405
+    ],
+    "original-routing-01-0": [
+     "c",
+     0.417
+    ],
+    "original-routing-01-1": [
+     "c",
+     0.424
+    ],
+    "original-routing-02-0": [
+     "c",
+     0.422
+    ],
+    "original-routing-02-1": [
+     "c",
+     0.406
+    ],
+    "original-routing-03-0": [
+     "w",
+     0.408
+    ],
+    "original-routing-03-1": [
+     "w",
+     0.428
+    ],
+    "original-routing-04-0": [
+     "c",
+     0.409
+    ],
+    "original-routing-04-1": [
+     "w",
+     0.414
+    ],
+    "original-routing-05-0": [
+     "c",
+     0.459
+    ],
+    "original-routing-05-1": [
+     "w",
+     0.41
+    ],
+    "original-routing-06-0": [
+     "c",
+     0.4
+    ],
+    "original-routing-06-1": [
+     "c",
+     0.399
+    ],
+    "hard-opus-a-long_policy-01": [
+     "w",
+     0.982
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     0.672
+    ],
+    "hard-opus-a-long_policy-08": [
+     "c",
+     0.637
+    ],
+    "hard-opus-a-long_policy-09": [
+     "w",
+     0.677
+    ],
+    "hard-opus-a-long_policy-11": [
+     "w",
+     0.608
+    ],
+    "hard-opus-a-long_policy-13": [
+     "w",
+     0.63
+    ],
+    "hard-opus-a-long_policy-17": [
+     "w",
+     0.648
+    ],
+    "hard-opus-a-long_policy-19": [
+     "w",
+     0.602
+    ],
+    "hard-opus-a-probability-03": [
+     "c",
+     0.406
+    ],
+    "hard-opus-a-probability-04": [
+     "w",
+     0.454
+    ],
+    "hard-opus-a-probability-07": [
+     "w",
+     0.411
+    ],
+    "hard-opus-a-probability-08": [
+     "w",
+     0.415
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "w",
+     0.408
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "c",
+     0.423
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "c",
+     0.455
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "c",
+     0.409
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "w",
+     0.409
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "w",
+     0.408
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "c",
+     0.409
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "w",
+     0.411
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "w",
+     0.41
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "w",
+     0.422
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "w",
+     0.411
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "w",
+     0.409
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "c",
+     0.763
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     0.601
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "w",
+     0.662
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     0.632
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "w",
+     0.581
+    ],
+    "hard-opus-b-probability-01": [
+     "c",
+     0.498
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.418
+    ],
+    "hard-opus-b-probability-03": [
+     "c",
+     0.414
+    ],
+    "hard-opus-b-probability-04": [
+     "w",
+     0.426
+    ],
+    "hard-opus-b-probability-06": [
+     "w",
+     0.42
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "w",
+     0.426
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.423
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "w",
+     0.423
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "c",
+     0.433
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "w",
+     0.408
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "c",
+     0.421
+    ],
+    "hard-opus-c-long_policy-02": [
+     "w",
+     0.909
+    ],
+    "hard-opus-c-long_policy-03": [
+     "c",
+     0.867
+    ],
+    "hard-opus-c-long_policy-04": [
+     "w",
+     0.77
+    ],
+    "hard-opus-c-long_policy-05": [
+     "w",
+     0.741
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     0.771
+    ],
+    "hard-opus-c-long_policy-10": [
+     "c",
+     0.906
+    ],
+    "hard-opus-c-long_policy-11": [
+     "w",
+     0.8
+    ],
+    "hard-opus-c-probability-03": [
+     "c",
+     0.41
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "w",
+     0.42
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "w",
+     0.413
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "c",
+     0.427
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.416
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "w",
+     0.428
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "c",
+     0.416
+    ],
+    "hard-sol-a-adversarial-01": [
+     "c",
+     0.42
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.41
+    ],
+    "hard-sol-a-adversarial-07": [
+     "c",
+     0.421
+    ],
+    "hard-sol-a-adversarial-08": [
+     "c",
+     0.413
+    ],
+    "hard-sol-a-adversarial-09": [
+     "w",
+     0.415
+    ],
+    "hard-sol-a-adversarial-11": [
+     "w",
+     0.454
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "c",
+     0.677
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     0.674
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "w",
+     0.656
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "w",
+     0.652
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "c",
+     0.633
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "w",
+     0.642
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "w",
+     0.66
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "w",
+     0.654
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.409
+    ],
+    "hard-sol-a-trap-04": [
+     "c",
+     0.417
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.417
+    ],
+    "hard-sol-a-trap-06": [
+     "c",
+     0.415
+    ],
+    "hard-sol-a-trap-08": [
+     "c",
+     0.406
+    ],
+    "hard-sol-a-trap-10": [
+     "c",
+     0.406
+    ],
+    "hard-sol-a-trap-13": [
+     "w",
+     0.408
+    ],
+    "hard-sol-a-trap-15": [
+     "w",
+     0.407
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "w",
+     0.406
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "c",
+     0.416
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "w",
+     0.411
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "c",
+     0.411
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "c",
+     0.405
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "c",
+     0.413
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "c",
+     0.41
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "c",
+     0.422
+    ],
+    "hard-sol-b-long_policy-01": [
+     "w",
+     0.86
+    ],
+    "hard-sol-b-long_policy-02": [
+     "w",
+     0.851
+    ],
+    "hard-sol-b-long_policy-05": [
+     "c",
+     0.837
+    ],
+    "hard-sol-b-long_policy-06": [
+     "c",
+     0.849
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "c",
+     0.414
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "w",
+     0.405
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "w",
+     0.406
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "w",
+     0.409
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "w",
+     0.407
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.418
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "w",
+     0.416
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "w",
+     0.415
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "w",
+     0.422
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "c",
+     0.418
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "c",
+     0.409
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "c",
+     0.417
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "w",
+     0.404
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "w",
+     0.41
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "c",
+     0.404
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "c",
+     0.411
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "c",
+     0.412
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "c",
+     0.409
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "c",
+     0.643
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "w",
+     0.644
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "w",
+     0.676
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.41
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "w",
+     0.683
     ]
    }
   }

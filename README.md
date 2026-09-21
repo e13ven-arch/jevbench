@@ -39,7 +39,7 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking (36 ranked rows): **Jev 1.13.0 (TypeSafe AI) 75.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 74.7 · djev (Maisa, diffusion-gemma) 74.3 · openJev Verdict 1.4 72.5 · reflex 4B (kshetrajna12) 71.7 · decision-machine-1 (milliseconds.ai) 71.5. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Top of the ranking (38 ranked rows): **Jev 1.13.0 (TypeSafe AI) 75.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 74.7 · djev (Maisa, diffusion-gemma) 74.3 · openJev Verdict 1.4 72.5 · reflex 4B (kshetrajna12) 71.7 · decision-machine-1 (milliseconds.ai) 71.5. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
 - **Honorable mention, not ranked: classifier.dev (fast tier) 84.8.** A service that runs another entrant's model is
   listed with all of its scores and axes, but is not ranked against the models — its fast tier *is* Jev
   ("The fast tier is Jev, TypeSafe's decision model", [classifier.dev/benchmark](https://classifier.dev/benchmark)), so
@@ -137,6 +137,12 @@ module missing from the public repository) and DIY Jev (the repository answers 4
 decisions through its author's `DecisionModel`, serially on our RunPod RTX 3090. The mapping, endpoint condition,
 published 64-token state and 48-token option limits, and hosted-price cost basis were pushed before the run
 ([`docs/v1.2-additions-certo.md`](docs/v1.2-additions-certo.md)). No earlier result or task changed.
+
+**v1.2.10 (tag `v1.2.10`): smalljev semantic-v9.** At Aditya's request, the public Apache-2.0
+[`isHeSatoshi/smalljev`](https://github.com/isHeSatoshi/smalljev) MiniCPM5-2B-Base LoRA and native decision heads
+ran all 534 frozen decisions serially on our lium.io A6000, scoring **62.4 (#29)**. The mapping, endpoint condition,
+non-zero hosted-reference cost basis and allowed public-benchmark-directed training disclosure were committed before
+the run ([`docs/v1.2-additions-smalljev.md`](docs/v1.2-additions-smalljev.md)). No earlier result or task changed.
 
 ## v1.1.3: the GPU round
 
