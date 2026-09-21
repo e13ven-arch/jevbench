@@ -1,4 +1,4 @@
-# JevBench v1.2.13 — results
+# JevBench v1.2.14 — results
 
 **JevBench Score** = Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.
 
@@ -18,42 +18,43 @@ v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; later revisions a
 | 2 | SemIf (Qwen3.5-4B) | **74.7** | 85.9 | 72.6 | 83.7 | 59.5 | $0.0224 est. | 0.20 s → 0.55 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
 | 3 | djev (Maisa, diffusion-gemma) | **74.3** | 88.4 | 65.4 | 91.4 | 57.6 | $0.0260 (announced price, free preview) | 0.24 s | production API (api.djev.dev, free preview) |
 | 4 | openJev Verdict 1.4 | **72.5** | 58.1 | 74.1 | 78.1 | 82.4 | $0.0039 est. | 0.31 s → 0.78 s | our CPU (4 threads, Ryzen 5 3600) |
-| 5 | reflex 4B (kshetrajna12) | **71.7** | 86.7 | 75.2 | 68.0 | 59.7 | $0.0221 est. | 1.80 s → 3.75 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 6 | decision-machine-1 (milliseconds.ai) | **71.5** | 74.5 | 70.4 | 92.9 | 53.7 | $0.0350 | 0.17 s | production API (milliseconds.ai, served from its nearest region), measured from Germany |
-| 7 | Laya (421M) | **70.1** | 63.2 | 62.5 | 71.1 | 86.2 | $0.0029 est. | 0.79 s → 1.72 s | our CPU (4 threads, Ryzen 5 3600) |
-| 8 | jqv (Qwen3-32B zero-shot) | **70.1** | 86.1 | 79.0 | 74.6 | 47.5 | $0.0564 est. | 0.75 s → 1.64 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 9 | open-alternative-jev (Qwen3.5-4B, IkerMoel) | **69.8** | 75.6 | 63.2 | 83.5 | 59.6 | $0.0222 est. | 0.21 s → 0.56 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
-| 10 | decider-35b-a3b (Mapika) | **68.9** | 86.3 | 71.5 | 80.8 | 45.3 | $0.0666 est. | 0.29 s → 0.73 s | our RunPod GPU (H100 NVL 96 GB), reached over the internet |
-| 11 | system-one-open (Gemma 4 E2B LoRA on an L4) | **68.9** | 79.5 | 56.7 | 77.0 | 64.8 | $0.0149 est. | 0.65 s → 1.30 s | author's public demo endpoint (Modal, L4) — not a production service |
-| 12 | Certo v1 (AltSlate Labs) | **68.2** | 28.0 | 82.0 | 94.0 | 100.0 | $0.0010 est. | 0.02 s → 0.19 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud), reached over the internet from Germany |
-| 13 | OpenJev razorback16 (DiffusionGemma 26B) | **67.7** | 86.0 | 64.8 | 83.2 | 45.5 | $0.0656 est. | 0.24 s → 0.63 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
-| 14 | SimpleJev Qwen3.8-27B | **67.3** | 89.7 | 81.1 | 71.2 | 39.5 | $0.1040 est. | 1.01 s → 2.03 s | author's public demo endpoint (Featherless Classifier Demo) — not a production service |
-| 15 | OpenDecision (ModernBERT-large zero-shot) | **67.0** | 59.6 | 56.1 | 79.9 | 75.3 | $0.0066 est. | 0.34 s → 0.83 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 16 | jeff (GLiFormer 400M) | **66.9** | 63.9 | 64.6 | 63.5 | 76.6 | $0.0060 est. | 0.94 s → 2.03 s | our CPU (4 threads, Ryzen 5 3600) |
-| 17 | kev 0.6B (research preview) | **66.7** | 67.4 | 51.1 | 75.6 | 76.1 | $0.0063 est. | 0.59 s → 1.33 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
-| 18 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **66.3** | 88.9 | 77.4 | 77.1 | 36.5 | $0.1313 est. | 0.68 s → 1.36 s | author's public demo endpoint (Modal) — not a production service |
-| 19 | openJev Verdict (151M) | **66.2** | 59.0 | 51.3 | 76.7 | 83.1 | $0.0037 est. | 0.28 s → 0.71 s | our CPU (4 threads, Ryzen 5 3600) |
-| 20 | GPT-5.6 Luna (low) | **66.2** | 96.8 | 89.8 | 77.5 | 28.5 | $0.2419 | 0.97 s | production API (OpenAI), reasoning effort low |
-| 21 | decider-2b (Mapika) | **64.6** | 73.8 | 46.6 | 83.2 | 61.0 | $0.0200 est. | 0.26 s → 0.67 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 22 | open-jev-deberta-v3-large (local CPU) | **64.6** | 53.6 | 66.4 | 66.0 | 74.0 | $0.0073 est. | 1.77 s → 3.69 s | our CPU (2 threads, Ryzen 5 3600) |
-| 23 | reflex-27b (Qwen3.8-27B) | **64.2** | 90.5 | 86.2 | 67.5 | 32.3 | $0.1811 est. | 1.89 s → 3.93 s | our RunPod GPU (H100 NVL 96 GB), reached over the internet |
-| 24 | jev-local (Qwen3.5-9B) | **63.8** | 80.3 | 68.7 | 69.2 | 43.3 | $0.0775 est. | 1.05 s → 2.24 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 25 | SimpleJev Qwen3.6-35B-A3B | **63.8** | 86.2 | 67.1 | 75.0 | 38.1 | $0.1156 est. | 0.85 s → 1.70 s | author's public demo endpoint (Featherless Classifier Demo) — not a production service |
-| 26 | LitJev (Qwen3.8-27B) | **63.7** | 88.1 | 83.5 | 66.7 | 33.6 | $0.1630 est. | 2.03 s → 4.20 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
-| 27 | djev (thinking) | **63.5** | 86.9 | 92.7 | 75.2 | 26.9 | $0.2743 est. | 0.43 s → 1.00 s | our GPU (lium.io H200 141 GB), reached over the internet from Germany; serial, one request at a time |
-| 28 | kev 0.5B | **63.1** | 57.2 | 47.4 | 77.0 | 76.1 | $0.0063 est. | 0.43 s → 1.01 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
-| 29 | GLiNER2.5 multi (Fastino, 287M) | **63.1** | 50.5 | 56.1 | 67.8 | 82.4 | $0.0039 est. | 0.43 s → 1.01 s | our CPU (4 threads, Ryzen 5 3600) |
-| 30 | smalljev semantic-v9 | **62.4** | 55.6 | 58.9 | 79.8 | 57.9 | $0.0254 est. | 0.41 s → 0.98 s | our GPU (lium.io A6000 48 GB), reached over the internet from Germany; serial, one request at a time |
-| 31 | kev 4B (research preview) | **62.2** | 76.3 | 42.0 | 75.7 | 61.8 | $0.0188 est. | 0.55 s → 1.25 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
-| 32 | GLiNER2.5 small (Fastino, 74M) | **62.1** | 49.0 | 47.2 | 77.8 | 82.4 | $0.0039 est. | 0.11 s → 0.38 s | our CPU (4 threads, Ryzen 5 3600) |
-| 33 | Bespoke Nimble 9B | **61.8** | 85.1 | 65.3 | 78.7 | 33.4 | $0.1658 est. | 0.39 s → 0.93 s | our RunPod GPU (A40 48 GB, Canada), reached over the internet from Germany |
-| 34 | Gemini 3.1 Flash-Lite | **60.9** | 90.3 | 68.1 | 81.8 | 27.4 | $0.2638 | 0.76 s | production API (Google) |
-| 35 | OpenJev (thinking, BF16) | **60.6** | 91.9 | 69.6 | 76.1 | 27.8 | $0.2546 est. | 0.46 s → 1.08 s | our GPU (lium.io H200 141 GB), reached over the internet from Germany; serial, one request at a time |
-| 36 | kev 8B (research preview) | **58.3** | 79.5 | 44.2 | 74.9 | 44.0 | $0.0733 est. | 0.59 s → 1.33 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
-| 37 | DeepSeek V4.1 Flash | **57.8** | 96.1 | 96.7 | 71.6 | 16.8 | $0.5937 | 1.42 s | production API (DeepSeek) |
-| 38 | system-one (Qwen3-8B, Goedecke) | **56.6** | 80.1 | 36.8 | 84.4 | 41.5 | $0.0894 est. | 0.17 s → 0.48 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
-| 39 | GLiNER2 (gliner2.5-base) | **53.0** | 56.0 | 23.7 | 71.8 | 83.1 | $0.0037 est. | 0.31 s → 0.78 s | our CPU (4 threads, Ryzen 5 3600) |
-| 40 | GLiNER2 large (Fastino) | **50.5** | 59.3 | 24.3 | 61.7 | 73.3 | $0.0077 est. | 1.10 s → 2.34 s | our CPU (4 threads, Ryzen 5 3600) |
+| 5 | Winnow-12B Q8 | **72.5** | 87.9 | 72.0 | 82.3 | 52.9 | $0.0371 est. | 0.23 s → 0.60 s | our GPU (lium.io RTX 4090 24 GB), reached over the internet from Germany; serial, one request at a time |
+| 6 | reflex 4B (kshetrajna12) | **71.7** | 86.7 | 75.2 | 68.0 | 59.7 | $0.0221 est. | 1.80 s → 3.75 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 7 | decision-machine-1 (milliseconds.ai) | **71.5** | 74.5 | 70.4 | 92.9 | 53.7 | $0.0350 | 0.17 s | production API (milliseconds.ai, served from its nearest region), measured from Germany |
+| 8 | Laya (421M) | **70.1** | 63.2 | 62.5 | 71.1 | 86.2 | $0.0029 est. | 0.79 s → 1.72 s | our CPU (4 threads, Ryzen 5 3600) |
+| 9 | jqv (Qwen3-32B zero-shot) | **70.1** | 86.1 | 79.0 | 74.6 | 47.5 | $0.0564 est. | 0.75 s → 1.64 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 10 | open-alternative-jev (Qwen3.5-4B, IkerMoel) | **69.8** | 75.6 | 63.2 | 83.5 | 59.6 | $0.0222 est. | 0.21 s → 0.56 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 11 | decider-35b-a3b (Mapika) | **68.9** | 86.3 | 71.5 | 80.8 | 45.3 | $0.0666 est. | 0.29 s → 0.73 s | our RunPod GPU (H100 NVL 96 GB), reached over the internet |
+| 12 | system-one-open (Gemma 4 E2B LoRA on an L4) | **68.9** | 79.5 | 56.7 | 77.0 | 64.8 | $0.0149 est. | 0.65 s → 1.30 s | author's public demo endpoint (Modal, L4) — not a production service |
+| 13 | Certo v1 (AltSlate Labs) | **68.2** | 28.0 | 82.0 | 94.0 | 100.0 | $0.0010 est. | 0.02 s → 0.19 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud), reached over the internet from Germany |
+| 14 | OpenJev razorback16 (DiffusionGemma 26B) | **67.7** | 86.0 | 64.8 | 83.2 | 45.5 | $0.0656 est. | 0.24 s → 0.63 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 15 | SimpleJev Qwen3.8-27B | **67.3** | 89.7 | 81.1 | 71.2 | 39.5 | $0.1040 est. | 1.01 s → 2.03 s | author's public demo endpoint (Featherless Classifier Demo) — not a production service |
+| 16 | OpenDecision (ModernBERT-large zero-shot) | **67.0** | 59.6 | 56.1 | 79.9 | 75.3 | $0.0066 est. | 0.34 s → 0.83 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 17 | jeff (GLiFormer 400M) | **66.9** | 63.9 | 64.6 | 63.5 | 76.6 | $0.0060 est. | 0.94 s → 2.03 s | our CPU (4 threads, Ryzen 5 3600) |
+| 18 | kev 0.6B (research preview) | **66.7** | 67.4 | 51.1 | 75.6 | 76.1 | $0.0063 est. | 0.59 s → 1.33 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
+| 19 | openjev-sglang (Qwen3.6-35B-A3B on SGLang) | **66.3** | 88.9 | 77.4 | 77.1 | 36.5 | $0.1313 est. | 0.68 s → 1.36 s | author's public demo endpoint (Modal) — not a production service |
+| 20 | openJev Verdict (151M) | **66.2** | 59.0 | 51.3 | 76.7 | 83.1 | $0.0037 est. | 0.28 s → 0.71 s | our CPU (4 threads, Ryzen 5 3600) |
+| 21 | GPT-5.6 Luna (low) | **66.2** | 96.8 | 89.8 | 77.5 | 28.5 | $0.2419 | 0.97 s | production API (OpenAI), reasoning effort low |
+| 22 | decider-2b (Mapika) | **64.6** | 73.8 | 46.6 | 83.2 | 61.0 | $0.0200 est. | 0.26 s → 0.67 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 23 | open-jev-deberta-v3-large (local CPU) | **64.6** | 53.6 | 66.4 | 66.0 | 74.0 | $0.0073 est. | 1.77 s → 3.69 s | our CPU (2 threads, Ryzen 5 3600) |
+| 24 | reflex-27b (Qwen3.8-27B) | **64.2** | 90.5 | 86.2 | 67.5 | 32.3 | $0.1811 est. | 1.89 s → 3.93 s | our RunPod GPU (H100 NVL 96 GB), reached over the internet |
+| 25 | jev-local (Qwen3.5-9B) | **63.8** | 80.3 | 68.7 | 69.2 | 43.3 | $0.0775 est. | 1.05 s → 2.24 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 26 | SimpleJev Qwen3.6-35B-A3B | **63.8** | 86.2 | 67.1 | 75.0 | 38.1 | $0.1156 est. | 0.85 s → 1.70 s | author's public demo endpoint (Featherless Classifier Demo) — not a production service |
+| 27 | LitJev (Qwen3.8-27B) | **63.7** | 88.1 | 83.5 | 66.7 | 33.6 | $0.1630 est. | 2.03 s → 4.20 s | our RunPod GPU (H100 NVL 96 GB, Canada), reached over the internet from Germany |
+| 28 | djev (thinking) | **63.5** | 86.9 | 92.7 | 75.2 | 26.9 | $0.2743 est. | 0.43 s → 1.00 s | our GPU (lium.io H200 141 GB), reached over the internet from Germany; serial, one request at a time |
+| 29 | kev 0.5B | **63.1** | 57.2 | 47.4 | 77.0 | 76.1 | $0.0063 est. | 0.43 s → 1.01 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
+| 30 | GLiNER2.5 multi (Fastino, 287M) | **63.1** | 50.5 | 56.1 | 67.8 | 82.4 | $0.0039 est. | 0.43 s → 1.01 s | our CPU (4 threads, Ryzen 5 3600) |
+| 31 | smalljev semantic-v9 | **62.4** | 55.6 | 58.9 | 79.8 | 57.9 | $0.0254 est. | 0.41 s → 0.98 s | our GPU (lium.io A6000 48 GB), reached over the internet from Germany; serial, one request at a time |
+| 32 | kev 4B (research preview) | **62.2** | 76.3 | 42.0 | 75.7 | 61.8 | $0.0188 est. | 0.55 s → 1.25 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
+| 33 | GLiNER2.5 small (Fastino, 74M) | **62.1** | 49.0 | 47.2 | 77.8 | 82.4 | $0.0039 est. | 0.11 s → 0.38 s | our CPU (4 threads, Ryzen 5 3600) |
+| 34 | Bespoke Nimble 9B | **61.8** | 85.1 | 65.3 | 78.7 | 33.4 | $0.1658 est. | 0.39 s → 0.93 s | our RunPod GPU (A40 48 GB, Canada), reached over the internet from Germany |
+| 35 | Gemini 3.1 Flash-Lite | **60.9** | 90.3 | 68.1 | 81.8 | 27.4 | $0.2638 | 0.76 s | production API (Google) |
+| 36 | OpenJev (thinking, BF16) | **60.6** | 91.9 | 69.6 | 76.1 | 27.8 | $0.2546 est. | 0.46 s → 1.08 s | our GPU (lium.io H200 141 GB), reached over the internet from Germany; serial, one request at a time |
+| 37 | kev 8B (research preview) | **58.3** | 79.5 | 44.2 | 74.9 | 44.0 | $0.0733 est. | 0.59 s → 1.33 s | our RunPod GPU (GeForce RTX 3090 24 GB, community cloud CA), reached over the internet |
+| 38 | DeepSeek V4.1 Flash | **57.8** | 96.1 | 96.7 | 71.6 | 16.8 | $0.5937 | 1.42 s | production API (DeepSeek) |
+| 39 | system-one (Qwen3-8B, Goedecke) | **56.6** | 80.1 | 36.8 | 84.4 | 41.5 | $0.0894 est. | 0.17 s → 0.48 s | our RunPod GPU (RTX PRO 4500 Blackwell 32 GB (EU-RO-1)), reached over the internet |
+| 40 | GLiNER2 (gliner2.5-base) | **53.0** | 56.0 | 23.7 | 71.8 | 83.1 | $0.0037 est. | 0.31 s → 0.78 s | our CPU (4 threads, Ryzen 5 3600) |
+| 41 | GLiNER2 large (Fastino) | **50.5** | 59.3 | 24.3 | 61.7 | 73.3 | $0.0077 est. | 1.10 s → 2.34 s | our CPU (4 threads, Ryzen 5 3600) |
 
 Jev 1.13.0 is #1 with 75.4; SemIf (Qwen3.5-4B) is #2, 0.7 points behind (difference of the rounded scores).
 
@@ -146,6 +147,8 @@ Footnote — SimpleJev Qwen3.8-27B: Author's no-login shared demo, model id reco
 
 Footnote — smalljev semantic-v9: The public semantic-v9 LoRA and native heads over MiniCPM5-2B-Base, through the mapping frozen before the run. It has a typed Python contract but no TypeSafe-compatible HTTP route. The released training recipe explicitly hill-climbed against JevBench's public shape and source families; this allowed public benchmark-directed development is disclosed. Cost is $0.04/M measured input tokens, not free/100.
 
+Footnote — Winnow-12B Q8: The submitted Q8_0 GGUF ran through the pinned author's TypeSafe-compatible /v1/systemone server with 8,192 context, four resident decision branches, Q8 KV, and full GPU offload. The private training corpus was not released. The author's checksum-based audit reports zero exact public-item overlap, but that claim cannot be independently reproduced; our scan found no exact public state or instruction text in the released artifacts. Cost uses the $0.05/M-input hosted Gemma 3 12B reference, not free/100.
+
 Footnote — open-alternative-jev: With the options in reverse order (A. no, B. yes) the same model scored 21 % instead of 72 % on yes/no answer-judging items — small models are very sensitive to option order. The ranked row uses the author's own order
 (`A. yes, B. no`, as his `yes_no()` helper builds it); the reversed-order run was our adapter's mistake and is kept only as raw
 files (`results/v1.2/wip/`, GPU round runs).
@@ -168,46 +171,47 @@ Other views reweight the same four axes and combine them the same way (geometric
 
 | System | JevBench Score (25:25:25:25) (25:25:25:25) | Balanced 33:33:33 (no calibration) (33:0:33:33) | Emphasis on Accuracy 60:20:20 (60:0:20:20) | Emphasis on Speed 20:60:20 (20:0:60:20) | Emphasis on Cost 20:20:60 (20:0:20:60) | Intelligence only (100:0:0:0) |
 |---|---|---|---|---|---|---|
-| Jev 1.13.0 | #1 75.4 | #4 73.1 | #2 79.6 | #4 77.0 | #22 63.8 | #5 90.4 |
-| SemIf (Qwen3.5-4B) | #2 74.7 | #2 75.3 | #3 79.4 | #3 78.6 | #14 68.5 | #17 85.9 |
+| Jev 1.13.0 | #1 75.4 | #4 73.1 | #2 79.6 | #4 77.0 | #23 63.8 | #5 90.4 |
+| SemIf (Qwen3.5-4B) | #2 74.7 | #2 75.3 | #3 79.4 | #3 78.6 | #14 68.5 | #18 85.9 |
 | djev (Maisa, diffusion-gemma) | #3 74.3 | #1 77.5 | #1 81.6 | #1 82.7 | #13 68.8 | #9 88.4 |
-| openJev Verdict 1.4 | #4 72.5 | #10 72.0 | #31 66.1 | #10 74.4 | #4 76.0 | #33 58.1 |
-| reflex 4B (kshetrajna12) | #5 71.7 | #14 70.6 | #4 76.7 | #23 69.5 | #20 66.0 | #12 86.7 |
-| decision-machine-1 (milliseconds.ai) | #6 71.5 | #11 71.9 | #11 72.9 | #2 79.7 | #21 64.0 | #25 74.5 |
-| Laya (421M) | #7 70.1 | #5 72.9 | #25 68.9 | #18 72.2 | #1 78.0 | #29 63.2 |
-| jqv (Qwen3-32B zero-shot) | #8 70.1 | #21 67.3 | #8 74.3 | #21 70.1 | #24 58.5 | #15 86.1 |
-| open-alternative-jev (Qwen3.5-4B, IkerMoel) | #9 69.8 | #7 72.2 | #9 73.5 | #5 76.5 | #19 66.9 | #24 75.6 |
-| decider-35b-a3b (Mapika) | #10 68.9 | #18 68.1 | #7 74.9 | #14 72.9 | #26 57.9 | #13 86.3 |
-| system-one-open (Gemma 4 E2B LoRA on an L4) | #11 68.9 | #3 73.5 | #5 75.8 | #7 74.9 | #12 69.9 | #21 79.5 |
-| Certo v1 (AltSlate Labs) | #12 68.2 | #25 64.1 | #40 46.0 | #8 74.7 | #2 76.6 | #40 28.0 |
-| OpenJev razorback16 (DiffusionGemma 26B) | #13 67.7 | #17 68.8 | #6 75.2 | #11 74.2 | #25 58.3 | #16 86.0 |
-| SimpleJev Qwen3.8-27B | #14 67.3 | #29 63.2 | #13 72.7 | #31 66.3 | #30 52.4 | #7 89.7 |
-| OpenDecision (ModernBERT-large zero-shot) | #15 67.0 | #12 71.1 | #29 66.3 | #9 74.5 | #8 72.8 | #30 59.6 |
-| jeff (GLiFormer 400M) | #16 66.9 | #20 67.7 | #30 66.2 | #32 66.0 | #11 71.1 | #28 63.9 |
-| kev 0.6B (research preview) | #17 66.7 | #6 72.9 | #18 70.6 | #12 73.9 | #6 74.2 | #27 67.4 |
-| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #18 66.3 | #30 63.0 | #15 72.3 | #24 68.3 | #32 50.6 | #8 88.9 |
-| openJev Verdict (151M) | #19 66.2 | #8 72.1 | #28 66.5 | #13 73.9 | #3 76.3 | #32 59.0 |
-| GPT-5.6 Luna (low) | #20 66.2 | #34 59.8 | #14 72.5 | #30 66.4 | #36 44.5 | #1 96.8 |
-| decider-2b (Mapika) | #21 64.6 | #9 72.1 | #12 72.7 | #6 76.3 | #17 67.4 | #26 73.8 |
-| open-jev-deberta-v3-large (local CPU) | #22 64.6 | #27 64.0 | #38 59.6 | #34 64.8 | #16 67.8 | #37 53.6 |
-| reflex-27b (Qwen3.8-27B) | #23 64.2 | #37 58.2 | #23 69.4 | #38 61.7 | #35 46.0 | #4 90.5 |
-| jev-local (Qwen3.5-9B) | #24 63.8 | #32 62.2 | #24 68.9 | #33 64.9 | #29 53.8 | #19 80.3 |
-| SimpleJev Qwen3.6-35B-A3B | #25 63.8 | #31 62.7 | #16 71.2 | #26 67.4 | #31 51.4 | #14 86.2 |
-| LitJev (Qwen3.8-27B) | #26 63.7 | #36 58.3 | #26 68.7 | #39 61.5 | #34 46.8 | #10 88.1 |
-| djev (thinking) | #27 63.5 | #39 56.0 | #27 66.7 | #37 63.0 | #39 41.7 | #11 86.9 |
-| kev 0.5B | #28 63.1 | #15 69.5 | #32 64.3 | #17 72.4 | #9 72.0 | #34 57.2 |
-| GLiNER2.5 multi (Fastino, 287M) | #29 63.1 | #22 65.6 | #39 59.1 | #29 66.5 | #10 71.8 | #38 50.5 |
-| smalljev semantic-v9 | #30 62.4 | #28 63.6 | #36 60.3 | #22 69.6 | #23 61.2 | #36 55.6 |
-| kev 4B (research preview) | #31 62.2 | #13 70.9 | #10 73.0 | #15 72.8 | #18 67.1 | #23 76.3 |
-| GLiNER2.5 small (Fastino, 74M) | #32 62.1 | #19 68.0 | #37 59.7 | #19 71.8 | #7 73.4 | #39 49.0 |
-| Bespoke Nimble 9B | #33 61.8 | #33 60.7 | #22 69.5 | #27 67.3 | #33 47.8 | #18 85.1 |
-| Gemini 3.1 Flash-Lite | #34 60.9 | #35 58.7 | #20 69.7 | #28 67.0 | #37 43.2 | #6 90.3 |
-| OpenJev (thinking, BF16) | #35 60.6 | #38 57.9 | #21 69.7 | #35 64.6 | #38 43.2 | #3 91.9 |
-| kev 8B (research preview) | #36 58.3 | #26 64.0 | #19 69.8 | #25 68.1 | #27 55.1 | #22 79.5 |
-| DeepSeek V4.1 Flash | #37 57.8 | #40 48.7 | #33 63.9 | #40 56.8 | #40 31.8 | #2 96.1 |
-| system-one (Qwen3-8B, Goedecke) | #38 56.6 | #23 65.4 | #17 70.9 | #16 72.4 | #28 54.5 | #20 80.1 |
-| GLiNER2 (gliner2.5-base) | #39 53.0 | #16 69.4 | #34 63.7 | #20 70.4 | #5 74.6 | #35 56.0 |
-| GLiNER2 large (Fastino) | #40 50.5 | #24 64.5 | #35 62.3 | #36 63.3 | #15 67.9 | #31 59.3 |
+| openJev Verdict 1.4 | #4 72.5 | #11 72.0 | #32 66.1 | #11 74.4 | #4 76.0 | #34 58.1 |
+| Winnow-12B Q8 | #5 72.5 | #7 72.6 | #4 78.4 | #6 76.4 | #21 64.0 | #11 87.9 |
+| reflex 4B (kshetrajna12) | #6 71.7 | #15 70.6 | #5 76.7 | #24 69.5 | #20 66.0 | #13 86.7 |
+| decision-machine-1 (milliseconds.ai) | #7 71.5 | #12 71.9 | #12 72.9 | #2 79.7 | #22 64.0 | #26 74.5 |
+| Laya (421M) | #8 70.1 | #5 72.9 | #26 68.9 | #19 72.2 | #1 78.0 | #30 63.2 |
+| jqv (Qwen3-32B zero-shot) | #9 70.1 | #22 67.3 | #9 74.3 | #22 70.1 | #25 58.5 | #16 86.1 |
+| open-alternative-jev (Qwen3.5-4B, IkerMoel) | #10 69.8 | #8 72.2 | #10 73.5 | #5 76.5 | #19 66.9 | #25 75.6 |
+| decider-35b-a3b (Mapika) | #11 68.9 | #19 68.1 | #8 74.9 | #15 72.9 | #27 57.9 | #14 86.3 |
+| system-one-open (Gemma 4 E2B LoRA on an L4) | #12 68.9 | #3 73.5 | #6 75.8 | #8 74.9 | #12 69.9 | #22 79.5 |
+| Certo v1 (AltSlate Labs) | #13 68.2 | #26 64.1 | #41 46.0 | #9 74.7 | #2 76.6 | #41 28.0 |
+| OpenJev razorback16 (DiffusionGemma 26B) | #14 67.7 | #18 68.8 | #7 75.2 | #12 74.2 | #26 58.3 | #17 86.0 |
+| SimpleJev Qwen3.8-27B | #15 67.3 | #30 63.2 | #14 72.7 | #32 66.3 | #31 52.4 | #7 89.7 |
+| OpenDecision (ModernBERT-large zero-shot) | #16 67.0 | #13 71.1 | #30 66.3 | #10 74.5 | #8 72.8 | #31 59.6 |
+| jeff (GLiFormer 400M) | #17 66.9 | #21 67.7 | #31 66.2 | #33 66.0 | #11 71.1 | #29 63.9 |
+| kev 0.6B (research preview) | #18 66.7 | #6 72.9 | #19 70.6 | #13 73.9 | #6 74.2 | #28 67.4 |
+| openjev-sglang (Qwen3.6-35B-A3B on SGLang) | #19 66.3 | #31 63.0 | #16 72.3 | #25 68.3 | #33 50.6 | #8 88.9 |
+| openJev Verdict (151M) | #20 66.2 | #9 72.1 | #29 66.5 | #14 73.9 | #3 76.3 | #33 59.0 |
+| GPT-5.6 Luna (low) | #21 66.2 | #35 59.8 | #15 72.5 | #31 66.4 | #37 44.5 | #1 96.8 |
+| decider-2b (Mapika) | #22 64.6 | #10 72.1 | #13 72.7 | #7 76.3 | #17 67.4 | #27 73.8 |
+| open-jev-deberta-v3-large (local CPU) | #23 64.6 | #28 64.0 | #39 59.6 | #35 64.8 | #16 67.8 | #38 53.6 |
+| reflex-27b (Qwen3.8-27B) | #24 64.2 | #38 58.2 | #24 69.4 | #39 61.7 | #36 46.0 | #4 90.5 |
+| jev-local (Qwen3.5-9B) | #25 63.8 | #33 62.2 | #25 68.9 | #34 64.9 | #30 53.8 | #20 80.3 |
+| SimpleJev Qwen3.6-35B-A3B | #26 63.8 | #32 62.7 | #17 71.2 | #27 67.4 | #32 51.4 | #15 86.2 |
+| LitJev (Qwen3.8-27B) | #27 63.7 | #37 58.3 | #27 68.7 | #40 61.5 | #35 46.8 | #10 88.1 |
+| djev (thinking) | #28 63.5 | #40 56.0 | #28 66.7 | #38 63.0 | #40 41.7 | #12 86.9 |
+| kev 0.5B | #29 63.1 | #16 69.5 | #33 64.3 | #18 72.4 | #9 72.0 | #35 57.2 |
+| GLiNER2.5 multi (Fastino, 287M) | #30 63.1 | #23 65.6 | #40 59.1 | #30 66.5 | #10 71.8 | #39 50.5 |
+| smalljev semantic-v9 | #31 62.4 | #29 63.6 | #37 60.3 | #23 69.6 | #24 61.2 | #37 55.6 |
+| kev 4B (research preview) | #32 62.2 | #14 70.9 | #11 73.0 | #16 72.8 | #18 67.1 | #24 76.3 |
+| GLiNER2.5 small (Fastino, 74M) | #33 62.1 | #20 68.0 | #38 59.7 | #20 71.8 | #7 73.4 | #40 49.0 |
+| Bespoke Nimble 9B | #34 61.8 | #34 60.7 | #23 69.5 | #28 67.3 | #34 47.8 | #19 85.1 |
+| Gemini 3.1 Flash-Lite | #35 60.9 | #36 58.7 | #21 69.7 | #29 67.0 | #38 43.2 | #6 90.3 |
+| OpenJev (thinking, BF16) | #36 60.6 | #39 57.9 | #22 69.7 | #36 64.6 | #39 43.2 | #3 91.9 |
+| kev 8B (research preview) | #37 58.3 | #27 64.0 | #20 69.8 | #26 68.1 | #28 55.1 | #23 79.5 |
+| DeepSeek V4.1 Flash | #38 57.8 | #41 48.7 | #34 63.9 | #41 56.8 | #41 31.8 | #2 96.1 |
+| system-one (Qwen3-8B, Goedecke) | #39 56.6 | #24 65.4 | #18 70.9 | #17 72.4 | #29 54.5 | #21 80.1 |
+| GLiNER2 (gliner2.5-base) | #40 53.0 | #17 69.4 | #35 63.7 | #21 70.4 | #5 74.6 | #36 56.0 |
+| GLiNER2 large (Fastino) | #41 50.5 | #25 64.5 | #36 62.3 | #37 63.3 | #15 67.9 | #32 59.3 |
 
 ## Hard tier
 
@@ -225,6 +229,7 @@ Other views reweight the same four axes and combine them the same way (geometric
 | SemIf (Qwen3.5-4B) | 100.0 % | 97.9 % | 95.2 % | 59.5 % | 0.20 s | 0.32 s | 0.22 s | x2 + 0.15 s (assumption, not measured) |
 | djev (Maisa, diffusion-gemma) | 100.0 % | 97.9 % | 93.2 % | 69.5 % | 0.24 s | 0.31 s | 0.25 s | none (production API) |
 | openJev Verdict 1.4 | 86.1 % | 67.7 % | 56.2 % | 37.7 % | 0.31 s | 0.92 s | 0.63 s | x2 + 0.15 s (assumption, not measured) |
+| Winnow-12B Q8 | 100.0 % | 96.9 % | 91.1 % | 70.9 % | 0.23 s | 0.41 s | 0.28 s | x2 + 0.15 s (assumption, not measured) |
 | reflex 4B (kshetrajna12) | 100.0 % | 94.8 % | 97.3 % | 63.2 % | 1.80 s | 2.05 s | 1.87 s | x2 + 0.15 s (assumption, not measured) |
 | decision-machine-1 (milliseconds.ai) | 100.0 % | 76.0 % | 89.7 % | 46.8 % | 0.17 s | 0.30 s | 0.19 s | none (production API) |
 | Laya (421M) | 94.4 % | 72.9 % | 69.2 % | 34.1 % | 0.79 s | 2.20 s | 1.93 s | x2 + 0.15 s (assumption, not measured) |
@@ -275,6 +280,7 @@ its rubric and its options — hundreds to thousands of input tokens. One decisi
 - **SemIf (Qwen3.5-4B)** — $0.0224 est.: ESTIMATE: hosted-provider price, deepinfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.15/M out (same weights (not on OpenRouter), as open-alternative-jev in v1.1.2) x 396 input and 1 output tokens per decision (input tokens measured) [corrected in v1.2.3: the price now averages each of the 314 v1.1 decisions once; see results/v1.2/cost-correction-v1.2.3.json] | ESTIMATE: deepinfra Qwen/Qwen3.5-4B $0.03/M in, $0.15/M out x 1244 in / 0 out tokens per hard decision
 - **djev (Maisa, diffusion-gemma)** — $0.0260 (announced price, free preview): ANNOUNCED PRICE (free preview): djev's docs state $0.035 per million input tokens, output tokens free (https://api.djev.dev/docs, 'Usage & credits'; prepaid billing not yet switched on, 19 Sep 2026, so nothing was charged) x measured input tokens (741 per decision on average over all 534 decisions)
 - **openJev Verdict 1.4** — $0.0039 est.: ESTIMATE: hosted-provider price, deepinfra base-size encoders (bge-base, e5-base, gte-base, all-mpnet-base) list price $0.005/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 452 input and 0 output tokens per decision (input tokens counted from the gemini-3.1-flash-lite run, same prompts)
+- **Winnow-12B Q8** — $0.0371 est.: ESTIMATE: hosted-provider price, OpenRouter google/gemma-3-12b-it hosted reference list price $0.05/M in, $0.0/M out (the nearest publicly hosted 12B Gemma sibling; Winnow reads answer logits in one forward pass and generates no answer tokens) x 393 input and 0 output tokens per decision (input tokens measured (the system's own count))
 - **reflex 4B (kshetrajna12)** — $0.0221 est.: ESTIMATE: hosted-provider price, DeepInfra Qwen/Qwen3.5-4B list price $0.03/M in, $0.0/M out (the exact base weights; one pass, no generated output) x 377 input and 0 output tokens per decision (input tokens measured (the system's own count))
 - **decision-machine-1 (milliseconds.ai)** — $0.0350: public tariff x measured tokens: $0.04 per million input tokens, output free (https://docs.milliseconds.ai/reference/pricing, read 2026-09-21) x 496 input tokens per easy/standard/judge decision as reported by the API; the run used the free test key, the price is the paid one
 - **Laya (421M)** — $0.0029 est.: ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 205 input and 0 output tokens per decision (input tokens measured (the system's own count))
@@ -326,6 +332,7 @@ Accuracy per subject topic over all four tiers (easy, standard, judge, hard): co
 | SemIf (Qwen3.5-4B) | 79.1 % | 96.4 % | 64.2 % | 60.9 % | 87.4 % | 100.0 % | 75.0 % |
 | djev (Maisa, diffusion-gemma) | 86.1 % | 94.6 % | 76.1 % | 64.1 % | 85.7 % | 98.7 % | 95.0 % |
 | openJev Verdict 1.4 | 64.3 % | 55.4 % | 38.8 % | 51.6 % | 37.8 % | 78.5 % | 60.0 % |
+| Winnow-12B Q8 | 82.2 % | 98.2 % | 82.1 % | 71.9 % | 79.8 % | 100.0 % | 90.0 % |
 | reflex 4B (kshetrajna12) | 86.1 % | 87.5 % | 68.7 % | 70.3 % | 84.0 % | 97.5 % | 80.0 % |
 | decision-machine-1 (milliseconds.ai) | 79.1 % | 82.1 % | 40.3 % | 56.2 % | 74.0 % | 86.1 % | 60.0 % |
 | Laya (421M) | 51.9 % | 58.9 % | 40.3 % | 54.7 % | 61.3 % | 83.5 % | 65.0 % |
@@ -376,6 +383,7 @@ Accuracy per subject topic over all four tiers (easy, standard, judge, hard): co
 
 ## Revision log
 
+- **v1.2.14** (2026-09-21): Added Winnow-12B Q8 after its author requested evaluation. The pinned Q8_0 GGUF ran all 534 unchanged decisions through the author's pinned TypeSafe-compatible server, serially on our lium.io RTX 4090. The row records the applicable Apache-2.0 Gemma 4 terms, non-zero hosted-reference cost and the independently unverifiable private-training overlap claim. No earlier measurement or task changed.
 - **v1.2.13** (2026-09-21): Added OpenJev (thinking, BF16) using OpenJev's native typed-API think=512 switch over DiffusionGemma. It ran all 534 unchanged decisions serially on the same H200. No earlier measurement or task changed.
 - **v1.2.12** (2026-09-21): Added djev (thinking), an experimental full-generation run over the same open DiffusionGemma checkpoint used by djev-dev. Thinking was enabled with a frozen 8,192-token output cap on all 534 unchanged decisions. Current djev-dev itself hard-codes thinking off, one denoising step and read-only inference, so this row is not presented as a switch in its published typed API. No earlier measurement or task changed.
 - **v1.2.10** (2026-09-21): Added smalljev semantic-v9 after its author requested evaluation. The public Apache-2.0 MiniCPM5-2B-Base LoRA and native decision heads ran all 534 frozen decisions serially on our lium.io A6000. Its mapping, endpoint condition, non-zero hosted-reference cost basis and public-benchmark-directed training disclosure were committed before the run (docs/v1.2-additions-smalljev.md). No earlier measurement or task changed.

@@ -1,0 +1,152 @@
+{
+ "key": "winnow-12b",
+ "display": "Winnow-12B Q8",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "Eldan Ring",
+ "repo": "https://huggingface.co/EldanRing/Winnow-12B",
+ "licence": "Apache-2.0, including the applicable Gemma 4 base/derivative licence terms",
+ "underlying": "google/gemma-4-12B-it LoRA fine-tune, merged and exported as Q8_0 GGUF",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.96875,
+  "judge": 0.910958904109589,
+  "hard": 0.7090909090909091
+ },
+ "hard": {
+  "run": "runs/winnow-12b--hard (job jevbench-add-requests-20260919)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.7090909090909091,
+  "by_family": {
+   "adversarial": {
+    "correct": 11,
+    "n": 12,
+    "accuracy": 0.9166666666666666
+   },
+   "ambiguous": {
+    "correct": 12,
+    "n": 14,
+    "accuracy": 0.8571428571428571
+   },
+   "judge_hard": {
+    "correct": 29,
+    "n": 33,
+    "accuracy": 0.8787878787878788
+   },
+   "long_policy": {
+    "correct": 25,
+    "n": 38,
+    "accuracy": 0.6578947368421053
+   },
+   "multi_hop": {
+    "correct": 24,
+    "n": 35,
+    "accuracy": 0.6857142857142857
+   },
+   "probability": {
+    "correct": 11,
+    "n": 20,
+    "accuracy": 0.55
+   },
+   "routing_hard": {
+    "correct": 10,
+    "n": 10,
+    "accuracy": 1.0
+   },
+   "temporal_numeric": {
+    "correct": 8,
+    "n": 30,
+    "accuracy": 0.26666666666666666
+   },
+   "tradeoff": {
+    "correct": 10,
+    "n": 12,
+    "accuracy": 0.8333333333333334
+   },
+   "trap": {
+    "correct": 16,
+    "n": 16,
+    "accuracy": 1.0
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.4051575575819251,
+  "ece": 0.11992766665864553,
+  "probability_fidelity": 67.92304895443986,
+  "calibration_score": 71.96875781135537,
+  "onehot": {
+   "ece": 0.2909090909090909,
+   "probability_fidelity": 47.842000000000006,
+   "calibration_score": 44.83009090909091
+  },
+  "latency_p50_s": 0.2846274711191654,
+  "latency_p95_s": 0.8760518249124287,
+  "mean_input_tokens": 1240.1863636363637,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.22503555566072464,
+  "p95_s": 0.4126893173903227,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.037087359550561805,
+  "usd_per_1000_v11_tiers": 0.01962611464968153,
+  "usd_per_1000_hard": 0.06200931818181819,
+  "basis_v11": "ESTIMATE: hosted-provider price, OpenRouter google/gemma-3-12b-it hosted reference list price $0.05/M in, $0.0/M out (the nearest publicly hosted 12B Gemma sibling; Winnow reads answer logits in one forward pass and generates no answer tokens) x 393 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "basis_hard": "ESTIMATE: OpenRouter google/gemma-3-12b-it hosted reference $0.05/M in, $0.0/M out x 1240 in / 0 out tokens per hard decision",
+  "basis_final": "ESTIMATE: hosted-provider price, OpenRouter google/gemma-3-12b-it hosted reference list price $0.05/M in, $0.0/M out (the nearest publicly hosted 12B Gemma sibling; Winnow reads answer logits in one forward pass and generates no answer tokens) x 393 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 71.96875781135537,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.11992766665864553,
+  "probability_fidelity": 67.92304895443986,
+  "brier_hard": 0.4051575575819251,
+  "brier_standard_judge_v11": 0.09509412904044282
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io RTX 4090 24 GB), reached over the internet from Germany; serial, one request at a time",
+ "note": "EldanRing/Winnow-12B b6ac22b; winnow-inference 6c2b3c0; Q8 GGUF sha256 b710efc...",
+ "footnote": "The submitted Q8_0 GGUF ran through the pinned author's TypeSafe-compatible /v1/systemone server with 8,192 context, four resident decision branches, Q8 KV, and full GPU offload. The private training corpus was not released. The author's checksum-based audit reports zero exact public-item overlap, but that claim cannot be independently reproduced; our scan found no exact public state or instruction text in the released artifacts. Cost uses the $0.05/M-input hosted Gemma 3 12B reference, not free/100.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 5.795467891382757e-07,
+   "first_request_s": 0.24021275341510773
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.96875,
+   "operational_success": 1.0,
+   "brier_mean": 0.04411943285274462,
+   "first_request_s": 0.21403955668210983
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.910958904109589,
+   "operational_success": 1.0,
+   "brier_mean": 0.12861173749262791,
+   "first_request_s": 0.2610037997364998
+  }
+ }
+}
