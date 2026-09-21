@@ -139,6 +139,8 @@ decisions through its author's `DecisionModel`, serially on our RunPod RTX 3090.
 published 64-token state and 48-token option limits, and hosted-price cost basis were pushed before the run
 ([`docs/v1.2-additions-certo.md`](docs/v1.2-additions-certo.md)). No earlier result or task changed.
 
+**v1.2.12 (tag `v1.2.12`): djev (thinking).** An experimental full-generation path over the same open DiffusionGemma checkpoint ran all 534 frozen decisions with thinking enabled and a fixed 8,192-token cap. Current djev-dev itself hard-codes thinking off, one denoising step and read-only inference, so this is not described as a switch in its published typed API. See [`docs/v1.2-additions-djev-thinking.md`](docs/v1.2-additions-djev-thinking.md).
+
 **v1.2.11 (tag `v1.2.11`): djev openness correction.** The djev score and all measurements are unchanged; its row now links the Apache-2.0 self-hostable runtime and identifies the Apache-2.0 Google base weights and absence of djev-specific weights.
 
 **v1.2.10 (tag `v1.2.10`): smalljev semantic-v9.** At Aditya's request, the public Apache-2.0

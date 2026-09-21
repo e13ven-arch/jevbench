@@ -136,7 +136,21 @@ class OpenAICompatAdapter:
         res.usage["input_tokens"] = res.usage.get("prompt_tokens",res.usage.get("input_tokens"))
         res.usage["output_tokens"] = res.usage.get("completion_tokens",res.usage.get("output_tokens"))
         try:
-            obj = json.loads(content)
+            # Reasoning-capable local runtimes may return a visible thought
+            # channel before the requested final JSON when native structured
+            # output is unavailable. Select the last complete object with the
+            # expected top-level key; never infer or repair probabilities.
+            candidates = []
+            for i, char in enumerate(content):
+                if char != "{":
+                    continue
+                try:
+                    candidate, _ = json.JSONDecoder().raw_decode(content[i:])
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(candidate, dict) and set(candidate) == {"probabilities"}:
+                    candidates.append(candidate)
+            obj = candidates[-1] if candidates else json.loads(content)
             if not isinstance(obj,dict) or set(obj)!={"probabilities"}: raise ValueError("JSON does not match schema")
             probs = obj["probabilities"]
             if not isinstance(probs, dict):

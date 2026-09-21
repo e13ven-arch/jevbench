@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.11",
+ "revision": "v1.2.12",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -2109,6 +2109,54 @@
      "attempted": 20,
      "correct": 11,
      "accuracy": 0.55
+    }
+   }
+  },
+  "djev-thinking": {
+   "display": "djev (thinking)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 110,
+     "accuracy": 0.8527
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 48,
+     "accuracy": 0.8571
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 50,
+     "accuracy": 0.7463
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 53,
+     "accuracy": 0.8281
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 97,
+     "accuracy": 0.8151
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 76,
+     "accuracy": 0.962
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
     }
    }
   }
