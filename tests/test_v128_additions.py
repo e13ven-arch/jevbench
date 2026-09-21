@@ -13,7 +13,7 @@ NEW = GPU_ROWS + API_ROWS + CPU_ROWS + [k for k in OPTIONAL if k in SYS]
 
 
 def test_v128_rows_are_complete_and_ranked():
-    assert ART["revision"] == "v1.2.8"
+    assert tuple(map(int, ART["revision"].removeprefix("v").split("."))) >= (1, 2, 8)
     for key in NEW:
         row = SYS[key]
         assert row["listing"] == "ranked" and row["rank"], key
@@ -48,3 +48,12 @@ def test_nimble_rerun_replaces_the_old_row_and_keeps_its_old_score():
     old = ART["superseded_rows"]["nimble-9b"]
     assert round(old["old_score"], 1) == 63.7 and old["old_tiers"]["hard"] < SYS["nimble-9b"]["tiers"]["hard"]
     assert SYS["nimble-9b"]["hard"]["coverage"] == 1.0 and "PR #4" in old["reason"]
+
+
+def test_certo_v129_is_complete_ranked_and_costed_from_retained_tokens():
+    row = SYS["certo"]
+    assert row["listing"] == "ranked" and row["rank"]
+    assert row["hard"]["coverage"] == 1.0 and not row["partial"]
+    assert row["endpoint_kind"] == "gpu"
+    assert row["cost"]["usd_per_1000"] > 0
+    assert "input tokens measured" in row["cost"]["basis"]

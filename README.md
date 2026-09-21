@@ -132,6 +132,12 @@ conditions and cost bases were pushed before the runs: [`docs/v1.2-additions-run
 [`docs/v1.2-additions-run4b.md`](docs/v1.2-additions-run4b.md). Not measurable this round: Werr (its server imports a
 module missing from the public repository) and DIY Jev (the repository answers 404). No earlier measurement changed.
 
+**v1.2.9 (tag `v1.2.9`): Certo v1.** At AltSlate Labs' request, the public MIT
+[`altslate/certo-decision-model`](https://huggingface.co/altslate/certo-decision-model) checkpoint ran all 534 frozen
+decisions through its author's `DecisionModel`, serially on our RunPod RTX 3090. The mapping, endpoint condition,
+published 64-token state and 48-token option limits, and hosted-price cost basis were pushed before the run
+([`docs/v1.2-additions-certo.md`](docs/v1.2-additions-certo.md)). No earlier result or task changed.
+
 ## v1.1.3: the GPU round
 
 **[Results -> `RESULTS-v1.1.3.md`](RESULTS-v1.1.3.md)** · artifact

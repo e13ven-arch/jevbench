@@ -1,0 +1,152 @@
+{
+ "key": "certo",
+ "display": "Certo v1 (AltSlate Labs)",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "AltSlate Labs",
+ "repo": "https://huggingface.co/altslate/certo-decision-model",
+ "licence": "MIT",
+ "underlying": "ModernBERT-large with a per-option query/scoring head, ~400M parameters",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 0.2777777777777778,
+  "standard": 0.3020833333333333,
+  "judge": 0.2191780821917808,
+  "hard": 0.3181818181818182
+ },
+ "hard": {
+  "run": "runs/certo--hard (job jevbench-add-requests-20260919)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.3181818181818182,
+  "by_family": {
+   "adversarial": {
+    "correct": 2,
+    "n": 12,
+    "accuracy": 0.16666666666666666
+   },
+   "ambiguous": {
+    "correct": 4,
+    "n": 14,
+    "accuracy": 0.2857142857142857
+   },
+   "judge_hard": {
+    "correct": 15,
+    "n": 33,
+    "accuracy": 0.45454545454545453
+   },
+   "long_policy": {
+    "correct": 13,
+    "n": 38,
+    "accuracy": 0.34210526315789475
+   },
+   "multi_hop": {
+    "correct": 7,
+    "n": 35,
+    "accuracy": 0.2
+   },
+   "probability": {
+    "correct": 7,
+    "n": 20,
+    "accuracy": 0.35
+   },
+   "routing_hard": {
+    "correct": 2,
+    "n": 10,
+    "accuracy": 0.2
+   },
+   "temporal_numeric": {
+    "correct": 12,
+    "n": 30,
+    "accuracy": 0.4
+   },
+   "tradeoff": {
+    "correct": 2,
+    "n": 12,
+    "accuracy": 0.16666666666666666
+   },
+   "trap": {
+    "correct": 6,
+    "n": 16,
+    "accuracy": 0.375
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.6629653915000002,
+  "ece": 0.037609090909090884,
+  "probability_fidelity": 71.58125,
+  "calibration_score": 82.02971590909091,
+  "onehot": {
+   "ece": 0.6818181818181819,
+   "probability_fidelity": 38.06900000000001,
+   "calibration_score": 19.034500000000005
+  },
+  "latency_p50_s": 0.019906828412786126,
+  "latency_p95_s": 0.02713130824267863,
+  "mean_input_tokens": 111.3409090909091,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.019205978140234947,
+  "p95_s": 0.031265050335787234,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.0009654868913857679,
+  "usd_per_1000_v11_tiers": 0.0008618471337579619,
+  "usd_per_1000_hard": 0.001113409090909091,
+  "basis_v11": "ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 86 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "basis_hard": "ESTIMATE: deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) $0.01/M in, $0.0/M out x 111 in / 0 out tokens per hard decision",
+  "basis_final": "ESTIMATE: hosted-provider price, deepinfra encoders of the same size (bge-large, e5-large, Qwen3-Embedding-0.6B) list price $0.01/M in, $0.0/M out (an encoder of the same size class; one forward pass, nothing generated) x 86 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 82.02971590909091,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.037609090909090884,
+  "probability_fidelity": 71.58125,
+  "brier_hard": 0.6629653915000002,
+  "brier_standard_judge_v11": 0.6887553576859503
+ },
+ "partial": false,
+ "endpoint_condition": "our RunPod GPU (GeForce RTX 3090 24 GB, community cloud), reached over the internet from Germany",
+ "note": "altslate/certo-decision-model 02f5961; model.pt sha256 92735ee2...; AltSlate-Labs/certo ed4d133",
+ "footnote": "The public Certo v1 checkpoint through the author's DecisionModel, serially on our rented GPU. The question instruction is prepended to the state because Certo exposes state + runtime options but no separate question field; the published 64-token state and 48-token option limits are unchanged. The model card says v1 does not yet transfer to arbitrary natural-language prose. Cost is an estimate from same-size hosted encoders times the checkpoint's retained input tokens, not free/100.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 0.2777777777777778,
+   "operational_success": 1.0,
+   "brier_mean": 0.7160819031944445,
+   "first_request_s": 0.9119335310533643
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.3020833333333333,
+   "operational_success": 1.0,
+   "brier_mean": 0.6810284733333333,
+   "first_request_s": 0.912769541144371
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.2191780821917808,
+   "operational_success": 1.0,
+   "brier_mean": 0.693836048767123,
+   "first_request_s": 0.028587682638317347
+  }
+ }
+}
