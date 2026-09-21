@@ -44,6 +44,6 @@ def test_an_incomplete_run_can_never_carry_a_rank():
             assert not s["rank"] and s["listing"] == "partial", s["key"]
 
 
-def test_the_earlier_gliner2_row_did_not_move():
-    assert round(SYS["gliner2"]["jevbench_score"], 1) == 53.0
+def test_the_earlier_gliner2_measurement_did_not_move():
+    # Its score changes under v1.3, but the measured tier value must not.
     assert SYS["gliner2"]["tiers"]["hard"] == SYS["gliner2"]["hard"]["accuracy"]

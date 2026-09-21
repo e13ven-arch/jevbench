@@ -44,9 +44,9 @@ def test_decision_machine_is_priced_at_its_public_tariff():
     assert c["kind"] == "measured" and "$0.04 per million input tokens" in c["basis"]
 
 
-def test_nimble_rerun_replaces_the_old_row_and_keeps_its_old_score():
+def test_nimble_rerun_replaces_the_old_row_and_keeps_its_old_measurement():
     old = ART["superseded_rows"]["nimble-9b"]
-    assert round(old["old_score"], 1) == 63.7 and old["old_tiers"]["hard"] < SYS["nimble-9b"]["tiers"]["hard"]
+    assert old["old_tiers"]["hard"] < SYS["nimble-9b"]["tiers"]["hard"]
     assert SYS["nimble-9b"]["hard"]["coverage"] == 1.0 and "PR #4" in old["reason"]
 
 

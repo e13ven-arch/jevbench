@@ -28,7 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from jevbench import composite_v12 as C  # noqa: E402
+from jevbench import composite_v13 as C  # noqa: E402
 
 V12 = ROOT / "results/v1.2"
 WIP = json.loads((V12 / "wip/jevbench-v1.2-wip-results.json").read_text())
@@ -78,8 +78,13 @@ SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the servi
 COST_FIX_REVISION = "v1.2.3"
 HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
-REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
+REVISION = "v1.3.0"
 REVISION_LOG = [e for e in [
+    {"revision": "v1.3.0", "date": "2026-09-22", "note":
+     "Scoring-only release; the task set and measurements are unchanged. Intelligence is now accuracy above each "
+     "item's uniform-guessing baseline, aggregated with the existing tier weights. If chance-corrected Intelligence "
+     "is below 50, the composite receives a growing (Intelligence / 50)^2 penalty. Calibration, Speed, Cost and "
+     "ranking eligibility are unchanged."},
     {"revision": "v1.2.16", "date": "2026-09-21", "note":
      "Added the reranker class and five Apache-2.0 open rerankers. A neutral adapter, identical task instructions, "
      "public-only temperature/yes-no calibration grids, and a no-instruction public baseline were preregistered "
@@ -159,7 +164,7 @@ REVISION_LOG = [e for e in [
      "through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), "
      "which is not yet charged (free preview). No other row changed."},
     {"revision": "v1.2", "date": "2026-09-19", "note": "Final JevBench Score: 4 axes, geometric mean."},
-] if e["revision"] in {"v1.2", COST_FIX_REVISION, HONORABLE_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
+] if e["revision"] == "v1.3.0" or e["revision"] in {"v1.2", COST_FIX_REVISION, HONORABLE_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
 ADDED_NAMES = {r: [ADDITIONS[k]["display"] for k in ADDITIONS if ADDED_IN[k] == r] for r in sorted({ADDED_IN[k] for k in ADDITIONS})}
 
 # open-alternative-jev: the ranked row is the run with the author's own yes/no option order ("A. yes, B. no", as his
@@ -362,11 +367,10 @@ def main():
         "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final" + (
             "; later additions measured on the same frozen items: " + "; ".join(f"{r}: " + ", ".join(n) for r, n in ADDED_NAMES.items()) if ADDITIONS else ""),
-        "revision_note": "v1.2 final: 4 axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean; hard tier 30 % of Intelligence; "
-                         "latency of non-production endpoints adjusted (assumption); one open-alternative-jev row (author's option order); "
-                         "Needle 3 options-as-tools priced." + "".join(f" {r}: added " + ", ".join(n) + "." for r, n in ADDED_NAMES.items()),
+        "revision_note": "v1.3.0 scoring-only release: Intelligence is chance-corrected per tier and scores below 50 receive the growing near-chance penalty. "
+                         "Calibration, Speed, Cost, ranking eligibility, tasks and measurements are unchanged.",
         "score_name": "JevBench Score",
-        "score_one_liner": "Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.",
+        "score_one_liner": "Intelligence above chance, Calibration, Speed, Cost — 25 % each, geometric mean; below 50 Intelligence receives a growing near-chance penalty.",
         "tiers": WIP["tiers"], "tier_weights": C.TIER_WEIGHTS, "axis_weights": C.WEIGHTS,
         "presets": {k: dict(zip(C.AXES, v)) for k, v in C.PRESETS.items()}, "main": C.MAIN,
         "speed_note": C.SPEED_NOTE,
@@ -386,10 +390,10 @@ def main():
                                       "pct": f["delta_pct"], "unchanged": f["unchanged"]}
                                   for k, f in COST_FIX["systems"].items()},
         "scoring": {
-            "jevbench_score": "exp(sum over the four axes of 0.25 x ln(max(axis, 1))) — the geometric mean of Intelligence, Calibration, Speed and Cost. "
-                              "A weak axis pulls the score down hard; a strong axis cannot buy it back.",
-            "intelligence": "100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 %. Accuracy = correct / all items; failed, "
-                            "timed-out or unparseable answers count as wrong.",
+            "jevbench_score": "Geometric mean of Intelligence, Calibration, Speed and Cost, 25 % each. If chance-corrected Intelligence is below 50, "
+                              "multiply by (Intelligence / 50)^2; at or above 50 there is no penalty.",
+            "intelligence": "Per tier: 100 x (accuracy - chance) / (1 - chance), clipped at 0. Chance is 1 / options for each item (1 / levels for score items), "
+                            "then averaged within the tier. Tier weights: hard 30 %, easy 14 %, standard 28 %, judge 28 %. Failed, timed-out or unparseable answers count as wrong.",
             "hard_tier": WIP["scoring"]["hard_tier"],
             "calibration": WIP["scoring"]["calibration"].split(" Label-only")[0] + " Label-only systems have none; it counts as 0 in the JevBench Score.",
             "speed": "Mean of score(p50) and score(p95) of the serial 242-decision standard+judge run; score(s) = 100 - 20 log10(s / 0.1 s), "

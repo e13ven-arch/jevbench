@@ -34,6 +34,8 @@ def topic_table():
     head = "| System | " + " | ".join(f'{t["label"]} ({TOP["n_items"][t["key"]]})' for t in TOP["topics"]) + " |"
     rows = []
     for s in ranked + honorable + partial:
+        if s["key"] not in TOP["systems"]:
+            continue
         tp = TOP["systems"][s["key"]]["topics"]
         cell = lambda a: "—" if a["accuracy"] is None else f'{100 * a["accuracy"]:.1f} %' + ("" if a["attempted"] >= TOP["min_attempted"] else f' (n={a["attempted"]}, too few)')
         rows.append(f"| {name(s)}{'' if s['ranked'] else (' (partial)' if s['partial'] else ' (honorable mention)')} | " + " | ".join(cell(tp[k]) for k in ks) + " |")
@@ -97,7 +99,7 @@ md = f"""# JevBench {R['revision']} — results
 **JevBench Score** = {R['score_one_liner']}
 
 Artifact: [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) · scoring code:
-[`jevbench/composite_v12.py`](jevbench/composite_v12.py) · built by [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py) from the
+[`jevbench/composite_v13.py`](jevbench/composite_v13.py) · built by [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py) from the
 v1.2-wip measurements (tag `v1.2-wip`; no measurement changed; later revisions add systems measured on the same frozen items, see the revision log) · interactive page: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models)
 
 ![JevBench Score](results/v1.2/charts/main-score.png)
@@ -166,7 +168,18 @@ its rubric and its options — hundreds to thousands of input tokens. """ + R["c
 
 """ + log + """
 
-## What changed from v1.2-wip
+## What changed in the score (v1.3.0)
+
+A system that is cheap and fast but barely better than guessing could rank high; intelligence is now measured above
+chance, and systems below half-way get a growing penalty.
+
+- Intelligence is `(accuracy - chance) / (1 - chance)` within each tier, clipped at zero. Chance is computed for every
+  frozen item as `1 / number of options` (`1 / levels` for score items), before the unchanged 14:28:28:30 tier weighting.
+- If chance-corrected Intelligence is below 50, the composite is multiplied by `(Intelligence / 50)²`. At 50 or above,
+  no penalty applies.
+- Calibration, Speed, Cost, the task set, measurements and ranking eligibility are unchanged.
+
+## What changed from v1.2-wip to v1.2
 
 - Score: four axes (Intelligence, Calibration, Speed, Cost), 25 % each, geometric mean — replaces the Balanced 33:33:33 arithmetic Main Score.
 - Intelligence weights hard 30 % (was 50 %); the rest 1 : 2 : 2 over easy : standard : judge.

@@ -11,16 +11,16 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.2.3: the JevBench Score (current)
+## v1.3.0: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
 interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
 
-**JevBench Score** = Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean: a weak axis pulls the score down hard.
+**JevBench Score** = chance-corrected Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean. Below 50 Intelligence, multiply the score by `(Intelligence / 50)²`.
 
 | Axis | Score 0-100 |
 |---|---|
-| **Intelligence** | 100 x weighted accuracy: hard 30 %, easy 14 %, standard 28 %, judge 28 % |
+| **Intelligence** | `(accuracy - chance) / (1 - chance)` per tier, clipped at 0; hard 30 %, easy 14 %, standard 28 %, judge 28 % |
 | **Calibration** | hard tier: ECE + fidelity to exact gold distributions (label-only systems: none, counts as 0) |
 | **Speed** | mean of score(p50), score(p95); score(s) = 100 - 20 log10(s / 0.1 s): 0.1 s = 100, each 10x slower -20 |
 | **Cost** | 100 - 30 log10($ per 1,000 decisions / $0.001): $0.001 = 100, each 10x more expensive -30 |
@@ -39,21 +39,27 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking (38 ranked rows): **Jev 1.13.0 (TypeSafe AI) 75.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 74.7 · djev (Maisa, diffusion-gemma) 74.3 · openJev Verdict 1.4 72.5 · reflex 4B (kshetrajna12) 71.7 · decision-machine-1 (milliseconds.ai) 71.5. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Top of the ranking (48 ranked rows): **Jev 1.13.0 (TypeSafe AI) 74.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 73.1 · djev (Maisa, diffusion-gemma) 73.0 · Winnow-12B Q8 71.2 · reflex 4B (kshetrajna12) 70.3. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
 - djev is self-hostable: [`Davipar/djev-dev`](https://github.com/Davipar/djev-dev) is Apache-2.0 code over Google's Apache-2.0 DiffusionGemma weights. It is an inference method, not a separately trained model, and adds no weights of its own. `djev-spark` is another DiffusionGemma structured-read runtime, not another model row.
-- **Honorable mention, not ranked: classifier.dev (fast tier) 84.8.** A service that runs another entrant's model is
+- **Honorable mention, not ranked: classifier.dev (fast tier) 83.6.** A service that runs another entrant's model is
   listed with all of its scores and axes, but is not ranked against the models — its fast tier *is* Jev
   ("The fast tier is Jev, TypeSafe's decision model", [classifier.dev/benchmark](https://classifier.dev/benchmark)), so
   ranking it would rank Jev's model against Jev's model at a different price. See
   [Honorable mentions](RESULTS-v1.2.md#honorable-mentions--services-built-on-another-entrants-model).
-- Scoring code: [`jevbench/composite_v12.py`](jevbench/composite_v12.py); the final artifact is rebuilt from the frozen measurements by
+- Scoring code: [`jevbench/composite_v13.py`](jevbench/composite_v13.py); the final artifact is rebuilt from the frozen measurements by
   [`scripts/v1.2/finalize.py`](scripts/v1.2/finalize.py), charts by [`scripts/v1.2/charts.py`](scripts/v1.2/charts.py).
   Per-task outcomes (public items): [`results/v1.2/jevbench-v1.2-per-task.json`](results/v1.2/jevbench-v1.2-per-task.json).
 - open-alternative-jev is ranked with the author's own option order (`A. yes, B. no`). With the options in reverse order
   (`A. no, B. yes`) the same model scored 21 % instead of 72 % on answer-judging items — small models are very sensitive to
   option order. Both runs: [`results/v1.2/runs/open-alternative-jev/`](results/v1.2/runs/open-alternative-jev/).
 
-![JevBench v1.2 — JevBench Score](results/v1.2/charts/main-score.png)
+![JevBench v1.3.0 — JevBench Score](results/v1.2/charts/main-score.png)
+
+### What changed in the score
+
+A system that is cheap and fast but barely better than guessing could rank high; intelligence is now measured above
+chance, and systems below half-way get a growing penalty. The task set, Calibration, Speed, Cost and who is eligible
+for a rank are unchanged.
 
 **Revision log of v1.2 (19 Sep 2026; items and answers never changed after the freeze):**
 v1.2-wip (tag `v1.2-wip`) hard tier + calibration sub-score, Balanced 33:33:33 Main Score with hard 50 % of Capability;
