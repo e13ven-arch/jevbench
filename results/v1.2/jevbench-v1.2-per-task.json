@@ -1,6 +1,6 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.10",
+ "revision": "v1.2.11",
  "status": "final",
  "note": "Outcome codes: c correct, w wrong, f failed (scored wrong), n not attempted. Topic = item family. Per-task outcomes only for public items; held-out and imported items only in aggregates. Tier 'standard' and 'judge' accuracies are over all items of the tier (failures count as wrong), as in the scores.",
  "tasks": [

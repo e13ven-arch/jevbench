@@ -2,11 +2,11 @@
  "key": "djev",
  "display": "djev (Maisa, diffusion-gemma)",
  "class": "jev-rebuild",
- "open": "planned",
+ "open": "yes",
  "author": "Maisa (David Villalón)",
- "repo": "https://djev.dev",
- "licence": "hosted API; open-sourcing announced, not yet released",
- "underlying": "diffusion-gemma (Gemma-based diffusion model, djev-0.1, one denoising step)",
+ "repo": "https://github.com/Davipar/djev-dev",
+ "licence": "Apache-2.0 code; Google DiffusionGemma Apache-2.0 weights; no djev-specific weights",
+ "underlying": "inference method on google/diffusiongemma-26B-A4B-it (one structured denoising read), not a separately trained model",
  "has_distribution": true,
  "probability_source": [
   "native"
@@ -147,5 +147,5 @@
    "first_request_s": 0.7758965417742729
   }
  },
- "footnote": "Hosted API in free preview: the cost uses djev's announced price ($0.035 per million input tokens, output free); nothing is charged yet. Open-sourcing is planned, not yet released. Probabilities are djev's own (its docs call them experimental and uncalibrated)."
+ "footnote": "The measured endpoint was Maisa's hosted API in free preview; the cost uses its announced price ($0.035 per million input tokens, output free), and nothing was charged. The self-hostable djev-dev runtime is Apache-2.0 and applies a structured one-step inference method to Google's Apache-2.0 diffusiongemma-26B-A4B-it checkpoint; it adds no separately trained djev weights. Probabilities are djev's own (its docs call them experimental and uncalibrated)."
 }

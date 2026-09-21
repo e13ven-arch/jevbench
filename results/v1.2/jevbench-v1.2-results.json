@@ -1,7 +1,12 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.10",
+ "revision": "v1.2.11",
  "revision_log": [
+  {
+   "revision": "v1.2.11",
+   "date": "2026-09-21",
+   "note": "Corrected djev's openness metadata after Maisa engineer David Villalón published Davipar/djev-dev under Apache-2.0. It is an open inference method and runtime over Google's Apache-2.0 DiffusionGemma checkpoint, with no separately trained djev weights. Scores, measurements, ranks and tasks are unchanged."
+  },
   {
    "revision": "v1.2.10",
    "date": "2026-09-21",
@@ -362,7 +367,7 @@
   "decider-2b": "The author's TypeSafe-compatible server and published weights (Qwen3.5-2B-Base with a trained one-pass decision readout), run serially on our GPU. Self-host latency gets the standard ×2 + 0.15 s adjustment.",
   "decider-35b-a3b": "The author's TypeSafe-compatible server and published FP8 weights, run serially on our H100 NVL. The exhaustive startup batch warmup was skipped; each required serial shape captured lazily before its measured request. Self-host latency receives the standard ×2 + 0.15 s adjustment. Cost uses the closest hosted 35B-A3B input tariff and is not the temporary rental charge.",
   "decision-machine-1": "A closed-weights decision model behind a production API that serves TypeSafe's wire format, so the unchanged typesafe adapter ran it. Run on a free test key (30 requests a minute, 2.2 s between requests); the provider states the inference infrastructure is the same as for paid keys. Cost is the public paid tariff, $0.04 per million input tokens (output free), times the input tokens the API reported.",
-  "djev": "Hosted API in free preview: the cost uses djev's announced price ($0.035 per million input tokens, output free); nothing is charged yet. Open-sourcing is planned, not yet released. Probabilities are djev's own (its docs call them experimental and uncalibrated).",
+  "djev": "The measured endpoint was Maisa's hosted API in free preview; the cost uses its announced price ($0.035 per million input tokens, output free), and nothing was charged. The self-hostable djev-dev runtime is Apache-2.0 and applies a structured one-step inference method to Google's Apache-2.0 diffusiongemma-26B-A4B-it checkpoint; it adds no separately trained djev weights. Probabilities are djev's own (its docs call them experimental and uncalibrated).",
   "gliner2-large": "The large checkpoint of Fastino's earlier GLiNER2 family, same documented mapping as the GLiNER2 row: the question goes in front of the text and the probabilities are the model's own single-label softmax over the labels, read out in full. A general schema classifier, not a Jev rebuild.",
   "gliner2.5-multi": "The multilingual GLiNER2.5 checkpoint (287M), same family and same documented mapping as the GLiNER2 row. JevBench items are English only, so its multilingual training is not exercised here.",
   "gliner2.5-small": "The small GLiNER2.5 checkpoint (74M), same family and same documented mapping as the GLiNER2 row: the question goes in front of the text and the probabilities are the model's own single-label softmax over the labels, read out in full. A general schema classifier, not a Jev rebuild.",
@@ -760,11 +765,11 @@
    "key": "djev",
    "display": "djev (Maisa, diffusion-gemma)",
    "class": "jev-rebuild",
-   "open": "planned",
+   "open": "yes",
    "author": "Maisa (David Villalón)",
-   "repo": "https://djev.dev",
-   "licence": "hosted API; open-sourcing announced, not yet released",
-   "underlying": "diffusion-gemma (Gemma-based diffusion model, djev-0.1, one denoising step)",
+   "repo": "https://github.com/Davipar/djev-dev",
+   "licence": "Apache-2.0 code; Google DiffusionGemma Apache-2.0 weights; no djev-specific weights",
+   "underlying": "inference method on google/diffusiongemma-26B-A4B-it (one structured denoising read), not a separately trained model",
    "has_distribution": true,
    "probability_source": [
     "native"
