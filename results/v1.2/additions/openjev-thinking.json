@@ -1,0 +1,152 @@
+{
+ "key": "openjev-thinking",
+ "display": "OpenJev (thinking, BF16)",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "razorback16",
+ "repo": "https://github.com/razorback16/openjev",
+ "licence": "Apache-2.0",
+ "underlying": "google/diffusiongemma-26b-a4b-it, BF16; OpenJev think=512",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 1.0,
+  "judge": 0.9452054794520548,
+  "hard": 0.7818181818181819
+ },
+ "hard": {
+  "run": "runs/openjev-thinking--hard (job jevbench-add-requests-20260919)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.7818181818181819,
+  "by_family": {
+   "adversarial": {
+    "correct": 12,
+    "n": 12,
+    "accuracy": 1.0
+   },
+   "ambiguous": {
+    "correct": 14,
+    "n": 14,
+    "accuracy": 1.0
+   },
+   "judge_hard": {
+    "correct": 31,
+    "n": 33,
+    "accuracy": 0.9393939393939394
+   },
+   "long_policy": {
+    "correct": 19,
+    "n": 38,
+    "accuracy": 0.5
+   },
+   "multi_hop": {
+    "correct": 29,
+    "n": 35,
+    "accuracy": 0.8285714285714286
+   },
+   "probability": {
+    "correct": 15,
+    "n": 20,
+    "accuracy": 0.75
+   },
+   "routing_hard": {
+    "correct": 10,
+    "n": 10,
+    "accuracy": 1.0
+   },
+   "temporal_numeric": {
+    "correct": 14,
+    "n": 30,
+    "accuracy": 0.4666666666666667
+   },
+   "tradeoff": {
+    "correct": 12,
+    "n": 12,
+    "accuracy": 1.0
+   },
+   "trap": {
+    "correct": 16,
+    "n": 16,
+    "accuracy": 1.0
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.3361950043526198,
+  "ece": 0.13293071724492195,
+  "probability_fidelity": 65.70556085965308,
+  "calibration_score": 69.55970870533434,
+  "onehot": {
+   "ece": 0.21818181818181814,
+   "probability_fidelity": 55.79700000000001,
+   "calibration_score": 56.08031818181819
+  },
+  "latency_p50_s": 0.8800784219056368,
+  "latency_p95_s": 1.2348620565375312,
+  "mean_input_tokens": 2901.8136363636363,
+  "mean_output_tokens": 447.8681818181818,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.46296589844860137,
+  "p95_s": 1.0775369299459272,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.25463898876404495,
+  "usd_per_1000_v11_tiers": 0.15592996815286625,
+  "usd_per_1000_hard": 0.39552368181818176,
+  "basis_v11": "ESTIMATE: same-size hosted reference $0.09/M in, $0.30/M out x 991 billed input and 222 thought output tokens per decision",
+  "basis_hard": "ESTIMATE: same hosted reference x 2902 billed input and 448 thought output tokens per hard decision",
+  "basis_final": "ESTIMATE: same hosted reference x 1778 billed input and 315 thought output tokens per decision",
+  "self_host_sensitivity": "Actual serial H200 rental equivalent: $0.585/1,000 decisions at measured 0.702s mean wall time and $3.00/hour; excludes setup/idle time."
+ },
+ "calibration": {
+  "score": 69.55970870533434,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.13293071724492195,
+  "probability_fidelity": 65.70556085965308,
+  "brier_hard": 0.3361950043526198,
+  "brier_standard_judge_v11": 0.06627872347289883
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io H200 141 GB), reached over the internet from Germany; serial, one request at a time",
+ "note": "razorback16/openjev 2d20174; google/diffusiongemma-26b-a4b-it; think=512",
+ "footnote": "OpenJev's real typed-API thinking switch at think=512, using its own /v1/systemone server over BF16 DiffusionGemma. The thought is generated first, then native probability reads are taken after it. All 534 requests returned valid distributions. Cost counts the server's billed input and thought output tokens.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.005313378204764282,
+   "first_request_s": 6.59806677303277
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.013230634589439391,
+   "first_request_s": 0.43221211107447743
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.9452054794520548,
+   "operational_success": 1.0,
+   "brier_mean": 0.10115965862914612,
+   "first_request_s": 0.6313784229569137
+  }
+ }
+}

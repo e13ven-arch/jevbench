@@ -65,7 +65,8 @@ ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1
             "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6",
             "decider-35b-a3b": "v1.2.8", "reflex-27b": "v1.2.8", "decision-machine-1": "v1.2.8", "decider-2b": "v1.2.8",
             "reflex-4b": "v1.2.8", "gliner2-large": "v1.2.8", "jev-local": "v1.2.8", "nimble-9b": "v1.2.8", "litjev": "v1.2.8",
-            "certo": "v1.2.9", "smalljev": "v1.2.10", "djev-thinking": "v1.2.12"}
+            "certo": "v1.2.9", "smalljev": "v1.2.10", "djev-thinking": "v1.2.12",
+            "openjev-thinking": "v1.2.13"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 # A complete re-run that replaces an earlier row (same frozen items, same scorer); the old score stays in the artifact.
 SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the serving prompt limit from 2,048 to 8,192 tokens "
@@ -75,6 +76,9 @@ HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
+    {"revision": "v1.2.13", "date": "2026-09-21", "note":
+     "Added OpenJev (thinking, BF16) using OpenJev's native typed-API think=512 switch over DiffusionGemma. It ran "
+     "all 534 unchanged decisions serially on the same H200. No earlier measurement or task changed."},
     {"revision": "v1.2.12", "date": "2026-09-21", "note":
      "Added djev (thinking), an experimental full-generation run over the same open DiffusionGemma checkpoint used "
      "by djev-dev. Thinking was enabled with a frozen 8,192-token output cap on all 534 unchanged decisions. Current "
