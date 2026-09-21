@@ -1,0 +1,152 @@
+{
+ "key": "open-jev-zefan-2b",
+ "display": "Open-Jev 2B (Zefan Cai)",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "Zefan Cai (@Zefan_Cai)",
+ "repo": "https://github.com/Zefan-Cai/Open-Jev",
+ "licence": "MIT (loader); Apache-2.0 (adapter and pinned Qwen base); CC0-1.0 public training projection",
+ "underlying": "Qwen3.5-2B plus rank-8 LoRA and trained scalar decision head",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.7916666666666666,
+  "judge": 0.8835616438356164,
+  "hard": 0.42727272727272725
+ },
+ "hard": {
+  "run": "runs/open-jev-zefan-2b--hard (job jevbench-zefan-openjev-20260921)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.42727272727272725,
+  "by_family": {
+   "adversarial": {
+    "correct": 6,
+    "n": 12,
+    "accuracy": 0.5
+   },
+   "ambiguous": {
+    "correct": 3,
+    "n": 14,
+    "accuracy": 0.21428571428571427
+   },
+   "judge_hard": {
+    "correct": 20,
+    "n": 33,
+    "accuracy": 0.6060606060606061
+   },
+   "long_policy": {
+    "correct": 8,
+    "n": 38,
+    "accuracy": 0.21052631578947367
+   },
+   "multi_hop": {
+    "correct": 18,
+    "n": 35,
+    "accuracy": 0.5142857142857142
+   },
+   "probability": {
+    "correct": 7,
+    "n": 20,
+    "accuracy": 0.35
+   },
+   "routing_hard": {
+    "correct": 8,
+    "n": 10,
+    "accuracy": 0.8
+   },
+   "temporal_numeric": {
+    "correct": 5,
+    "n": 30,
+    "accuracy": 0.16666666666666666
+   },
+   "tradeoff": {
+    "correct": 5,
+    "n": 12,
+    "accuracy": 0.4166666666666667
+   },
+   "trap": {
+    "correct": 14,
+    "n": 16,
+    "accuracy": 0.875
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.7779483924445973,
+  "ece": 0.2573327936087847,
+  "probability_fidelity": 61.57396445297609,
+  "calibration_score": 55.05370286560958,
+  "onehot": {
+   "ece": 0.5727272727272728,
+   "probability_fidelity": 41.585499999999996,
+   "calibration_score": 20.792749999999998
+  },
+  "latency_p50_s": 0.6978476755321026,
+  "latency_p95_s": 1.2396420393139123,
+  "mean_input_tokens": 3985.2090909090907,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.664745207875967,
+  "p95_s": 1.450564834475517,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.24882153558052428,
+  "usd_per_1000_v11_tiers": 0.14393662420382164,
+  "usd_per_1000_hard": 0.39852090909090904,
+  "basis_v11": "ESTIMATE: hosted-provider price, OpenRouter Qwen3.5-9B list price read 2026-09-21 list price $0.1/M in, $0.0/M out (the exact 9B base and a conservative same-family proxy for the unlisted 2B; the decision head generates no output tokens) x 1439 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "basis_hard": "ESTIMATE: OpenRouter Qwen3.5-9B list price read 2026-09-21 $0.1/M in, $0.0/M out x 3985 in / 0 out tokens per hard decision",
+  "basis_final": "ESTIMATE: hosted-provider price, OpenRouter Qwen3.5-9B list price read 2026-09-21 list price $0.1/M in, $0.0/M out (the exact 9B base and a conservative same-family proxy for the unlisted 2B; the decision head generates no output tokens) x 1439 input and 0 output tokens per decision (input tokens measured (the system's own count))",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 55.05370286560958,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.2573327936087847,
+  "probability_fidelity": 61.57396445297609,
+  "brier_hard": 0.7779483924445973,
+  "brier_standard_judge_v11": 0.26468498350008274
+ },
+ "partial": false,
+ "endpoint_condition": "our RunPod GPU (H100 80GB HBM3), reached over the internet",
+ "note": "HF 0c7aa498b1627be8da4acf34c863ff0ee0a92785; code f46ff604f794b1932d1a6f34725c8163e550952a",
+ "footnote": "The author's pinned LoRA adapter, trained scalar decision head and calibration temperature, served by the author's Open-Jev server with prefix caching off, batch size 1 and 4,096-token limit. Serial requests were measured from Sandy over an SSH tunnel to the H100. Self-host latency receives the standing x2 + 0.15 s adjustment. Cost uses the exact Qwen3.5-9B hosted input tariff for 9B and the same conservative same-family proxy for the unlisted 2B; neither receives an automatic 100. Exact normalized comparison found no JevBench public task state or instruction in the 79,116-row public training projection.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.02576536878490343,
+   "first_request_s": 1.0548527538776398
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.7916666666666666,
+   "operational_success": 1.0,
+   "brier_mean": 0.294912046451642,
+   "first_request_s": 0.3672645464539528
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.8835616438356164,
+   "operational_success": 1.0,
+   "brier_mean": 0.2448096544360437,
+   "first_request_s": 1.100505419075489
+  }
+ }
+}
