@@ -62,14 +62,17 @@ ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1
             "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.8",
             "jqv": "v1.2.7", "gliner2.5-small": "v1.2.7", "gliner2.5-multi": "v1.2.7", "opendecision": "v1.2.7",
             "kev-0.5b": "v1.2.5", "kev-0.6b": "v1.2.5", "kev-4b": "v1.2.5", "kev-8b": "v1.2.5",
-            "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6"}
+            "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6",
+            "decider-35b-a3b": "v1.2.8", "reflex-27b": "v1.2.8"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 COST_FIX_REVISION = "v1.2.3"
 HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
-    {"revision": "v1.2.8", "date": None, "note": "Added ProgramAsWeights (one compiled program per question), same rules. No other row changed."},
+    {"revision": "v1.2.8", "date": "2026-09-21", "note":
+     "Added decider-35b-a3b and reflex-27b on the unchanged frozen 534-decision set. Both ran through the existing "
+     "TypeSafe adapter, one request at a time, on our credential-free H100 NVL pod. No earlier row changed."},
     {"revision": "v1.2.7", "date": "2026-09-20", "note":
      "Added three systems: jqv (a stock Qwen3-32B read as a decision model, submitted with a public endpoint) and the "
      "GLiNER2.5 small and multi checkpoints. The GLiNER2.5 rows ran the full frozen 534-decision set on our CPU with "

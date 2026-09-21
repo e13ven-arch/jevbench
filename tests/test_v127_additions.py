@@ -14,7 +14,7 @@ N_HARD, N_PUBLIC_HARD = 220, 111
 
 
 def test_the_new_rows_are_present_in_this_revision():
-    assert ART["revision"] == "v1.2.7"
+    assert tuple(map(int, ART["revision"].removeprefix("v").split("."))) >= (1, 2, 7)
     for key in [*NEW_COMPLETE, "jqv"]:
         assert key in SYS, key
 
