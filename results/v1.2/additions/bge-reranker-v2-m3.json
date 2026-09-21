@@ -1,0 +1,319 @@
+{
+ "key": "bge-reranker-v2-m3",
+ "display": "BAAI bge-reranker-v2-m3",
+ "class": "reranker",
+ "open": "yes",
+ "author": "BAAI",
+ "repo": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+ "licence": "Apache-2.0",
+ "underlying": "568M multilingual cross-encoder",
+ "has_distribution": true,
+ "probability_source": [
+  "public_calibrated_reranker_softmax"
+ ],
+ "tiers": {
+  "easy": 0.4305555555555556,
+  "standard": 0.3645833333333333,
+  "judge": 0.08904109589041095,
+  "hard": 0.36818181818181817
+ },
+ "hard": {
+  "run": "runs/bge-reranker-v2-m3--hard (job jevbench-add-requests-20260919)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.36818181818181817,
+  "by_family": {
+   "adversarial": {
+    "correct": 6,
+    "n": 12,
+    "accuracy": 0.5
+   },
+   "ambiguous": {
+    "correct": 6,
+    "n": 14,
+    "accuracy": 0.42857142857142855
+   },
+   "judge_hard": {
+    "correct": 17,
+    "n": 33,
+    "accuracy": 0.5151515151515151
+   },
+   "long_policy": {
+    "correct": 16,
+    "n": 38,
+    "accuracy": 0.42105263157894735
+   },
+   "multi_hop": {
+    "correct": 9,
+    "n": 35,
+    "accuracy": 0.2571428571428571
+   },
+   "probability": {
+    "correct": 9,
+    "n": 20,
+    "accuracy": 0.45
+   },
+   "routing_hard": {
+    "correct": 0,
+    "n": 10,
+    "accuracy": 0.0
+   },
+   "temporal_numeric": {
+    "correct": 9,
+    "n": 30,
+    "accuracy": 0.3
+   },
+   "tradeoff": {
+    "correct": 3,
+    "n": 12,
+    "accuracy": 0.25
+   },
+   "trap": {
+    "correct": 6,
+    "n": 16,
+    "accuracy": 0.375
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.6627383026655216,
+  "ece": 0.022679951965887575,
+  "probability_fidelity": 72.18897252368282,
+  "calibration_score": 83.82649106525265,
+  "onehot": {
+   "ece": 0.6318181818181818,
+   "probability_fidelity": 39.899499999999996,
+   "calibration_score": 19.949749999999998
+  },
+  "latency_p50_s": 0.040032369550317526,
+  "latency_p95_s": 0.24636488300748166,
+  "mean_input_tokens": 4623.740909090909,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.034560746513307095,
+  "p95_s": 0.17954895906150325,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "measured",
+  "usd_per_1000": 0.007718915951068509,
+  "usd_per_1000_v11_tiers": 0.005582540915812308,
+  "usd_per_1000_hard": 0.010768105774115997,
+  "basis_v11": "MEASURED model inference time x lium.io A6000 tariff USD 0.42/hour; excludes shared setup/download overhead",
+  "basis_hard": "MEASURED hard-item inference time x lium.io A6000 tariff USD 0.42/hour",
+  "basis_final": "MEASURED model inference time x lium.io A6000 tariff USD 0.42/hour",
+  "self_host_sensitivity": "Whole five-model rental including setup/download was USD 0.21."
+ },
+ "calibration": {
+  "score": 83.82649106525265,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.022679951965887575,
+  "probability_fidelity": 72.18897252368282,
+  "brier_hard": 0.6627383026655216,
+  "brier_standard_judge_v11": 0.7142212126429204
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io A6000 48 GB), serial, one option batch per decision",
+ "note": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+ "footnote": "Neutral documented reranker adapter; instruction and no-instruction public calibration were run, then frozen before one held-out pass.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 0.4305555555555556,
+   "operational_success": 1.0,
+   "brier_mean": 0.6779942169620987,
+   "first_request_s": 0.38098839577287436
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.3645833333333333,
+   "operational_success": 1.0,
+   "brier_mean": 0.6738831110039558,
+   "first_request_s": 0.03366701118648052
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.08904109589041095,
+   "operational_success": 1.0,
+   "brier_mean": 0.7407448959123767,
+   "first_request_s": 0.05877479258924723
+  }
+ },
+ "calibration_protocol": {
+  "model": "BAAI/bge-reranker-v2-m3",
+  "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "public_only": true,
+  "instruction": {
+   "temperature": 4.0,
+   "noul_threshold": 0.55,
+   "curves": {
+    "temperature": [
+     {
+      "temperature": 0.25,
+      "log_loss": 2.925847413937923,
+      "accuracy": 0.36796536796536794,
+      "ece": 0.4116775375092955
+     },
+     {
+      "temperature": 0.5,
+      "log_loss": 1.788309731135343,
+      "accuracy": 0.3722943722943723,
+      "ece": 0.29435951156314005
+     },
+     {
+      "temperature": 1.0,
+      "log_loss": 1.346142593978813,
+      "accuracy": 0.37662337662337664,
+      "ece": 0.1589549008849504
+     },
+     {
+      "temperature": 2.0,
+      "log_loss": 1.225282827323013,
+      "accuracy": 0.37662337662337664,
+      "ece": 0.0667641799782917
+     },
+     {
+      "temperature": 4.0,
+      "log_loss": 1.2091672360186827,
+      "accuracy": 0.3939393939393939,
+      "ece": 0.04086836793218785
+     },
+     {
+      "temperature": 8.0,
+      "log_loss": 1.2140754399389218,
+      "accuracy": 0.3852813852813853,
+      "ece": 0.04193828333439115
+     }
+    ],
+    "noul_threshold": [
+     {
+      "threshold": 0.3,
+      "accuracy": 0.47297297297297297,
+      "ece": 0.272051760402219
+     },
+     {
+      "threshold": 0.4,
+      "accuracy": 0.47297297297297297,
+      "ece": 0.18073850888314041
+     },
+     {
+      "threshold": 0.45,
+      "accuracy": 0.47297297297297297,
+      "ece": 0.13365469376655167
+     },
+     {
+      "threshold": 0.5,
+      "accuracy": 0.4594594594594595,
+      "ece": 0.10762818742489474
+     },
+     {
+      "threshold": 0.55,
+      "accuracy": 0.5540540540540541,
+      "ece": 0.03431553178593191
+     },
+     {
+      "threshold": 0.6,
+      "accuracy": 0.5,
+      "ece": 0.05625295275745382
+     },
+     {
+      "threshold": 0.7,
+      "accuracy": 0.527027027027027,
+      "ece": 0.11890059441854361
+     }
+    ]
+   }
+  },
+  "no_instruction_baseline": {
+   "temperature": 4.0,
+   "noul_threshold": 0.5,
+   "curves": {
+    "temperature": [
+     {
+      "temperature": 0.25,
+      "log_loss": 2.9526798965708947,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.34601805243170936
+     },
+     {
+      "temperature": 0.5,
+      "log_loss": 1.7815117031197805,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.2605315412386834
+     },
+     {
+      "temperature": 1.0,
+      "log_loss": 1.2994354210043908,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.1538580318165895
+     },
+     {
+      "temperature": 2.0,
+      "log_loss": 1.1636585821684318,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.13870320480187853
+     },
+     {
+      "temperature": 4.0,
+      "log_loss": 1.1619825664119168,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.08122337064082116
+     },
+     {
+      "temperature": 8.0,
+      "log_loss": 1.1857697342107236,
+      "accuracy": 0.4199134199134199,
+      "ece": 0.07239910439240381
+     }
+    ],
+    "noul_threshold": [
+     {
+      "threshold": 0.3,
+      "accuracy": 0.47297297297297297,
+      "ece": 0.2761060034828967
+     },
+     {
+      "threshold": 0.4,
+      "accuracy": 0.47297297297297297,
+      "ece": 0.18642582597781493
+     },
+     {
+      "threshold": 0.45,
+      "accuracy": 0.4864864864864865,
+      "ece": 0.1653695183393796
+     },
+     {
+      "threshold": 0.5,
+      "accuracy": 0.5405405405405406,
+      "ece": 0.08947884950530985
+     },
+     {
+      "threshold": 0.55,
+      "accuracy": 0.40540540540540543,
+      "ece": 0.1565317019214764
+     },
+     {
+      "threshold": 0.6,
+      "accuracy": 0.5,
+      "ece": 0.07685889305527982
+     },
+     {
+      "threshold": 0.7,
+      "accuracy": 0.5405405405405406,
+      "ece": 0.10588897251125992
+     }
+    ]
+   }
+  }
+ }
+}

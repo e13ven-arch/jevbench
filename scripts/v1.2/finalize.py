@@ -67,7 +67,10 @@ ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1
             "reflex-4b": "v1.2.8", "gliner2-large": "v1.2.8", "jev-local": "v1.2.8", "nimble-9b": "v1.2.8", "litjev": "v1.2.8",
             "certo": "v1.2.9", "smalljev": "v1.2.10", "djev-thinking": "v1.2.12",
             "openjev-thinking": "v1.2.13", "winnow-12b": "v1.2.14",
-            "open-jev-zefan-2b": "v1.2.15", "open-jev-zefan-9b": "v1.2.15"}
+            "open-jev-zefan-2b": "v1.2.15", "open-jev-zefan-9b": "v1.2.15",
+            "zerank-2": "v1.2.16", "bge-reranker-v2-m3": "v1.2.16",
+            "mxbai-rerank-base-v2": "v1.2.16", "gte-reranker-modernbert-base": "v1.2.16",
+            "qwen3-reranker-4b": "v1.2.16"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 # A complete re-run that replaces an earlier row (same frozen items, same scorer); the old score stays in the artifact.
 SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the serving prompt limit from 2,048 to 8,192 tokens "
@@ -77,6 +80,10 @@ HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
+    {"revision": "v1.2.16", "date": "2026-09-21", "note":
+     "Added the reranker class and five Apache-2.0 open rerankers. A neutral adapter, identical task instructions, "
+     "public-only temperature/yes-no calibration grids, and a no-instruction public baseline were preregistered "
+     "before the held-out run. Every row covers all 534 frozen decisions; no earlier row or task changed."},
     {"revision": "v1.2.15", "date": "2026-09-21", "note":
      "Added Open-Jev 2B and Open-Jev 9B by Zefan Cai. Both public checkpoints ran all 534 frozen decisions through "
      "the author's pinned LoRA-plus-decision-head server, serially on our RunPod H100 with prefix caching off. "

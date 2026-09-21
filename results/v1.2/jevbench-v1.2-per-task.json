@@ -1,6 +1,6 @@
 {
  "benchmark": "JevBench",
- "revision": "v1.2.15",
+ "revision": "v1.2.16",
  "status": "final",
  "note": "Outcome codes: c correct, w wrong, f failed (scored wrong), n not attempted. Topic = item family. Per-task outcomes only for public items; held-out and imported items only in aggregates. Tier 'standard' and 'judge' accuracies are over all items of the tier (failures count as wrong), as in the scores.",
  "tasks": [
@@ -18501,6 +18501,1130 @@
     ]
    }
   },
+  "bge-reranker-v2-m3": {
+   "display": "BAAI bge-reranker-v2-m3",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 31,
+     "w": 41,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.4306
+    },
+    "standard": {
+     "c": 35,
+     "w": 61,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3646
+    },
+    "judge": {
+     "c": 13,
+     "w": 133,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.089
+    },
+    "hard": {
+     "c": 81,
+     "w": 139,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3682
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 7,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3889
+     },
+     "fact": {
+      "c": 9,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "extraction": {
+      "c": 6,
+      "w": 12,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3333
+     },
+     "tool_selection": {
+      "c": 9,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "intent": {
+      "c": 3,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1875
+     },
+     "ordinal": {
+      "c": 6,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.375
+     },
+     "extraction": {
+      "c": 6,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.375
+     },
+     "adequacy": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "routing": {
+      "c": 4,
+      "w": 12,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.25
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 2,
+      "w": 76,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.0256
+     },
+     "adequacy": {
+      "c": 11,
+      "w": 57,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1618
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 16,
+      "w": 22,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4211
+     },
+     "probability": {
+      "c": 9,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.45
+     },
+     "temporal_numeric": {
+      "c": 9,
+      "w": 21,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3
+     },
+     "ambiguous": {
+      "c": 6,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4286
+     },
+     "multi_hop": {
+      "c": 9,
+      "w": 26,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2571
+     },
+     "tradeoff": {
+      "c": 3,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.25
+     },
+     "adversarial": {
+      "c": 6,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "trap": {
+      "c": 6,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.375
+     },
+     "judge_hard": {
+      "c": 17,
+      "w": 16,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5152
+     },
+     "routing_hard": {
+      "c": 0,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.0
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "w",
+     0.381
+    ],
+    "easy-intent-01": [
+     "w",
+     0.034
+    ],
+    "easy-intent-02": [
+     "w",
+     0.034
+    ],
+    "easy-intent-03": [
+     "w",
+     0.034
+    ],
+    "easy-intent-04": [
+     "c",
+     0.034
+    ],
+    "easy-intent-05": [
+     "w",
+     0.034
+    ],
+    "easy-intent-06": [
+     "c",
+     0.036
+    ],
+    "easy-intent-07": [
+     "c",
+     0.033
+    ],
+    "easy-intent-08": [
+     "w",
+     0.032
+    ],
+    "easy-intent-09": [
+     "w",
+     0.034
+    ],
+    "easy-intent-10": [
+     "c",
+     0.035
+    ],
+    "easy-intent-11": [
+     "c",
+     0.038
+    ],
+    "easy-fact-00": [
+     "c",
+     0.033
+    ],
+    "easy-fact-01": [
+     "w",
+     0.03
+    ],
+    "easy-fact-02": [
+     "c",
+     0.03
+    ],
+    "easy-fact-03": [
+     "w",
+     0.031
+    ],
+    "easy-fact-04": [
+     "c",
+     0.031
+    ],
+    "easy-fact-05": [
+     "w",
+     0.028
+    ],
+    "easy-fact-06": [
+     "c",
+     0.032
+    ],
+    "easy-fact-07": [
+     "w",
+     0.03
+    ],
+    "easy-fact-08": [
+     "c",
+     0.033
+    ],
+    "easy-fact-09": [
+     "w",
+     0.032
+    ],
+    "easy-fact-10": [
+     "c",
+     0.032
+    ],
+    "easy-fact-11": [
+     "w",
+     0.032
+    ],
+    "easy-extraction-00": [
+     "w",
+     0.033
+    ],
+    "easy-extraction-01": [
+     "w",
+     0.031
+    ],
+    "easy-extraction-02": [
+     "c",
+     0.038
+    ],
+    "easy-extraction-03": [
+     "w",
+     0.032
+    ],
+    "easy-extraction-04": [
+     "w",
+     0.031
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.031
+    ],
+    "easy-extraction-06": [
+     "w",
+     0.031
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.029
+    ],
+    "easy-extraction-08": [
+     "c",
+     0.031
+    ],
+    "easy-extraction-09": [
+     "w",
+     0.029
+    ],
+    "easy-extraction-10": [
+     "c",
+     0.03
+    ],
+    "easy-extraction-11": [
+     "c",
+     0.03
+    ],
+    "easy-tool_selection-00": [
+     "c",
+     0.031
+    ],
+    "easy-tool_selection-01": [
+     "w",
+     0.031
+    ],
+    "easy-tool_selection-02": [
+     "w",
+     0.032
+    ],
+    "easy-tool_selection-03": [
+     "w",
+     0.033
+    ],
+    "easy-tool_selection-04": [
+     "w",
+     0.03
+    ],
+    "easy-tool_selection-05": [
+     "w",
+     0.036
+    ],
+    "easy-tool_selection-06": [
+     "c",
+     0.034
+    ],
+    "easy-tool_selection-07": [
+     "c",
+     0.032
+    ],
+    "easy-tool_selection-08": [
+     "c",
+     0.031
+    ],
+    "easy-tool_selection-09": [
+     "w",
+     0.029
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.032
+    ],
+    "easy-tool_selection-11": [
+     "c",
+     0.031
+    ],
+    "original-policy-01-0": [
+     "w",
+     0.034
+    ],
+    "original-policy-01-1": [
+     "w",
+     0.031
+    ],
+    "original-policy-02-0": [
+     "c",
+     0.031
+    ],
+    "original-policy-02-1": [
+     "c",
+     0.031
+    ],
+    "original-policy-03-0": [
+     "c",
+     0.033
+    ],
+    "original-policy-03-1": [
+     "c",
+     0.031
+    ],
+    "original-policy-04-0": [
+     "w",
+     0.038
+    ],
+    "original-policy-04-1": [
+     "w",
+     0.032
+    ],
+    "original-policy-05-0": [
+     "w",
+     0.033
+    ],
+    "original-policy-05-1": [
+     "w",
+     0.031
+    ],
+    "original-policy-06-0": [
+     "c",
+     0.032
+    ],
+    "original-policy-06-1": [
+     "c",
+     0.032
+    ],
+    "original-intent-01-0": [
+     "c",
+     0.037
+    ],
+    "original-intent-01-1": [
+     "c",
+     0.036
+    ],
+    "original-intent-02-0": [
+     "w",
+     0.035
+    ],
+    "original-intent-02-1": [
+     "w",
+     0.035
+    ],
+    "original-intent-03-0": [
+     "w",
+     0.036
+    ],
+    "original-intent-03-1": [
+     "w",
+     0.035
+    ],
+    "original-intent-04-0": [
+     "w",
+     0.035
+    ],
+    "original-intent-04-1": [
+     "w",
+     0.032
+    ],
+    "original-intent-05-0": [
+     "w",
+     0.034
+    ],
+    "original-intent-05-1": [
+     "w",
+     0.036
+    ],
+    "original-intent-06-0": [
+     "w",
+     0.036
+    ],
+    "original-intent-06-1": [
+     "w",
+     0.048
+    ],
+    "original-ordinal-01-0": [
+     "c",
+     0.035
+    ],
+    "original-ordinal-01-1": [
+     "c",
+     0.032
+    ],
+    "original-ordinal-02-0": [
+     "w",
+     0.03
+    ],
+    "original-ordinal-02-1": [
+     "w",
+     0.034
+    ],
+    "original-ordinal-03-0": [
+     "w",
+     0.031
+    ],
+    "original-ordinal-03-1": [
+     "w",
+     0.036
+    ],
+    "original-ordinal-04-0": [
+     "w",
+     0.03
+    ],
+    "original-ordinal-04-1": [
+     "w",
+     0.031
+    ],
+    "original-ordinal-05-0": [
+     "c",
+     0.033
+    ],
+    "original-ordinal-05-1": [
+     "c",
+     0.033
+    ],
+    "original-ordinal-06-0": [
+     "w",
+     0.032
+    ],
+    "original-ordinal-06-1": [
+     "c",
+     0.038
+    ],
+    "original-extraction-01-0": [
+     "w",
+     0.034
+    ],
+    "original-extraction-01-1": [
+     "w",
+     0.03
+    ],
+    "original-extraction-02-0": [
+     "c",
+     0.031
+    ],
+    "original-extraction-02-1": [
+     "c",
+     0.03
+    ],
+    "original-extraction-03-0": [
+     "w",
+     0.03
+    ],
+    "original-extraction-03-1": [
+     "w",
+     0.029
+    ],
+    "original-extraction-04-0": [
+     "w",
+     0.031
+    ],
+    "original-extraction-04-1": [
+     "w",
+     0.032
+    ],
+    "original-extraction-05-0": [
+     "c",
+     0.032
+    ],
+    "original-extraction-05-1": [
+     "c",
+     0.03
+    ],
+    "original-extraction-06-0": [
+     "w",
+     0.033
+    ],
+    "original-extraction-06-1": [
+     "w",
+     0.032
+    ],
+    "original-adequacy-01-0": [
+     "c",
+     0.034
+    ],
+    "original-adequacy-01-1": [
+     "c",
+     0.035
+    ],
+    "original-adequacy-02-0": [
+     "w",
+     0.032
+    ],
+    "original-adequacy-02-1": [
+     "w",
+     0.03
+    ],
+    "original-adequacy-03-0": [
+     "w",
+     0.03
+    ],
+    "original-adequacy-03-1": [
+     "w",
+     0.031
+    ],
+    "original-adequacy-04-0": [
+     "c",
+     0.029
+    ],
+    "original-adequacy-04-1": [
+     "c",
+     0.031
+    ],
+    "original-adequacy-05-0": [
+     "w",
+     0.03
+    ],
+    "original-adequacy-05-1": [
+     "w",
+     0.032
+    ],
+    "original-adequacy-06-0": [
+     "c",
+     0.032
+    ],
+    "original-adequacy-06-1": [
+     "c",
+     0.03
+    ],
+    "original-routing-01-0": [
+     "c",
+     0.037
+    ],
+    "original-routing-01-1": [
+     "w",
+     0.034
+    ],
+    "original-routing-02-0": [
+     "w",
+     0.034
+    ],
+    "original-routing-02-1": [
+     "w",
+     0.035
+    ],
+    "original-routing-03-0": [
+     "c",
+     0.037
+    ],
+    "original-routing-03-1": [
+     "c",
+     0.032
+    ],
+    "original-routing-04-0": [
+     "w",
+     0.032
+    ],
+    "original-routing-04-1": [
+     "w",
+     0.032
+    ],
+    "original-routing-05-0": [
+     "w",
+     0.033
+    ],
+    "original-routing-05-1": [
+     "w",
+     0.033
+    ],
+    "original-routing-06-0": [
+     "w",
+     0.034
+    ],
+    "original-routing-06-1": [
+     "w",
+     0.032
+    ],
+    "hard-opus-a-long_policy-01": [
+     "w",
+     0.494
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     0.248
+    ],
+    "hard-opus-a-long_policy-08": [
+     "w",
+     0.174
+    ],
+    "hard-opus-a-long_policy-09": [
+     "c",
+     0.178
+    ],
+    "hard-opus-a-long_policy-11": [
+     "c",
+     0.098
+    ],
+    "hard-opus-a-long_policy-13": [
+     "c",
+     0.098
+    ],
+    "hard-opus-a-long_policy-17": [
+     "w",
+     0.214
+    ],
+    "hard-opus-a-long_policy-19": [
+     "c",
+     0.08
+    ],
+    "hard-opus-a-probability-03": [
+     "w",
+     0.036
+    ],
+    "hard-opus-a-probability-04": [
+     "w",
+     0.05
+    ],
+    "hard-opus-a-probability-07": [
+     "w",
+     0.048
+    ],
+    "hard-opus-a-probability-08": [
+     "w",
+     0.052
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "w",
+     0.038
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "c",
+     0.037
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "w",
+     0.075
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "c",
+     0.04
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "w",
+     0.043
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "c",
+     0.041
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "c",
+     0.039
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "c",
+     0.038
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "w",
+     0.041
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "w",
+     0.038
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "w",
+     0.038
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "w",
+     0.038
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "w",
+     0.206
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     0.226
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "w",
+     0.186
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     0.246
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "w",
+     0.082
+    ],
+    "hard-opus-b-probability-01": [
+     "w",
+     0.106
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.043
+    ],
+    "hard-opus-b-probability-03": [
+     "c",
+     0.041
+    ],
+    "hard-opus-b-probability-04": [
+     "c",
+     0.04
+    ],
+    "hard-opus-b-probability-06": [
+     "c",
+     0.049
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "w",
+     0.06
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.047
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "w",
+     0.036
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "c",
+     0.052
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "w",
+     0.044
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "w",
+     0.041
+    ],
+    "hard-opus-c-long_policy-02": [
+     "w",
+     0.353
+    ],
+    "hard-opus-c-long_policy-03": [
+     "w",
+     0.423
+    ],
+    "hard-opus-c-long_policy-04": [
+     "w",
+     0.116
+    ],
+    "hard-opus-c-long_policy-05": [
+     "c",
+     0.232
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     0.242
+    ],
+    "hard-opus-c-long_policy-10": [
+     "c",
+     0.236
+    ],
+    "hard-opus-c-long_policy-11": [
+     "c",
+     0.123
+    ],
+    "hard-opus-c-probability-03": [
+     "c",
+     0.04
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "w",
+     0.036
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "w",
+     0.052
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "w",
+     0.049
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.068
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "c",
+     0.064
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "w",
+     0.04
+    ],
+    "hard-sol-a-adversarial-01": [
+     "w",
+     0.037
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.036
+    ],
+    "hard-sol-a-adversarial-07": [
+     "w",
+     0.035
+    ],
+    "hard-sol-a-adversarial-08": [
+     "w",
+     0.032
+    ],
+    "hard-sol-a-adversarial-09": [
+     "w",
+     0.033
+    ],
+    "hard-sol-a-adversarial-11": [
+     "w",
+     0.037
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "c",
+     0.236
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     0.217
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "c",
+     0.219
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "c",
+     0.222
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "w",
+     0.224
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "c",
+     0.22
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "w",
+     0.209
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "w",
+     0.214
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.037
+    ],
+    "hard-sol-a-trap-04": [
+     "c",
+     0.034
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.039
+    ],
+    "hard-sol-a-trap-06": [
+     "w",
+     0.039
+    ],
+    "hard-sol-a-trap-08": [
+     "w",
+     0.037
+    ],
+    "hard-sol-a-trap-10": [
+     "w",
+     0.051
+    ],
+    "hard-sol-a-trap-13": [
+     "c",
+     0.036
+    ],
+    "hard-sol-a-trap-15": [
+     "c",
+     0.036
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "w",
+     0.033
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "c",
+     0.033
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "w",
+     0.035
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "c",
+     0.033
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "c",
+     0.033
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "c",
+     0.036
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "c",
+     0.033
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "c",
+     0.032
+    ],
+    "hard-sol-b-long_policy-01": [
+     "c",
+     0.267
+    ],
+    "hard-sol-b-long_policy-02": [
+     "w",
+     0.251
+    ],
+    "hard-sol-b-long_policy-05": [
+     "w",
+     0.245
+    ],
+    "hard-sol-b-long_policy-06": [
+     "w",
+     0.234
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "w",
+     0.039
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "w",
+     0.038
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "w",
+     0.037
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "w",
+     0.038
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "w",
+     0.037
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.034
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "c",
+     0.033
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "w",
+     0.031
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "c",
+     0.035
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "c",
+     0.034
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "w",
+     0.035
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "c",
+     0.035
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "c",
+     0.043
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "w",
+     0.036
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "w",
+     0.035
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "c",
+     0.034
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "c",
+     0.033
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "w",
+     0.034
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "w",
+     0.185
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "c",
+     0.206
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "w",
+     0.201
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.038
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "w",
+     0.208
+    ]
+   }
+  },
   "certo": {
    "display": "Certo v1 (AltSlate Labs)",
    "partial": false,
@@ -30865,6 +31989,1130 @@
     ]
    }
   },
+  "gte-reranker-modernbert-base": {
+   "display": "Alibaba GTE Reranker ModernBERT-base",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 24,
+     "w": 48,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3333
+    },
+    "standard": {
+     "c": 38,
+     "w": 58,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3958
+    },
+    "judge": {
+     "c": 44,
+     "w": 102,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3014
+    },
+    "hard": {
+     "c": 74,
+     "w": 146,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3364
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 5,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2778
+     },
+     "fact": {
+      "c": 9,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "extraction": {
+      "c": 5,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2778
+     },
+     "tool_selection": {
+      "c": 5,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2778
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "intent": {
+      "c": 6,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.375
+     },
+     "ordinal": {
+      "c": 3,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1875
+     },
+     "extraction": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "adequacy": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "routing": {
+      "c": 5,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3125
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 37,
+      "w": 41,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4744
+     },
+     "adequacy": {
+      "c": 7,
+      "w": 61,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1029
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 11,
+      "w": 27,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2895
+     },
+     "probability": {
+      "c": 7,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.35
+     },
+     "temporal_numeric": {
+      "c": 7,
+      "w": 23,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2333
+     },
+     "ambiguous": {
+      "c": 7,
+      "w": 7,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "multi_hop": {
+      "c": 8,
+      "w": 27,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2286
+     },
+     "tradeoff": {
+      "c": 4,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3333
+     },
+     "adversarial": {
+      "c": 7,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5833
+     },
+     "trap": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "judge_hard": {
+      "c": 15,
+      "w": 18,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4545
+     },
+     "routing_hard": {
+      "c": 0,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.0
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "w",
+     11.96
+    ],
+    "easy-intent-01": [
+     "w",
+     0.048
+    ],
+    "easy-intent-02": [
+     "w",
+     0.048
+    ],
+    "easy-intent-03": [
+     "c",
+     0.056
+    ],
+    "easy-intent-04": [
+     "w",
+     0.048
+    ],
+    "easy-intent-05": [
+     "w",
+     0.049
+    ],
+    "easy-intent-06": [
+     "c",
+     0.045
+    ],
+    "easy-intent-07": [
+     "w",
+     0.046
+    ],
+    "easy-intent-08": [
+     "w",
+     0.045
+    ],
+    "easy-intent-09": [
+     "w",
+     0.047
+    ],
+    "easy-intent-10": [
+     "c",
+     0.046
+    ],
+    "easy-intent-11": [
+     "c",
+     0.046
+    ],
+    "easy-fact-00": [
+     "w",
+     0.047
+    ],
+    "easy-fact-01": [
+     "c",
+     0.054
+    ],
+    "easy-fact-02": [
+     "w",
+     0.042
+    ],
+    "easy-fact-03": [
+     "c",
+     0.044
+    ],
+    "easy-fact-04": [
+     "w",
+     0.044
+    ],
+    "easy-fact-05": [
+     "c",
+     0.043
+    ],
+    "easy-fact-06": [
+     "w",
+     0.045
+    ],
+    "easy-fact-07": [
+     "c",
+     0.042
+    ],
+    "easy-fact-08": [
+     "w",
+     0.045
+    ],
+    "easy-fact-09": [
+     "c",
+     0.044
+    ],
+    "easy-fact-10": [
+     "w",
+     0.043
+    ],
+    "easy-fact-11": [
+     "c",
+     0.043
+    ],
+    "easy-extraction-00": [
+     "w",
+     0.052
+    ],
+    "easy-extraction-01": [
+     "w",
+     0.044
+    ],
+    "easy-extraction-02": [
+     "w",
+     0.046
+    ],
+    "easy-extraction-03": [
+     "w",
+     0.044
+    ],
+    "easy-extraction-04": [
+     "w",
+     0.045
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.045
+    ],
+    "easy-extraction-06": [
+     "w",
+     0.045
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.044
+    ],
+    "easy-extraction-08": [
+     "w",
+     0.046
+    ],
+    "easy-extraction-09": [
+     "c",
+     0.044
+    ],
+    "easy-extraction-10": [
+     "w",
+     0.048
+    ],
+    "easy-extraction-11": [
+     "c",
+     0.045
+    ],
+    "easy-tool_selection-00": [
+     "c",
+     0.047
+    ],
+    "easy-tool_selection-01": [
+     "w",
+     0.046
+    ],
+    "easy-tool_selection-02": [
+     "w",
+     0.046
+    ],
+    "easy-tool_selection-03": [
+     "w",
+     0.045
+    ],
+    "easy-tool_selection-04": [
+     "c",
+     0.045
+    ],
+    "easy-tool_selection-05": [
+     "w",
+     0.052
+    ],
+    "easy-tool_selection-06": [
+     "w",
+     0.048
+    ],
+    "easy-tool_selection-07": [
+     "w",
+     0.046
+    ],
+    "easy-tool_selection-08": [
+     "w",
+     0.048
+    ],
+    "easy-tool_selection-09": [
+     "w",
+     0.049
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.048
+    ],
+    "easy-tool_selection-11": [
+     "w",
+     0.046
+    ],
+    "original-policy-01-0": [
+     "c",
+     0.045
+    ],
+    "original-policy-01-1": [
+     "c",
+     0.049
+    ],
+    "original-policy-02-0": [
+     "w",
+     0.047
+    ],
+    "original-policy-02-1": [
+     "w",
+     0.048
+    ],
+    "original-policy-03-0": [
+     "w",
+     0.045
+    ],
+    "original-policy-03-1": [
+     "w",
+     0.047
+    ],
+    "original-policy-04-0": [
+     "c",
+     0.055
+    ],
+    "original-policy-04-1": [
+     "c",
+     0.046
+    ],
+    "original-policy-05-0": [
+     "c",
+     0.044
+    ],
+    "original-policy-05-1": [
+     "c",
+     0.072
+    ],
+    "original-policy-06-0": [
+     "w",
+     0.045
+    ],
+    "original-policy-06-1": [
+     "w",
+     0.042
+    ],
+    "original-intent-01-0": [
+     "w",
+     0.046
+    ],
+    "original-intent-01-1": [
+     "w",
+     0.048
+    ],
+    "original-intent-02-0": [
+     "w",
+     0.049
+    ],
+    "original-intent-02-1": [
+     "w",
+     0.046
+    ],
+    "original-intent-03-0": [
+     "w",
+     0.056
+    ],
+    "original-intent-03-1": [
+     "c",
+     0.048
+    ],
+    "original-intent-04-0": [
+     "c",
+     0.048
+    ],
+    "original-intent-04-1": [
+     "w",
+     0.045
+    ],
+    "original-intent-05-0": [
+     "c",
+     0.044
+    ],
+    "original-intent-05-1": [
+     "c",
+     0.045
+    ],
+    "original-intent-06-0": [
+     "w",
+     0.05
+    ],
+    "original-intent-06-1": [
+     "w",
+     0.045
+    ],
+    "original-ordinal-01-0": [
+     "w",
+     0.044
+    ],
+    "original-ordinal-01-1": [
+     "w",
+     0.043
+    ],
+    "original-ordinal-02-0": [
+     "w",
+     0.052
+    ],
+    "original-ordinal-02-1": [
+     "w",
+     0.044
+    ],
+    "original-ordinal-03-0": [
+     "w",
+     0.043
+    ],
+    "original-ordinal-03-1": [
+     "w",
+     0.043
+    ],
+    "original-ordinal-04-0": [
+     "c",
+     0.071
+    ],
+    "original-ordinal-04-1": [
+     "c",
+     0.043
+    ],
+    "original-ordinal-05-0": [
+     "w",
+     0.044
+    ],
+    "original-ordinal-05-1": [
+     "w",
+     0.046
+    ],
+    "original-ordinal-06-0": [
+     "w",
+     0.043
+    ],
+    "original-ordinal-06-1": [
+     "w",
+     0.045
+    ],
+    "original-extraction-01-0": [
+     "w",
+     0.051
+    ],
+    "original-extraction-01-1": [
+     "w",
+     0.048
+    ],
+    "original-extraction-02-0": [
+     "c",
+     0.047
+    ],
+    "original-extraction-02-1": [
+     "c",
+     0.085
+    ],
+    "original-extraction-03-0": [
+     "w",
+     0.045
+    ],
+    "original-extraction-03-1": [
+     "w",
+     0.044
+    ],
+    "original-extraction-04-0": [
+     "w",
+     0.044
+    ],
+    "original-extraction-04-1": [
+     "w",
+     0.046
+    ],
+    "original-extraction-05-0": [
+     "c",
+     0.045
+    ],
+    "original-extraction-05-1": [
+     "c",
+     0.047
+    ],
+    "original-extraction-06-0": [
+     "w",
+     0.047
+    ],
+    "original-extraction-06-1": [
+     "w",
+     0.043
+    ],
+    "original-adequacy-01-0": [
+     "w",
+     0.05
+    ],
+    "original-adequacy-01-1": [
+     "w",
+     0.046
+    ],
+    "original-adequacy-02-0": [
+     "c",
+     0.043
+    ],
+    "original-adequacy-02-1": [
+     "c",
+     0.046
+    ],
+    "original-adequacy-03-0": [
+     "c",
+     0.047
+    ],
+    "original-adequacy-03-1": [
+     "c",
+     0.045
+    ],
+    "original-adequacy-04-0": [
+     "w",
+     0.049
+    ],
+    "original-adequacy-04-1": [
+     "w",
+     0.042
+    ],
+    "original-adequacy-05-0": [
+     "c",
+     0.042
+    ],
+    "original-adequacy-05-1": [
+     "c",
+     0.05
+    ],
+    "original-adequacy-06-0": [
+     "w",
+     0.042
+    ],
+    "original-adequacy-06-1": [
+     "w",
+     0.042
+    ],
+    "original-routing-01-0": [
+     "w",
+     0.047
+    ],
+    "original-routing-01-1": [
+     "w",
+     0.045
+    ],
+    "original-routing-02-0": [
+     "c",
+     0.046
+    ],
+    "original-routing-02-1": [
+     "c",
+     0.047
+    ],
+    "original-routing-03-0": [
+     "c",
+     0.05
+    ],
+    "original-routing-03-1": [
+     "c",
+     0.088
+    ],
+    "original-routing-04-0": [
+     "w",
+     0.048
+    ],
+    "original-routing-04-1": [
+     "w",
+     0.049
+    ],
+    "original-routing-05-0": [
+     "w",
+     0.046
+    ],
+    "original-routing-05-1": [
+     "w",
+     0.052
+    ],
+    "original-routing-06-0": [
+     "w",
+     0.047
+    ],
+    "original-routing-06-1": [
+     "w",
+     0.048
+    ],
+    "hard-opus-a-long_policy-01": [
+     "w",
+     0.353
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     0.173
+    ],
+    "hard-opus-a-long_policy-08": [
+     "w",
+     0.143
+    ],
+    "hard-opus-a-long_policy-09": [
+     "w",
+     0.154
+    ],
+    "hard-opus-a-long_policy-11": [
+     "w",
+     0.098
+    ],
+    "hard-opus-a-long_policy-13": [
+     "w",
+     0.089
+    ],
+    "hard-opus-a-long_policy-17": [
+     "w",
+     0.16
+    ],
+    "hard-opus-a-long_policy-19": [
+     "c",
+     0.094
+    ],
+    "hard-opus-a-probability-03": [
+     "w",
+     0.05
+    ],
+    "hard-opus-a-probability-04": [
+     "w",
+     0.088
+    ],
+    "hard-opus-a-probability-07": [
+     "w",
+     0.056
+    ],
+    "hard-opus-a-probability-08": [
+     "c",
+     0.049
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "w",
+     0.05
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "c",
+     0.049
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "w",
+     0.058
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "c",
+     0.047
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "c",
+     0.05
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "c",
+     0.051
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "c",
+     0.052
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "c",
+     0.068
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "w",
+     0.054
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "w",
+     0.052
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "w",
+     0.05
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "w",
+     0.059
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "w",
+     0.171
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     0.166
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "w",
+     0.158
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     0.177
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "c",
+     0.077
+    ],
+    "hard-opus-b-probability-01": [
+     "w",
+     0.069
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.049
+    ],
+    "hard-opus-b-probability-03": [
+     "w",
+     0.052
+    ],
+    "hard-opus-b-probability-04": [
+     "c",
+     0.05
+    ],
+    "hard-opus-b-probability-06": [
+     "w",
+     0.054
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "w",
+     0.056
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.055
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "w",
+     0.052
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "c",
+     0.055
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "w",
+     0.049
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "w",
+     0.052
+    ],
+    "hard-opus-c-long_policy-02": [
+     "w",
+     0.287
+    ],
+    "hard-opus-c-long_policy-03": [
+     "w",
+     0.292
+    ],
+    "hard-opus-c-long_policy-04": [
+     "w",
+     0.134
+    ],
+    "hard-opus-c-long_policy-05": [
+     "w",
+     0.216
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     0.233
+    ],
+    "hard-opus-c-long_policy-10": [
+     "w",
+     0.232
+    ],
+    "hard-opus-c-long_policy-11": [
+     "c",
+     0.138
+    ],
+    "hard-opus-c-probability-03": [
+     "w",
+     0.05
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "w",
+     0.049
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "w",
+     0.054
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "w",
+     0.051
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.057
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "w",
+     0.054
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "w",
+     0.052
+    ],
+    "hard-sol-a-adversarial-01": [
+     "w",
+     0.048
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.046
+    ],
+    "hard-sol-a-adversarial-07": [
+     "c",
+     0.048
+    ],
+    "hard-sol-a-adversarial-08": [
+     "w",
+     0.045
+    ],
+    "hard-sol-a-adversarial-09": [
+     "w",
+     0.046
+    ],
+    "hard-sol-a-adversarial-11": [
+     "c",
+     0.047
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "w",
+     0.127
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     0.12
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "c",
+     0.127
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "w",
+     0.117
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "w",
+     0.11
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "w",
+     0.112
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "c",
+     0.109
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "w",
+     0.118
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.05
+    ],
+    "hard-sol-a-trap-04": [
+     "c",
+     0.047
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.048
+    ],
+    "hard-sol-a-trap-06": [
+     "w",
+     0.058
+    ],
+    "hard-sol-a-trap-08": [
+     "w",
+     0.049
+    ],
+    "hard-sol-a-trap-10": [
+     "w",
+     0.047
+    ],
+    "hard-sol-a-trap-13": [
+     "c",
+     0.047
+    ],
+    "hard-sol-a-trap-15": [
+     "c",
+     0.049
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "w",
+     0.045
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "c",
+     0.048
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "w",
+     0.048
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "c",
+     0.047
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "c",
+     0.046
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "c",
+     0.047
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "w",
+     0.045
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "c",
+     0.045
+    ],
+    "hard-sol-b-long_policy-01": [
+     "w",
+     0.183
+    ],
+    "hard-sol-b-long_policy-02": [
+     "c",
+     0.154
+    ],
+    "hard-sol-b-long_policy-05": [
+     "c",
+     0.155
+    ],
+    "hard-sol-b-long_policy-06": [
+     "w",
+     0.162
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "w",
+     0.05
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "w",
+     0.048
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "w",
+     0.05
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "w",
+     0.055
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "w",
+     0.047
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.048
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "w",
+     0.047
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "w",
+     0.048
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "c",
+     0.047
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "c",
+     0.045
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "w",
+     0.045
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "c",
+     0.046
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "c",
+     0.045
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "w",
+     0.047
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "w",
+     0.046
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "c",
+     0.046
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "c",
+     0.052
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "w",
+     0.046
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "w",
+     0.145
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "c",
+     0.141
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "w",
+     0.141
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.049
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "w",
+     0.144
+    ]
+   }
+  },
   "jeff": {
    "display": "jeff (Logan Markewich, GLiFormer 400M)",
    "partial": false,
@@ -40981,6 +43229,1130 @@
     ]
    }
   },
+  "mxbai-rerank-base-v2": {
+   "display": "Mixedbread mxbai-rerank-base-v2",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 32,
+     "w": 40,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.4444
+    },
+    "standard": {
+     "c": 32,
+     "w": 64,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.3333
+    },
+    "judge": {
+     "c": 39,
+     "w": 107,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.2671
+    },
+    "hard": {
+     "c": 88,
+     "w": 132,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.4
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 4,
+      "w": 14,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2222
+     },
+     "fact": {
+      "c": 9,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "extraction": {
+      "c": 9,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "tool_selection": {
+      "c": 10,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5556
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 10,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.625
+     },
+     "intent": {
+      "c": 3,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1875
+     },
+     "ordinal": {
+      "c": 3,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1875
+     },
+     "extraction": {
+      "c": 5,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3125
+     },
+     "adequacy": {
+      "c": 8,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "routing": {
+      "c": 3,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1875
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 12,
+      "w": 66,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.1538
+     },
+     "adequacy": {
+      "c": 27,
+      "w": 41,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3971
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 14,
+      "w": 24,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3684
+     },
+     "probability": {
+      "c": 7,
+      "w": 13,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.35
+     },
+     "temporal_numeric": {
+      "c": 7,
+      "w": 23,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2333
+     },
+     "ambiguous": {
+      "c": 4,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2857
+     },
+     "multi_hop": {
+      "c": 16,
+      "w": 19,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4571
+     },
+     "tradeoff": {
+      "c": 7,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5833
+     },
+     "adversarial": {
+      "c": 6,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5
+     },
+     "trap": {
+      "c": 7,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4375
+     },
+     "judge_hard": {
+      "c": 18,
+      "w": 15,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5455
+     },
+     "routing_hard": {
+      "c": 2,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "w",
+     0.668
+    ],
+    "easy-intent-01": [
+     "w",
+     0.063
+    ],
+    "easy-intent-02": [
+     "w",
+     0.063
+    ],
+    "easy-intent-03": [
+     "w",
+     0.065
+    ],
+    "easy-intent-04": [
+     "c",
+     0.067
+    ],
+    "easy-intent-05": [
+     "w",
+     0.066
+    ],
+    "easy-intent-06": [
+     "w",
+     0.072
+    ],
+    "easy-intent-07": [
+     "w",
+     0.061
+    ],
+    "easy-intent-08": [
+     "w",
+     0.077
+    ],
+    "easy-intent-09": [
+     "c",
+     0.068
+    ],
+    "easy-intent-10": [
+     "w",
+     0.067
+    ],
+    "easy-intent-11": [
+     "w",
+     0.065
+    ],
+    "easy-fact-00": [
+     "w",
+     0.072
+    ],
+    "easy-fact-01": [
+     "c",
+     0.067
+    ],
+    "easy-fact-02": [
+     "w",
+     0.071
+    ],
+    "easy-fact-03": [
+     "c",
+     0.077
+    ],
+    "easy-fact-04": [
+     "w",
+     0.065
+    ],
+    "easy-fact-05": [
+     "c",
+     0.065
+    ],
+    "easy-fact-06": [
+     "w",
+     0.064
+    ],
+    "easy-fact-07": [
+     "c",
+     0.065
+    ],
+    "easy-fact-08": [
+     "w",
+     0.066
+    ],
+    "easy-fact-09": [
+     "c",
+     0.064
+    ],
+    "easy-fact-10": [
+     "w",
+     0.062
+    ],
+    "easy-fact-11": [
+     "c",
+     0.064
+    ],
+    "easy-extraction-00": [
+     "w",
+     0.065
+    ],
+    "easy-extraction-01": [
+     "w",
+     0.066
+    ],
+    "easy-extraction-02": [
+     "c",
+     0.065
+    ],
+    "easy-extraction-03": [
+     "w",
+     0.066
+    ],
+    "easy-extraction-04": [
+     "w",
+     0.065
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.065
+    ],
+    "easy-extraction-06": [
+     "c",
+     0.068
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.065
+    ],
+    "easy-extraction-08": [
+     "c",
+     0.064
+    ],
+    "easy-extraction-09": [
+     "c",
+     0.068
+    ],
+    "easy-extraction-10": [
+     "c",
+     0.063
+    ],
+    "easy-extraction-11": [
+     "w",
+     0.064
+    ],
+    "easy-tool_selection-00": [
+     "w",
+     0.065
+    ],
+    "easy-tool_selection-01": [
+     "w",
+     0.066
+    ],
+    "easy-tool_selection-02": [
+     "c",
+     0.066
+    ],
+    "easy-tool_selection-03": [
+     "c",
+     0.084
+    ],
+    "easy-tool_selection-04": [
+     "w",
+     0.065
+    ],
+    "easy-tool_selection-05": [
+     "c",
+     0.067
+    ],
+    "easy-tool_selection-06": [
+     "w",
+     0.066
+    ],
+    "easy-tool_selection-07": [
+     "w",
+     0.067
+    ],
+    "easy-tool_selection-08": [
+     "c",
+     0.071
+    ],
+    "easy-tool_selection-09": [
+     "c",
+     0.069
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.065
+    ],
+    "easy-tool_selection-11": [
+     "c",
+     0.066
+    ],
+    "original-policy-01-0": [
+     "c",
+     0.064
+    ],
+    "original-policy-01-1": [
+     "c",
+     0.065
+    ],
+    "original-policy-02-0": [
+     "c",
+     0.07
+    ],
+    "original-policy-02-1": [
+     "c",
+     0.068
+    ],
+    "original-policy-03-0": [
+     "w",
+     0.063
+    ],
+    "original-policy-03-1": [
+     "w",
+     0.111
+    ],
+    "original-policy-04-0": [
+     "c",
+     0.062
+    ],
+    "original-policy-04-1": [
+     "c",
+     0.063
+    ],
+    "original-policy-05-0": [
+     "c",
+     0.063
+    ],
+    "original-policy-05-1": [
+     "c",
+     0.067
+    ],
+    "original-policy-06-0": [
+     "w",
+     0.066
+    ],
+    "original-policy-06-1": [
+     "w",
+     0.075
+    ],
+    "original-intent-01-0": [
+     "w",
+     0.068
+    ],
+    "original-intent-01-1": [
+     "w",
+     0.068
+    ],
+    "original-intent-02-0": [
+     "w",
+     0.069
+    ],
+    "original-intent-02-1": [
+     "w",
+     0.065
+    ],
+    "original-intent-03-0": [
+     "w",
+     0.062
+    ],
+    "original-intent-03-1": [
+     "w",
+     0.062
+    ],
+    "original-intent-04-0": [
+     "w",
+     0.076
+    ],
+    "original-intent-04-1": [
+     "w",
+     0.063
+    ],
+    "original-intent-05-0": [
+     "c",
+     0.072
+    ],
+    "original-intent-05-1": [
+     "c",
+     0.064
+    ],
+    "original-intent-06-0": [
+     "w",
+     0.068
+    ],
+    "original-intent-06-1": [
+     "w",
+     0.064
+    ],
+    "original-ordinal-01-0": [
+     "w",
+     0.066
+    ],
+    "original-ordinal-01-1": [
+     "w",
+     0.069
+    ],
+    "original-ordinal-02-0": [
+     "w",
+     0.071
+    ],
+    "original-ordinal-02-1": [
+     "w",
+     0.069
+    ],
+    "original-ordinal-03-0": [
+     "w",
+     0.063
+    ],
+    "original-ordinal-03-1": [
+     "w",
+     0.067
+    ],
+    "original-ordinal-04-0": [
+     "c",
+     0.064
+    ],
+    "original-ordinal-04-1": [
+     "c",
+     0.068
+    ],
+    "original-ordinal-05-0": [
+     "w",
+     0.072
+    ],
+    "original-ordinal-05-1": [
+     "w",
+     0.069
+    ],
+    "original-ordinal-06-0": [
+     "w",
+     0.067
+    ],
+    "original-ordinal-06-1": [
+     "w",
+     0.07
+    ],
+    "original-extraction-01-0": [
+     "w",
+     0.068
+    ],
+    "original-extraction-01-1": [
+     "w",
+     0.068
+    ],
+    "original-extraction-02-0": [
+     "c",
+     0.069
+    ],
+    "original-extraction-02-1": [
+     "c",
+     0.066
+    ],
+    "original-extraction-03-0": [
+     "w",
+     0.068
+    ],
+    "original-extraction-03-1": [
+     "w",
+     0.068
+    ],
+    "original-extraction-04-0": [
+     "w",
+     0.067
+    ],
+    "original-extraction-04-1": [
+     "w",
+     0.067
+    ],
+    "original-extraction-05-0": [
+     "c",
+     0.068
+    ],
+    "original-extraction-05-1": [
+     "c",
+     0.07
+    ],
+    "original-extraction-06-0": [
+     "w",
+     0.072
+    ],
+    "original-extraction-06-1": [
+     "w",
+     0.081
+    ],
+    "original-adequacy-01-0": [
+     "c",
+     0.063
+    ],
+    "original-adequacy-01-1": [
+     "c",
+     0.051
+    ],
+    "original-adequacy-02-0": [
+     "w",
+     0.052
+    ],
+    "original-adequacy-02-1": [
+     "w",
+     0.05
+    ],
+    "original-adequacy-03-0": [
+     "w",
+     0.051
+    ],
+    "original-adequacy-03-1": [
+     "w",
+     0.051
+    ],
+    "original-adequacy-04-0": [
+     "c",
+     0.052
+    ],
+    "original-adequacy-04-1": [
+     "c",
+     0.054
+    ],
+    "original-adequacy-05-0": [
+     "w",
+     0.057
+    ],
+    "original-adequacy-05-1": [
+     "w",
+     0.053
+    ],
+    "original-adequacy-06-0": [
+     "c",
+     0.053
+    ],
+    "original-adequacy-06-1": [
+     "c",
+     0.055
+    ],
+    "original-routing-01-0": [
+     "w",
+     0.068
+    ],
+    "original-routing-01-1": [
+     "w",
+     0.063
+    ],
+    "original-routing-02-0": [
+     "w",
+     0.064
+    ],
+    "original-routing-02-1": [
+     "w",
+     0.086
+    ],
+    "original-routing-03-0": [
+     "c",
+     0.061
+    ],
+    "original-routing-03-1": [
+     "c",
+     0.089
+    ],
+    "original-routing-04-0": [
+     "w",
+     0.065
+    ],
+    "original-routing-04-1": [
+     "w",
+     0.064
+    ],
+    "original-routing-05-0": [
+     "w",
+     0.065
+    ],
+    "original-routing-05-1": [
+     "w",
+     0.098
+    ],
+    "original-routing-06-0": [
+     "w",
+     0.066
+    ],
+    "original-routing-06-1": [
+     "w",
+     0.097
+    ],
+    "hard-opus-a-long_policy-01": [
+     "w",
+     0.559
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     0.302
+    ],
+    "hard-opus-a-long_policy-08": [
+     "w",
+     0.225
+    ],
+    "hard-opus-a-long_policy-09": [
+     "w",
+     0.248
+    ],
+    "hard-opus-a-long_policy-11": [
+     "w",
+     0.096
+    ],
+    "hard-opus-a-long_policy-13": [
+     "w",
+     0.117
+    ],
+    "hard-opus-a-long_policy-17": [
+     "w",
+     0.253
+    ],
+    "hard-opus-a-long_policy-19": [
+     "c",
+     0.114
+    ],
+    "hard-opus-a-probability-03": [
+     "w",
+     0.065
+    ],
+    "hard-opus-a-probability-04": [
+     "c",
+     0.077
+    ],
+    "hard-opus-a-probability-07": [
+     "w",
+     0.082
+    ],
+    "hard-opus-a-probability-08": [
+     "c",
+     0.057
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "c",
+     0.072
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "c",
+     0.065
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "w",
+     0.111
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "c",
+     0.066
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "w",
+     0.075
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "w",
+     0.076
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "w",
+     0.075
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "w",
+     0.075
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "w",
+     0.072
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "w",
+     0.071
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "w",
+     0.073
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "w",
+     0.068
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "w",
+     0.19
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     0.288
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "w",
+     0.312
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     0.35
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "c",
+     0.117
+    ],
+    "hard-opus-b-probability-01": [
+     "w",
+     0.13
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.072
+    ],
+    "hard-opus-b-probability-03": [
+     "w",
+     0.07
+    ],
+    "hard-opus-b-probability-04": [
+     "w",
+     0.072
+    ],
+    "hard-opus-b-probability-06": [
+     "w",
+     0.076
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "c",
+     0.095
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.074
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "c",
+     0.067
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "c",
+     0.082
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "c",
+     0.057
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "c",
+     0.072
+    ],
+    "hard-opus-c-long_policy-02": [
+     "c",
+     0.436
+    ],
+    "hard-opus-c-long_policy-03": [
+     "c",
+     0.532
+    ],
+    "hard-opus-c-long_policy-04": [
+     "w",
+     0.185
+    ],
+    "hard-opus-c-long_policy-05": [
+     "w",
+     0.326
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     0.314
+    ],
+    "hard-opus-c-long_policy-10": [
+     "c",
+     0.346
+    ],
+    "hard-opus-c-long_policy-11": [
+     "w",
+     0.184
+    ],
+    "hard-opus-c-probability-03": [
+     "w",
+     0.063
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "c",
+     0.074
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "w",
+     0.081
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "w",
+     0.076
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.125
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "w",
+     0.093
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "c",
+     0.074
+    ],
+    "hard-sol-a-adversarial-01": [
+     "w",
+     0.068
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.068
+    ],
+    "hard-sol-a-adversarial-07": [
+     "w",
+     0.069
+    ],
+    "hard-sol-a-adversarial-08": [
+     "w",
+     0.065
+    ],
+    "hard-sol-a-adversarial-09": [
+     "c",
+     0.065
+    ],
+    "hard-sol-a-adversarial-11": [
+     "c",
+     0.072
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "c",
+     0.188
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     0.194
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "c",
+     0.186
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "w",
+     0.181
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "w",
+     0.185
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "w",
+     0.181
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "c",
+     0.187
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "c",
+     0.182
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.067
+    ],
+    "hard-sol-a-trap-04": [
+     "c",
+     0.066
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.068
+    ],
+    "hard-sol-a-trap-06": [
+     "w",
+     0.068
+    ],
+    "hard-sol-a-trap-08": [
+     "w",
+     0.069
+    ],
+    "hard-sol-a-trap-10": [
+     "w",
+     0.069
+    ],
+    "hard-sol-a-trap-13": [
+     "c",
+     0.067
+    ],
+    "hard-sol-a-trap-15": [
+     "c",
+     0.07
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "c",
+     0.068
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "w",
+     0.067
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "c",
+     0.068
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "w",
+     0.064
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "w",
+     0.065
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "w",
+     0.066
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "c",
+     0.066
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "w",
+     0.067
+    ],
+    "hard-sol-b-long_policy-01": [
+     "c",
+     0.25
+    ],
+    "hard-sol-b-long_policy-02": [
+     "c",
+     0.232
+    ],
+    "hard-sol-b-long_policy-05": [
+     "w",
+     0.224
+    ],
+    "hard-sol-b-long_policy-06": [
+     "w",
+     0.256
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "w",
+     0.069
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "c",
+     0.071
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "w",
+     0.069
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "w",
+     0.067
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "w",
+     0.071
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.07
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "w",
+     0.07
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "w",
+     0.068
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "w",
+     0.066
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "w",
+     0.072
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "c",
+     0.069
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "w",
+     0.069
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "c",
+     0.066
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "c",
+     0.071
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "c",
+     0.069
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "w",
+     0.07
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "w",
+     0.074
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "w",
+     0.067
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "c",
+     0.161
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "w",
+     0.213
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "c",
+     0.233
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.072
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "w",
+     0.167
+    ]
+   }
+  },
   "open-jev-zefan-2b": {
    "display": "Open-Jev 2B (Zefan Cai)",
    "partial": false,
@@ -47725,6 +51097,1130 @@
     ]
    }
   },
+  "qwen3-reranker-4b": {
+   "display": "Qwen3-Reranker-4B",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 72,
+     "w": 0,
+     "f": 0,
+     "n": 0,
+     "accuracy": 1.0
+    },
+    "standard": {
+     "c": 76,
+     "w": 20,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.7917
+    },
+    "judge": {
+     "c": 128,
+     "w": 18,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.8767
+    },
+    "hard": {
+     "c": 110,
+     "w": 110,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.5
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "fact": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "extraction": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "tool_selection": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 12,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.75
+     },
+     "intent": {
+      "c": 13,
+      "w": 3,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8125
+     },
+     "ordinal": {
+      "c": 12,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.75
+     },
+     "extraction": {
+      "c": 13,
+      "w": 3,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8125
+     },
+     "adequacy": {
+      "c": 11,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.6875
+     },
+     "routing": {
+      "c": 15,
+      "w": 1,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.9375
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 67,
+      "w": 11,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.859
+     },
+     "adequacy": {
+      "c": 61,
+      "w": 7,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8971
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 16,
+      "w": 22,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4211
+     },
+     "probability": {
+      "c": 11,
+      "w": 9,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.55
+     },
+     "temporal_numeric": {
+      "c": 8,
+      "w": 22,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2667
+     },
+     "ambiguous": {
+      "c": 6,
+      "w": 8,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4286
+     },
+     "multi_hop": {
+      "c": 18,
+      "w": 17,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5143
+     },
+     "tradeoff": {
+      "c": 5,
+      "w": 7,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4167
+     },
+     "adversarial": {
+      "c": 8,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.6667
+     },
+     "trap": {
+      "c": 10,
+      "w": 6,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.625
+     },
+     "judge_hard": {
+      "c": 18,
+      "w": 15,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5455
+     },
+     "routing_hard": {
+      "c": 10,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "c",
+     0.491
+    ],
+    "easy-intent-01": [
+     "c",
+     0.125
+    ],
+    "easy-intent-02": [
+     "c",
+     0.132
+    ],
+    "easy-intent-03": [
+     "c",
+     0.124
+    ],
+    "easy-intent-04": [
+     "c",
+     0.123
+    ],
+    "easy-intent-05": [
+     "c",
+     0.123
+    ],
+    "easy-intent-06": [
+     "c",
+     0.118
+    ],
+    "easy-intent-07": [
+     "c",
+     0.119
+    ],
+    "easy-intent-08": [
+     "c",
+     0.118
+    ],
+    "easy-intent-09": [
+     "c",
+     0.119
+    ],
+    "easy-intent-10": [
+     "c",
+     0.119
+    ],
+    "easy-intent-11": [
+     "c",
+     0.118
+    ],
+    "easy-fact-00": [
+     "c",
+     0.153
+    ],
+    "easy-fact-01": [
+     "c",
+     0.11
+    ],
+    "easy-fact-02": [
+     "c",
+     0.107
+    ],
+    "easy-fact-03": [
+     "c",
+     0.108
+    ],
+    "easy-fact-04": [
+     "c",
+     0.113
+    ],
+    "easy-fact-05": [
+     "c",
+     0.108
+    ],
+    "easy-fact-06": [
+     "c",
+     0.111
+    ],
+    "easy-fact-07": [
+     "c",
+     0.107
+    ],
+    "easy-fact-08": [
+     "c",
+     0.108
+    ],
+    "easy-fact-09": [
+     "c",
+     0.109
+    ],
+    "easy-fact-10": [
+     "c",
+     0.108
+    ],
+    "easy-fact-11": [
+     "c",
+     0.107
+    ],
+    "easy-extraction-00": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-01": [
+     "c",
+     0.123
+    ],
+    "easy-extraction-02": [
+     "c",
+     0.108
+    ],
+    "easy-extraction-03": [
+     "c",
+     0.108
+    ],
+    "easy-extraction-04": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-06": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-08": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-09": [
+     "c",
+     0.117
+    ],
+    "easy-extraction-10": [
+     "c",
+     0.127
+    ],
+    "easy-extraction-11": [
+     "c",
+     0.106
+    ],
+    "easy-tool_selection-00": [
+     "c",
+     0.125
+    ],
+    "easy-tool_selection-01": [
+     "c",
+     0.123
+    ],
+    "easy-tool_selection-02": [
+     "c",
+     0.125
+    ],
+    "easy-tool_selection-03": [
+     "c",
+     0.123
+    ],
+    "easy-tool_selection-04": [
+     "c",
+     0.121
+    ],
+    "easy-tool_selection-05": [
+     "c",
+     0.123
+    ],
+    "easy-tool_selection-06": [
+     "c",
+     0.126
+    ],
+    "easy-tool_selection-07": [
+     "c",
+     0.125
+    ],
+    "easy-tool_selection-08": [
+     "c",
+     0.124
+    ],
+    "easy-tool_selection-09": [
+     "c",
+     0.125
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.124
+    ],
+    "easy-tool_selection-11": [
+     "c",
+     0.125
+    ],
+    "original-policy-01-0": [
+     "c",
+     0.108
+    ],
+    "original-policy-01-1": [
+     "c",
+     0.106
+    ],
+    "original-policy-02-0": [
+     "w",
+     0.111
+    ],
+    "original-policy-02-1": [
+     "w",
+     0.11
+    ],
+    "original-policy-03-0": [
+     "c",
+     0.108
+    ],
+    "original-policy-03-1": [
+     "w",
+     0.107
+    ],
+    "original-policy-04-0": [
+     "c",
+     0.107
+    ],
+    "original-policy-04-1": [
+     "c",
+     0.117
+    ],
+    "original-policy-05-0": [
+     "c",
+     0.106
+    ],
+    "original-policy-05-1": [
+     "c",
+     0.108
+    ],
+    "original-policy-06-0": [
+     "c",
+     0.106
+    ],
+    "original-policy-06-1": [
+     "c",
+     0.11
+    ],
+    "original-intent-01-0": [
+     "c",
+     0.118
+    ],
+    "original-intent-01-1": [
+     "c",
+     0.117
+    ],
+    "original-intent-02-0": [
+     "w",
+     0.118
+    ],
+    "original-intent-02-1": [
+     "c",
+     0.118
+    ],
+    "original-intent-03-0": [
+     "w",
+     0.119
+    ],
+    "original-intent-03-1": [
+     "c",
+     0.118
+    ],
+    "original-intent-04-0": [
+     "c",
+     0.119
+    ],
+    "original-intent-04-1": [
+     "c",
+     0.118
+    ],
+    "original-intent-05-0": [
+     "c",
+     0.129
+    ],
+    "original-intent-05-1": [
+     "w",
+     0.116
+    ],
+    "original-intent-06-0": [
+     "c",
+     0.117
+    ],
+    "original-intent-06-1": [
+     "c",
+     0.118
+    ],
+    "original-ordinal-01-0": [
+     "w",
+     0.118
+    ],
+    "original-ordinal-01-1": [
+     "w",
+     0.116
+    ],
+    "original-ordinal-02-0": [
+     "c",
+     0.118
+    ],
+    "original-ordinal-02-1": [
+     "c",
+     0.112
+    ],
+    "original-ordinal-03-0": [
+     "c",
+     0.111
+    ],
+    "original-ordinal-03-1": [
+     "c",
+     0.111
+    ],
+    "original-ordinal-04-0": [
+     "c",
+     0.111
+    ],
+    "original-ordinal-04-1": [
+     "c",
+     0.109
+    ],
+    "original-ordinal-05-0": [
+     "w",
+     0.111
+    ],
+    "original-ordinal-05-1": [
+     "w",
+     0.128
+    ],
+    "original-ordinal-06-0": [
+     "c",
+     0.117
+    ],
+    "original-ordinal-06-1": [
+     "c",
+     0.117
+    ],
+    "original-extraction-01-0": [
+     "c",
+     0.116
+    ],
+    "original-extraction-01-1": [
+     "c",
+     0.118
+    ],
+    "original-extraction-02-0": [
+     "w",
+     0.11
+    ],
+    "original-extraction-02-1": [
+     "c",
+     0.158
+    ],
+    "original-extraction-03-0": [
+     "w",
+     0.107
+    ],
+    "original-extraction-03-1": [
+     "w",
+     0.11
+    ],
+    "original-extraction-04-0": [
+     "c",
+     0.108
+    ],
+    "original-extraction-04-1": [
+     "c",
+     0.109
+    ],
+    "original-extraction-05-0": [
+     "c",
+     0.11
+    ],
+    "original-extraction-05-1": [
+     "c",
+     0.11
+    ],
+    "original-extraction-06-0": [
+     "c",
+     0.118
+    ],
+    "original-extraction-06-1": [
+     "c",
+     0.11
+    ],
+    "original-adequacy-01-0": [
+     "w",
+     0.1
+    ],
+    "original-adequacy-01-1": [
+     "c",
+     0.099
+    ],
+    "original-adequacy-02-0": [
+     "c",
+     0.118
+    ],
+    "original-adequacy-02-1": [
+     "c",
+     0.098
+    ],
+    "original-adequacy-03-0": [
+     "w",
+     0.098
+    ],
+    "original-adequacy-03-1": [
+     "w",
+     0.1
+    ],
+    "original-adequacy-04-0": [
+     "c",
+     0.099
+    ],
+    "original-adequacy-04-1": [
+     "c",
+     0.099
+    ],
+    "original-adequacy-05-0": [
+     "w",
+     0.1
+    ],
+    "original-adequacy-05-1": [
+     "c",
+     0.098
+    ],
+    "original-adequacy-06-0": [
+     "c",
+     0.103
+    ],
+    "original-adequacy-06-1": [
+     "c",
+     0.098
+    ],
+    "original-routing-01-0": [
+     "c",
+     0.159
+    ],
+    "original-routing-01-1": [
+     "c",
+     0.155
+    ],
+    "original-routing-02-0": [
+     "c",
+     0.155
+    ],
+    "original-routing-02-1": [
+     "c",
+     0.156
+    ],
+    "original-routing-03-0": [
+     "c",
+     0.155
+    ],
+    "original-routing-03-1": [
+     "c",
+     0.155
+    ],
+    "original-routing-04-0": [
+     "c",
+     0.153
+    ],
+    "original-routing-04-1": [
+     "c",
+     0.153
+    ],
+    "original-routing-05-0": [
+     "c",
+     0.154
+    ],
+    "original-routing-05-1": [
+     "w",
+     0.157
+    ],
+    "original-routing-06-0": [
+     "c",
+     0.156
+    ],
+    "original-routing-06-1": [
+     "c",
+     0.153
+    ],
+    "hard-opus-a-long_policy-01": [
+     "c",
+     3.028
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     1.797
+    ],
+    "hard-opus-a-long_policy-08": [
+     "w",
+     1.306
+    ],
+    "hard-opus-a-long_policy-09": [
+     "c",
+     1.43
+    ],
+    "hard-opus-a-long_policy-11": [
+     "c",
+     0.531
+    ],
+    "hard-opus-a-long_policy-13": [
+     "c",
+     0.697
+    ],
+    "hard-opus-a-long_policy-17": [
+     "c",
+     1.7
+    ],
+    "hard-opus-a-long_policy-19": [
+     "w",
+     0.665
+    ],
+    "hard-opus-a-probability-03": [
+     "c",
+     0.137
+    ],
+    "hard-opus-a-probability-04": [
+     "w",
+     0.439
+    ],
+    "hard-opus-a-probability-07": [
+     "c",
+     0.466
+    ],
+    "hard-opus-a-probability-08": [
+     "w",
+     0.114
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "c",
+     0.148
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "w",
+     0.163
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "w",
+     0.723
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "w",
+     0.161
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "w",
+     0.325
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "c",
+     0.226
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "w",
+     0.211
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "w",
+     0.209
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "c",
+     0.259
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "c",
+     0.177
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "c",
+     0.211
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "w",
+     0.32
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "w",
+     1.332
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     1.858
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "c",
+     1.767
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     2.154
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "w",
+     0.671
+    ],
+    "hard-opus-b-probability-01": [
+     "w",
+     0.777
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.211
+    ],
+    "hard-opus-b-probability-03": [
+     "w",
+     0.317
+    ],
+    "hard-opus-b-probability-04": [
+     "c",
+     0.253
+    ],
+    "hard-opus-b-probability-06": [
+     "c",
+     0.389
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "w",
+     0.551
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.399
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "c",
+     0.226
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "w",
+     0.457
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "c",
+     0.161
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "w",
+     0.391
+    ],
+    "hard-opus-c-long_policy-02": [
+     "c",
+     2.709
+    ],
+    "hard-opus-c-long_policy-03": [
+     "c",
+     3.129
+    ],
+    "hard-opus-c-long_policy-04": [
+     "c",
+     1.037
+    ],
+    "hard-opus-c-long_policy-05": [
+     "w",
+     1.926
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     1.894
+    ],
+    "hard-opus-c-long_policy-10": [
+     "c",
+     2.204
+    ],
+    "hard-opus-c-long_policy-11": [
+     "w",
+     1.077
+    ],
+    "hard-opus-c-probability-03": [
+     "c",
+     0.207
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "c",
+     0.268
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "c",
+     0.507
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "w",
+     0.444
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.755
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "w",
+     0.557
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "c",
+     0.334
+    ],
+    "hard-sol-a-adversarial-01": [
+     "w",
+     0.179
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.111
+    ],
+    "hard-sol-a-adversarial-07": [
+     "w",
+     0.189
+    ],
+    "hard-sol-a-adversarial-08": [
+     "c",
+     0.111
+    ],
+    "hard-sol-a-adversarial-09": [
+     "c",
+     0.155
+    ],
+    "hard-sol-a-adversarial-11": [
+     "w",
+     0.192
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "c",
+     1.205
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     1.222
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "c",
+     1.151
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "c",
+     1.154
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "c",
+     1.141
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "c",
+     1.145
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "c",
+     1.178
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "w",
+     1.133
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.115
+    ],
+    "hard-sol-a-trap-04": [
+     "w",
+     0.123
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.203
+    ],
+    "hard-sol-a-trap-06": [
+     "c",
+     0.208
+    ],
+    "hard-sol-a-trap-08": [
+     "w",
+     0.18
+    ],
+    "hard-sol-a-trap-10": [
+     "c",
+     0.144
+    ],
+    "hard-sol-a-trap-13": [
+     "w",
+     0.113
+    ],
+    "hard-sol-a-trap-15": [
+     "c",
+     0.13
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "c",
+     0.118
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "w",
+     0.117
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "c",
+     0.121
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "w",
+     0.12
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "w",
+     0.117
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "w",
+     0.121
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "c",
+     0.128
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "w",
+     0.115
+    ],
+    "hard-sol-b-long_policy-01": [
+     "w",
+     1.661
+    ],
+    "hard-sol-b-long_policy-02": [
+     "w",
+     1.523
+    ],
+    "hard-sol-b-long_policy-05": [
+     "c",
+     1.484
+    ],
+    "hard-sol-b-long_policy-06": [
+     "w",
+     1.588
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "c",
+     0.224
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "c",
+     0.218
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "c",
+     0.219
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "c",
+     0.205
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "c",
+     0.205
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.175
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "c",
+     0.191
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "w",
+     0.16
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "c",
+     0.129
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "w",
+     0.13
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "c",
+     0.122
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "w",
+     0.116
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "w",
+     0.112
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "c",
+     0.12
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "c",
+     0.125
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "w",
+     0.125
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "w",
+     0.119
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "c",
+     0.114
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "c",
+     1.167
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "w",
+     1.407
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "w",
+     1.493
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.285
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "c",
+     1.119
+    ]
+   }
+  },
   "reflex-27b": {
    "display": "reflex-27b (Qwen3.8-27B)",
    "partial": false,
@@ -54466,6 +58962,1130 @@
     "hard-sol-c-multi_hop-13": [
      "c",
      0.675
+    ]
+   }
+  },
+  "zerank-2": {
+   "display": "ZeroEntropy zerank-2",
+   "partial": false,
+   "by_tier": {
+    "easy": {
+     "c": 72,
+     "w": 0,
+     "f": 0,
+     "n": 0,
+     "accuracy": 1.0
+    },
+    "standard": {
+     "c": 76,
+     "w": 20,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.7917
+    },
+    "judge": {
+     "c": 129,
+     "w": 17,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.8836
+    },
+    "hard": {
+     "c": 104,
+     "w": 116,
+     "f": 0,
+     "n": 0,
+     "accuracy": 0.4727
+    }
+   },
+   "by_tier_topic": {
+    "easy": {
+     "intent": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "fact": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "extraction": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     },
+     "tool_selection": {
+      "c": 18,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     }
+    },
+    "standard": {
+     "policy": {
+      "c": 11,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.6875
+     },
+     "intent": {
+      "c": 13,
+      "w": 3,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8125
+     },
+     "ordinal": {
+      "c": 12,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.75
+     },
+     "extraction": {
+      "c": 15,
+      "w": 1,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.9375
+     },
+     "adequacy": {
+      "c": 9,
+      "w": 7,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5625
+     },
+     "routing": {
+      "c": 16,
+      "w": 0,
+      "f": 0,
+      "n": 0,
+      "accuracy": 1.0
+     }
+    },
+    "judge": {
+     "routing": {
+      "c": 68,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8718
+     },
+     "adequacy": {
+      "c": 61,
+      "w": 7,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.8971
+     }
+    },
+    "hard": {
+     "long_policy": {
+      "c": 12,
+      "w": 26,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.3158
+     },
+     "probability": {
+      "c": 8,
+      "w": 12,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.4
+     },
+     "temporal_numeric": {
+      "c": 7,
+      "w": 23,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2333
+     },
+     "ambiguous": {
+      "c": 4,
+      "w": 10,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.2857
+     },
+     "multi_hop": {
+      "c": 19,
+      "w": 16,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5429
+     },
+     "tradeoff": {
+      "c": 8,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.6667
+     },
+     "adversarial": {
+      "c": 7,
+      "w": 5,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5833
+     },
+     "trap": {
+      "c": 12,
+      "w": 4,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.75
+     },
+     "judge_hard": {
+      "c": 18,
+      "w": 15,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.5455
+     },
+     "routing_hard": {
+      "c": 9,
+      "w": 1,
+      "f": 0,
+      "n": 0,
+      "accuracy": 0.9
+     }
+    }
+   },
+   "public_tasks": {
+    "easy-intent-00": [
+     "c",
+     0.521
+    ],
+    "easy-intent-01": [
+     "c",
+     0.116
+    ],
+    "easy-intent-02": [
+     "c",
+     0.125
+    ],
+    "easy-intent-03": [
+     "c",
+     0.116
+    ],
+    "easy-intent-04": [
+     "c",
+     0.119
+    ],
+    "easy-intent-05": [
+     "c",
+     0.115
+    ],
+    "easy-intent-06": [
+     "c",
+     0.112
+    ],
+    "easy-intent-07": [
+     "c",
+     0.137
+    ],
+    "easy-intent-08": [
+     "c",
+     0.114
+    ],
+    "easy-intent-09": [
+     "c",
+     0.112
+    ],
+    "easy-intent-10": [
+     "c",
+     0.111
+    ],
+    "easy-intent-11": [
+     "c",
+     0.118
+    ],
+    "easy-fact-00": [
+     "c",
+     0.114
+    ],
+    "easy-fact-01": [
+     "c",
+     0.109
+    ],
+    "easy-fact-02": [
+     "c",
+     0.11
+    ],
+    "easy-fact-03": [
+     "c",
+     0.121
+    ],
+    "easy-fact-04": [
+     "c",
+     0.108
+    ],
+    "easy-fact-05": [
+     "c",
+     0.116
+    ],
+    "easy-fact-06": [
+     "c",
+     0.109
+    ],
+    "easy-fact-07": [
+     "c",
+     0.113
+    ],
+    "easy-fact-08": [
+     "c",
+     0.11
+    ],
+    "easy-fact-09": [
+     "c",
+     0.109
+    ],
+    "easy-fact-10": [
+     "c",
+     0.111
+    ],
+    "easy-fact-11": [
+     "c",
+     0.109
+    ],
+    "easy-extraction-00": [
+     "c",
+     0.126
+    ],
+    "easy-extraction-01": [
+     "c",
+     0.123
+    ],
+    "easy-extraction-02": [
+     "c",
+     0.113
+    ],
+    "easy-extraction-03": [
+     "c",
+     0.115
+    ],
+    "easy-extraction-04": [
+     "c",
+     0.113
+    ],
+    "easy-extraction-05": [
+     "c",
+     0.263
+    ],
+    "easy-extraction-06": [
+     "c",
+     0.115
+    ],
+    "easy-extraction-07": [
+     "c",
+     0.154
+    ],
+    "easy-extraction-08": [
+     "c",
+     0.123
+    ],
+    "easy-extraction-09": [
+     "c",
+     0.113
+    ],
+    "easy-extraction-10": [
+     "c",
+     0.111
+    ],
+    "easy-extraction-11": [
+     "c",
+     0.114
+    ],
+    "easy-tool_selection-00": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-01": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-02": [
+     "c",
+     0.109
+    ],
+    "easy-tool_selection-03": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-04": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-05": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-06": [
+     "c",
+     0.112
+    ],
+    "easy-tool_selection-07": [
+     "c",
+     0.112
+    ],
+    "easy-tool_selection-08": [
+     "c",
+     0.113
+    ],
+    "easy-tool_selection-09": [
+     "c",
+     0.128
+    ],
+    "easy-tool_selection-10": [
+     "c",
+     0.11
+    ],
+    "easy-tool_selection-11": [
+     "c",
+     0.117
+    ],
+    "original-policy-01-0": [
+     "c",
+     0.112
+    ],
+    "original-policy-01-1": [
+     "c",
+     0.113
+    ],
+    "original-policy-02-0": [
+     "w",
+     0.113
+    ],
+    "original-policy-02-1": [
+     "w",
+     0.109
+    ],
+    "original-policy-03-0": [
+     "c",
+     0.113
+    ],
+    "original-policy-03-1": [
+     "w",
+     0.115
+    ],
+    "original-policy-04-0": [
+     "c",
+     0.108
+    ],
+    "original-policy-04-1": [
+     "c",
+     0.111
+    ],
+    "original-policy-05-0": [
+     "c",
+     0.109
+    ],
+    "original-policy-05-1": [
+     "c",
+     0.117
+    ],
+    "original-policy-06-0": [
+     "c",
+     0.121
+    ],
+    "original-policy-06-1": [
+     "c",
+     0.109
+    ],
+    "original-intent-01-0": [
+     "c",
+     0.108
+    ],
+    "original-intent-01-1": [
+     "c",
+     0.111
+    ],
+    "original-intent-02-0": [
+     "c",
+     0.115
+    ],
+    "original-intent-02-1": [
+     "c",
+     0.107
+    ],
+    "original-intent-03-0": [
+     "c",
+     0.115
+    ],
+    "original-intent-03-1": [
+     "c",
+     0.11
+    ],
+    "original-intent-04-0": [
+     "c",
+     0.112
+    ],
+    "original-intent-04-1": [
+     "c",
+     0.112
+    ],
+    "original-intent-05-0": [
+     "w",
+     0.108
+    ],
+    "original-intent-05-1": [
+     "w",
+     0.109
+    ],
+    "original-intent-06-0": [
+     "c",
+     0.121
+    ],
+    "original-intent-06-1": [
+     "c",
+     0.117
+    ],
+    "original-ordinal-01-0": [
+     "w",
+     0.124
+    ],
+    "original-ordinal-01-1": [
+     "c",
+     0.115
+    ],
+    "original-ordinal-02-0": [
+     "c",
+     0.118
+    ],
+    "original-ordinal-02-1": [
+     "c",
+     0.115
+    ],
+    "original-ordinal-03-0": [
+     "c",
+     0.116
+    ],
+    "original-ordinal-03-1": [
+     "c",
+     0.114
+    ],
+    "original-ordinal-04-0": [
+     "c",
+     0.11
+    ],
+    "original-ordinal-04-1": [
+     "c",
+     0.111
+    ],
+    "original-ordinal-05-0": [
+     "w",
+     0.109
+    ],
+    "original-ordinal-05-1": [
+     "w",
+     0.116
+    ],
+    "original-ordinal-06-0": [
+     "c",
+     0.115
+    ],
+    "original-ordinal-06-1": [
+     "c",
+     0.12
+    ],
+    "original-extraction-01-0": [
+     "c",
+     0.112
+    ],
+    "original-extraction-01-1": [
+     "c",
+     0.172
+    ],
+    "original-extraction-02-0": [
+     "c",
+     0.113
+    ],
+    "original-extraction-02-1": [
+     "c",
+     0.113
+    ],
+    "original-extraction-03-0": [
+     "w",
+     0.115
+    ],
+    "original-extraction-03-1": [
+     "c",
+     0.122
+    ],
+    "original-extraction-04-0": [
+     "c",
+     0.113
+    ],
+    "original-extraction-04-1": [
+     "c",
+     0.114
+    ],
+    "original-extraction-05-0": [
+     "c",
+     0.114
+    ],
+    "original-extraction-05-1": [
+     "c",
+     0.113
+    ],
+    "original-extraction-06-0": [
+     "c",
+     0.117
+    ],
+    "original-extraction-06-1": [
+     "c",
+     0.114
+    ],
+    "original-adequacy-01-0": [
+     "c",
+     0.11
+    ],
+    "original-adequacy-01-1": [
+     "c",
+     0.099
+    ],
+    "original-adequacy-02-0": [
+     "w",
+     0.093
+    ],
+    "original-adequacy-02-1": [
+     "w",
+     0.099
+    ],
+    "original-adequacy-03-0": [
+     "w",
+     0.091
+    ],
+    "original-adequacy-03-1": [
+     "w",
+     0.092
+    ],
+    "original-adequacy-04-0": [
+     "c",
+     0.093
+    ],
+    "original-adequacy-04-1": [
+     "c",
+     0.091
+    ],
+    "original-adequacy-05-0": [
+     "w",
+     0.105
+    ],
+    "original-adequacy-05-1": [
+     "w",
+     0.095
+    ],
+    "original-adequacy-06-0": [
+     "c",
+     0.094
+    ],
+    "original-adequacy-06-1": [
+     "c",
+     0.092
+    ],
+    "original-routing-01-0": [
+     "c",
+     0.12
+    ],
+    "original-routing-01-1": [
+     "c",
+     0.129
+    ],
+    "original-routing-02-0": [
+     "c",
+     0.118
+    ],
+    "original-routing-02-1": [
+     "c",
+     0.113
+    ],
+    "original-routing-03-0": [
+     "c",
+     0.12
+    ],
+    "original-routing-03-1": [
+     "c",
+     0.128
+    ],
+    "original-routing-04-0": [
+     "c",
+     0.115
+    ],
+    "original-routing-04-1": [
+     "c",
+     0.114
+    ],
+    "original-routing-05-0": [
+     "c",
+     0.117
+    ],
+    "original-routing-05-1": [
+     "c",
+     0.115
+    ],
+    "original-routing-06-0": [
+     "c",
+     0.116
+    ],
+    "original-routing-06-1": [
+     "c",
+     0.11
+    ],
+    "hard-opus-a-long_policy-01": [
+     "c",
+     2.99
+    ],
+    "hard-opus-a-long_policy-04": [
+     "w",
+     1.776
+    ],
+    "hard-opus-a-long_policy-08": [
+     "c",
+     1.271
+    ],
+    "hard-opus-a-long_policy-09": [
+     "w",
+     1.38
+    ],
+    "hard-opus-a-long_policy-11": [
+     "c",
+     0.528
+    ],
+    "hard-opus-a-long_policy-13": [
+     "w",
+     0.676
+    ],
+    "hard-opus-a-long_policy-17": [
+     "c",
+     1.636
+    ],
+    "hard-opus-a-long_policy-19": [
+     "w",
+     0.651
+    ],
+    "hard-opus-a-probability-03": [
+     "c",
+     0.122
+    ],
+    "hard-opus-a-probability-04": [
+     "w",
+     0.414
+    ],
+    "hard-opus-a-probability-07": [
+     "c",
+     0.457
+    ],
+    "hard-opus-a-probability-08": [
+     "c",
+     0.102
+    ],
+    "hard-opus-a-temporal_numeric-03": [
+     "c",
+     0.143
+    ],
+    "hard-opus-a-temporal_numeric-06": [
+     "w",
+     0.146
+    ],
+    "hard-opus-a-temporal_numeric-07": [
+     "w",
+     0.689
+    ],
+    "hard-opus-a-temporal_numeric-09": [
+     "w",
+     0.146
+    ],
+    "hard-opus-a-temporal_numeric-12": [
+     "w",
+     0.279
+    ],
+    "hard-opus-b-ambiguous-02": [
+     "c",
+     0.205
+    ],
+    "hard-opus-b-ambiguous-03": [
+     "w",
+     0.195
+    ],
+    "hard-opus-b-ambiguous-07": [
+     "w",
+     0.193
+    ],
+    "hard-opus-b-ambiguous-09": [
+     "w",
+     0.228
+    ],
+    "hard-opus-b-ambiguous-10": [
+     "c",
+     0.162
+    ],
+    "hard-opus-b-ambiguous-11": [
+     "w",
+     0.187
+    ],
+    "hard-opus-b-ambiguous-13": [
+     "c",
+     0.282
+    ],
+    "hard-opus-b-multi_hop-03": [
+     "w",
+     1.297
+    ],
+    "hard-opus-b-multi_hop-04": [
+     "w",
+     1.775
+    ],
+    "hard-opus-b-multi_hop-05": [
+     "w",
+     1.709
+    ],
+    "hard-opus-b-multi_hop-07": [
+     "w",
+     2.104
+    ],
+    "hard-opus-b-multi_hop-08": [
+     "w",
+     0.644
+    ],
+    "hard-opus-b-probability-01": [
+     "w",
+     0.749
+    ],
+    "hard-opus-b-probability-02": [
+     "w",
+     0.194
+    ],
+    "hard-opus-b-probability-03": [
+     "c",
+     0.304
+    ],
+    "hard-opus-b-probability-04": [
+     "w",
+     0.227
+    ],
+    "hard-opus-b-probability-06": [
+     "w",
+     0.369
+    ],
+    "hard-opus-b-tradeoff-01": [
+     "c",
+     0.495
+    ],
+    "hard-opus-b-tradeoff-03": [
+     "w",
+     0.366
+    ],
+    "hard-opus-b-tradeoff-06": [
+     "w",
+     0.212
+    ],
+    "hard-opus-b-tradeoff-07": [
+     "w",
+     0.423
+    ],
+    "hard-opus-b-tradeoff-08": [
+     "c",
+     0.148
+    ],
+    "hard-opus-b-tradeoff-12": [
+     "c",
+     0.349
+    ],
+    "hard-opus-c-long_policy-02": [
+     "c",
+     2.638
+    ],
+    "hard-opus-c-long_policy-03": [
+     "c",
+     3.05
+    ],
+    "hard-opus-c-long_policy-04": [
+     "c",
+     0.989
+    ],
+    "hard-opus-c-long_policy-05": [
+     "w",
+     1.898
+    ],
+    "hard-opus-c-long_policy-08": [
+     "w",
+     1.933
+    ],
+    "hard-opus-c-long_policy-10": [
+     "c",
+     2.166
+    ],
+    "hard-opus-c-long_policy-11": [
+     "w",
+     1.049
+    ],
+    "hard-opus-c-probability-03": [
+     "w",
+     0.189
+    ],
+    "hard-opus-c-temporal_numeric-02": [
+     "c",
+     0.244
+    ],
+    "hard-opus-c-temporal_numeric-03": [
+     "w",
+     0.47
+    ],
+    "hard-opus-c-temporal_numeric-04": [
+     "w",
+     0.409
+    ],
+    "hard-opus-c-temporal_numeric-06": [
+     "w",
+     0.705
+    ],
+    "hard-opus-c-temporal_numeric-08": [
+     "c",
+     0.535
+    ],
+    "hard-opus-c-temporal_numeric-12": [
+     "c",
+     0.304
+    ],
+    "hard-sol-a-adversarial-01": [
+     "w",
+     0.147
+    ],
+    "hard-sol-a-adversarial-06": [
+     "c",
+     0.117
+    ],
+    "hard-sol-a-adversarial-07": [
+     "c",
+     0.16
+    ],
+    "hard-sol-a-adversarial-08": [
+     "w",
+     0.117
+    ],
+    "hard-sol-a-adversarial-09": [
+     "c",
+     0.125
+    ],
+    "hard-sol-a-adversarial-11": [
+     "c",
+     0.161
+    ],
+    "hard-sol-a-multi_hop-01": [
+     "c",
+     1.157
+    ],
+    "hard-sol-a-multi_hop-02": [
+     "w",
+     1.182
+    ],
+    "hard-sol-a-multi_hop-05": [
+     "w",
+     1.117
+    ],
+    "hard-sol-a-multi_hop-07": [
+     "c",
+     1.123
+    ],
+    "hard-sol-a-multi_hop-08": [
+     "w",
+     1.116
+    ],
+    "hard-sol-a-multi_hop-09": [
+     "c",
+     1.118
+    ],
+    "hard-sol-a-multi_hop-10": [
+     "c",
+     1.139
+    ],
+    "hard-sol-a-multi_hop-12": [
+     "c",
+     1.112
+    ],
+    "hard-sol-a-trap-02": [
+     "c",
+     0.114
+    ],
+    "hard-sol-a-trap-04": [
+     "c",
+     0.109
+    ],
+    "hard-sol-a-trap-05": [
+     "w",
+     0.176
+    ],
+    "hard-sol-a-trap-06": [
+     "c",
+     0.179
+    ],
+    "hard-sol-a-trap-08": [
+     "c",
+     0.148
+    ],
+    "hard-sol-a-trap-10": [
+     "c",
+     0.121
+    ],
+    "hard-sol-a-trap-13": [
+     "c",
+     0.112
+    ],
+    "hard-sol-a-trap-15": [
+     "c",
+     0.121
+    ],
+    "hard-sol-b-judge_hard-01": [
+     "c",
+     0.13
+    ],
+    "hard-sol-b-judge_hard-02": [
+     "w",
+     0.12
+    ],
+    "hard-sol-b-judge_hard-05": [
+     "c",
+     0.114
+    ],
+    "hard-sol-b-judge_hard-08": [
+     "w",
+     0.112
+    ],
+    "hard-sol-b-judge_hard-10": [
+     "w",
+     0.136
+    ],
+    "hard-sol-b-judge_hard-14": [
+     "w",
+     0.117
+    ],
+    "hard-sol-b-judge_hard-15": [
+     "c",
+     0.113
+    ],
+    "hard-sol-b-judge_hard-18": [
+     "w",
+     0.117
+    ],
+    "hard-sol-b-long_policy-01": [
+     "c",
+     1.619
+    ],
+    "hard-sol-b-long_policy-02": [
+     "w",
+     1.471
+    ],
+    "hard-sol-b-long_policy-05": [
+     "c",
+     1.439
+    ],
+    "hard-sol-b-long_policy-06": [
+     "w",
+     1.505
+    ],
+    "hard-sol-b-routing_hard-01": [
+     "c",
+     0.198
+    ],
+    "hard-sol-b-routing_hard-02": [
+     "c",
+     0.183
+    ],
+    "hard-sol-b-routing_hard-03": [
+     "c",
+     0.182
+    ],
+    "hard-sol-b-routing_hard-07": [
+     "c",
+     0.176
+    ],
+    "hard-sol-b-routing_hard-09": [
+     "c",
+     0.188
+    ],
+    "hard-sol-b-temporal_numeric-01": [
+     "w",
+     0.153
+    ],
+    "hard-sol-b-temporal_numeric-02": [
+     "c",
+     0.161
+    ],
+    "hard-sol-b-temporal_numeric-03": [
+     "c",
+     0.128
+    ],
+    "hard-sol-b-temporal_numeric-04": [
+     "w",
+     0.119
+    ],
+    "hard-sol-c-judge_hard-03": [
+     "w",
+     0.117
+    ],
+    "hard-sol-c-judge_hard-05": [
+     "c",
+     0.128
+    ],
+    "hard-sol-c-judge_hard-07": [
+     "w",
+     0.126
+    ],
+    "hard-sol-c-judge_hard-08": [
+     "w",
+     0.117
+    ],
+    "hard-sol-c-judge_hard-09": [
+     "c",
+     0.117
+    ],
+    "hard-sol-c-judge_hard-10": [
+     "c",
+     0.122
+    ],
+    "hard-sol-c-judge_hard-11": [
+     "w",
+     0.117
+    ],
+    "hard-sol-c-judge_hard-13": [
+     "w",
+     0.12
+    ],
+    "hard-sol-c-judge_hard-15": [
+     "c",
+     0.115
+    ],
+    "hard-sol-c-multi_hop-07": [
+     "c",
+     1.056
+    ],
+    "hard-sol-c-multi_hop-09": [
+     "w",
+     1.381
+    ],
+    "hard-sol-c-multi_hop-11": [
+     "c",
+     1.426
+    ],
+    "hard-sol-c-multi_hop-12": [
+     "w",
+     0.268
+    ],
+    "hard-sol-c-multi_hop-13": [
+     "c",
+     1.096
     ]
    }
   }

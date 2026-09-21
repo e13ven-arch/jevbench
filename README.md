@@ -141,6 +141,15 @@ published 64-token state and 48-token option limits, and hosted-price cost basis
 
 **v1.2.15 (tag `v1.2.15`): Zefan Cai's Open-Jev 2B and 9B.** Both pinned Apache-2.0 adapter packages ran all 534 frozen decisions through the author's MIT server on our RunPod H100: **Open-Jev 9B (Zefan Cai)** scored **56.7 (#39)** and **Open-Jev 2B (Zefan Cai)** scored **53.8 (#41)**. Their full names distinguish them from the other unrelated OpenJev projects already measured. An exact normalized-text audit found no public JevBench state or instruction in the 79,116-row public training projection, and on the held-out diagnostic both score slightly higher on held-out than on public hard items (gaps -2.6 and -2.9 points, field mean -0.7). Endpoint, revisions, licences, cost basis, the overlap check and the held-out figures are in [`docs/v1.2-additions-zefan-open-jev.md`](docs/v1.2-additions-zefan-open-jev.md). No earlier result or task changed.
 
+**v1.2.16 (tag `v1.2.16`): rerankers.** Added zerank-2, Qwen3-Reranker-4B,
+BAAI bge-reranker-v2-m3, Mixedbread mxbai-rerank-base-v2, and Alibaba GTE
+Reranker ModernBERT-base as a new `reranker` class. All ran the complete 534
+frozen decisions through one neutral, preregistered option-ranking adapter.
+Temperature and yes/no threshold grids were fitted on public items only and
+then frozen; the public no-instruction baseline and complete sensitivity curves
+are embedded in each result row. See
+[`docs/v1.2-additions-rerankers.md`](docs/v1.2-additions-rerankers.md).
+
 **v1.2.13 (tag `v1.2.13`): OpenJev (thinking, BF16).** OpenJev's native typed-API `think=512` switch ran all 534 frozen decisions on the same H200. See [`docs/v1.2-additions-openjev-thinking.md`](docs/v1.2-additions-openjev-thinking.md).
 
 **v1.2.12 (tag `v1.2.12`): djev (thinking).** An experimental full-generation path over the same open DiffusionGemma checkpoint ran all 534 frozen decisions with thinking enabled and a fixed 8,192-token cap. Current djev-dev itself hard-codes thinking off, one denoising step and read-only inference, so this is not described as a switch in its published typed API. See [`docs/v1.2-additions-djev-thinking.md`](docs/v1.2-additions-djev-thinking.md).

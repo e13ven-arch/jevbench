@@ -1,0 +1,319 @@
+{
+ "key": "zerank-2",
+ "display": "ZeroEntropy zerank-2",
+ "class": "reranker",
+ "open": "yes",
+ "author": "ZeroEntropy",
+ "repo": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+ "licence": "Apache-2.0",
+ "underlying": "Qwen3-Reranker-derived 4B cross-encoder",
+ "has_distribution": true,
+ "probability_source": [
+  "public_calibrated_reranker_softmax"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.7916666666666666,
+  "judge": 0.8835616438356164,
+  "hard": 0.4727272727272727
+ },
+ "hard": {
+  "run": "runs/zerank-2--hard (job jevbench-add-requests-20260919)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.4727272727272727,
+  "by_family": {
+   "adversarial": {
+    "correct": 7,
+    "n": 12,
+    "accuracy": 0.5833333333333334
+   },
+   "ambiguous": {
+    "correct": 4,
+    "n": 14,
+    "accuracy": 0.2857142857142857
+   },
+   "judge_hard": {
+    "correct": 18,
+    "n": 33,
+    "accuracy": 0.5454545454545454
+   },
+   "long_policy": {
+    "correct": 12,
+    "n": 38,
+    "accuracy": 0.3157894736842105
+   },
+   "multi_hop": {
+    "correct": 19,
+    "n": 35,
+    "accuracy": 0.5428571428571428
+   },
+   "probability": {
+    "correct": 8,
+    "n": 20,
+    "accuracy": 0.4
+   },
+   "routing_hard": {
+    "correct": 9,
+    "n": 10,
+    "accuracy": 0.9
+   },
+   "temporal_numeric": {
+    "correct": 7,
+    "n": 30,
+    "accuracy": 0.23333333333333334
+   },
+   "tradeoff": {
+    "correct": 8,
+    "n": 12,
+    "accuracy": 0.6666666666666666
+   },
+   "trap": {
+    "correct": 12,
+    "n": 16,
+    "accuracy": 0.75
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.631716160803407,
+  "ece": 0.09786559872743003,
+  "probability_fidelity": 72.55111248672686,
+  "calibration_score": 76.48899637062043,
+  "onehot": {
+   "ece": 0.5272727272727273,
+   "probability_fidelity": 38.704499999999996,
+   "calibration_score": 19.352249999999998
+  },
+  "latency_p50_s": 0.23386710975319147,
+  "latency_p95_s": 1.8308645181823509,
+  "mean_input_tokens": 4350.459090909091,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "from a Hetzner server in Germany, network included",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.12663885252550244,
+  "p95_s": 1.5002395501825958,
+  "run": "serial 242-decision standard+judge run"
+ },
+ "cost": {
+  "kind": "measured",
+  "usd_per_1000": 0.04729792435014604,
+  "usd_per_1000_v11_tiers": 0.03125511838232944,
+  "usd_per_1000_hard": 0.07019538377693882,
+  "basis_v11": "MEASURED model inference time x lium.io A6000 tariff USD 0.42/hour; excludes shared setup/download overhead",
+  "basis_hard": "MEASURED hard-item inference time x lium.io A6000 tariff USD 0.42/hour",
+  "basis_final": "MEASURED model inference time x lium.io A6000 tariff USD 0.42/hour",
+  "self_host_sensitivity": "Whole five-model rental including setup/download was USD 0.21."
+ },
+ "calibration": {
+  "score": 76.48899637062043,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.09786559872743003,
+  "probability_fidelity": 72.55111248672686,
+  "brier_hard": 0.631716160803407,
+  "brier_standard_judge_v11": 0.40128849491331786
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io A6000 48 GB), serial, one option batch per decision",
+ "note": "5eae30d5ee3c6b2df2ef6d723bde45172d761c4c",
+ "footnote": "Neutral documented reranker adapter; instruction and no-instruction public calibration were run, then frozen before one held-out pass.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.05124256431482749,
+   "first_request_s": 0.5213367706164718
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.7916666666666666,
+   "operational_success": 1.0,
+   "brier_mean": 0.3973369354312963,
+   "first_request_s": 0.11168663017451763
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.8835616438356164,
+   "operational_success": 1.0,
+   "brier_mean": 0.4038867806001266,
+   "first_request_s": 0.41008459590375423
+  }
+ },
+ "calibration_protocol": {
+  "model": "zeroentropy/zerank-2-reranker",
+  "revision": "5eae30d5ee3c6b2df2ef6d723bde45172d761c4c",
+  "public_only": true,
+  "instruction": {
+   "temperature": 4.0,
+   "noul_threshold": 0.5,
+   "curves": {
+    "temperature": [
+     {
+      "temperature": 0.25,
+      "log_loss": 3.4755627200303962,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.28221393141887935
+     },
+     {
+      "temperature": 0.5,
+      "log_loss": 1.8361817673376362,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.23448200447087653
+     },
+     {
+      "temperature": 1.0,
+      "log_loss": 1.0658245630811412,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.15918344100749218
+     },
+     {
+      "temperature": 2.0,
+      "log_loss": 0.7864238164619384,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.1087835571209382
+     },
+     {
+      "temperature": 4.0,
+      "log_loss": 0.7823747190706503,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.13455709834173107
+     },
+     {
+      "temperature": 8.0,
+      "log_loss": 0.9118724963985114,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.22947799797469395
+     }
+    ],
+    "noul_threshold": [
+     {
+      "threshold": 0.3,
+      "accuracy": 0.581081081081081,
+      "ece": 0.22260389143497505
+     },
+     {
+      "threshold": 0.4,
+      "accuracy": 0.6081081081081081,
+      "ece": 0.22979004263934283
+     },
+     {
+      "threshold": 0.45,
+      "accuracy": 0.581081081081081,
+      "ece": 0.17364974462923857
+     },
+     {
+      "threshold": 0.5,
+      "accuracy": 0.6351351351351351,
+      "ece": 0.16902380530302602
+     },
+     {
+      "threshold": 0.55,
+      "accuracy": 0.6216216216216216,
+      "ece": 0.16028039209483202
+     },
+     {
+      "threshold": 0.6,
+      "accuracy": 0.5945945945945946,
+      "ece": 0.11391897555492131
+     },
+     {
+      "threshold": 0.7,
+      "accuracy": 0.5405405405405406,
+      "ece": 0.15957485098389418
+     }
+    ]
+   }
+  },
+  "no_instruction_baseline": {
+   "temperature": 4.0,
+   "noul_threshold": 0.5,
+   "curves": {
+    "temperature": [
+     {
+      "temperature": 0.25,
+      "log_loss": 3.4755627200303962,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.28221393141887935
+     },
+     {
+      "temperature": 0.5,
+      "log_loss": 1.8361817673376362,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.23448200447087653
+     },
+     {
+      "temperature": 1.0,
+      "log_loss": 1.0658245630811412,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.15918344100749218
+     },
+     {
+      "temperature": 2.0,
+      "log_loss": 0.7864238164619384,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.1087835571209382
+     },
+     {
+      "temperature": 4.0,
+      "log_loss": 0.7823747190706503,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.13455709834173107
+     },
+     {
+      "temperature": 8.0,
+      "log_loss": 0.9118724963985114,
+      "accuracy": 0.7012987012987013,
+      "ece": 0.22947799797469395
+     }
+    ],
+    "noul_threshold": [
+     {
+      "threshold": 0.3,
+      "accuracy": 0.581081081081081,
+      "ece": 0.22260389143497505
+     },
+     {
+      "threshold": 0.4,
+      "accuracy": 0.6081081081081081,
+      "ece": 0.22979004263934283
+     },
+     {
+      "threshold": 0.45,
+      "accuracy": 0.581081081081081,
+      "ece": 0.17364974462923857
+     },
+     {
+      "threshold": 0.5,
+      "accuracy": 0.6351351351351351,
+      "ece": 0.16902380530302602
+     },
+     {
+      "threshold": 0.55,
+      "accuracy": 0.6216216216216216,
+      "ece": 0.16028039209483202
+     },
+     {
+      "threshold": 0.6,
+      "accuracy": 0.5945945945945946,
+      "ece": 0.11391897555492131
+     },
+     {
+      "threshold": 0.7,
+      "accuracy": 0.5405405405405406,
+      "ece": 0.15957485098389418
+     }
+    ]
+   }
+  }
+ }
+}
