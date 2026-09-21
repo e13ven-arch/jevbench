@@ -32,6 +32,7 @@ from .gliner2_local import Gliner2LocalAdapter  # noqa: F401
 from .verdict_local import VerdictLocalAdapter  # noqa: F401
 from .paw_local import PawLocalAdapter  # noqa: F401
 from .classifier_dev import ClassifierDevAdapter  # noqa: F401
+from .certo_local import CertoLocalAdapter  # noqa: F401
 
 
 def NeedleLocalAdapter(**kw):  # lazy: only the Needle venv can import needle
