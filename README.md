@@ -39,9 +39,7 @@ interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-mo
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking: **Jev 1.13.0 75.4** · SemIf (Qwen3.5-4B) 74.7 · djev (Maisa, diffusion-gemma) 74.3 ·
-  Laya (421M) 70.1 · open-alternative-jev (Qwen3.5-4B) 69.8 · system-one-open 68.9. Qwen3.8 27B and Needle 3 (both
-  modes) are partial runs, shown without a rank.
+- Top of the ranking (36 ranked rows): **Jev 1.13.0 (TypeSafe AI) 75.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 74.7 · djev (Maisa, diffusion-gemma) 74.3 · openJev Verdict 1.4 72.5 · reflex 4B (kshetrajna12) 71.7 · decision-machine-1 (milliseconds.ai) 71.5. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
 - **Honorable mention, not ranked: classifier.dev (fast tier) 84.8.** A service that runs another entrant's model is
   listed with all of its scores and axes, but is not ranked against the models — its fast tier *is* Jev
   ("The fast tier is Jev, TypeSafe's decision model", [classifier.dev/benchmark](https://classifier.dev/benchmark)), so
@@ -121,6 +119,18 @@ Mappings, endpoint conditions and cost bases were committed before any row was a
 GLiNER2.5 runs started ([`docs/v1.2-additions-run3.md`](docs/v1.2-additions-run3.md)); jqv's run had begun about ten
 minutes earlier, because its endpoint was temporary, but it needs no mapping and is priced at its base model's public
 tariff. No other row changed.
+
+**v1.2.8 (tag `v1.2.8`): 10 more requested systems, and jqv complete.** Every entrant ran all 534 frozen decisions
+through its author's own server, one request at a time, scored with the unchanged rules: [reflex 4B](https://github.com/kshetrajna12/reflex) 71.7 (#5), [decision-machine-1](https://www.milliseconds.ai) 71.5 (#6), [jqv](https://github.com/Octalab-Inc/jqv) 70.1 (#8), [decider-35b-a3b](https://huggingface.co/Mapika/decider-35b-a3b) 68.9 (#10), [OpenDecision](https://github.com/deepanwadhwa/OpenDecision) 67.0 (#14), [decider-2b](https://huggingface.co/Mapika/decider-2b) 64.6 (#20), [reflex-27b](https://github.com/kshetrajna12/reflex) 64.2 (#22), [jev-local](https://github.com/us/jev-local) 63.8 (#23), [LitJev](https://github.com/zhengxuyu/litjev) 63.7 (#25), [Bespoke Nimble 9B (re-run)](https://github.com/bespokelabsai/nimble) 61.8 (#30), [GLiNER2 large](https://huggingface.co/fastino/gliner2-large-v1) 50.5 (#36). decision-machine-1
+is a closed decision model behind milliseconds.ai's production API and gets its own class ("closed decision model");
+the rest ran on our RunPod GPUs, GLiNER2 large on our CPU. jqv (issues #6 and #9) was re-run in full on our own GPU from
+its now-public serving code, so its v1.2.7 partial row is replaced by a complete, ranked one. Bespoke Nimble 9B was re-run
+after Bespoke Labs raised its prompt limit to 8,192 tokens: hard tier 43.6 % → 65.5 %, yet its score fell from 63.7 to
+61.8, because the long items that used to fail are now answered and priced, and its pod was farther from our server.
+Every GPU pod this round was in Canada, so those rows' Speed includes a transatlantic network path from Germany. Mappings, endpoint
+conditions and cost bases were pushed before the runs: [`docs/v1.2-additions-run4.md`](docs/v1.2-additions-run4.md),
+[`docs/v1.2-additions-run4b.md`](docs/v1.2-additions-run4b.md). Not measurable this round: Werr (its server imports a
+module missing from the public repository) and DIY Jev (the repository answers 404). No earlier measurement changed.
 
 ## v1.1.3: the GPU round
 

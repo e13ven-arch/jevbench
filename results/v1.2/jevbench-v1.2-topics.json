@@ -1,7 +1,7 @@
 {
  "benchmark": "JevBench",
  "protocol": "jevbench::v1.2",
- "revision": "v1.2.7",
+ "revision": "v1.2.8",
  "status": "final",
  "note": "Accuracy per subject topic over all four tiers (easy, standard, judge, hard): correct / attempted; failures count as wrong; items a partial run never attempted are left out. Aggregates only; not part of the JevBench Score. Topics differ in their tier mix (n_items_by_tier), so compare systems within a topic, not topics with each other. A topic with fewer than 15 attempted items for a system is too thin to read (partial runs).",
  "min_attempted": 15,
@@ -349,26 +349,26 @@
     "coding": {
      "n": 56,
      "attempted": 56,
-     "correct": 47,
-     "accuracy": 0.8393
+     "correct": 48,
+     "accuracy": 0.8571
     },
     "law_policy": {
      "n": 67,
      "attempted": 67,
-     "correct": 34,
-     "accuracy": 0.5075
+     "correct": 54,
+     "accuracy": 0.806
     },
     "finance_commerce": {
      "n": 64,
      "attempted": 64,
-     "correct": 32,
-     "accuracy": 0.5
+     "correct": 44,
+     "accuracy": 0.6875
     },
     "support_ops": {
      "n": 119,
      "attempted": 119,
-     "correct": 78,
-     "accuracy": 0.6555
+     "correct": 93,
+     "accuracy": 0.7815
     },
     "everyday_language": {
      "n": 79,
@@ -864,6 +864,150 @@
     }
    }
   },
+  "decider-2b": {
+   "display": "decider-2b (Mapika)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 105,
+     "accuracy": 0.814
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 38,
+     "accuracy": 0.6786
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 36,
+     "accuracy": 0.5373
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 34,
+     "accuracy": 0.5312
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 73,
+     "accuracy": 0.6134
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 72,
+     "accuracy": 0.9114
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 13,
+     "accuracy": 0.65
+    }
+   }
+  },
+  "decider-35b-a3b": {
+   "display": "decider-35b-a3b (Mapika)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 109,
+     "accuracy": 0.845
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 43,
+     "accuracy": 0.7679
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 48,
+     "accuracy": 0.7164
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 45,
+     "accuracy": 0.7031
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 102,
+     "accuracy": 0.8571
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 77,
+     "accuracy": 0.9747
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
+    }
+   }
+  },
+  "decision-machine-1": {
+   "display": "decision-machine-1 (milliseconds.ai)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 102,
+     "accuracy": 0.7907
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 46,
+     "accuracy": 0.8214
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 27,
+     "accuracy": 0.403
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 36,
+     "accuracy": 0.5625
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 88,
+     "accuracy": 0.7395
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 68,
+     "accuracy": 0.8608
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 12,
+     "accuracy": 0.6
+    }
+   }
+  },
   "djev": {
    "display": "djev (Maisa, diffusion-gemma)",
    "partial": false,
@@ -909,6 +1053,54 @@
      "attempted": 20,
      "correct": 19,
      "accuracy": 0.95
+    }
+   }
+  },
+  "gliner2-large": {
+   "display": "GLiNER2 large (Fastino)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 89,
+     "accuracy": 0.6899
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 32,
+     "accuracy": 0.5714
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 30,
+     "accuracy": 0.4478
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 28,
+     "accuracy": 0.4375
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 45,
+     "accuracy": 0.3782
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 65,
+     "accuracy": 0.8228
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 11,
+     "accuracy": 0.55
     }
    }
   },
@@ -1104,51 +1296,99 @@
     }
    }
   },
-  "jqv": {
-   "display": "jqv (Qwen3-32B zero-shot)",
-   "partial": true,
+  "jev-local": {
+   "display": "jev-local (Qwen3.5-9B)",
+   "partial": false,
    "topics": {
     "math": {
      "n": 129,
-     "attempted": 112,
-     "correct": 99,
-     "accuracy": 0.8839
+     "attempted": 129,
+     "correct": 102,
+     "accuracy": 0.7907
     },
     "coding": {
      "n": 56,
-     "attempted": 45,
-     "correct": 42,
-     "accuracy": 0.9333
+     "attempted": 56,
+     "correct": 41,
+     "accuracy": 0.7321
     },
     "law_policy": {
      "n": 67,
-     "attempted": 39,
-     "correct": 32,
-     "accuracy": 0.8205
+     "attempted": 67,
+     "correct": 39,
+     "accuracy": 0.5821
     },
     "finance_commerce": {
      "n": 64,
-     "attempted": 45,
-     "correct": 35,
-     "accuracy": 0.7778
+     "attempted": 64,
+     "correct": 42,
+     "accuracy": 0.6562
     },
     "support_ops": {
      "n": 119,
-     "attempted": 96,
-     "correct": 76,
-     "accuracy": 0.7917
+     "attempted": 119,
+     "correct": 98,
+     "accuracy": 0.8235
     },
     "everyday_language": {
      "n": 79,
-     "attempted": 78,
-     "correct": 76,
-     "accuracy": 0.9744
+     "attempted": 79,
+     "correct": 73,
+     "accuracy": 0.9241
     },
     "safety_security": {
      "n": 20,
-     "attempted": 10,
-     "correct": 8,
-     "accuracy": 0.8
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
+    }
+   }
+  },
+  "jqv": {
+   "display": "jqv (Qwen3-32B zero-shot)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 110,
+     "accuracy": 0.8527
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 50,
+     "accuracy": 0.8929
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 47,
+     "accuracy": 0.7015
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 43,
+     "accuracy": 0.6719
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 96,
+     "accuracy": 0.8067
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 77,
+     "accuracy": 0.9747
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
     }
    }
   },
@@ -1392,6 +1632,102 @@
     }
    }
   },
+  "litjev": {
+   "display": "LitJev (Qwen3.8-27B)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 100,
+     "accuracy": 0.7752
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 46,
+     "accuracy": 0.8214
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 58,
+     "accuracy": 0.8657
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 48,
+     "accuracy": 0.75
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 108,
+     "accuracy": 0.9076
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 78,
+     "accuracy": 0.9873
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 18,
+     "accuracy": 0.9
+    }
+   }
+  },
+  "opendecision": {
+   "display": "OpenDecision (ModernBERT-large zero-shot)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 92,
+     "accuracy": 0.7132
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 24,
+     "accuracy": 0.4286
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 25,
+     "accuracy": 0.3731
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 31,
+     "accuracy": 0.4844
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 53,
+     "accuracy": 0.4454
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 62,
+     "accuracy": 0.7848
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 13,
+     "accuracy": 0.65
+    }
+   }
+  },
   "openjev-verdict-1.4": {
    "display": "openJev Verdict 1.4",
    "partial": false,
@@ -1485,6 +1821,102 @@
      "attempted": 20,
      "correct": 12,
      "accuracy": 0.6
+    }
+   }
+  },
+  "reflex-27b": {
+   "display": "reflex-27b (Qwen3.8-27B)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 110,
+     "accuracy": 0.8527
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 52,
+     "accuracy": 0.9286
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 57,
+     "accuracy": 0.8507
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 48,
+     "accuracy": 0.75
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 107,
+     "accuracy": 0.8992
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 78,
+     "accuracy": 0.9873
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 19,
+     "accuracy": 0.95
+    }
+   }
+  },
+  "reflex-4b": {
+   "display": "reflex 4B (kshetrajna12)",
+   "partial": false,
+   "topics": {
+    "math": {
+     "n": 129,
+     "attempted": 129,
+     "correct": 111,
+     "accuracy": 0.8605
+    },
+    "coding": {
+     "n": 56,
+     "attempted": 56,
+     "correct": 49,
+     "accuracy": 0.875
+    },
+    "law_policy": {
+     "n": 67,
+     "attempted": 67,
+     "correct": 46,
+     "accuracy": 0.6866
+    },
+    "finance_commerce": {
+     "n": 64,
+     "attempted": 64,
+     "correct": 45,
+     "accuracy": 0.7031
+    },
+    "support_ops": {
+     "n": 119,
+     "attempted": 119,
+     "correct": 100,
+     "accuracy": 0.8403
+    },
+    "everyday_language": {
+     "n": 79,
+     "attempted": 79,
+     "correct": 77,
+     "accuracy": 0.9747
+    },
+    "safety_security": {
+     "n": 20,
+     "attempted": 20,
+     "correct": 16,
+     "accuracy": 0.8
     }
    }
   },

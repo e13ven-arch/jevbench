@@ -28,14 +28,14 @@ def test_the_gliner25_rows_are_complete_and_ranked():
         assert all(s["tiers"][t] is not None for t in ("easy", "standard", "judge", "hard")), key
 
 
-def test_jqv_is_shown_but_not_ranked_and_says_how_far_it_got():
+def test_jqv_partial_row_was_replaced_by_a_complete_run_in_v128():
+    # v1.2.7 showed jqv as a partial row (425 of 534, no held-out hard items sent to the submitter's machine).
+    # v1.2.8 re-ran it on our own GPU from the now-public serving code, so the row is complete and ranked.
     s = SYS["jqv"]
-    assert s["partial"] and s["listing"] == "partial" and not s["rank"]
-    assert s["hard"]["n_attempted"] == N_PUBLIC_HARD
-    assert abs(s["hard"]["coverage"] - N_PUBLIC_HARD / N_HARD) < 1e-9
-    assert "not a production service" in s["endpoint_condition"]
-    note = ART["footnotes"]["jqv"]
-    assert "425 of 534" in note and "held-out" in note
+    assert not s["partial"] and s["listing"] == "ranked" and s["rank"]
+    assert s["hard"]["n_attempted"] == N_HARD and s["hard"]["coverage"] == 1.0
+    assert s["endpoint_kind"] == "gpu"
+    assert "replaces the v1.2.7 partial row" in ART["footnotes"]["jqv"]
 
 
 def test_an_incomplete_run_can_never_carry_a_rank():

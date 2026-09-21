@@ -31,6 +31,7 @@ CLASS = {
     "small-tool-model": ("#4a3aa7", "Small tool-calling model"),
     "jev-service": ("#7cb4f0", "Service built on Jev"),
     "classifier": ("#c0368c", "Zero-shot classifier (not a Jev rebuild)"),
+    "decision-api": ("#c89410", "Closed decision model (API only)"),
 }
 SURFACE, INK, INK2, GRID, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#d8d7d2", "#b9b8b1"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "text.parse_math": False, "axes.edgecolor": GRID,

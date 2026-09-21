@@ -60,19 +60,31 @@ COST_UNIT_EXAMPLE = cost_unit_example()
 # Which revision added which row. A row's revision is fixed; the artifact's revision is the newest one present.
 ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1.2.2", "openjev-verdict": "v1.2.2",
             "classifier-dev-fast": "v1.2.2", "programasweights": "v1.2.8",
-            "jqv": "v1.2.7", "gliner2.5-small": "v1.2.7", "gliner2.5-multi": "v1.2.7", "opendecision": "v1.2.7",
+            "jqv": "v1.2.8", "gliner2.5-small": "v1.2.7", "gliner2.5-multi": "v1.2.7", "opendecision": "v1.2.8",
             "kev-0.5b": "v1.2.5", "kev-0.6b": "v1.2.5", "kev-4b": "v1.2.5", "kev-8b": "v1.2.5",
             "openjev-verdict-1.4": "v1.2.6", "simplejev-qwen3.8-27b": "v1.2.6", "simplejev-qwen3.6-35b-a3b": "v1.2.6",
-            "decider-35b-a3b": "v1.2.8", "reflex-27b": "v1.2.8"}
+            "decider-35b-a3b": "v1.2.8", "reflex-27b": "v1.2.8", "decision-machine-1": "v1.2.8", "decider-2b": "v1.2.8",
+            "reflex-4b": "v1.2.8", "gliner2-large": "v1.2.8", "jev-local": "v1.2.8", "nimble-9b": "v1.2.8", "litjev": "v1.2.8"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
+# A complete re-run that replaces an earlier row (same frozen items, same scorer); the old score stays in the artifact.
+SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the serving prompt limit from 2,048 to 8,192 tokens "
+                           "(bespokelabsai/nimble PR #4); the v1.1.3 run had failed long items on that limit."}
 COST_FIX_REVISION = "v1.2.3"
 HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
 REVISION = max([ADDED_IN[k] for k in ADDITIONS] + [COST_FIX_REVISION, HONORABLE_REVISION], default="v1.2", key=_rk)
 REVISION_LOG = [e for e in [
     {"revision": "v1.2.8", "date": "2026-09-21", "note":
-     "Added decider-35b-a3b and reflex-27b on the unchanged frozen 534-decision set. Both ran through the existing "
-     "TypeSafe adapter, one request at a time, on our credential-free H100 NVL pod. No earlier row changed."},
+     "Added requested systems on the unchanged frozen 534-decision set, each through its author's own server and the "
+     "existing TypeSafe adapter, one request at a time: decider-35b-a3b and reflex-27b (issues #4, #5), decider-2b (#2), "
+     "reflex 4B (#3), OpenDecision, jev-local and LitJev on our RunPod GPUs; GLiNER2 large on our CPU; and "
+     "decision-machine-1 (#8), a closed decision model behind milliseconds.ai's production API, shown in its own class. "
+     "jqv (#6, #9) was re-run in full on our own GPU from its now-public serving code; that complete run replaces the "
+     "v1.2.7 partial row. Bespoke Nimble 9B was re-run at Bespoke Labs' request after they raised its serving prompt "
+     "limit from 2,048 to 8,192 tokens; the complete re-run replaces the v1.1.3 row (its old score is kept under "
+     "superseded_rows). "
+     "Mappings, endpoint conditions and cost bases were pushed before the runs (docs/v1.2-additions-run4.md, "
+     "docs/v1.2-additions-run4b.md). No earlier measurement changed."},
     {"revision": "v1.2.7", "date": "2026-09-20", "note":
      "Added three systems: jqv (a stock Qwen3-32B read as a decision model, submitted with a public endpoint) and the "
      "GLiNER2.5 small and multi checkpoints. The GLiNER2.5 rows ran the full frozen 534-decision set on our CPU with "
@@ -195,7 +207,13 @@ def needle_tools_price(row, needle):
     return row
 
 
-def apply_cost_correction(src):
+def apply_cost_correction_one(key, row):
+    """The v1.2.3 price correction for one frozen row (used to record a superseded row's old score)."""
+    apply_cost_correction({key: row}, only={key})
+    return row
+
+
+def apply_cost_correction(src, skip=(), only=None):
     """v1.2.3: replace every row's v1.1-tier price with the one that counts each of the 314 decisions once.
 
     The corrected figures and their derivation (tariff, mean input tokens, output tokens charged, n) are in
@@ -205,8 +223,11 @@ def apply_cost_correction(src):
     n11, nh = COST_FIX["n_v11_decisions"], COST_FIX["n_hard_decisions"]
     # The frozen correction covers rows present in v1.2.3. Later additions are
     # already aggregated with each decision counted exactly once.
-    assert set(COST_FIX["systems"]) <= set(src), set(COST_FIX["systems"]) - set(src)
+    if only is None:
+        assert set(COST_FIX["systems"]) <= set(src), set(COST_FIX["systems"]) - set(src)
     for key, fix in COST_FIX["systems"].items():
+        if key in skip or (only is not None and key not in only):
+            continue
         c = src[key]["cost"]
         assert abs(c["usd_per_1000_v11_tiers"] - fix["usd_per_1000_v11_tiers_old"]) < 1e-12, key
         assert abs(c["usd_per_1000"] - fix["usd_per_1000_old"]) < 1e-12, key
@@ -274,10 +295,15 @@ def main():
     own.update(key=OAJ_KEY, display=OAJ_NAME, run_key=OAJ_RANKED)
     src[OAJ_KEY] = own
     needle_tools_price(src["needle-3-tools"], src["needle-3"])
+    superseded = {}
     for k, row in ADDITIONS.items():
-        assert k not in src, k
+        if k in src:  # v1.2.8: a complete re-run on the same frozen items replaces the earlier row (named in SUPERSEDES)
+            assert k in SUPERSEDES, k
+            old = build_row(apply_cost_correction_one(k, copy.deepcopy(src[k])))
+            superseded[k] = {"reason": SUPERSEDES[k], "old_score": old["jevbench_score"], "old_tiers": old["tiers"],
+                             "old_endpoint_condition": old["endpoint_condition"]}
         src[k] = copy.deepcopy(row)
-    apply_cost_correction(src)
+    apply_cost_correction(src, skip=set(superseded))
 
     rows = [build_row(s) for s in src.values()]
     rows[[r["key"] for r in rows].index(OAJ_KEY)]["run_key"] = OAJ_RANKED
@@ -341,6 +367,7 @@ def main():
         },
         "hard_dataset": WIP.get("hard_dataset"),
         "footnotes": {OAJ_KEY: footnote, **{k: r["footnote"] for k, r in ADDITIONS.items() if r.get("footnote")}},
+        "superseded_rows": superseded,
         "excluded_runs": [{
             "key": "open-alternative-jev-reversed-order", "run_key": OAJ_REVERSED, "why_not_ranked":
             "Our first adapter put the options in reverse order (A. no, B. yes); the author's yes_no() helper builds A. yes, B. no. "
