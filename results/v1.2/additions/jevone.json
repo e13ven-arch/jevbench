@@ -1,0 +1,152 @@
+{
+ "key": "jevone",
+ "display": "JevOne",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "Juspay",
+ "repo": "https://huggingface.co/juspay/jev-one",
+ "licence": "Component-specific JevOne/Qwen/SGLang terms recorded in RESULT.md",
+ "underlying": "Qwen3.6-35B-A3B BF16 with JevOne bidirectional option-logit mapping",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.96875,
+  "judge": 0.9246575342465754,
+  "hard": 0.75
+ },
+ "hard": {
+  "run": "jevone/runs/results.jsonl (hard-tier subset)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.75,
+  "by_family": {
+   "adversarial": {
+    "correct": 12,
+    "n": 12,
+    "accuracy": 1.0
+   },
+   "ambiguous": {
+    "correct": 9,
+    "n": 14,
+    "accuracy": 0.6428571428571429
+   },
+   "judge_hard": {
+    "correct": 28,
+    "n": 33,
+    "accuracy": 0.8484848484848485
+   },
+   "long_policy": {
+    "correct": 23,
+    "n": 38,
+    "accuracy": 0.6052631578947368
+   },
+   "multi_hop": {
+    "correct": 27,
+    "n": 35,
+    "accuracy": 0.7714285714285715
+   },
+   "probability": {
+    "correct": 16,
+    "n": 20,
+    "accuracy": 0.8
+   },
+   "routing_hard": {
+    "correct": 10,
+    "n": 10,
+    "accuracy": 1.0
+   },
+   "temporal_numeric": {
+    "correct": 15,
+    "n": 30,
+    "accuracy": 0.5
+   },
+   "tradeoff": {
+    "correct": 9,
+    "n": 12,
+    "accuracy": 0.75
+   },
+   "trap": {
+    "correct": 16,
+    "n": 16,
+    "accuracy": 1.0
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.35137750199999995,
+  "ece": 0.029812272727272604,
+  "probability_fidelity": 77.68325,
+  "calibration_score": 85.86039772727274,
+  "onehot": {
+   "ece": 0.25,
+   "probability_fidelity": 59.564499999999995,
+   "calibration_score": 54.78225
+  },
+  "latency_p50_s": 0.10946263652294874,
+  "latency_p95_s": 0.2206121566006913,
+  "mean_input_tokens": 1193.9272727272728,
+  "mean_output_tokens": 1.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "our GPU (lium.io RTX PRO 6000 Blackwell 96 GB), local loopback HTTP, TP1; serial; independently validated one-card condition",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.08668531733565032,
+  "p95_s": 0.14500587752554567,
+  "run": "serial 242-decision standard+judge subset of completed 534 run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.1373250936329588,
+  "usd_per_1000_v11_tiers": 0.1373250936329588,
+  "usd_per_1000_hard": 0.1373250936329588,
+  "basis_v11": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_hard": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_final": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 85.86039772727274,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.029812272727272604,
+  "probability_fidelity": 77.68325,
+  "brier_hard": 0.35137750199999995,
+  "brier_standard_judge_v11": 0.14412887595041324
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io RTX PRO 6000 Blackwell 96 GB), local loopback HTTP, TP1; serial; independently validated one-card condition",
+ "note": "juspay/jev-one 4de0db772d718134bd32fe5d4c8da77d97a36240; SGLang image digest pinned in RESULT.md",
+ "footnote": "Every prompt is evaluated in forward and reversed option order. Cost uses twice the logical input count. The author default is two 96 GB GPUs; this run validated one 96 GB GPU without changing weights or mapping.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.0018199397222222221,
+   "first_request_s": 0.06457193987444043
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.96875,
+   "operational_success": 1.0,
+   "brier_mean": 0.08319042249999999,
+   "first_request_s": 0.07322637876495719
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.9246575342465754,
+   "operational_success": 1.0,
+   "brier_mean": 0.18419799602739728,
+   "first_request_s": 0.10196916619315743
+  }
+ }
+}

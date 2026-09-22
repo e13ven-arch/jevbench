@@ -1,0 +1,152 @@
+{
+ "key": "raw-phi-4-mini",
+ "display": "Raw Phi-4 mini direct logits",
+ "class": "raw-logit-control",
+ "open": "yes",
+ "author": "Microsoft / neutral reproduction",
+ "repo": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+ "licence": "MIT",
+ "underlying": "Phi-4-mini-instruct BF16",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.7395833333333334,
+  "judge": 0.7808219178082192,
+  "hard": 0.5227272727272727
+ },
+ "hard": {
+  "run": "raw-controls/runs/phi4-mini/canonical-results-v1.3.0.jsonl (hard-tier subset)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.5227272727272727,
+  "by_family": {
+   "adversarial": {
+    "correct": 7,
+    "n": 12,
+    "accuracy": 0.5833333333333334
+   },
+   "ambiguous": {
+    "correct": 4,
+    "n": 14,
+    "accuracy": 0.2857142857142857
+   },
+   "judge_hard": {
+    "correct": 19,
+    "n": 33,
+    "accuracy": 0.5757575757575758
+   },
+   "long_policy": {
+    "correct": 16,
+    "n": 38,
+    "accuracy": 0.42105263157894735
+   },
+   "multi_hop": {
+    "correct": 20,
+    "n": 35,
+    "accuracy": 0.5714285714285714
+   },
+   "probability": {
+    "correct": 12,
+    "n": 20,
+    "accuracy": 0.6
+   },
+   "routing_hard": {
+    "correct": 9,
+    "n": 10,
+    "accuracy": 0.9
+   },
+   "temporal_numeric": {
+    "correct": 5,
+    "n": 30,
+    "accuracy": 0.16666666666666666
+   },
+   "tradeoff": {
+    "correct": 8,
+    "n": 12,
+    "accuracy": 0.6666666666666666
+   },
+   "trap": {
+    "correct": 15,
+    "n": 16,
+    "accuracy": 0.9375
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.6986812465074166,
+  "ece": 0.2417753590606609,
+  "probability_fidelity": 72.76407537993293,
+  "calibration_score": 62.204501783900376,
+  "onehot": {
+   "ece": 0.4772727272727273,
+   "probability_fidelity": 51.07900000000001,
+   "calibration_score": 27.812227272727274
+  },
+  "latency_p50_s": 0.0792750152759254,
+  "latency_p95_s": 0.31224897452630096,
+  "mean_input_tokens": 1140.8863636363637,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "our lium.io RTX A6000 48 GB; local in-process; serial; one forward pass",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.06377661414444447,
+  "p95_s": 0.16066877208650113,
+  "run": "serial 242-decision standard+judge subset of completed 534 run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.047970318352059935,
+  "usd_per_1000_v11_tiers": 0.047970318352059935,
+  "usd_per_1000_hard": 0.047970318352059935,
+  "basis_v11": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_hard": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_final": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 62.204501783900376,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.2417753590606609,
+  "probability_fidelity": 72.76407537993293,
+  "brier_hard": 0.6986812465074166,
+  "brier_standard_judge_v11": 0.3532999027223932
+ },
+ "partial": false,
+ "endpoint_condition": "our lium.io RTX A6000 48 GB; local in-process; serial; one forward pass",
+ "note": "immutable microsoft/Phi-4-mini-instruct revision recorded in MANIFEST.md and run manifest",
+ "footnote": "Neutral preregistered uncalibrated softmax over next-token option-letter logits; reproduced raw-logit control, not an S1Bench score.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.00021150256057662147,
+   "first_request_s": 0.12675925344228745
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.7395833333333334,
+   "operational_success": 1.0,
+   "brier_mean": 0.35583381332759306,
+   "first_request_s": 0.061264303512871265
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.7808219178082192,
+   "operational_success": 1.0,
+   "brier_mean": 0.3516337697217139,
+   "first_request_s": 0.08594200108200312
+  }
+ }
+}

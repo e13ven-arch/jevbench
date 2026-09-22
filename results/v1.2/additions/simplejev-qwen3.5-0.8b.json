@@ -1,0 +1,162 @@
+{
+ "key": "simplejev-qwen3.5-0.8b",
+ "display": "SimpleJev (Qwen3.5-0.8B, CPU)",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "sabeel111 / Featherless AI",
+ "repo": "https://github.com/featherless-ai/simple-jev",
+ "licence": "Apache-2.0 server; Apache-2.0 Qwen3.5-0.8B checkpoint",
+ "underlying": "Qwen3.5-0.8B through SimpleJev native assistant-prefill option-logit scorer",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 0.875,
+  "standard": 0.5729166666666666,
+  "judge": 0.1917808219178082,
+  "hard": 0.4
+ },
+ "hard": {
+  "run": "run/results.jsonl (hard-tier subset)",
+  "n_items": 220,
+  "n_ok": 213,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 0.9681818181818181,
+  "accuracy": 0.4,
+  "by_family": {
+   "adversarial": {
+    "correct": 6,
+    "n": 12,
+    "accuracy": 0.5
+   },
+   "ambiguous": {
+    "correct": 6,
+    "n": 14,
+    "accuracy": 0.42857142857142855
+   },
+   "judge_hard": {
+    "correct": 15,
+    "n": 33,
+    "accuracy": 0.45454545454545453
+   },
+   "long_policy": {
+    "correct": 15,
+    "n": 38,
+    "accuracy": 0.39473684210526316
+   },
+   "multi_hop": {
+    "correct": 9,
+    "n": 35,
+    "accuracy": 0.2571428571428571
+   },
+   "probability": {
+    "correct": 8,
+    "n": 20,
+    "accuracy": 0.4
+   },
+   "routing_hard": {
+    "correct": 5,
+    "n": 10,
+    "accuracy": 0.5
+   },
+   "temporal_numeric": {
+    "correct": 8,
+    "n": 30,
+    "accuracy": 0.26666666666666666
+   },
+   "tradeoff": {
+    "correct": 7,
+    "n": 12,
+    "accuracy": 0.5833333333333334
+   },
+   "trap": {
+    "correct": 9,
+    "n": 16,
+    "accuracy": 0.5625
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.847391268136483,
+  "ece": 0.3060342388575625,
+  "probability_fidelity": 58.27785757969319,
+  "calibration_score": 48.535504904090345,
+  "onehot": {
+   "ece": 0.5868544600938967,
+   "probability_fidelity": 37.127500000000005,
+   "calibration_score": 18.563750000000002
+  },
+  "latency_p50_s": 8.088544107973576,
+  "latency_p95_s": 25.18287063837051,
+  "mean_input_tokens": 1551.2300469483569,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "our CPU, float32, four PyTorch threads, author-documented small-model command",
+  "hardware": "Sandy shared CPU (4 inference threads)",
+  "n": 242,
+  "p50_s": 3.993786856532097,
+  "p95_s": 10.967020866274833,
+  "run": "serial 242-decision standard+judge subset of completed 534 run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.011435224719101125,
+  "usd_per_1000_v11_tiers": 0.011435224719101125,
+  "usd_per_1000_hard": 0.011435224719101125,
+  "basis_v11": "ESTIMATE: DeepInfra Qwen3-Embedding-0.6B size-class reference USD 0.01/M input, USD 0/M output, applied to exact author-compiler token counts; see RESULT.md",
+  "basis_hard": "Same nonzero hosted size-class reference and exact prompt-token accounting; see RESULT.md",
+  "basis_final": "Same nonzero hosted size-class reference and exact prompt-token accounting; see RESULT.md",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 48.535504904090345,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.3060342388575625,
+  "probability_fidelity": 58.27785757969319,
+  "brier_hard": 0.847391268136483,
+  "brier_standard_judge_v11": 1.132994899496268
+ },
+ "partial": false,
+ "endpoint_condition": "our CPU, Qwen3.5-0.8B float32, 4 inference threads, local loopback HTTP, serial, author-documented 4096-token limit",
+ "note": "simple-jev b02aa81c915a8193759b3cd33fef74721d6e005b; Qwen/Qwen3.5-0.8B 2fc06364715b967f1860aea9cf38778875588b17",
+ "footnote": "Seven over-4096-token hard inputs received the endpoint’s documented HTTP 422 rejection and count as misses. No truncation or context extension was introduced.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 0.875,
+   "operational_success": 1.0,
+   "brier_mean": 0.24897578520195468,
+   "first_request_s": 2.3769496008753777
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.5729166666666666,
+   "operational_success": 1.0,
+   "brier_mean": 0.7359364268022778,
+   "first_request_s": 2.9870391562581062
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.1917808219178082,
+   "operational_success": 1.0,
+   "brier_mean": 1.3940744431854668,
+   "first_request_s": 6.076506033539772
+  }
+ },
+ "provisional_v13": {
+  "axes": {
+   "intelligence": 24.929386805579167,
+   "calibration": 48.535504904090345,
+   "speed": 57.454265052488324,
+   "cost": 68.25265889330862
+  },
+  "jevbench_score": 11.60209541534599,
+  "note": "recompute through release finalizer before publication"
+ }
+}

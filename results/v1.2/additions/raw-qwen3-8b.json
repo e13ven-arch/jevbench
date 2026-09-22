@@ -1,0 +1,152 @@
+{
+ "key": "raw-qwen3-8b",
+ "display": "Raw Qwen3 8B direct logits",
+ "class": "raw-logit-control",
+ "open": "yes",
+ "author": "Alibaba Qwen / neutral reproduction",
+ "repo": "https://huggingface.co/Qwen/Qwen3-8B",
+ "licence": "Apache-2.0",
+ "underlying": "Qwen3-8B BF16",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.8645833333333334,
+  "judge": 0.9657534246575342,
+  "hard": 0.4636363636363636
+ },
+ "hard": {
+  "run": "raw-controls/runs/qwen3-8/canonical-results-v1.3.0.jsonl (hard-tier subset)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.4636363636363636,
+  "by_family": {
+   "adversarial": {
+    "correct": 7,
+    "n": 12,
+    "accuracy": 0.5833333333333334
+   },
+   "ambiguous": {
+    "correct": 6,
+    "n": 14,
+    "accuracy": 0.42857142857142855
+   },
+   "judge_hard": {
+    "correct": 23,
+    "n": 33,
+    "accuracy": 0.696969696969697
+   },
+   "long_policy": {
+    "correct": 9,
+    "n": 38,
+    "accuracy": 0.23684210526315788
+   },
+   "multi_hop": {
+    "correct": 17,
+    "n": 35,
+    "accuracy": 0.4857142857142857
+   },
+   "probability": {
+    "correct": 8,
+    "n": 20,
+    "accuracy": 0.4
+   },
+   "routing_hard": {
+    "correct": 9,
+    "n": 10,
+    "accuracy": 0.9
+   },
+   "temporal_numeric": {
+    "correct": 3,
+    "n": 30,
+    "accuracy": 0.1
+   },
+   "tradeoff": {
+    "correct": 5,
+    "n": 12,
+    "accuracy": 0.4166666666666667
+   },
+   "trap": {
+    "correct": 15,
+    "n": 16,
+    "accuracy": 0.9375
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.9930717989711458,
+  "ece": 0.47954385778952974,
+  "probability_fidelity": 47.80992141349076,
+  "calibration_score": 25.95057492779241,
+  "onehot": {
+   "ece": 0.5363636363636364,
+   "probability_fidelity": 40.8955,
+   "calibration_score": 20.44775
+  },
+  "latency_p50_s": 0.15026657423004508,
+  "latency_p95_s": 0.6204535091295839,
+  "mean_input_tokens": 1236.2227272727273,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "our lium.io RTX A6000 48 GB; local in-process; serial; one forward pass",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.08492440730333328,
+  "p95_s": 0.288180502736941,
+  "run": "serial 242-decision standard+judge subset of completed 534 run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.0865558988764045,
+  "usd_per_1000_v11_tiers": 0.0865558988764045,
+  "usd_per_1000_hard": 0.0865558988764045,
+  "basis_v11": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_hard": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_final": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 25.95057492779241,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.47954385778952974,
+  "probability_fidelity": 47.80992141349076,
+  "brier_hard": 0.9930717989711458,
+  "brier_standard_judge_v11": 0.1352067143558659
+ },
+ "partial": false,
+ "endpoint_condition": "our lium.io RTX A6000 48 GB; local in-process; serial; one forward pass",
+ "note": "immutable Qwen/Qwen3-8B revision recorded in MANIFEST.md and run manifest",
+ "footnote": "Neutral preregistered uncalibrated softmax over next-token option-letter logits; reproduced raw-logit control, not an S1Bench score.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 1.825415494064862e-17,
+   "first_request_s": 0.08964833244681358
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.8645833333333334,
+   "operational_success": 1.0,
+   "brier_mean": 0.2457211216411835,
+   "first_request_s": 0.07758190762251616
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.9657534246575342,
+   "operational_success": 1.0,
+   "brier_mean": 0.06253970682579402,
+   "first_request_s": 0.1100681722164154
+  }
+ }
+}

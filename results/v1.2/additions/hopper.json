@@ -1,0 +1,152 @@
+{
+ "key": "hopper",
+ "display": "Hopper",
+ "class": "jev-rebuild",
+ "open": "yes",
+ "author": "HopitAI",
+ "repo": "https://huggingface.co/HopitAI/hopper",
+ "licence": "Component-specific terms recorded in RESULT.md; submitted adapter release and Qwen base retain their respective terms",
+ "underlying": "Qwen3.5-4B plus HopitAI/hopper LoRA",
+ "has_distribution": true,
+ "probability_source": [
+  "native"
+ ],
+ "tiers": {
+  "easy": 1.0,
+  "standard": 0.96875,
+  "judge": 0.8356164383561644,
+  "hard": 0.65
+ },
+ "hard": {
+  "run": "hopper/runs/results.jsonl (hard-tier subset)",
+  "n_items": 220,
+  "n_ok": 220,
+  "n_attempted": 220,
+  "coverage": 1.0,
+  "success_rate": 1.0,
+  "accuracy": 0.65,
+  "by_family": {
+   "adversarial": {
+    "correct": 12,
+    "n": 12,
+    "accuracy": 1.0
+   },
+   "ambiguous": {
+    "correct": 11,
+    "n": 14,
+    "accuracy": 0.7857142857142857
+   },
+   "judge_hard": {
+    "correct": 23,
+    "n": 33,
+    "accuracy": 0.696969696969697
+   },
+   "long_policy": {
+    "correct": 20,
+    "n": 38,
+    "accuracy": 0.5263157894736842
+   },
+   "multi_hop": {
+    "correct": 24,
+    "n": 35,
+    "accuracy": 0.6857142857142857
+   },
+   "probability": {
+    "correct": 13,
+    "n": 20,
+    "accuracy": 0.65
+   },
+   "routing_hard": {
+    "correct": 10,
+    "n": 10,
+    "accuracy": 1.0
+   },
+   "temporal_numeric": {
+    "correct": 6,
+    "n": 30,
+    "accuracy": 0.2
+   },
+   "tradeoff": {
+    "correct": 8,
+    "n": 12,
+    "accuracy": 0.6666666666666666
+   },
+   "trap": {
+    "correct": 16,
+    "n": 16,
+    "accuracy": 1.0
+   }
+  },
+  "has_distribution": true,
+  "brier_mean": 0.4290948535258254,
+  "ece": 0.06006635020486461,
+  "probability_fidelity": 78.07297634980476,
+  "calibration_score": 83.02985315441592,
+  "onehot": {
+   "ece": 0.35,
+   "probability_fidelity": 53.949000000000005,
+   "calibration_score": 41.974500000000006
+  },
+  "latency_p50_s": 0.13407477270811796,
+  "latency_p95_s": 0.3750792991835623,
+  "mean_input_tokens": 1295.9272727272728,
+  "mean_output_tokens": 0.0,
+  "charged_usd": 0.0
+ },
+ "speed_block": {
+  "measured_where": "our GPU (lium.io RTX A6000 48 GB), local loopback HTTP; serial",
+  "hardware": null,
+  "n": 242,
+  "p50_s": 0.12881201645359397,
+  "p95_s": 0.18081656964495776,
+  "run": "serial 242-decision standard+judge subset of completed 534 run"
+ },
+ "cost": {
+  "kind": "estimate",
+  "usd_per_1000": 0.02375376404494382,
+  "usd_per_1000_v11_tiers": 0.02375376404494382,
+  "usd_per_1000_hard": 0.02375376404494382,
+  "basis_v11": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_hard": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "basis_final": "Nonzero hosted-comparable estimate; see RESULT.md",
+  "self_host_sensitivity": null
+ },
+ "calibration": {
+  "score": 83.02985315441592,
+  "score_label_only_as_onehot": null,
+  "ece_hard": 0.06006635020486461,
+  "probability_fidelity": 78.07297634980476,
+  "brier_hard": 0.4290948535258254,
+  "brier_standard_judge_v11": 0.1791607379566707
+ },
+ "partial": false,
+ "endpoint_condition": "our GPU (lium.io RTX A6000 48 GB), local loopback HTTP; serial",
+ "note": "HopitAI/hopper be8d454f71b237400686250978c291f16c3f9a42",
+ "footnote": "Pinned submitted adapter and base weights, native complete distributions; nonzero hosted-reference cost from measured input tokens.",
+ "tier_blocks_v11": {
+  "easy": {
+   "n_planned": 72,
+   "n_attempted": 72,
+   "accuracy": 1.0,
+   "operational_success": 1.0,
+   "brier_mean": 0.0005891313002292295,
+   "first_request_s": 0.17283577844500542
+  },
+  "standard": {
+   "n_planned": 96,
+   "n_attempted": 96,
+   "accuracy": 0.96875,
+   "operational_success": 1.0,
+   "brier_mean": 0.04162220957991067,
+   "first_request_s": 0.18656260147690773
+  },
+  "judge": {
+   "n_planned": 146,
+   "n_attempted": 146,
+   "accuracy": 0.8356164383561644,
+   "operational_success": 1.0,
+   "brier_mean": 0.26959703058796497,
+   "first_request_s": 0.13371337112039328
+  }
+ }
+}

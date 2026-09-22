@@ -73,9 +73,9 @@ def test_honorable_mentions_keep_every_published_number():
         assert s["presets"] and "rank_under" not in s, key
 
 
-def test_classifier_dev_is_the_honorable_mention_and_jev_leads():
+def test_classifier_dev_is_the_honorable_mention():
     assert [s["key"] for s in rows("honorable_mention")] == ["classifier-dev-fast"]
-    assert rows("ranked")[0]["key"] == "jev-1.13.0"
+    assert rows("ranked")[0]["key"] == "hopper"
     d = HM["systems"]["classifier-dev-fast"]
     assert d["runs_on_key"] == "jev-1.13.0"
     # The price caveat Florian asked to keep: the flat rate is only $0.0033 at full use.

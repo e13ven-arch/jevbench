@@ -9,8 +9,8 @@ SYS = {row["key"]: row for row in ART["systems"]}
 
 def test_zefan_open_jev_rows_are_complete_distinct_and_provenanced():
     expected = {
-        "open-jev-zefan-2b": ("Open-Jev 2B (Zefan Cai)", 34, 51.3),
-        "open-jev-zefan-9b": ("Open-Jev 9B (Zefan Cai)", 30, 55.0),
+        "open-jev-zefan-2b": ("Open-Jev 2B (Zefan Cai)", 46, 51.3),
+        "open-jev-zefan-9b": ("Open-Jev 9B (Zefan Cai)", 42, 55.0),
     }
     for key, (display, rank, score) in expected.items():
         row = SYS[key]
@@ -26,11 +26,11 @@ def test_zefan_open_jev_rows_are_complete_distinct_and_provenanced():
         assert "Apache-2.0" in row["licence"] and "MIT" in row["licence"]
 
 
-def test_revision_is_the_v13_scoring_release():
-    assert ART["revision"] == "v1.3.0"
+def test_revision_is_the_v131_additions_release():
+    assert ART["revision"] == "v1.3.1"
 
 
 def test_zefan_rows_did_not_move_any_measured_score():
     ranked = sorted((r for r in ART["systems"] if r["ranked"]), key=lambda r: r["rank"])
     assert [r["rank"] for r in ranked] == list(range(1, len(ranked) + 1))
-    assert SYS["winnow-12b"]["rank"] == 4 and round(SYS["winnow-12b"]["jevbench_score"], 1) == 71.2
+    assert SYS["winnow-12b"]["rank"] == 7 and round(SYS["winnow-12b"]["jevbench_score"], 1) == 71.2
