@@ -11,14 +11,12 @@ JevBench is [Benchmark Heaven](https://benchmarkheaven.com)'s own benchmark. It 
 affiliated with or endorsed by TypeSafe AI, whose Jev model is one of the systems
 measured here.
 
-## v1.3.1: round-4 additions (current)
+## v1.3.0: the JevBench Score (current)
 
 **[Results -> `RESULTS-v1.2.md`](RESULTS-v1.2.md)** · artifact [`results/v1.2/jevbench-v1.2-results.json`](results/v1.2/jevbench-v1.2-results.json) ·
 interactive: [benchmarkheaven.com/jev-models](https://benchmarkheaven.com/jev-models) · how the hard tier was made: [`datasets/HARD-TIER.md`](datasets/HARD-TIER.md)
 
 **JevBench Score** = chance-corrected Intelligence, Calibration, Speed, Cost — 25 % each, geometric mean. Below 50 Intelligence, multiply the score by `(Intelligence / 50)²`.
-
-v1.3.1 adds 18 independently reviewed full-set rows; the frozen tasks and the v1.3.0 scoring formula are unchanged. [Method and included systems](docs/v1.3.1-additions-round4.md).
 
 | Axis | Score 0-100 |
 |---|---|
@@ -41,7 +39,7 @@ v1.3.1 adds 18 independently reviewed full-set rows; the frozen tasks and the v1
 
 - **220 hard decisions** (111 public in `datasets/public/hard.jsonl`, 109 held out), written by Claude Opus 5 and GPT-5.6 Sol,
   cross-reviewed, frozen and hashed before any system ran; 534 decisions per system in total.
-- Top of the ranking (66 ranked rows): **Hopper 75.4** · Jev 1.13.0 (TypeSafe AI) 74.4 · Jobe Qwen3.5 4B 73.4 · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 73.1 · djev (Maisa, diffusion-gemma) 73.0. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
+- Top of the ranking (48 ranked rows): **Jev 1.13.0 (TypeSafe AI) 74.4** · SemIf, formerly OpenJev (Qwen3.5-4B, TheoLeeCJ) 73.1 · djev (Maisa, diffusion-gemma) 73.0 · Winnow-12B Q8 71.2 · reflex 4B (kshetrajna12) 70.3. Qwen3.8 27B and Needle 3 (both modes) are partial runs, shown without a rank.
 - djev is self-hostable: [`Davipar/djev-dev`](https://github.com/Davipar/djev-dev) is Apache-2.0 code over Google's Apache-2.0 DiffusionGemma weights. It is an inference method, not a separately trained model, and adds no weights of its own. `djev-spark` is another DiffusionGemma structured-read runtime, not another model row.
 - **Honorable mention, not ranked: classifier.dev (fast tier) 83.6.** A service that runs another entrant's model is
   listed with all of its scores and axes, but is not ranked against the models — its fast tier *is* Jev
@@ -55,7 +53,7 @@ v1.3.1 adds 18 independently reviewed full-set rows; the frozen tasks and the v1
   (`A. no, B. yes`) the same model scored 21 % instead of 72 % on answer-judging items — small models are very sensitive to
   option order. Both runs: [`results/v1.2/runs/open-alternative-jev/`](results/v1.2/runs/open-alternative-jev/).
 
-![JevBench v1.3.1 — JevBench Score](results/v1.2/charts/main-score.png)
+![JevBench v1.3.0 — JevBench Score](results/v1.2/charts/main-score.png)
 
 ### What changed in the score
 

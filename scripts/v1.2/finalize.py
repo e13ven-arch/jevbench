@@ -70,15 +70,7 @@ ADDED_IN = {"djev": "v1.2.1", "laya": "v1.2.2", "jeff": "v1.2.2", "gliner2": "v1
             "open-jev-zefan-2b": "v1.2.15", "open-jev-zefan-9b": "v1.2.15",
             "zerank-2": "v1.2.16", "bge-reranker-v2-m3": "v1.2.16",
             "mxbai-rerank-base-v2": "v1.2.16", "gte-reranker-modernbert-base": "v1.2.16",
-            "qwen3-reranker-4b": "v1.2.16",
-            "localjev-qwen3.5-4b": "v1.3.1", "metask-jev-4b": "v1.3.1", "jobe-qwen3.5-4b": "v1.3.1",
-            "ninfer-qwen3.8-27b": "v1.3.1", "ninfer-qwen3.8-27b-t1.5": "v1.3.1",
-            "ninfer-qwen3.8-flash-next": "v1.3.1", "hopper": "v1.3.1", "mirror": "v1.3.1",
-            "jevone": "v1.3.1", "swanone": "v1.3.1", "jev-qwen3.5-9b-base-nvfp4": "v1.3.1",
-            "simplejev-qwen3.5-0.8b": "v1.3.1", "raw-qwen3-0.6b": "v1.3.1",
-            "raw-qwen3-1.7b": "v1.3.1", "raw-qwen3-8b": "v1.3.1",
-            "raw-qwen3-4b-instruct-2507": "v1.3.1", "raw-phi-4-mini": "v1.3.1",
-            "open-jev-json-canvas-joshuasp": "v1.3.1"}
+            "qwen3-reranker-4b": "v1.2.16"}
 assert set(ADDITIONS) <= set(ADDED_IN), set(ADDITIONS) - set(ADDED_IN)
 # A complete re-run that replaces an earlier row (same frozen items, same scorer); the old score stays in the artifact.
 SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the serving prompt limit from 2,048 to 8,192 tokens "
@@ -86,12 +78,8 @@ SUPERSEDES = {"nimble-9b": "Re-run in v1.2.8 after Bespoke Labs raised the servi
 COST_FIX_REVISION = "v1.2.3"
 HONORABLE_REVISION = "v1.2.4"
 _rk = lambda r: [int(x) for x in r[1:].split(".")]
-REVISION = "v1.3.1"
+REVISION = "v1.3.0"
 REVISION_LOG = [e for e in [
-    {"revision": "v1.3.1", "date": "2026-09-22", "note":
-     "Added 18 independently reviewed rows on the unchanged frozen 534-decision v1.2 task set, using the v1.3.0 "
-     "scorer. Each addition includes standard aggregate and per-task evidence. No earlier measurement or task "
-     "changed. Reflex 0.8B and typed-engine remain withheld pending review."},
     {"revision": "v1.3.0", "date": "2026-09-22", "note":
      "Scoring-only release; the task set and measurements are unchanged. Intelligence is now accuracy above each "
      "item's uniform-guessing baseline, aggregated with the existing tier weights. If chance-corrected Intelligence "
@@ -176,7 +164,7 @@ REVISION_LOG = [e for e in [
      "through its production API, scored with the unchanged v1.2 rules. Cost at djev's announced price ($0.035/M input tokens, output free), "
      "which is not yet charged (free preview). No other row changed."},
     {"revision": "v1.2", "date": "2026-09-19", "note": "Final JevBench Score: 4 axes, geometric mean."},
-] if e["revision"] in {"v1.3.0", REVISION} or e["revision"] in {"v1.2", COST_FIX_REVISION, HONORABLE_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
+] if e["revision"] == "v1.3.0" or e["revision"] in {"v1.2", COST_FIX_REVISION, HONORABLE_REVISION} or e["revision"] in {ADDED_IN[k] for k in ADDITIONS}]
 ADDED_NAMES = {r: [ADDITIONS[k]["display"] for k in ADDITIONS if ADDED_IN[k] == r] for r in sorted({ADDED_IN[k] for k in ADDITIONS})}
 
 # open-alternative-jev: the ranked row is the run with the author's own yes/no option order ("A. yes, B. no", as his
@@ -241,9 +229,9 @@ def endpoint_kind(cond):
     c = cond.lower()
     if c.startswith("production api") or c.startswith("chutes shared"):
         return "api"
-    if "runpod gpu" in c or c.startswith("our gpu") or c.startswith("our lium.io"):
+    if "runpod gpu" in c or c.startswith("our gpu"):
         return "gpu"
-    if "demo endpoint" in c or "author-hosted endpoint" in c or c.startswith("hosted submission endpoint"):
+    if "demo endpoint" in c or "author-hosted endpoint" in c:
         return "demo"
     if "our cpu" in c:
         return "cpu"
@@ -379,8 +367,8 @@ def main():
         "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "measured_in": "v1.2-wip (tag v1.2-wip); no measurement changed for v1.2 final" + (
             "; later additions measured on the same frozen items: " + "; ".join(f"{r}: " + ", ".join(n) for r, n in ADDED_NAMES.items()) if ADDITIONS else ""),
-        "revision_note": "v1.3.1 adds 18 independently reviewed rows on the unchanged frozen 534-decision task set. "
-                         "Scoring remains v1.3.0: chance-corrected Intelligence with the growing near-chance penalty.",
+        "revision_note": "v1.3.0 scoring-only release: Intelligence is chance-corrected per tier and scores below 50 receive the growing near-chance penalty. "
+                         "Calibration, Speed, Cost, ranking eligibility, tasks and measurements are unchanged.",
         "score_name": "JevBench Score",
         "score_one_liner": "Intelligence above chance, Calibration, Speed, Cost — 25 % each, geometric mean; below 50 Intelligence receives a growing near-chance penalty.",
         "tiers": WIP["tiers"], "tier_weights": C.TIER_WEIGHTS, "axis_weights": C.WEIGHTS,

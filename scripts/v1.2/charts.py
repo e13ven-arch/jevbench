@@ -33,8 +33,6 @@ CLASS = {
     "classifier": ("#c0368c", "Zero-shot classifier (not a Jev rebuild)"),
     "decision-api": ("#c89410", "Closed decision model (API only)"),
     "reranker": ("#6f55a8", "Reranker used as a decision classifier"),
-    "native-logit": ("#d65a9e", "Native-logit decision model"),
-    "raw-logit-control": ("#6a9f38", "Neutral raw-logit control"),
 }
 SURFACE, INK, INK2, GRID, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#d8d7d2", "#b9b8b1"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "text.parse_math": False, "axes.edgecolor": GRID,
